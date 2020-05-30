@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | API Reference</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.420d534cb751429dd57ce4685a1cfcacce88bfddd601cb644c8379f2fd647c98.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body style="background-color:#fff">
+    <div class="navbar">
+  <header>
+    <ul>
+      <li><a href="/site/annotorious/">Home</a></li>
+      <li><a href="/site/annotorious/getting-started">Getting Started</a></li>
+      <li><a href="/site/annotorious/api-docs">API Docs</a></li>
+      <li><a href="/site/annotorious/guides">Guides</a></li>
+      <li><a href="/site/annotorious/about">About</a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="table-of-contents">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#initializing-annotorious">Initializing Annotorious</a></li>
+    <li><a href="#instance-methods">Instance Methods</a>
+      <ul>
+        <li><a href="#addannotation">addAnnotation</a></li>
+        <li><a href="#removeannotation">removeAnnotation</a></li>
+        <li><a href="#setannotations">setAnnotations</a></li>
+        <li><a href="#loadannotations">loadAnnotations</a></li>
+        <li><a href="#getannotations">getAnnotations</a></li>
+        <li><a href="#setannotationsvisible">setAnnotationsVisible</a></li>
+        <li><a href="#selectannotation">selectAnnotation</a></li>
+        <li><a href="#applytemplate">applyTemplate</a></li>
+        <li><a href="#destroy">destroy</a></li>
+        <li><a href="#on">on</a></li>
+        <li><a href="#off">off</a></li>
+      </ul>
+    </li>
+    <li><a href="#events">Events</a>
+      <ul>
+        <li><a href="#selectannotation-1">selectAnnotation</a></li>
+        <li><a href="#createannotation">createAnnotation</a></li>
+        <li><a href="#updateannotation">updateAnnotation</a></li>
+        <li><a href="#deleteannotation">deleteAnnotation</a></li>
+        <li><a href="#mouseenterannotation">mouseEnterAnnotation</a></li>
+        <li><a href="#mouseleaveannotation">mouseLeaveAnnotation</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+      <div class="main-content">
+        <h2 id="initializing-annotorious">Initializing Annotorious</h2>
+<p>Initialize an Annotorious instance on an image with</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init(config);
+</code></pre></div><p>The configuration must be an object with the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image</code></td>
+<td><strong>REQUIRED</strong> the DOM image element to make annotate-able or, alternatively, it the element ID</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>readOnly</code></td>
+<td>Set to <code>true</code> to display annotations read-only</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>headless</code></td>
+<td>Headless mode completely disables the editor popup. Use the events along with <a href="https://github.com/recogito/annotorious/wiki/API-Reference#applytemplatetemplate-openeditor">applyTemplate</a> to control the annotation lifecycle from outside via the API. Note that headless mode currently doesn’t support shape editing - only shape creation.</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="instance-methods">Instance Methods</h2>
+<h3 id="addannotation">addAnnotation</h3>
+<p>Adds an annotation programmatically. The format is the
+<a href="https://github.com/recogito/annotorious/wiki/Web-Annotation-Model">W3C WebAnnotation model</a>. At the moment,
+only a single <code>FragmentSelector</code> with an <code>xywh=pixel</code> fragment is supported.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="removeannotation">removeAnnotation</h3>
+<p>Removes an annotation programmatically.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>the annotation in W3C WebAnnotation format or the annotation ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setannotations">setAnnotations</h3>
+<p>Renders the list of annotations to the image, removing any previously
+existing annotations.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotations</code></td>
+<td>array of annotations in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="loadannotations">loadAnnotations</h3>
+<p>Loads annotations from a JSON file. The method returns a promise, in
+case you want to perform an action after the annotations have loaded.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.loadAnnotations(url).then(<span style="color:#268bd2">function</span>(annotations) {
+  <span style="color:#586e75">// Do something
+</span><span style="color:#586e75"></span>});
+</code></pre></div><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>the URL to HTTP GET the annotations from</td>
+</tr>
+</tbody>
+</table>
+<h3 id="getannotations">getAnnotations</h3>
+<p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
+<h3 id="setannotationsvisible">setAnnotationsVisible</h3>
+<p>Shows or hides the annotation layer.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>visible</code></td>
+<td>if <code>true</code> show the annotation layer, otherwise hide it</td>
+</tr>
+</tbody>
+</table>
+<h3 id="selectannotation">selectAnnotation</h3>
+<p>Selects an annotation programmatically, highlighting its shape, and opening the editor popup.</p>
+<ul>
+<li>If no argument is provided (or the annotation or ID is unknown), this method will deselect
+the current selection, if any</li>
+<li>The method will return the selected annotation as a result</li>
+<li>Note that the the <code>selectAnnotation</code> event will <strong>not</strong> fire when using this method</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>the annotation or the annotation ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="applytemplate">applyTemplate</h3>
+<p>When a new annotation is created, Annotorious will automatically apply the given
+template. The template can be a single annotation body, or an array of bodies.
+If <code>openEditor</code> is set to true, the editor popup will open, allowing the user to
+edit the annotation normally. Otherwise, Annotorious will <strong>instantly</strong> create an
+annotation from the template bodies <strong>only</strong>. The editor will not open.</p>
+<p>Use this method if you want to implement batch- or fast annotation modes, where
+the same annotation should be applied repeatedly, and the user should only take
+care of drawing selections.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>template</code></td>
+<td>the template body or list of bodies to apply automatically</td>
+</tr>
+<tr>
+<td><code>openEditor</code></td>
+<td>if <code>true</code>, the editor will open after the template is applied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Destroys this instance of Annotorious, removing the annotation layer on the image.</p>
+<h3 id="on">on</h3>
+<p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>the function to call when the event is emitted</td>
+</tr>
+</tbody>
+</table>
+<h3 id="off">off</h3>
+<p>Unsubscribe from an event. If no callback is provided,
+all event handlers for this event will be unsubscribed.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>the function used when binding to the event</td>
+</tr>
+</tbody>
+</table>
+<h2 id="events">Events</h2>
+<h3 id="selectannotation-1">selectAnnotation</h3>
+<p>Fired when the user selects an annotation. Note that this event will <strong>not</strong> fire when
+the selection is made programmatically through the <code>selectAnnotation(arg)</code> API method.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="createannotation">createAnnotation</h3>
+<p>Fired when a new annotation is created from a user selection.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="updateannotation">updateAnnotation</h3>
+<p>Fired when an existing annotation was updated.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the updated annotation</td>
+</tr>
+<tr>
+<td><code>previous</code></td>
+<td>the annotation state before the update</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deleteannotation">deleteAnnotation</h3>
+<p>Fired when an existing annotation was deleted.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the deleted annotation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mouseenterannotation">mouseEnterAnnotation</h3>
+<p>Fired when the mouse moves into an existing annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>the original mouse event</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mouseleaveannotation">mouseLeaveAnnotation</h3>
+<p>Fired when the mouse moves out of an existing annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>the original mouse event</td>
+</tr>
+</tbody>
+</table>
+
+      </div>
+    </div>
+  </body>
+</html>

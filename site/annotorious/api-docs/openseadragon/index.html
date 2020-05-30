@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Openseadragon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.420d534cb751429dd57ce4685a1cfcacce88bfddd601cb644c8379f2fd647c98.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body style="background-color:#fff">
+    <div class="navbar">
+  <header>
+    <ul>
+      <li><a href="/site/annotorious/">Home</a></li>
+      <li><a href="/site/annotorious/getting-started">Getting Started</a></li>
+      <li><a href="/site/annotorious/api-docs">API Docs</a></li>
+      <li><a href="/site/annotorious/guides">Guides</a></li>
+      <li><a href="/site/annotorious/about">About</a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="table-of-contents">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#initializing-openseadragon-annotorious">Initializing OpenSeadragon Annotorious</a></li>
+    <li><a href="#instance-methods">Instance Methods</a>
+      <ul>
+        <li><a href="#addannotationannotation"><code>addAnnotation(annotation)</code></a></li>
+        <li><a href="#removeannotationarg"><code>removeAnnotation(arg)</code></a></li>
+        <li><a href="#setannotationsannotations"><code>setAnnotations(annotations)</code></a></li>
+        <li><a href="#loadannotationsurl"><code>loadAnnotations(url)</code></a></li>
+        <li><a href="#getannotations"><code>getAnnotations()</code></a></li>
+        <li><a href="#selectannotationarg"><code>selectAnnotation(arg)</code></a></li>
+        <li><a href="#pantoarg-immediately"><code>panTo(arg, immediately)</code></a></li>
+        <li><a href="#fitboundsarg-immediately"><code>fitBounds(arg, immediately)</code></a></li>
+        <li><a href="#destroy"><code>destroy()</code></a></li>
+        <li><a href="#onevent-callback"><code>on(event, callback)</code></a></li>
+        <li><a href="#offevent-callback"><code>off(event[, callback])</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#events">Events</a>
+      <ul>
+        <li><a href="#selectannotationannotation"><code>selectAnnotation(annotation)</code></a></li>
+        <li><a href="#createannotationannotation"><code>createAnnotation(annotation)</code></a></li>
+        <li><a href="#updateannotationannotation-previous"><code>updateAnnotation(annotation, previous)</code></a></li>
+        <li><a href="#deleteannotationannotation"><code>deleteAnnotation(annotation)</code></a></li>
+        <li><a href="#mouseenterannotationannotation-event"><code>mouseEnterAnnotation(annotation, event)</code></a></li>
+        <li><a href="#mouseleaveannotationannotation-event"><code>mouseLeaveAnnotation(annotation, event)</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+      <div class="main-content">
+        <h2 id="initializing-openseadragon-annotorious">Initializing OpenSeadragon Annotorious</h2>
+<p>Initialize Annotorious on an OpenSeadragon viewer instance with</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> OpenSeadragon.Annotorious(viewer, config);
+</code></pre></div><p>The <code>config</code> is optional, and must be an object with the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>readOnly</code></td>
+<td>Set to <code>true</code> to display annotations read-only</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="instance-methods">Instance Methods</h2>
+<h3 id="addannotationannotation"><code>addAnnotation(annotation)</code></h3>
+<p>Adds an annotation programmatically. The format is the
+<a href="https://github.com/recogito/annotorious-openseadragon/wiki/Web-Annotation-Model">W3C WebAnnotation model</a>.
+At the moment, only a single <code>FragmentSelector</code> with an <code>xywh=pixel</code> fragment is supported.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="removeannotationarg"><code>removeAnnotation(arg)</code></h3>
+<p>Removes an annotation programmatically.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>the annotation in W3C WebAnnotation format or the annotation ID</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="setannotationsannotations"><code>setAnnotations(annotations)</code></h3>
+<p>Renders the list of annotations to the image, removing any previously
+existing annotations.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotations</code></td>
+<td>array of annotations in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="loadannotationsurl"><code>loadAnnotations(url)</code></h3>
+<p>Loads annotations from a JSON file. The method returns a promise, in
+case you want to perform an action after the annotations have loaded.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.loadAnnotations(url).then(<span style="color:#268bd2">function</span>(annotations) {
+  <span style="color:#586e75">// Do something
+</span><span style="color:#586e75"></span>});
+</code></pre></div><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>the URL to HTTP GET the annotations from</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="getannotations"><code>getAnnotations()</code></h3>
+<p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
+<!-- raw HTML omitted -->
+<h3 id="selectannotationarg"><code>selectAnnotation(arg)</code></h3>
+<p>Selects an annotation programmatically, highlighting its shape, and opening the editor popup.</p>
+<ul>
+<li>If no argument is provided (or the annotation or ID is unknown), this method will deselect
+the current selection, if any</li>
+<li>The method will return the selected annotation as a result</li>
+<li>Note that the the <code>selectAnnotation</code> event will <strong>not</strong> fire when using this method</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>the annotation or the annotation ID</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="pantoarg-immediately"><code>panTo(arg, immediately)</code></h3>
+<p>Pans the OpenSeadragon viewport to the specified annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>the annotation or the annotation ID</td>
+</tr>
+<tr>
+<td><code>immediately</code></td>
+<td>if <code>true</code> pans without animation</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="fitboundsarg-immediately"><code>fitBounds(arg, immediately)</code></h3>
+<p>Makes the OpenSeadragon viewport pan and zoom to the bounds of the specified annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>the annotation or the annotation ID</td>
+</tr>
+<tr>
+<td><code>immediately</code></td>
+<td>if <code>true</code> pans and zooms without animation</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="destroy"><code>destroy()</code></h3>
+<p>Destroys this instance of Annotorious, removing the annotation layer on the image.</p>
+<!-- raw HTML omitted -->
+<h3 id="onevent-callback"><code>on(event, callback)</code></h3>
+<p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>the function to call when the event is emitted</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="offevent-callback"><code>off(event[, callback])</code></h3>
+<p>Unsubscribe from an event. If no callback is provided,
+all event handlers for this event will be unsubscribed.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>the function used when binding to the event</td>
+</tr>
+</tbody>
+</table>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="events">Events</h2>
+<h3 id="selectannotationannotation"><code>selectAnnotation(annotation)</code></h3>
+<p>Fired when the user selects an annotation. Note that this event will <strong>not</strong> fire when
+the selection is made programmatically through the <code>selectAnnotation(arg)</code> API method.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="createannotationannotation"><code>createAnnotation(annotation)</code></h3>
+<p>Fired when a new annotation is created from a user selection.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="updateannotationannotation-previous"><code>updateAnnotation(annotation, previous)</code></h3>
+<p>Fired when an existing annotation was updated.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the updated annotation</td>
+</tr>
+<tr>
+<td><code>previous</code></td>
+<td>the annotation state before the update</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="deleteannotationannotation"><code>deleteAnnotation(annotation)</code></h3>
+<p>Fired when an existing annotation was deleted.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the deleted annotation</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="mouseenterannotationannotation-event"><code>mouseEnterAnnotation(annotation, event)</code></h3>
+<p>Fired when the mouse moves into an existing annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>the original mouse event</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+<h3 id="mouseleaveannotationannotation-event"><code>mouseLeaveAnnotation(annotation, event)</code></h3>
+<p>Fired when the mouse moves out of an existing annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>the annotation</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>the original mouse event</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | A Javascript Library for Image Annotation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/splash.min.fa74c1d6342bd7b3ac0ee816cba9b848f0ab79a6cd2d635dfb811b655f1f8b17.css">  
+    <link rel="apple-touch-icon" href="/images/annotorious-touch-icon.png">
+  </head>
+
+  <body>
+    <div class="jumbo-header">
+      <img id="header-background" src="/images/splash-header.jpg" />
+      <div class="jumbo-header-foreground">
+        <div class="jumbo-header-logo-wrapper">
+          <div class="jumbo-header-logo">Annotorious</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="navbar" class="jumbo-header-navbar">
+      <ul>
+        <li><a href="getting-started">Getting Started</a></li>
+        <li><a href="api-docs">API Docs</a></li>
+        <li><a href="guides">Guides</a></li>
+        <li><a href="about">About</a></li>
+        <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+      </ul>
+    </div>
+
+    <div class="column">
+      <div class="download-latest">
+        <h2>A JavaScript library for image annotation.</h2>
+        <p>
+          Add drawing, commenting and labeling functionality to images on your website <br/>
+          with a few lines of JavaScript.
+        </p>
+               
+        <a class="download-button" href="#">Download Annotorious v2.0.1</a>
+
+        <p class="osd-link">
+          Or get the latest <a href="#openseadragon">OpenSeadragon plugin</a>.
+        </p>
+      </div>
+
+      <div>
+        <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;image-to-annotate&#39;</span>)
+});
+
+<span style="color:#586e75">// Load annotations in W3C Web Annotation format
+</span><span style="color:#586e75"></span>anno.loadAnnotations(<span style="color:#2aa198">&#39;annotations.json&#39;</span>);
+
+<span style="color:#586e75">// Attach listeners to handle annotation events
+</span><span style="color:#586e75"></span>anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation)) {
+  console.log(<span style="color:#2aa198">&#39;Created!&#39;</span>);
+};
+</code></pre></div>
+      </div>
+
+      <div class="message">
+        <p>
+          <strong>Integrate anywhere.</strong> Annotorious has no server-side dependencies and 
+          makes no assumptions about your technology stack or backend. Roll your own custom  
+          integration with the <a href="#">JavaScript API</a>, or follow one of the 
+          <a href="#">guides</a> for simple out-of-the-box recipes.          
+        </p>
+      </div>
+
+      <div class="divider-image">
+        <img id="cogs" src="/images/splash-cogs.jpg" />
+      </div>
+
+      <div class="message">
+        <p>
+          <strong> Customize &amp; extend.</strong> Create your own extension components 
+          for the annotation editor. Change the look and feel of everything with CSS. 
+          Use <a href="#">formatters</a> to apply rule-based styles to annotations.
+        </p>
+      </div>
+
+      <div class="divider-image">
+        <img id="lego" src="/images/splash-lego.jpg" />
+      </div>
+
+      <div id="openseadragon" class="download-openseadragon">
+        <img src="/annotorious-osd-stylized.png" width="300" />
+        <p>
+          Annotorious is also available as a plugin to <a href="#">OpenSeadragon</a>, a JavaScript 
+          viewer for high-resolution zoomable images. <a href="#">Learn more</a>.
+        </p>  
+        <a class="download-button" href="#">Download OpenSeadragon Plugin v2.0.1</a>        
+      </div>
+    </div>
+    
+    <footer>
+      
+    </footer>
+
+    <script type="text/javascript" src="/js/annotorious.min.js"></script>
+    <script type="text/javascript" src="/js/splash-gadgets.js"></script>
+  </body>
+</html>

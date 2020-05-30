@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Web Annotation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.420d534cb751429dd57ce4685a1cfcacce88bfddd601cb644c8379f2fd647c98.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body style="background-color:#fff">
+    <div class="navbar">
+  <header>
+    <ul>
+      <li><a href="/site/annotorious/">Home</a></li>
+      <li><a href="/site/annotorious/getting-started">Getting Started</a></li>
+      <li><a href="/site/annotorious/api-docs">API Docs</a></li>
+      <li><a href="/site/annotorious/guides">Guides</a></li>
+      <li><a href="/site/annotorious/about">About</a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="table-of-contents">
+        <nav id="TableOfContents"></nav>
+      </div>
+      <div class="main-content">
+        <p>Annotorious uses the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>. For the
+time being, the only supported <code>selector</code> type is a single <strong>FragmentSelector</strong> with a rectangle
+selection, according to the <a href="https://www.w3.org/TR/media-frags/">W3C Media Fragments URI</a> format,
+using the <code>xywh</code> scheme and pixel coordinates.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
+  <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
+  <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#a88b22d0-6106-4872-9435-c78b5e89fede&#34;</span>,
+  <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
+  <span style="color:#268bd2">&#34;body&#34;</span>: [{
+    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;It&#39;s Hallstatt in Upper Austria&#34;</span>
+  }],
+  <span style="color:#268bd2">&#34;target&#34;</span>: {
+    <span style="color:#268bd2">&#34;selector&#34;</span>: {
+      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;FragmentSelector&#34;</span>,
+      <span style="color:#268bd2">&#34;conformsTo&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/TR/media-frags/&#34;</span>,
+      <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;xywh=pixel:270,120,90,170&#34;</span>
+    }
+  }
+}
+</code></pre></div>
+      </div>
+    </div>
+  </body>
+</html>
