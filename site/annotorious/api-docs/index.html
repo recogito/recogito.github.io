@@ -4,7 +4,7 @@
     <title>Annotorious | API Reference</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.3ab9ac8b799e7de238915aa8172f29be966ef9d0a0fbc6555b3e62fde5576edb.css">
+    <link rel="stylesheet" href="/css/style.min.de2eb076d94a03ca74632d9f0c00cc9f4a267a717ccb3bad93a3b8ce8654eca8.css">
   </head>
   <body style="background-color:#fff">
     <div class="navbar">
@@ -22,14 +22,26 @@
 
     <div class="column">
       <div class="main-content">
-        <h2 id="initializing-annotorious">Initializing Annotorious</h2>
+        <div class="tabs">
+  
+    <a href="#" class="tab annotorious current">Annotorious</a>
+    <a href="#" class="tab annotorious-osd">OpenSeadragon Plugin</a>
+  
+</div>
+<h2 id="initializing-annotorious">Initializing Annotorious</h2>
 <p>Initialize an Annotorious instance on an image with</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init(config);
-</code></pre></div><p>The configuration must be an object with the following properties:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> config <span style="color:#719e07">=</span> {
+  image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>),
+  readOnly<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>
+};
+
+<span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init(config);
+</code></pre></div><p>The config object can have the following properties:</p>
 <table>
 <thead>
 <tr>
 <th>Property</th>
+<th>Type</th>
 <th>Value</th>
 <th>Default</th>
 </tr>
@@ -37,52 +49,69 @@
 <tbody>
 <tr>
 <td><code>image</code></td>
-<td><strong>REQUIRED</strong> the DOM image element to make annotate-able or, alternatively, it the element ID</td>
+<td><code>Element</code>, <code>String</code></td>
+<td>image element or, alternatively, element ID</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>readOnly</code></td>
-<td>Set to <code>true</code> to display annotations read-only</td>
+<td><code>Boolean</code></td>
+<td>Set to <code>true</code> to display all annotations read-only</td>
 <td><code>false</code></td>
 </tr>
 <tr>
 <td><code>headless</code></td>
-<td>Headless mode completely disables the editor popup. Use the events along with <a href="https://github.com/recogito/annotorious/wiki/API-Reference#applytemplatetemplate-openeditor">applyTemplate</a> to control the annotation lifecycle from outside via the API. Note that headless mode currently doesn’t support shape editing - only shape creation.</td>
+<td><code>Boolean</code></td>
+<td>Completely disables the editor popup. Drawing is still possible, and lifecycle events still fire. Can be used in conjunction with <a href="#applytemplate">applyTemplate</a>. Note that headless mode currently supports only shape creation, not editing.</td>
 <td><code>false</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="instance-methods">Instance Methods</h2>
 <h3 id="addannotation">addAnnotation</h3>
-<p>Adds an annotation programmatically. The format is the
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addAnnotation(annotation);
+
+<span style="color:#586e75">// Display read-only
+</span><span style="color:#586e75"></span>anno.addAnnotation(annotation, <span style="color:#cb4b16">true</span>);
+</code></pre></div><p>Adds an annotation programmatically. The format is the
 <a href="https://github.com/recogito/annotorious/wiki/Web-Annotation-Model">W3C WebAnnotation model</a>. At the moment,
 only a single <code>FragmentSelector</code> with an <code>xywh=pixel</code> fragment is supported.</p>
 <table>
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>annotation</code></td>
-<td>the annotation in W3C WebAnnotation format</td>
+<td>Object</td>
+<td>the annotation according to the W3C WebAnnotation format</td>
+</tr>
+<tr>
+<td><code>readOnly</code></td>
+<td>Boolean</td>
+<td>set the second arg to <code>true</code> to display the annotation in read-only mode</td>
 </tr>
 </tbody>
 </table>
 <h3 id="removeannotation">removeAnnotation</h3>
-<p>Removes an annotation programmatically.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.removeAnnotation(arg);
+</code></pre></div><p>Removes an annotation programmatically.</p>
 <table>
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>arg</code></td>
+<td>Object, String</td>
 <td>the annotation in W3C WebAnnotation format or the annotation ID</td>
 </tr>
 </tbody>
