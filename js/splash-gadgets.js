@@ -108,7 +108,7 @@ observer.observe(document.getElementById('lego'));
 var onScroll = function() {
   var navbar = document.getElementById('navbar');
   var offset = window.pageYOffset || window.scrollTop || 0;
-  var opacity = offset < 310 ? Math.max(offset, 0) / 310 : 1;
+  var opacity = offset < 600 ? Math.max(offset, 0) / 600 : 1;
   navbar.style.backgroundColor = 'rgba(34,34,34,' + opacity.toFixed(2) + ')';
 };
 
