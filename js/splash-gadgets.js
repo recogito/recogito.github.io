@@ -112,7 +112,7 @@ var onScroll = function() {
   navbar.style.backgroundColor = 'rgba(34,34,34,' + opacity.toFixed(2) + ')';
 };
 
-window.onscroll = onScroll;
+document.addEventListener('scroll', onScroll);
 
 // 'Random boxes' animation on header background
 window.onload = async function() {
