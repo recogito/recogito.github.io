@@ -1,7 +1,7 @@
 // Annotations on the 'cogs' and 'lego' divider images
 var cannedAnnotations = {
   cogs : { id: '#640e3cde', x: 290, y: 180, w: 250, h: 270, text: 'You can create your own annotations on this image. Just click and drag with your mouse to draw a box.' },
-  lego : { id: '#ffe68c32', x: 850, y: 30, w: 470, h: 270, text: 'Annotorious is open source software. Free for non-commercial and commercial projects.' }
+  lego : { id: '#ffe68c32', x: 850, y: 30, w: 470, h: 270, text: 'Open source software. Free for non-commercial and commercial projects.' }
 };
 
 // Lazy-initialized Annotorious instances
@@ -70,7 +70,7 @@ var createAnimatedAnnotation = function(data, anno) {
   return new Promise(function(resolve) {
     var onTick = function(bounds) {
       var annotationState = Object.assign({}, data, bounds);
-      anno.addAnnotation(toAnnotation(annotationState));
+      anno.addAnnotation(toAnnotation(annotationState), true);
     }
 
     var onComplete = function() {
@@ -92,7 +92,7 @@ var observer = new IntersectionObserver(function(entries) {
     if (entry.isIntersecting > 0) {
       var id = entry.target.id;
       if (!annoInstances[id]) {
-        var anno = Annotorious.init({ image: id, readOnly: true });
+        var anno = Annotorious.init({ image: id });
         annoInstances[id] = anno;
 
         createAnimatedAnnotation(cannedAnnotations[id], anno);

@@ -23,17 +23,22 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/about/</loc>
-    <lastmod>2020-06-01T17:48:46+02:00</lastmod>
+    <loc>http://recogito.github.io/site/guides/contributing-ui-translations/</loc>
+    <lastmod>2020-06-01T20:04:18+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://recogito.github.io/</loc>
-    <lastmod>2020-06-01T17:48:46+02:00</lastmod>
+    <lastmod>2020-06-01T20:04:18+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://recogito.github.io/site/</loc>
+    <lastmod>2020-06-01T20:04:18+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/site/annotorious/about/</loc>
     <lastmod>2020-06-01T17:48:46+02:00</lastmod>
   </url>
   
@@ -63,12 +68,12 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/guides/using-firebase-for-storage/</loc>
+    <loc>http://recogito.github.io/site/guides/using-firebase-for-storage/</loc>
     <lastmod>2020-05-01T13:28:54+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/guides/</loc>
+    <loc>http://recogito.github.io/site/guides/</loc>
     <lastmod>2020-05-01T13:28:19+02:00</lastmod>
   </url>
   

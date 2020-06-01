@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jun 2020 17:48:46 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2020 20:04:18 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -50,6 +50,16 @@ When an annotation is created, updated or deleted by the user, Annotorious emits
     </item>
     
     <item>
+      <title>Contributing UI Translations</title>
+      <link>http://recogito.github.io/site/guides/contributing-ui-translations/</link>
+      <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/guides/contributing-ui-translations/</guid>
+      <description>We want to make Annotorious available in as many languages as possible. If you want to help: providing a translation is easy - and because Annotorious doesn&amp;rsquo;t have many labeled user interface elements, it&amp;rsquo;s also not a lot of work.
+How to add a new translation The user interface labels are part of the recogito-client-core package, located here. In this folder you will find messages files, one for each available translation.</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>http://recogito.github.io/site/annotorious/about/</link>
       <pubDate>Mon, 01 Jun 2020 17:48:46 +0200</pubDate>
@@ -60,10 +70,10 @@ When an annotation is created, updated or deleted by the user, Annotorious emits
     
     <item>
       <title>Using Firebase for Storage</title>
-      <link>http://recogito.github.io/site/annotorious/guides/using-firebase-for-storage/</link>
+      <link>http://recogito.github.io/site/guides/using-firebase-for-storage/</link>
       <pubDate>Fri, 01 May 2020 13:28:54 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/guides/using-firebase-for-storage/</guid>
+      <guid>http://recogito.github.io/site/guides/using-firebase-for-storage/</guid>
       <description>Using Firebase for Storage A quick and easy way to set up your own annotation store without managing your own server is through Firebase, a web application development platform by Google.
 Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and deleting JSON records. All you need to do is wire up the Firebase storage SDK operations with the corresponding events from Annotorious.
 E.g. when Annotorious fires the createAnnotation event, store the annotation via the .</description>

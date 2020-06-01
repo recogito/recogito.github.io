@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Contributing UI Translations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.a6123d86f5aac572a4e3390c41c3e05b41fbf028e8f3f3fa1c97b4ae1d745958.css">
+  </head>
+
+  <body>
+    <div class="navbar">
+  <header>
+    <ul>
+      <li><a href="/site/annotorious/">Home</a></li>
+      <li><a href="/site/annotorious/getting-started">Getting Started</a></li>
+      <li><a href="/site/annotorious/api-docs">API Docs</a></li>
+      <li><a href="/site/guides">Guides</a></li>
+      <li><a href="/site/annotorious/about">About</a></li>
+      <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="main-content">
+        <p>We want to make Annotorious available in as many languages as possible. If you want to help: providing a translation is easy - and because Annotorious doesn&rsquo;t have many labeled user interface elements, it&rsquo;s also not a lot of work.</p>
+<h2 id="how-to-add-a-new-translation">How to add a new translation</h2>
+<p>The user interface labels are part of the <code>recogito-client-core</code> package, <a href="https://github.com/recogito/recogito-client-core/tree/master/src/i18n">located here</a>. In this folder you will find
+<code>messages</code> files, one for each available translation.</p>
+<p>Each <code>messages</code> file is a dictionary of the default English labels and their translations. For example,
+here&rsquo;s what the German translation file <code>messages_de.json</code> looks like.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#268bd2">&#34;Add a comment...&#34;</span>: <span style="color:#2aa198">&#34;Kommentar schreiben...&#34;</span>,
+  <span style="color:#268bd2">&#34;Add a reply...&#34;</span>: <span style="color:#2aa198">&#34;Antwort schreiben...&#34;</span>,
+  <span style="color:#268bd2">&#34;Add tag...&#34;</span>: <span style="color:#2aa198">&#34;Tag...&#34;</span>,
+  <span style="color:#268bd2">&#34;Cancel&#34;</span>: <span style="color:#2aa198">&#34;Abbrechen&#34;</span>,
+  <span style="color:#268bd2">&#34;Close&#34;</span>: <span style="color:#2aa198">&#34;Schliessen&#34;</span>,
+  <span style="color:#268bd2">&#34;Edit&#34;</span>: <span style="color:#2aa198">&#34;Bearbeiten&#34;</span>,
+  <span style="color:#268bd2">&#34;Delete&#34;</span>: <span style="color:#2aa198">&#34;Löschen&#34;</span>,
+  <span style="color:#268bd2">&#34;Ok&#34;</span>: <span style="color:#2aa198">&#34;Ok&#34;</span>
+}
+</code></pre></div><p>In order to add a new translation:</p>
+<ul>
+<li>Fork the <a href="https://github.com/recogito/recogito-client-core">recogito-client-core repository</a></li>
+<li>Add a message file to the <a href="https://github.com/recogito/recogito-client-core/tree/master/src/i18n">src/i18n folder</a> named <code>messages_{iso}.json</code>, where {iso} is the 2-character ISO code of
+the language.</li>
+<li>Copy the dictionary above, and replace the translations accordingly.</li>
+<li><a href="https://www.freecodecamp.org/news/how-to-make-your-first-pull-request-on-github-3/">Send us a pull request</a></li>
+</ul>
+<p>Many thanks in advance! If you have questions, do get in touch via the <a href="https://gitter.im/recogito/annotorious">Annotorious chat on Gitter</a>.</p>
+<h2 id="available-translations-so-far">Available translations so far</h2>
+<table>
+<thead>
+<tr>
+<th>Locale</th>
+<th>Language</th>
+<th>Status</th>
+<th>Dictionary file</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ar</td>
+<td>Arabic</td>
+<td>Partial</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_ar.json">messages_ar.json</a></td>
+</tr>
+<tr>
+<td>de</td>
+<td>German</td>
+<td>Complete</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_de.json">messages_de.json</a></td>
+</tr>
+<tr>
+<td>it</td>
+<td>Italian</td>
+<td>Partial</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_it.json">messages_it.json</a></td>
+</tr>
+<tr>
+<td>es</td>
+<td>Spanish</td>
+<td>Partial</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_es.json">messages_es.json</a></td>
+</tr>
+<tr>
+<td>gl</td>
+<td>Galician</td>
+<td>Partial</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_gl.json">messages_gl.json</a></td>
+</tr>
+<tr>
+<td>sv</td>
+<td>Swedish</td>
+<td>Partial</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_sv.json">messages_sv.json</a></td>
+</tr>
+</tbody>
+</table>
+<p>Your language isn&rsquo;t on this list? Consider contributing :-)</p>
+
+      </div>
+
+      <div class="table-of-contents subsections">
+        <nav>
+          <ul>
+            <li><a href="http://recogito.github.io/site/guides/">Guides</a></li>
+            <li>
+              <ul>
+                
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/site/guides/contributing-ui-translations/" class="active">Contributing UI Translations</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/site/guides/using-firebase-for-storage/">Using Firebase for Storage</a>
+                    
+                  </li>
+                
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </body>
+</html>
