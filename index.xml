@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jun 2020 10:20:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2020 17:48:46 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -47,6 +47,15 @@
       <guid>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</guid>
       <description>Storing Annotations To store annotations, you need an annotation server or database backend. Annotorious - as well as its sister project RecogitoJS - do not include their own storage solution. They provide the user interface functionality for annotation only. To store annotations, you need to connect them to your own backend, using the API.
 When an annotation is created, updated or deleted by the user, Annotorious emits the following events through the API:</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://recogito.github.io/site/annotorious/about/</link>
+      <pubDate>Mon, 01 Jun 2020 17:48:46 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/about/</guid>
+      <description>About </description>
     </item>
     
     <item>

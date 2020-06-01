@@ -4,7 +4,7 @@
     <title>Annotorious | Using Firebase for Storage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.79674e0098eef628d2157647aae6da2d5aebbae069cb421f0c7525252ffae7dc.css">
+    <link rel="stylesheet" href="/css/style.min.b1365f5cd436659a404ffaaf28e36a9ad566df03c296d1b96d892fa1531b38c4.css">
   </head>
 
   <body>
@@ -42,13 +42,12 @@ code after completion, and handle connection errors.</p>
   &lt;<span style="color:#268bd2">head</span>&gt;
     &lt;<span style="color:#268bd2">meta</span> charset<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;utf-8&#34;</span> /&gt;
     &lt;<span style="color:#268bd2">title</span>&gt;Annotorious | Firebase Demo&lt;/<span style="color:#268bd2">title</span>&gt;
-    &lt;<span style="color:#268bd2">link</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://fonts.googleapis.com/css?family=Lato&amp;display=swap&#34;</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span>&gt;
-    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://recogito.github.io/annotorious/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
-    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
-    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://www.gstatic.com/firebasejs/7.14.3/firebase-firestore.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;js/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;js/firebasejs/7.14.3/firebase-app.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;js/firebasejs/7.14.3/firebase-firestore.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
     &lt;<span style="color:#268bd2">script</span>&gt;
-      <span style="color:#586e75">// Firebase will auto-generate this config for you when you create your app.
-</span><span style="color:#586e75"></span>      <span style="color:#586e75">// Just paste your own settings in here.
+      <span style="color:#586e75">// Firebase will auto-generate this config for you when you 
+</span><span style="color:#586e75"></span>      <span style="color:#586e75">// create your app. Just paste your own settings in here.
 </span><span style="color:#586e75"></span>      <span style="color:#268bd2">var</span> firebaseConfig <span style="color:#719e07">=</span> {
         apiKey<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;-- your firebase api key here --&#34;</span>,
         authDomain<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;-- your authdomain here --&#34;</span>,
@@ -72,7 +71,7 @@ code after completion, and handle connection errors.</p>
       }
 
       <span style="color:#b58900">window</span>.onload <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>() {
-        <span style="color:#268bd2">var</span> image <span style="color:#719e07">=</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;hallstatt&#39;</span>);
+        <span style="color:#268bd2">var</span> image <span style="color:#719e07">=</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>);
         <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image });
 
         <span style="color:#586e75">// Load annotations for this image
@@ -107,26 +106,25 @@ code after completion, and handle connection errors.</p>
   &lt;/<span style="color:#268bd2">head</span>&gt;
   &lt;<span style="color:#268bd2">body</span>&gt;
     &lt;<span style="color:#268bd2">div</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;content&#34;</span>&gt;      
-      &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;hallstatt&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://recogito.github.io/annotorious/640px-Hallstatt.jpg&#34;</span>&gt;
-      &lt;<span style="color:#268bd2">p</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;caption&#34;</span>&gt;
-        Sample image source: &lt;<span style="color:#268bd2">a</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;http://commons.wikimedia.org/wiki/File:Hallstatt_300.jpg&#34;</span>&gt;Hallstatt,
-        Austria&lt;/<span style="color:#268bd2">a</span>&gt;, by Nick Csakany/Wikimedia Commons. Public Domain.
-      &lt;/<span style="color:#268bd2">p</span>&gt;
+      &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/images/my-image.jpg&#34;</span>&gt;
     &lt;/<span style="color:#268bd2">div</span>&gt;
   &lt;/<span style="color:#268bd2">body</span>&gt;
 &lt;/<span style="color:#268bd2">html</span>&gt;
 </code></pre></div>
       </div>
 
-      <div class="table-of-contents">
+      <div class="table-of-contents subsections">
         <nav>
           <ul>
-            <li><a href="http://recogito.github.io/site/annotorious/guides/">Getting Started</a></li>
+            <li><a href="http://recogito.github.io/site/annotorious/guides/">Guides</a></li>
             <li>
               <ul>
                 
+                
                   <li>
-                    <a href="http://recogito.github.io/site/annotorious/guides/using-firebase-for-storage/">Using Firebase for Storage</a>
+                    
+                      <a href="http://recogito.github.io/site/annotorious/guides/using-firebase-for-storage/" class="active">Using Firebase for Storage</a>
+                    
                   </li>
                 
               </ul>
