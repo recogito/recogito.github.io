@@ -6,10 +6,47 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 May 2020 14:33:09 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jun 2020 10:20:00 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Annotorious</title>
+      <link>http://recogito.github.io/site/annotorious/getting-started/annotorious/</link>
+      <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/getting-started/annotorious/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenSeadragon Plugin</title>
+      <link>http://recogito.github.io/site/annotorious/getting-started/osd-plugin/</link>
+      <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/getting-started/osd-plugin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Storing Annotations</title>
+      <link>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</link>
+      <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Annotation</title>
+      <link>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</link>
+      <pubDate>Sun, 17 May 2020 14:33:09 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</guid>
+      <description>Annotorious uses the W3C Web Annotation model. For the time being, the only supported selector type is a single FragmentSelector with a rectangle selection, according to the W3C Media Fragments URI format, using the xywh scheme and pixel coordinates.
+{ &amp;#34;@context&amp;#34;: &amp;#34;http://www.w3.org/ns/anno.jsonld&amp;#34;, &amp;#34;id&amp;#34;: &amp;#34;#a88b22d0-6106-4872-9435-c78b5e89fede&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;Annotation&amp;#34;, &amp;#34;body&amp;#34;: [{ &amp;#34;type&amp;#34;: &amp;#34;TextualBody&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;It&amp;#39;s Hallstatt in Upper Austria&amp;#34; }], &amp;#34;target&amp;#34;: { &amp;#34;selector&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;FragmentSelector&amp;#34;, &amp;#34;conformsTo&amp;#34;: &amp;#34;http://www.w3.org/TR/media-frags/&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;xywh=pixel:270,120,90,170&amp;#34; } } } </description>
+    </item>
     
   </channel>
 </rss>

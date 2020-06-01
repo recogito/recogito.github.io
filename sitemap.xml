@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://recogito.github.io/site/annotorious/getting-started/annotorious/</loc>
+    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/site/annotorious/getting-started/osd-plugin/</loc>
+    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://recogito.github.io/</loc>
-    <lastmod>2020-05-17T14:33:09+02:00</lastmod>
+    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://recogito.github.io/site/</loc>
-    <lastmod>2020-05-17T14:33:09+02:00</lastmod>
+    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</loc>
+    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
   </url>
   
   <url>
