@@ -4,7 +4,7 @@
     <title>Annotorious | Storing Annotations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.ed404ff4d7d1cf534277e08e1b1ffb5a21a02c0b2fe38e5956d4e6bd12e8501f.css">
+    <link rel="stylesheet" href="/css/style.min.79674e0098eef628d2157647aae6da2d5aebbae069cb421f0c7525252ffae7dc.css">
   </head>
 
   <body>
@@ -23,7 +23,29 @@
 
     <div class="column">
       <div class="main-content">
-        
+        <h1 id="storing-annotations">Storing Annotations</h1>
+<p>To store annotations, you need an annotation server or database backend.
+Annotorious - as well as its sister project <a href="https://github.com/recogito/recogito">RecogitoJS</a> - <strong>do not
+include their own storage solution</strong>. They provide <strong>the user interface functionality</strong> for annotation
+<strong>only</strong>. To store annotations, you need to connect them to your own backend, using the <a href="https://github.com/recogito/annotorious/wiki/API-Reference">API</a>.</p>
+<p>When an annotation is created, updated or deleted by the user, Annotorious emits the following events
+through the API:</p>
+<ul>
+<li><strong>createAnnotation</strong></li>
+<li><strong>updateAnnotation</strong></li>
+<li><strong>deleteAnnotation</strong></li>
+</ul>
+<p>You need to subscribe to these events, and execute the corresponding write operations to your backend.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+  <span style="color:#586e75">// This part depends entirely on how your backend works
+</span><span style="color:#586e75"></span>  axios.post(<span style="color:#2aa198">&#39;http://www.example.com/annotations/).then((response) =&gt; {
+</span><span style="color:#2aa198">    console.log(&#39;</span>Stored.&#39;);
+  });
+});
+</code></pre></div><h2 id="using-cloud-storage-services">Using Cloud Storage Services</h2>
+<p>If you don&rsquo;t want to run your own application backend, cloud storage services offer a good alternative.
+See <a href="https://github.com/recogito/annotorious/wiki/Using-Firebase-for-Storage">this example for using Google Firebase</a> to create your own free &amp; personal annotation store with minimum effort.</p>
+
       </div>
 
       <div class="table-of-contents">
@@ -42,11 +64,11 @@
                   </li>
                 
                   <li>
-                    <a href="http://recogito.github.io/site/annotorious/getting-started/storing-annotations/">Storing Annotations</a>
+                    <a href="http://recogito.github.io/site/annotorious/getting-started/web-annotation/">Web Annotation Model</a>
                   </li>
                 
                   <li>
-                    <a href="http://recogito.github.io/site/annotorious/getting-started/web-annotation/">Web Annotation</a>
+                    <a href="http://recogito.github.io/site/annotorious/getting-started/storing-annotations/">Storing Annotations</a>
                   </li>
                 
               </ul>

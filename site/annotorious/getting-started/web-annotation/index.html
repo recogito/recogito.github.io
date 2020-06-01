@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Annotorious | Web Annotation</title>
+    <title>Annotorious | Web Annotation Model</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.ed404ff4d7d1cf534277e08e1b1ffb5a21a02c0b2fe38e5956d4e6bd12e8501f.css">
+    <link rel="stylesheet" href="/css/style.min.79674e0098eef628d2157647aae6da2d5aebbae069cb421f0c7525252ffae7dc.css">
   </head>
 
   <body>
@@ -23,10 +23,18 @@
 
     <div class="column">
       <div class="main-content">
-        <p>Annotorious uses the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>. For the
-time being, the only supported <code>selector</code> type is a single <strong>FragmentSelector</strong> with a rectangle
-selection, according to the <a href="https://www.w3.org/TR/media-frags/">W3C Media Fragments URI</a> format,
-using the <code>xywh</code> scheme and pixel coordinates.</p>
+        <h1 id="the-w3c-web-annotation-model">The W3C Web Annotation Model</h1>
+<p>Annotorious uses the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>. Only a limited range
+of the specification is supported at the moment.</p>
+<ul>
+<li>Only annotations with a single rectangle selection</li>
+<li><code>selector</code> must be a <strong>FragmentSelector</strong>, according to the
+<a href="https://www.w3.org/TR/media-frags/">W3C Media Fragments URI</a> format</li>
+<li>Only <code>xywh</code> scheme with pixel coordinates</li>
+<li><code>id</code> <strong>should</strong> be provided, but can be any alphanumeric string</li>
+<li>When creating new annotations, Annotorious will automatically generate globally unique IDs in the
+form <code>#{uuid}</code></li>
+</ul>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
   <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
   <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#a88b22d0-6106-4872-9435-c78b5e89fede&#34;</span>,
@@ -62,11 +70,11 @@ using the <code>xywh</code> scheme and pixel coordinates.</p>
                   </li>
                 
                   <li>
-                    <a href="http://recogito.github.io/site/annotorious/getting-started/storing-annotations/">Storing Annotations</a>
+                    <a href="http://recogito.github.io/site/annotorious/getting-started/web-annotation/">Web Annotation Model</a>
                   </li>
                 
                   <li>
-                    <a href="http://recogito.github.io/site/annotorious/getting-started/web-annotation/">Web Annotation</a>
+                    <a href="http://recogito.github.io/site/annotorious/getting-started/storing-annotations/">Storing Annotations</a>
                   </li>
                 
               </ul>

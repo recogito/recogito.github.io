@@ -30,22 +30,23 @@
     </item>
     
     <item>
+      <title>Web Annotation Model</title>
+      <link>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</link>
+      <pubDate>Sun, 17 May 2020 14:33:09 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</guid>
+      <description>The W3C Web Annotation Model Annotorious uses the W3C Web Annotation model. Only a limited range of the specification is supported at the moment.
+ Only annotations with a single rectangle selection selector must be a FragmentSelector, according to the W3C Media Fragments URI format Only xywh scheme with pixel coordinates id should be provided, but can be any alphanumeric string When creating new annotations, Annotorious will automatically generate globally unique IDs in the form #{uuid}  { &amp;#34;@context&amp;#34;: &amp;#34;http://www.</description>
+    </item>
+    
+    <item>
       <title>Storing Annotations</title>
       <link>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</link>
       <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
       
       <guid>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Web Annotation</title>
-      <link>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</link>
-      <pubDate>Sun, 17 May 2020 14:33:09 +0200</pubDate>
-      
-      <guid>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</guid>
-      <description>Annotorious uses the W3C Web Annotation model. For the time being, the only supported selector type is a single FragmentSelector with a rectangle selection, according to the W3C Media Fragments URI format, using the xywh scheme and pixel coordinates.
-{ &amp;#34;@context&amp;#34;: &amp;#34;http://www.w3.org/ns/anno.jsonld&amp;#34;, &amp;#34;id&amp;#34;: &amp;#34;#a88b22d0-6106-4872-9435-c78b5e89fede&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;Annotation&amp;#34;, &amp;#34;body&amp;#34;: [{ &amp;#34;type&amp;#34;: &amp;#34;TextualBody&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;It&amp;#39;s Hallstatt in Upper Austria&amp;#34; }], &amp;#34;target&amp;#34;: { &amp;#34;selector&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;FragmentSelector&amp;#34;, &amp;#34;conformsTo&amp;#34;: &amp;#34;http://www.w3.org/TR/media-frags/&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;xywh=pixel:270,120,90,170&amp;#34; } } } </description>
+      <description>Storing Annotations To store annotations, you need an annotation server or database backend. Annotorious - as well as its sister project RecogitoJS - do not include their own storage solution. They provide the user interface functionality for annotation only. To store annotations, you need to connect them to your own backend, using the API.
+When an annotation is created, updated or deleted by the user, Annotorious emits the following events through the API:</description>
     </item>
     
   </channel>
