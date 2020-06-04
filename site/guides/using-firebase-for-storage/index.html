@@ -4,7 +4,7 @@
     <title>Annotorious | Using Firebase for Storage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.1e49b72b64aae45fe8edcf5a0275826d021f66fb2d832a9f6328cd7debd17d8f.css">
+    <link rel="stylesheet" href="/css/style.min.fb04eef840b77f1bfa682b4888b266cf6b0fc3ad4bed2e7a871e89940c59f27b.css">
   </head>
 
   <body>
@@ -25,18 +25,21 @@
       <div class="main-content">
         <h1 id="using-firebase-for-storage">Using Firebase for Storage</h1>
 <p>A quick and easy way to set up your own annotation store without managing your own server is
-through <a href="https://firebase.google.com/">Firebase</a>, a web application development platform by Google.</p>
-<p>Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and
+through <a href="https://firebase.google.com/">Firebase</a>, a web application development platform by Google.
+Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and
 deleting JSON records. All you need to do is wire up the Firebase storage SDK operations with the corresponding events from Annotorious.</p>
-<p>E.g. when Annotorious fires the <code>createAnnotation</code> event, store the annotation
-via the <code>.add()</code> method on the cloud storage SDK. Storage operations return a <code>Promise</code>, so you can execute
+<p><img src="/images/guides/firebase.png" alt="Firebase Screenshot"></p>
+<h2 id="using-events-for-storage">Using Events for Storage</h2>
+<p>When Annotorious fires the <code>createAnnotation</code> event, store the annotation via the <code>.add()</code>
+method on the cloud storage SDK. Storage operations return a <code>Promise</code>, so you can execute
 code after completion, and handle connection errors.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   db.collection(<span style="color:#2aa198">&#39;annotations&#39;</span>).add(annotation).then(<span style="color:#268bd2">function</span>() {
     console.log(<span style="color:#2aa198">&#39;Stored annotation&#39;</span>);
   });
 });
-</code></pre></div><p>The HTML below provides a minimal, but fully working storage example.</p>
+</code></pre></div><p>In the same way, wire up the rest of the events - <code>update</code>, <code>delete</code> - with the storage API. The
+HTML below provides a minimal, but fully working example.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
 &lt;<span style="color:#268bd2">html</span>&gt;
   &lt;<span style="color:#268bd2">head</span>&gt;
