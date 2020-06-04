@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Hacker&#39;s Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.1e49b72b64aae45fe8edcf5a0275826d021f66fb2d832a9f6328cd7debd17d8f.css">
+  </head>
+
+  <body>
+    <div class="navbar">
+  <header>
+    <ul>
+      <li><a href="/site/annotorious/">Home</a></li>
+      <li><a href="/site/annotorious/getting-started">Getting Started</a></li>
+      <li><a href="/site/annotorious/api-docs">API Docs</a></li>
+      <li><a href="/site/guides">Guides</a></li>
+      <li><a href="/site/annotorious/about">About</a></li>
+      <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="main-content">
+        <p>When working on <strong>RecogitoJS</strong> or <strong>Annotorious</strong>, you may sometimes need to modify code in
+<strong>recogito-client-core</strong>. To make this work, you have to <code>npm link</code> your local projects.</p>
+<ul>
+<li>Clone the <a href="https://github.com/recogito/recogito-js">RecogitoJS</a> and/or
+<a href="https://github.com/recogito/annotorious">Annotorious</a> repositories</li>
+<li>Clone the <a href="https://github.com/recogito/recogito-client-core">recogito-client-core repository</a></li>
+<li>Run <code>npm install</code> in all repositories to install dependencies</li>
+<li>Link your local clone of <strong>recogito-client-core</strong>, so that changes you make to
+recogito-client-core are reflected in RecogitoJS/Annotorious</li>
+</ul>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#b58900">cd</span> recogito-client-core
+$ npm install 
+$ npm link <span style="color:#586e75"># Creates a global symlink</span>
+$ <span style="color:#b58900">cd</span> ..
+
+$ <span style="color:#b58900">cd</span> annotorious
+$ npm install
+$ npm link @recogito/recogito-client-core <span style="color:#586e75"># Links to the global symlink</span>
+
+<span style="color:#586e75"># Annotorious now uses your local clone of recogito-client-core</span>
+<span style="color:#586e75"># instead of the latest published NPM package</span>
+$ npm start
+
+<span style="color:#586e75"># Same procedure for RecogitoJS if needed</span>
+</code></pre></div>
+      </div>
+
+      <div class="table-of-contents subsections">
+        <nav>
+          <ul>
+            <li><a href="http://recogito.github.io/site/guides/">Guides</a></li>
+            <li>
+              <ul>
+                
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/site/guides/using-firebase-for-storage/">Using Firebase for Storage</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/site/guides/contributing-ui-translations/">Contributing UI Translations</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/site/guides/development-setup/" class="active">Hacker&#39;s Guide</a>
+                    
+                  </li>
+                
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </body>
+</html>

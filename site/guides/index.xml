@@ -32,5 +32,15 @@ E.g. when Annotorious fires the createAnnotation event, store the annotation via
 How to add a new translation The user interface labels are part of the recogito-client-core package, located here. In this folder you will find messages files, one for each available translation.</description>
     </item>
     
+    <item>
+      <title>Hacker&#39;s Guide</title>
+      <link>http://recogito.github.io/site/guides/development-setup/</link>
+      <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/guides/development-setup/</guid>
+      <description>When working on RecogitoJS or Annotorious, you may sometimes need to modify code in recogito-client-core. To make this work, you have to npm link your local projects.
+ Clone the RecogitoJS and/or Annotorious repositories Clone the recogito-client-core repository Run npm install in all repositories to install dependencies Link your local clone of recogito-client-core, so that changes you make to recogito-client-core are reflected in RecogitoJS/Annotorious  $ cd recogito-client-core $ npm install $ npm link # Creates a global symlink $ cd .</description>
+    </item>
+    
   </channel>
 </rss>

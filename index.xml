@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jun 2020 20:04:18 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jun 2020 11:46:22 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -68,6 +68,16 @@ How to add a new translation The user interface labels are part of the recogito-
       <guid>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</guid>
       <description>Storing Annotations To store annotations, you need an annotation server or database backend. Annotorious - as well as its sister project RecogitoJS - do not include their own storage solution. They provide the user interface functionality for annotation only. To store annotations, you need to connect them to your own backend, using the API.
 When an annotation is created, updated or deleted by the user, Annotorious emits the following events through the API:</description>
+    </item>
+    
+    <item>
+      <title>Hacker&#39;s Guide</title>
+      <link>http://recogito.github.io/site/guides/development-setup/</link>
+      <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/guides/development-setup/</guid>
+      <description>When working on RecogitoJS or Annotorious, you may sometimes need to modify code in recogito-client-core. To make this work, you have to npm link your local projects.
+ Clone the RecogitoJS and/or Annotorious repositories Clone the recogito-client-core repository Run npm install in all repositories to install dependencies Link your local clone of recogito-client-core, so that changes you make to recogito-client-core are reflected in RecogitoJS/Annotorious  $ cd recogito-client-core $ npm install $ npm link # Creates a global symlink $ cd .</description>
     </item>
     
     <item>
