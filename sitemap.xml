@@ -8,6 +8,16 @@
   </url>
   
   <url>
+    <loc>http://recogito.github.io/site/guides/using-firebase-for-storage/</loc>
+    <lastmod>2020-05-01T13:28:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/site/guides/contributing-ui-translations/</loc>
+    <lastmod>2020-06-01T20:04:18+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://recogito.github.io/site/annotorious/getting-started/osd-plugin/</loc>
     <lastmod>2020-06-01T10:20:00+02:00</lastmod>
   </url>
@@ -20,11 +30,6 @@
   <url>
     <loc>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</loc>
     <lastmod>2020-06-01T10:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://recogito.github.io/site/guides/contributing-ui-translations/</loc>
-    <lastmod>2020-06-01T20:04:18+02:00</lastmod>
   </url>
   
   <url>
@@ -65,11 +70,6 @@
   <url>
     <loc>http://recogito.github.io/site/annotorious/</loc>
     <lastmod>2020-05-17T14:00:29+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://recogito.github.io/site/guides/using-firebase-for-storage/</loc>
-    <lastmod>2020-05-01T13:28:54+02:00</lastmod>
   </url>
   
   <url>
