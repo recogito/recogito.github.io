@@ -27,7 +27,7 @@ Using Events for Storage When Annotorious fires the createAnnotation event, stor
       <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
       
       <guid>http://recogito.github.io/site/guides/contributing-ui-translations/</guid>
-      <description>Contributing UI Translations We want to make Annotorious available in as many languages as possible. If you want to help: providing a translation is easy - and because Annotorious doesn&amp;rsquo;t have many labeled user interface elements, it&amp;rsquo;s also not a lot of work.
+      <description>Contributing UI Translations We want to make our software available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled user interface elements, it&amp;rsquo;s also not a lot of work.
 Message Dictionaries The user interface labels are part of the recogito-client-core package, located here. In this folder you will find messages files, one file for each available translation.</description>
     </item>
     
