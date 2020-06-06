@@ -1,7 +1,7 @@
 // Annotations on the 'cogs' and 'lego' divider images
 var cannedAnnotations = {
   cogs : { id: '#640e3cde', x: 290, y: 180, w: 250, h: 270, text: 'You can create your own annotations on this image. Just click and drag with your mouse to draw a box.' },
-  lego : { id: '#ffe68c32', x: 850, y: 30, w: 470, h: 270, text: 'Open source software. Free for non-commercial and commercial projects.' }
+  lego : { id: '#ffe68c32', x: 1180, y: 150, w: 170, h: 210, text: 'Open source software. Free for non-commercial and commercial projects.' }
 };
 
 // Lazy-initialized Annotorious instances
