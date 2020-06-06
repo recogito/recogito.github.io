@@ -90,7 +90,8 @@ Developing  Clone the repository Run npm install to download project dependencie
       <pubDate>Mon, 01 Jun 2020 17:48:46 +0200</pubDate>
       
       <guid>http://recogito.github.io/site/annotorious/about/</guid>
-      <description>About </description>
+      <description>About Annotorious Annotorious is a modernized reboot of my outdated original Annotorious, which I&amp;rsquo;m no longer supporting.
+License Annotrious is licensed under the terms of the BSD 3-Clause license. That basically means: feel free to use this code in whatever way you wish, for non-commerical and commercial projects. But keep the attribution/license file included. And bear in mind: this code comes as is. You get it for free, if breaks something, please report an issue, but don&amp;rsquo;t complain to us ;-)</description>
     </item>
     
   </channel>

@@ -66,19 +66,24 @@ var animateBounds = function(bounds, onTick, onDone) {
   loop();
 };
 
-var createAnimatedAnnotation = function(data, anno) {
+var createAnimatedAnnotation = function(data, anno, closeAfter) {
   return new Promise(function(resolve) {
     var onTick = function(bounds) {
       var annotationState = Object.assign({}, data, bounds);
       anno.addAnnotation(toAnnotation(annotationState), true);
     }
 
+    var keepOpen = closeAfter || 2000;
+
     var onComplete = function() {
       setTimeout(function() { 
         anno.selectAnnotation(data.id); 
         setTimeout(function() {
+          if (closeAfter)
+            anno.selectAnnotation();
+
           resolve();
-        }, 2000);
+        }, keepOpen);
       }, 200);
     };
 
@@ -95,7 +100,7 @@ var observer = new IntersectionObserver(function(entries) {
         var anno = Annotorious.init({ image: id });
         annoInstances[id] = anno;
 
-        createAnimatedAnnotation(cannedAnnotations[id], anno);
+        createAnimatedAnnotation(cannedAnnotations[id], anno, 3000);
       }
     }
   });
