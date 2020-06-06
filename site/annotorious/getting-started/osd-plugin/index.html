@@ -4,7 +4,7 @@
     <title>Annotorious | OpenSeadragon Plugin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.be578602ba26230d749ec32266b6cacecb3adb1b69dba0c28e51cabd3afed258.css">
+    <link rel="stylesheet" href="/css/style.min.72237011fe0804964f6babbe1236ac12548e1a37180a85f602f577166612051e.css">
   </head>
 
   <body>
@@ -23,7 +23,86 @@
 
     <div class="column">
       <div class="main-content">
-        
+        <h1 id="getting-started-with-the-openseadragon-plugin">Getting Started with the OpenSeadragon Plugin</h1>
+<p>The <strong>OpenSeadragon plugin</strong> is an extension to the <a href="http://openseadragon.github.io/">OpenSeadragon</a> viewer for zoomable high-resolution images.</p>
+<p>Click the annotation to edit. Hold <code>SHIFT</code> while clicking and dragging the mouse to create a new annotation.</p>
+<div class="inline-demo">
+  <style>
+    .openseadragon-canvas {
+      outline:none; 
+      background-color:#f4f4f4 !important;
+      border-radius:3px;
+    }
+  </style>
+  <div id="openseadragon" style="width: 640px; height: 480px;"></div>
+</div>
+<script type="text/javascript" src="/js/openseadragon/openseadragon.2.4.2.min.js"></script>
+<script type="text/javascript" src="/js/openseadragon-annotorious.min.js"></script>
+<script>
+  var sampleAnnotation = { 
+    "@context": "http://www.w3.org/ns/anno.jsonld",
+    "id": "#07475897-d2eb-4dce-aa12-ecb50771c734",
+    "type": "Annotation",
+    "body": [{
+      "type": "TextualBody",
+      "value": "Annotation"
+    }],
+    "target": {
+      "selector": {
+        "type": "FragmentSelector",
+        "conformsTo": "http://www.w3.org/TR/media-frags/",
+        "value": "xywh=540,240,180,340"
+      }
+    }
+  };
+
+  window.onload = function() {
+    var viewer = OpenSeadragon({
+      id: "openseadragon",
+      prefixUrl: "/js/openseadragon/images/",
+      tileSources: {
+        type: "image",
+        url: "/images/1280px-Hallstatt.jpg"
+      },
+      gestureSettingsTouch: {
+        pinchRotate: true
+      }
+    });
+
+    var anno = OpenSeadragon.Annotorious(viewer, {
+      locale: 'auto'
+    });
+
+    anno.addAnnotation(sampleAnnotation);
+  }
+</script>
+<p>Download the <a href="https://github.com/recogito/annotorious-openseadragon/releases/latest">latest release</a>
+and include it in your web page. Make sure to include the script <strong>after</strong> the
+OpenSeadragon script.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;openseadragon/openseadragon.2.4.2.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;openseadragon-annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+</code></pre></div><p>Create the viewer and initialize the Annotorious plugin.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">script</span>&gt;
+  <span style="color:#b58900">window</span>.onload <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>() {
+    <span style="color:#268bd2">var</span> viewer <span style="color:#719e07">=</span> OpenSeadragon({
+      id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;openseadragon1&#34;</span>,
+      prefixUrl<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;openseadragon/images/&#34;</span>,
+      tileSources<span style="color:#719e07">:</span> {
+        type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;image&#34;</span>,
+        url<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;1280px-Hallstatt.jpg&#34;</span>
+      }
+    });
+
+    <span style="color:#586e75">// Initialize the Annotorious plugin
+</span><span style="color:#586e75"></span>    <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> OpenSeadragon.Annotorious(viewer);
+
+    <span style="color:#586e75">// Load annotations in W3C WebAnnotation format
+</span><span style="color:#586e75"></span>    anno.loadAnnotations(<span style="color:#2aa198">&#39;annotations.w3c.json&#39;</span>);
+  }
+&lt;/<span style="color:#268bd2">script</span>&gt;
+</code></pre></div><p>The plugin takes a config object as optional second argument. See the <a href="https://github.com/recogito/annotorious-openseadragon/wiki/API-Reference">API Reference</a> for details.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> OpenSeadragon.Annotorious(viewer, config);
+</code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">

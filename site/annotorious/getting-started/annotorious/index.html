@@ -4,7 +4,7 @@
     <title>Annotorious | Annotorious</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.be578602ba26230d749ec32266b6cacecb3adb1b69dba0c28e51cabd3afed258.css">
+    <link rel="stylesheet" href="/css/style.min.72237011fe0804964f6babbe1236ac12548e1a37180a85f602f577166612051e.css">
   </head>
 
   <body>
@@ -23,13 +23,17 @@
 
     <div class="column">
       <div class="main-content">
-        <p>If you use npm, <code>npm install @recogito/annotorious</code> and then</p>
+        <h1 id="getting-started-with-annotorious">Getting Started with Annotorious</h1>
+<p>The Annotorious standard version works on normal images embedded in websites or web applications.</p>
+<h2 id="using-npm">Using NPM</h2>
+<p>If you use npm, <code>npm install @recogito/annotorious</code> and then</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
 
 <span style="color:#268bd2">const</span> anno <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
   image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>)
 });
-</code></pre></div><p>Otherwise download the <a href="https://github.com/recogito/annotorious/releases/latest">latest release</a>
+</code></pre></div><h2 id="using-the-script-tag">Using the Script Tag</h2>
+<p>Download the <a href="https://github.com/recogito/annotorious/releases/latest">latest release</a>
 and add the script to your HTML page at the end of the <code>&lt;body&gt;</code> section.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">body</span>&gt;
   &lt;<span style="color:#268bd2">div</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;content&#34;</span>&gt;
