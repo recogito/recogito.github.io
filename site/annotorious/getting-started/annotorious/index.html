@@ -4,7 +4,7 @@
     <title>Annotorious | Annotorious</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.fb04eef840b77f1bfa682b4888b266cf6b0fc3ad4bed2e7a871e89940c59f27b.css">
+    <link rel="stylesheet" href="/css/style.min.be578602ba26230d749ec32266b6cacecb3adb1b69dba0c28e51cabd3afed258.css">
   </head>
 
   <body>
@@ -23,7 +23,37 @@
 
     <div class="column">
       <div class="main-content">
-        
+        <p>If you use npm, <code>npm install @recogito/annotorious</code> and then</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
+
+<span style="color:#268bd2">const</span> anno <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
+  image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>)
+});
+</code></pre></div><p>Otherwise download the <a href="https://github.com/recogito/annotorious/releases/latest">latest release</a>
+and add the script to your HTML page at the end of the <code>&lt;body&gt;</code> section.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">body</span>&gt;
+  &lt;<span style="color:#268bd2">div</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;content&#34;</span>&gt;
+    &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;hallstatt&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;640px-Hallstatt.jpg&#34;</span>&gt;
+  &lt;/<span style="color:#268bd2">div</span>&gt;
+  &lt;<span style="color:#268bd2">script</span>&gt;
+    (<span style="color:#268bd2">function</span>() {
+      <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+        image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span> <span style="color:#586e75">// image element or ID
+</span><span style="color:#586e75"></span>      });
+
+      anno.loadAnnotations(<span style="color:#2aa198">&#39;annotations.w3c.json&#39;</span>);
+
+      <span style="color:#586e75">// Add event handlers using .on  
+</span><span style="color:#586e75"></span>      r.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+        <span style="color:#586e75">// Do something
+</span><span style="color:#586e75"></span>      });
+    })()
+  &lt;/<span style="color:#268bd2">script</span>&gt;
+
+  &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;annotorious-2.0.1-alpha.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+&lt;/<span style="color:#268bd2">body</span>&gt;
+</code></pre></div><p>For more information on using Annotorious, see the full <a href="https://github.com/recogito/annotorious/wiki/API-Reference">API Reference</a>.</p>
+
       </div>
 
       <div class="table-of-contents subsections">

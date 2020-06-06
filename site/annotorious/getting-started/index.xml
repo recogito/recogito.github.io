@@ -17,7 +17,9 @@
       <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
       
       <guid>http://recogito.github.io/site/annotorious/getting-started/annotorious/</guid>
-      <description></description>
+      <description>If you use npm, npm install @recogito/annotorious and then
+import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; const anno = new Annotorious({ image: document.getElementById(&amp;#39;my-image&amp;#39;) }); Otherwise download the latest release and add the script to your HTML page at the end of the &amp;lt;body&amp;gt; section.
+&amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt; &amp;lt;img id=&amp;#34;hallstatt&amp;#34; src=&amp;#34;640px-Hallstatt.jpg&amp;#34;&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;script&amp;gt; (function() { var anno = Annotorious.init({ image: &amp;#39;hallstatt&amp;#39; // image element or ID  }); anno.loadAnnotations(&amp;#39;annotations.w3c.json&amp;#39;); // Add event handlers using .</description>
     </item>
     
     <item>
