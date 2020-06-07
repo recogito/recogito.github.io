@@ -100,7 +100,7 @@ var observer = new IntersectionObserver(function(entries) {
         var anno = Annotorious.init({ image: id });
         annoInstances[id] = anno;
 
-        createAnimatedAnnotation(cannedAnnotations[id], anno, 3000);
+        createAnimatedAnnotation(cannedAnnotations[id], anno, 4000);
       }
     }
   });
