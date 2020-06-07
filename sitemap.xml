@@ -38,13 +38,18 @@
   </url>
   
   <url>
+    <loc>http://recogito.github.io/site/annotorious/api-docs/</loc>
+    <lastmod>2020-06-07T09:28:16+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://recogito.github.io/</loc>
-    <lastmod>2020-06-04T11:46:22+02:00</lastmod>
+    <lastmod>2020-06-07T09:28:16+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://recogito.github.io/site/</loc>
-    <lastmod>2020-06-04T11:46:22+02:00</lastmod>
+    <lastmod>2020-06-07T09:28:16+02:00</lastmod>
   </url>
   
   <url>
@@ -53,12 +58,12 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/api-docs/openseadragon/</loc>
+    <loc>http://recogito.github.io/site/annotorious/api-docs/osd-plugin/</loc>
     <lastmod>2020-05-17T14:15:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/api-docs/</loc>
+    <loc>http://recogito.github.io/site/annotorious/api-docs/annotorious/</loc>
     <lastmod>2020-05-17T14:14:36+02:00</lastmod>
   </url>
   

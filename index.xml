@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Jun 2020 11:46:22 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 09:28:16 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -93,6 +93,29 @@ Developing  Clone the repository Run npm install to download project dependencie
       <description>About Annotorious Annotorious is a modernized reboot of the now outdated original Annotorious.
 License Annotorious is licensed under the terms of the BSD 3-Clause license. That basically means: you can use this code for free, in whatever way you want, for non-commerical and commercial projects. But keep the attribution/license file included - and bear in mind: this code comes as is, don&amp;rsquo;t come complaining to us stuff breaks ;-)
 Need Help?</description>
+    </item>
+    
+    <item>
+      <title>API Docs | Annotorious OSD Plugin</title>
+      <link>http://recogito.github.io/site/annotorious/api-docs/osd-plugin/</link>
+      <pubDate>Sun, 17 May 2020 14:15:19 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/api-docs/osd-plugin/</guid>
+      <description>Initializing OpenSeadragon Annotorious Initialize Annotorious on an OpenSeadragon viewer instance with
+var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, and must be an object with the following properties:
+   Property Value Default     readOnly Set to true to display annotations read-only false    Instance Methods addAnnotation(annotation) Adds an annotation programmatically. The format is the W3C WebAnnotation model. At the moment, only a single FragmentSelector with an xywh=pixel fragment is supported.</description>
+    </item>
+    
+    <item>
+      <title>API Docs | Annotorious</title>
+      <link>http://recogito.github.io/site/annotorious/api-docs/annotorious/</link>
+      <pubDate>Sun, 17 May 2020 14:14:36 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/api-docs/annotorious/</guid>
+      <description>This is the API documentation for the standard version of Annotorious. You can switch to the documentation for the OpenSeadragon plugin.
+ Initializing Annotorious Initialize an Annotorious instance on an image with
+var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); The config object can have the following properties:
+   Property Type Value Default     image Element, String image element or, alternatively, element ID -   readOnly Boolean Set to true to display all annotations read-only false   headless Boolean Completely disables the editor popup.</description>
     </item>
     
   </channel>
