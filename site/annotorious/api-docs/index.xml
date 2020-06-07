@@ -17,9 +17,10 @@
       <pubDate>Sun, 17 May 2020 14:15:19 +0200</pubDate>
       
       <guid>http://recogito.github.io/site/annotorious/api-docs/osd-plugin/</guid>
-      <description>Initializing OpenSeadragon Annotorious Initialize Annotorious on an OpenSeadragon viewer instance with
+      <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon, zoomable image viewer. The API reference for the Annotorious standard version is available here.
+ Initializing the Plugin Initialize Annotorious on an OpenSeadragon viewer instance with
 var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, and must be an object with the following properties:
-   Property Value Default     readOnly Set to true to display annotations read-only false    Instance Methods addAnnotation(annotation) Adds an annotation programmatically. The format is the W3C WebAnnotation model. At the moment, only a single FragmentSelector with an xywh=pixel fragment is supported.</description>
+   Property Value Default     readOnly Set to true to display annotations read-only false    Instance Methods addAnnotation Adds an annotation programmatically.</description>
     </item>
     
     <item>
@@ -28,7 +29,7 @@ var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, an
       <pubDate>Sun, 17 May 2020 14:14:36 +0200</pubDate>
       
       <guid>http://recogito.github.io/site/annotorious/api-docs/annotorious/</guid>
-      <description>This is the API documentation for the standard version of Annotorious. You can switch to the documentation for the OpenSeadragon plugin.
+      <description>API Reference: Annotorious  The standard version of Annotorious works on normal images embedded in websites or web applications. The API reference for the Annotorious OpenSeadragon plugin is available here.
  Initializing Annotorious Initialize an Annotorious instance on an image with
 var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); The config object can have the following properties:
    Property Type Value Default     image Element, String image element or, alternatively, element ID -   readOnly Boolean Set to true to display all annotations read-only false   headless Boolean Completely disables the editor popup.</description>
