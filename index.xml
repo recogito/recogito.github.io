@@ -104,7 +104,7 @@ Need Help?</description>
       <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon, zoomable image viewer. The API reference for the Annotorious standard version is available here.
  Initializing the Plugin Initialize Annotorious on an OpenSeadragon viewer instance with
 var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, and must be an object with the following properties:
-   Property Value Default     readOnly Set to true to display annotations read-only false    Instance Methods addAnnotation Adds an annotation programmatically.</description>
+   Property Value Default     readOnly Set to true to display annotations read-only false    Instance Methods addAnnotation anno.</description>
     </item>
     
     <item>
