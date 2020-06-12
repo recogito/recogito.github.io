@@ -51,12 +51,9 @@
     <div class="column">
       <div class="main-content">
         <h1 id="getting-started-with-annotorious">Getting Started with Annotorious</h1>
-<p>Annotorious lets your users make rectangle selections on images and add comments
-and labels. Try it out on the image below:</p>
-<ul>
-<li><strong>Click the annotation</strong> to edit comment and tags</li>
-<li><strong>Click and drag</strong> with the mouse to create a new annotation</li>
-</ul>
+<p>Annotorious lets your users draw rectangle selections on images and add comments
+and labels. Try it out on the image below: <strong>click the annotation</strong> to edit, <strong>click and drag</strong>
+with the mouse to create a new annotation</p>
 <div class="inline-demo">
   <img id="hallstatt" src="/images/640px-Hallstatt.jpg">
   <p class="image-caption">
@@ -100,7 +97,7 @@ and labels. Try it out on the image below:</p>
     anno.addAnnotation(sampleAnnotation);
   }
 </script>
-<h2 id="importing-via-script-tag">Importing via Script Tag</h2>
+<h2 id="include-script-tag">Include Script Tag</h2>
 <p>To include Annotorious on your page, download the <a href="https://github.com/recogito/annotorious/releases/latest">latest release</a>
 and add the script at the end of the <code>&lt;body&gt;</code> section.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">body</span>&gt;
@@ -134,7 +131,7 @@ and add the script at the end of the <code>&lt;body&gt;</code> section.</p>
 <span style="color:#268bd2">const</span> anno <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
   image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>)
 });
-</code></pre></div><h1 id="annotorious-openseadragon-plugin">Annotorious OpenSeadragon Plugin</h1>
+</code></pre></div><h1 id="openseadragon-plugin">OpenSeadragon Plugin</h1>
 <p>There is a separate version of Annotorious which plugs into the <a href="http://openseadragon.github.io/">OpenSeadragon viewer</a>
 for high-resolution images. Setup is just as easy as for the standard version. <a href="/annotorious/getting-started/osd-plugin">Read more</a></p>
 <h1 id="next-steps">Next Steps</h1>
