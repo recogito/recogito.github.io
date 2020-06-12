@@ -98,7 +98,7 @@ available <a href="/annotorious/api-docs/osd-plugin">here</a>.</p>
 <h3 id="addannotation">.addAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addAnnotation(annotation [, readOnly]);
 </code></pre></div><p>Adds an annotation programmatically. The format is the
-<a href="https://github.com/recogito/annotorious/wiki/Web-Annotation-Model">W3C WebAnnotation model</a>. At the moment,
+<a href="/annotorious/getting-started/web-annotation">W3C WebAnnotation model</a>. At the moment,
 only a single <code>FragmentSelector</code> with an <code>xywh=pixel</code> fragment is supported.</p>
 <table>
 <thead>
@@ -165,7 +165,7 @@ more information about creator data.)</p>
 </code></pre></div><p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
 <h3 id="loadannotations">.loadAnnotations</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.loadAnnotations(url);
-</code></pre></div><p>Loads annotations from a JSON file. The method returns a promise, in
+</code></pre></div><p>Loads annotations from a JSON URL. The method returns a promise, in
 case you want to perform an action after the annotations have loaded.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.loadAnnotations(url).then(<span style="color:#268bd2">function</span>(annotations) {
   <span style="color:#586e75">// Do something
