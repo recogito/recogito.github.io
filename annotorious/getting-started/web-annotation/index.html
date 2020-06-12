@@ -57,6 +57,9 @@ Current limitations are:</p>
 <ul>
 <li>Only annotations with a <strong>single rectangle</strong> shape are supported</li>
 <li>The <a href="https://www.w3.org/TR/media-frags/">W3C Media Fragments</a> <code>FragmentSelector</code> is the only supported selector type</li>
+<li>Annotation <code>TextualBody</code> types with a <code>purpose</code> of <code>commenting</code>, <code>replying</code> or no <code>purpose</code> are displayed as comments</li>
+<li>Anntation bodies with a <code>purpose</code> of <code>tagging</code> are displayed as tags</li>
+<li>Bodies of any other type are ignored (unless you implement your own editor extension)</li>
 </ul>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
   <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
