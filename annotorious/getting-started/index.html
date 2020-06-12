@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Getting Started</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.0d34dce52045db68f7b534b3b1d458d4775a6830d058d9c868c1d813543fa2ae.css">
+    <meta name="description" content="Examples and instructions for getting started with the Annotorious image annotation library">
+<meta name="twitter:title" content="Getting Started With Annotorious" />
+<meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta name="twitter:site" content="@aboutgeo" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Examples and instructions for getting started with the Annotorious image annotation library">
+<meta property="og:title" content="Getting Started With Annotorious" />
+<meta property="og:description" content="Examples and instructions for getting started with the Annotorious image annotation library">
+<meta property="og:url" content="https://recogito.github.io/annotorious/getting-started" />
+<meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta property="og:type" content="object" />
+
+  </head>
+
+  <body>
+    <div class="navbar">
+  <header>
+    <ul>
+      <li><a href="/annotorious/">Home</a></li>
+      <li><a href="/annotorious/getting-started">Getting Started</a></li>
+      <li><a href="/annotorious/api-docs">API Docs</a></li>
+      <li><a href="/guides">Guides</a></li>
+      <li><a href="/annotorious/about">About</a></li>
+      <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="main-content">
+        <h1 id="getting-started-with-annotorious">Getting Started with Annotorious</h1>
+<p>Add drawing, commenting and labeling functionality to images on your website with
+just a few lines of code. <strong>Click the annotation below</strong> to edit.
+<strong>Click and drag the mouse</strong> to create a new annotation.</p>
+<div class="inline-demo">
+  <img id="hallstatt" src="/images/640px-Hallstatt.jpg">
+  <p class="image-caption">
+    Sample image source: <a href="http://commons.wikimedia.org/wiki/File:Hallstatt_300.jpg">Hallstatt,
+    Austria</a>, by Nick Csakany/Wikimedia Commons. Public Domain.
+  </p>
+</div>
+<script type="text/javascript" src="/js/annotorious.min.js"></script>
+<script>
+  var sampleAnnotation = { 
+    "@context": "http://www.w3.org/ns/anno.jsonld",
+    "id": "#a88b22d0-6106-4872-9435-c78b5e89fede",
+    "type": "Annotation",
+    "body": [{
+      "type": "TextualBody",
+      "value": "It's Hallstatt in Upper Austria"
+    }, {
+      "type": "TextualBody",
+      "purpose": "tagging",
+      "value": "Hallstatt"
+    }, {
+      "type": "TextualBody",
+      "purpose": "tagging",
+      "value": "Upper Austria"
+    }],
+    "target": {
+      "selector": {
+        "type": "FragmentSelector",
+        "conformsTo": "http://www.w3.org/TR/media-frags/",
+        "value": "xywh=pixel:270,120,90,170"
+      }
+    }
+  };
+
+  window.onload = function() {
+    var anno = Annotorious.init({
+      image: 'hallstatt',
+      locale: 'auto'
+    });
+
+    anno.addAnnotation(sampleAnnotation);
+  }
+</script>
+<p><strong>Current features of Annotorious include:</strong></p>
+<ul>
+<li>Editable rectangle shapes: draw with click &amp; drag, resize and move after creation</li>
+<li>A <a href="/annotorious/api-docs/">rich JavaScript API</a> for integrating Annotorious with your own application,
+tweaking its behavior, handling user auth info, etc.</li>
+<li>All SVG and CSS-based, allowing you to customize styles on everything</li>
+<li>Component-based architecture that allows you to extend the editor with custom widgets</li>
+</ul>
+
+
+        <div class="section-overview">
+          
+            <h2><a href="http://recogito.github.io/annotorious/getting-started/annotorious/">Annotorious</a></h2>
+            <p class="blurb">
+              The Annotorious <strong>standard version</strong> works on normal images embedded in websites or web applications. <a href="http://recogito.github.io/annotorious/getting-started/annotorious/">Read more</a>
+            </p>
+          
+            <h2><a href="http://recogito.github.io/annotorious/getting-started/osd-plugin/">OpenSeadragon Plugin</a></h2>
+            <p class="blurb">
+              The <strong>OpenSeadragon plugin</strong> is an extension to the <a href="http://openseadragon.github.io/">OpenSeadragon</a> viewer for zoomable high-resolution images. <a href="http://recogito.github.io/annotorious/getting-started/osd-plugin/">Read more</a>
+            </p>
+          
+            <h2><a href="http://recogito.github.io/annotorious/getting-started/web-annotation/">Web Annotation Model</a></h2>
+            <p class="blurb">
+              Annotorious uses the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>. Learn the basics of how annotations are encoded as JSON, and what parts of the standard Annotorious currently supports. <a href="http://recogito.github.io/annotorious/getting-started/web-annotation/">Read more</a>
+            </p>
+          
+            <h2><a href="http://recogito.github.io/annotorious/getting-started/storing-annotations/">Storing Annotations</a></h2>
+            <p class="blurb">
+              To store annotations, you need an annotation server. <strong>Annotorious does not come with built-in storage</strong>. Learn how you can use the JavaScript API to set up your own solution that fits your needs. <a href="http://recogito.github.io/annotorious/getting-started/storing-annotations/">Read more</a>
+            </p>
+          
+        </div>
+      </div>
+
+      <div class="table-of-contents">
+        <nav>
+          <ul>
+            <li><a href="http://recogito.github.io/annotorious/getting-started/">Getting Started</a></li>
+            <li>
+              <ul>
+                
+                  <li>
+                    <a href="http://recogito.github.io/annotorious/getting-started/annotorious/">Annotorious</a>
+                  </li>
+                
+                  <li>
+                    <a href="http://recogito.github.io/annotorious/getting-started/osd-plugin/">OpenSeadragon Plugin</a>
+                  </li>
+                
+                  <li>
+                    <a href="http://recogito.github.io/annotorious/getting-started/web-annotation/">Web Annotation Model</a>
+                  </li>
+                
+                  <li>
+                    <a href="http://recogito.github.io/annotorious/getting-started/storing-annotations/">Storing Annotations</a>
+                  </li>
+                
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <footer>
+  <div class="inner">
+    <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
+    <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious">Annotorious Gitter Chat</a></p>
+    <p class="github-link">
+      <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
+      <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

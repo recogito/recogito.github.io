@@ -3,72 +3,77 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/getting-started/annotorious/</loc>
+    <loc>http://recogito.github.io/annotorious/getting-started/annotorious/</loc>
     <lastmod>2020-06-01T10:20:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/guides/using-firebase-for-storage/</loc>
+    <loc>http://recogito.github.io/guides/using-firebase-for-storage/</loc>
     <lastmod>2020-05-01T13:28:54+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/guides/contributing-ui-translations/</loc>
+    <loc>http://recogito.github.io/guides/contributing-ui-translations/</loc>
     <lastmod>2020-06-01T20:04:18+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/getting-started/osd-plugin/</loc>
+    <loc>http://recogito.github.io/annotorious/getting-started/osd-plugin/</loc>
     <lastmod>2020-06-01T10:20:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</loc>
+    <loc>http://recogito.github.io/annotorious/getting-started/web-annotation/</loc>
     <lastmod>2020-05-17T14:33:09+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</loc>
+    <loc>http://recogito.github.io/annotorious/getting-started/storing-annotations/</loc>
     <lastmod>2020-06-01T10:20:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/guides/development-setup/</loc>
+    <loc>http://recogito.github.io/guides/development-setup/</loc>
     <lastmod>2020-06-04T11:46:22+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/api-docs/</loc>
-    <lastmod>2020-06-07T09:28:16+02:00</lastmod>
+    <loc>http://recogito.github.io/site/annotorious/</loc>
+    <lastmod>2020-06-12T08:04:26+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://recogito.github.io/</loc>
-    <lastmod>2020-06-07T09:28:16+02:00</lastmod>
+    <lastmod>2020-06-12T08:04:26+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://recogito.github.io/site/</loc>
+    <lastmod>2020-06-12T07:36:52+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/annotorious/api-docs/</loc>
     <lastmod>2020-06-07T09:28:16+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/about/</loc>
+    <loc>http://recogito.github.io/annotorious/about/</loc>
     <lastmod>2020-06-01T17:48:46+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/api-docs/osd-plugin/</loc>
+    <loc>http://recogito.github.io/annotorious/api-docs/osd-plugin/</loc>
     <lastmod>2020-05-17T14:15:19+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/api-docs/annotorious/</loc>
+    <loc>http://recogito.github.io/annotorious/api-docs/annotorious/</loc>
     <lastmod>2020-05-17T14:14:36+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/getting-started/</loc>
+    <loc>http://recogito.github.io/annotorious/getting-started/</loc>
     <lastmod>2020-05-17T14:10:57+02:00</lastmod>
   </url>
   
@@ -78,12 +83,12 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/annotorious/</loc>
+    <loc>http://recogito.github.io/annotorious/</loc>
     <lastmod>2020-05-17T14:00:29+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/site/guides/</loc>
+    <loc>http://recogito.github.io/guides/</loc>
     <lastmod>2020-05-01T13:28:19+02:00</lastmod>
   </url>
   

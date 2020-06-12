@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Annotorious on recogito.github.io</title>
+    <link>http://recogito.github.io/annotorious/</link>
+    <description>Recent content in Annotorious on recogito.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 May 2020 14:00:29 +0200</lastBuildDate>
+    
+	<atom:link href="http://recogito.github.io/annotorious/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>http://recogito.github.io/annotorious/about/</link>
+      <pubDate>Mon, 01 Jun 2020 17:48:46 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/annotorious/about/</guid>
+      <description>About Annotorious Annotorious is a modernized reboot of the now outdated original Annotorious.
+License Annotorious is licensed under the terms of the BSD 3-Clause license. That basically means: you can use this code for free, in whatever way you want, for non-commerical and commercial projects. But keep the attribution/license file included - and bear in mind: this code comes as is, don&amp;rsquo;t come complaining to us stuff breaks ;-)
+Need Help?</description>
+    </item>
+    
+  </channel>
+</rss>

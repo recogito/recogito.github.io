@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Getting Started on recogito.github.io</title>
+    <link>http://recogito.github.io/annotorious/getting-started/</link>
+    <description>Recent content in Getting Started on recogito.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 May 2020 14:10:57 +0200</lastBuildDate>
+    
+	<atom:link href="http://recogito.github.io/annotorious/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Annotorious</title>
+      <link>http://recogito.github.io/annotorious/getting-started/annotorious/</link>
+      <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/annotorious/getting-started/annotorious/</guid>
+      <description>Getting Started with Annotorious The Annotorious standard version works on normal images embedded in websites or web applications.
+Using NPM If you use npm, npm install @recogito/annotorious and then
+import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; const anno = new Annotorious({ image: document.getElementById(&amp;#39;my-image&amp;#39;) }); Using the Script Tag Download the latest release and add the script to your HTML page at the end of the &amp;lt;body&amp;gt; section.
+&amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;content&amp;#34;&amp;gt; &amp;lt;img id=&amp;#34;hallstatt&amp;#34; src=&amp;#34;640px-Hallstatt.</description>
+    </item>
+    
+    <item>
+      <title>OpenSeadragon Plugin</title>
+      <link>http://recogito.github.io/annotorious/getting-started/osd-plugin/</link>
+      <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/annotorious/getting-started/osd-plugin/</guid>
+      <description>Getting Started with the OpenSeadragon Plugin The OpenSeadragon plugin is an extension to the OpenSeadragon viewer for zoomable high-resolution images. Click the annotation to edit. Hold SHIFT while clicking and dragging the mouse to create a new annotation.
+ .openseadragon-canvas { outline:none; background-color:#f4f4f4 !important; border-radius:3px; }       var sampleAnnotation = { &#34;@context&#34;: &#34;http://www.w3.org/ns/anno.jsonld&#34;, &#34;id&#34;: &#34;#07475897-d2eb-4dce-aa12-ecb50771c734&#34;, &#34;type&#34;: &#34;Annotation&#34;, &#34;body&#34;: [{ &#34;type&#34;: &#34;TextualBody&#34;, &#34;value&#34;: &#34;Annotation&#34; }], &#34;target&#34;: { &#34;</description>
+    </item>
+    
+    <item>
+      <title>Web Annotation Model</title>
+      <link>http://recogito.github.io/annotorious/getting-started/web-annotation/</link>
+      <pubDate>Sun, 17 May 2020 14:33:09 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
+      <description>The W3C Web Annotation Model Annotorious uses the W3C Web Annotation model. Only a limited range of the specification is supported at the moment. Current limitations are:
+ Annotations with a single rectangle shape The W3C Media Fragments FragmentSelector is the only currently supported selector type  { &amp;#34;@context&amp;#34;: &amp;#34;http://www.w3.org/ns/anno.jsonld&amp;#34;, &amp;#34;id&amp;#34;: &amp;#34;#a88b22d0-6106-4872-9435-c78b5e89fede&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;Annotation&amp;#34;, &amp;#34;body&amp;#34;: [{ &amp;#34;type&amp;#34;: &amp;#34;TextualBody&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;It&amp;#39;s Hallstatt in Upper Austria&amp;#34; }], &amp;#34;target&amp;#34;: { &amp;#34;selector&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;FragmentSelector&amp;#34;, &amp;#34;conformsTo&amp;#34;: &amp;#34;http://www.</description>
+    </item>
+    
+    <item>
+      <title>Storing Annotations</title>
+      <link>http://recogito.github.io/annotorious/getting-started/storing-annotations/</link>
+      <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/annotorious/getting-started/storing-annotations/</guid>
+      <description>Storing Annotations To store annotations, you need an annotation server or database backend. Annotorious - as well as its sister project RecogitoJS - do not include their own storage solution. They provide the user interface functionality for annotation only. To store annotations, you need to connect them to your own backend, using the API.
+When an annotation is created, updated or deleted by the user, Annotorious emits the following events through the API:</description>
+    </item>
+    
+  </channel>
+</rss>

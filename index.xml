@@ -6,17 +6,17 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 07 Jun 2020 09:28:16 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 12 Jun 2020 08:04:26 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Annotorious</title>
-      <link>http://recogito.github.io/site/annotorious/getting-started/annotorious/</link>
+      <link>http://recogito.github.io/annotorious/getting-started/annotorious/</link>
       <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/getting-started/annotorious/</guid>
+      <guid>http://recogito.github.io/annotorious/getting-started/annotorious/</guid>
       <description>Getting Started with Annotorious The Annotorious standard version works on normal images embedded in websites or web applications.
 Using NPM If you use npm, npm install @recogito/annotorious and then
 import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; const anno = new Annotorious({ image: document.getElementById(&amp;#39;my-image&amp;#39;) }); Using the Script Tag Download the latest release and add the script to your HTML page at the end of the &amp;lt;body&amp;gt; section.
@@ -25,71 +25,80 @@ import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; const anno 
     
     <item>
       <title>Using Firebase for Storage</title>
-      <link>http://recogito.github.io/site/guides/using-firebase-for-storage/</link>
+      <link>http://recogito.github.io/guides/using-firebase-for-storage/</link>
       <pubDate>Fri, 01 May 2020 13:28:54 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/guides/using-firebase-for-storage/</guid>
+      <guid>http://recogito.github.io/guides/using-firebase-for-storage/</guid>
       <description>Using Firebase for Storage A quick and easy way to set up your own annotation store without managing your own server is through Firebase, a web application development platform by Google. Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and deleting JSON records. All you need to do is wire up the Firebase storage SDK operations with the corresponding events from Annotorious.
 Using Events for Storage When Annotorious fires the createAnnotation event, store the annotation via the .</description>
     </item>
     
     <item>
       <title>Contributing UI Translations</title>
-      <link>http://recogito.github.io/site/guides/contributing-ui-translations/</link>
+      <link>http://recogito.github.io/guides/contributing-ui-translations/</link>
       <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/guides/contributing-ui-translations/</guid>
+      <guid>http://recogito.github.io/guides/contributing-ui-translations/</guid>
       <description>Contributing UI Translations We want to make our software available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled user interface elements, it&amp;rsquo;s also not a lot of work.
 Message Dictionaries The user interface labels are part of the recogito-client-core package, located here. In this folder you will find messages files, one file for each available translation.</description>
     </item>
     
     <item>
       <title>OpenSeadragon Plugin</title>
-      <link>http://recogito.github.io/site/annotorious/getting-started/osd-plugin/</link>
+      <link>http://recogito.github.io/annotorious/getting-started/osd-plugin/</link>
       <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/getting-started/osd-plugin/</guid>
+      <guid>http://recogito.github.io/annotorious/getting-started/osd-plugin/</guid>
       <description>Getting Started with the OpenSeadragon Plugin The OpenSeadragon plugin is an extension to the OpenSeadragon viewer for zoomable high-resolution images. Click the annotation to edit. Hold SHIFT while clicking and dragging the mouse to create a new annotation.
  .openseadragon-canvas { outline:none; background-color:#f4f4f4 !important; border-radius:3px; }       var sampleAnnotation = { &#34;@context&#34;: &#34;http://www.w3.org/ns/anno.jsonld&#34;, &#34;id&#34;: &#34;#07475897-d2eb-4dce-aa12-ecb50771c734&#34;, &#34;type&#34;: &#34;Annotation&#34;, &#34;body&#34;: [{ &#34;type&#34;: &#34;TextualBody&#34;, &#34;value&#34;: &#34;Annotation&#34; }], &#34;target&#34;: { &#34;</description>
     </item>
     
     <item>
       <title>Web Annotation Model</title>
-      <link>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</link>
+      <link>http://recogito.github.io/annotorious/getting-started/web-annotation/</link>
       <pubDate>Sun, 17 May 2020 14:33:09 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/getting-started/web-annotation/</guid>
+      <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
       <description>The W3C Web Annotation Model Annotorious uses the W3C Web Annotation model. Only a limited range of the specification is supported at the moment. Current limitations are:
  Annotations with a single rectangle shape The W3C Media Fragments FragmentSelector is the only currently supported selector type  { &amp;#34;@context&amp;#34;: &amp;#34;http://www.w3.org/ns/anno.jsonld&amp;#34;, &amp;#34;id&amp;#34;: &amp;#34;#a88b22d0-6106-4872-9435-c78b5e89fede&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;Annotation&amp;#34;, &amp;#34;body&amp;#34;: [{ &amp;#34;type&amp;#34;: &amp;#34;TextualBody&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;It&amp;#39;s Hallstatt in Upper Austria&amp;#34; }], &amp;#34;target&amp;#34;: { &amp;#34;selector&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;FragmentSelector&amp;#34;, &amp;#34;conformsTo&amp;#34;: &amp;#34;http://www.</description>
     </item>
     
     <item>
       <title>Storing Annotations</title>
-      <link>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</link>
+      <link>http://recogito.github.io/annotorious/getting-started/storing-annotations/</link>
       <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/getting-started/storing-annotations/</guid>
+      <guid>http://recogito.github.io/annotorious/getting-started/storing-annotations/</guid>
       <description>Storing Annotations To store annotations, you need an annotation server or database backend. Annotorious - as well as its sister project RecogitoJS - do not include their own storage solution. They provide the user interface functionality for annotation only. To store annotations, you need to connect them to your own backend, using the API.
 When an annotation is created, updated or deleted by the user, Annotorious emits the following events through the API:</description>
     </item>
     
     <item>
       <title>Hacker&#39;s Guide</title>
-      <link>http://recogito.github.io/site/guides/development-setup/</link>
+      <link>http://recogito.github.io/guides/development-setup/</link>
       <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/guides/development-setup/</guid>
+      <guid>http://recogito.github.io/guides/development-setup/</guid>
       <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away.
 Repositories &amp;hellip;
 Developing  Clone the repository Run npm install to download project dependencies Run npm start to launch the project in dev mode, with hot-reloading enabled Go to http://localhost:3000/  Building a distribution bundle  Run npm run build to build a distribution bundle The distribution files will be in the dist folder  Want to find your way around in the source code?</description>
     </item>
     
     <item>
+      <title>Annotorious</title>
+      <link>http://recogito.github.io/site/annotorious/</link>
+      <pubDate>Fri, 12 Jun 2020 08:04:26 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/site/annotorious/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>About</title>
-      <link>http://recogito.github.io/site/annotorious/about/</link>
+      <link>http://recogito.github.io/annotorious/about/</link>
       <pubDate>Mon, 01 Jun 2020 17:48:46 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/about/</guid>
+      <guid>http://recogito.github.io/annotorious/about/</guid>
       <description>About Annotorious Annotorious is a modernized reboot of the now outdated original Annotorious.
 License Annotorious is licensed under the terms of the BSD 3-Clause license. That basically means: you can use this code for free, in whatever way you want, for non-commerical and commercial projects. But keep the attribution/license file included - and bear in mind: this code comes as is, don&amp;rsquo;t come complaining to us stuff breaks ;-)
 Need Help?</description>
@@ -97,10 +106,10 @@ Need Help?</description>
     
     <item>
       <title>API Docs | Annotorious OSD Plugin</title>
-      <link>http://recogito.github.io/site/annotorious/api-docs/osd-plugin/</link>
+      <link>http://recogito.github.io/annotorious/api-docs/osd-plugin/</link>
       <pubDate>Sun, 17 May 2020 14:15:19 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/api-docs/osd-plugin/</guid>
+      <guid>http://recogito.github.io/annotorious/api-docs/osd-plugin/</guid>
       <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon, zoomable image viewer. The API reference for the Annotorious standard version is available here.
  Initializing the Plugin Initialize Annotorious on an OpenSeadragon viewer instance with
 var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, and must be an object with the following properties:
@@ -109,10 +118,10 @@ var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, an
     
     <item>
       <title>API Docs | Annotorious</title>
-      <link>http://recogito.github.io/site/annotorious/api-docs/annotorious/</link>
+      <link>http://recogito.github.io/annotorious/api-docs/annotorious/</link>
       <pubDate>Sun, 17 May 2020 14:14:36 +0200</pubDate>
       
-      <guid>http://recogito.github.io/site/annotorious/api-docs/annotorious/</guid>
+      <guid>http://recogito.github.io/annotorious/api-docs/annotorious/</guid>
       <description>API Reference: Annotorious  The standard version of Annotorious works on normal images embedded in websites or web applications. The API reference for the Annotorious OpenSeadragon plugin is available here.
  Initializing Annotorious Initialize an Annotorious instance on an image with
 var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); The config object can have the following properties:

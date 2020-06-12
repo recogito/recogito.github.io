@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Annotorious | A Javascript Library for Image Annotation</title>
+    <title>Page has moved</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/splash.min.99d96516745cc72b7afaf9d1ec60ecbe59d4ad3c9fc4759f75fa4969d03b6cb0.css">  
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/annotorious-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/annotorious-touch-icon-152.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/annotorious-touch-icon-144.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/annotorious-touch-icon-114.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/annotorious-touch-icon-144.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/annotorious-touch-icon-114.png" />
-    <link rel="apple-touch-icon" href="/images/annotorious-touch-icon.png">
+    <link rel="stylesheet" href="/css/style.min.0d34dce52045db68f7b534b3b1d458d4775a6830d058d9c868c1d813543fa2ae.css">
     <meta name="description" content="A JavaScript library for image annotation. Add drawing, commenting and labeling functionality to images on your website with a few lines of JavaScript.">
 <meta name="twitter:title" content="Annotorious" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
@@ -20,109 +13,38 @@
 <meta name="twitter:description" content="A JavaScript library for image annotation. Add drawing, commenting and labeling functionality to images on your website with a few lines of JavaScript.">
 <meta property="og:title" content="Annotorious" />
 <meta property="og:description" content="A JavaScript library for image annotation. Add drawing, commenting and labeling functionality to images on your website with a few lines of JavaScript.">
-<meta property="og:url" content="https://recogito.github.io/site/annotorious" />
+<meta property="og:url" content="https://recogito.github.io/annotorious" />
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
 
+    <meta name="description" content="A JavaScript library for image annotation. Add drawing, commenting and labeling functionality to images on your website with a few lines of JavaScript.">
+<meta name="twitter:title" content="Annotorious" />
+<meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta name="twitter:site" content="@aboutgeo" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="A JavaScript library for image annotation. Add drawing, commenting and labeling functionality to images on your website with a few lines of JavaScript.">
+<meta property="og:title" content="Annotorious" />
+<meta property="og:description" content="A JavaScript library for image annotation. Add drawing, commenting and labeling functionality to images on your website with a few lines of JavaScript.">
+<meta property="og:url" content="https://recogito.github.io/annotorious" />
+<meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta property="og:type" content="object" />
+
+    <meta http-equiv="refresh" content="0; URL='/annotorious'" />
   </head>
 
   <body>
-    <div class="jumbo-header">
-      <img id="header-background" src="/images/splash-header.jpg" />
-      <div class="jumbo-header-foreground">
-        <div class="jumbo-header-logo-wrapper">
-          <div class="jumbo-header-logo">Annotorious</div>
-        </div>
+    <div class="column full-width">
+      <div class="main-content">
+        <p>
+          This page has moved to a new location:<br/>
+          <a id="redirect" href="/annotorious">/annotorious</a>
+        </p>
       </div>
     </div>
-
-    <div id="navbar" class="jumbo-header-navbar" style="background-color:rgba(34,34,34,0);">
-      <ul>
-        <li><a href="/site/annotorious/getting-started">Getting Started</a></li>
-        <li><a href="/site/annotorious/api-docs">API Docs</a></li>
-        <li><a href="/site/guides">Guides</a></li>
-        <li><a href="/site/annotorious/about">About</a></li>
-        <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
-      </ul>
-    </div>
-
-    <div class="column">
-      <div class="download-latest">
-        <h2>A JavaScript library for image annotation.</h2>
-        <p>
-          Add drawing, commenting and labeling functionality to images on your website <br/>
-          with a few lines of JavaScript.
-        </p>
-               
-        <a class="download-button" href="https://github.com/recogito/annotorious/releases/latest">Download Annotorious v2.0.3</a>
-
-        <p class="osd-link">
-          Or get the latest <a href="#openseadragon">OpenSeadragon plugin</a>.
-        </p>
-      </div>
-
-      <div>
-        <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
-  image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;image-to-annotate&#39;</span>)
-});
-
-<span style="color:#586e75">// Load annotations in W3C Web Annotation format
-</span><span style="color:#586e75"></span>anno.loadAnnotations(<span style="color:#2aa198">&#39;annotations.json&#39;</span>);
-
-<span style="color:#586e75">// Attach listeners to handle annotation events
-</span><span style="color:#586e75"></span>anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation)) {
-  console.log(<span style="color:#2aa198">&#39;Created!&#39;</span>);
-};
-</code></pre></div>
-      </div>
-
-      <div class="message">
-        <p>
-          <strong>Integrate anywhere.</strong> Annotorious has no server-side dependencies and 
-          does not force a specific technology stack or backend on you. Integrate the backend you  
-          already have, or follow one of the <a href="/site/guides">guides</a> for a simple out-of-the-box 
-          cloud storage recipe.          
-        </p>
-      </div>
-
-      <div class="divider-image">
-        <img id="cogs" src="/images/splash-cogs.jpg" />
-      </div>
-
-      <div class="message">
-        <p>
-          <strong> Customize &amp; extend.</strong> Create your own extension components 
-          for the annotation editor. Change the look and feel of everything with CSS. 
-          Use <a href="#">formatters</a> to apply rule-based styles to annotations.
-        </p>
-      </div>
-
-      <div class="divider-image">
-        <img id="lego" src="/images/splash-lego-orange.jpg" />
-      </div>
-
-      <div id="openseadragon" class="download-openseadragon">
-        <img src="/images/annotorious-osd-stylized.png"/>
-        <p>
-          Annotorious is also available as a plugin to <a href="https://openseadragon.github.io/">OpenSeadragon</a>, a JavaScript 
-          viewer for high-resolution zoomable images. <a href="/site/annotorious/getting-started/osd-plugin/">Learn more</a>.
-        </p>  
-        <a class="download-button" href="https://github.com/recogito/annotorious-openseadragon/releases/latest">Download OpenSeadragon Plugin v2.0.1</a>        
-      </div>
-    </div>
-    
-    <footer>
-      <div class="inner">
-        <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
-        <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious">Annotorious Gitter Chat</a></p>
-        <p class="github-link">
-          <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
-          <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
-        </p>
-      </div>
-    </footer>
-
-    <script type="text/javascript" src="/js/annotorious.min.js"></script>
-    <script type="text/javascript" src="/js/splash-gadgets.js"></script>
+    <script>
+      var relative = '\/annotorious';
+      var absolute = new URL(relative, document.baseURI);
+      document.getElementById('redirect').innerHTML = absolute;
+    </script>
   </body>
 </html>
