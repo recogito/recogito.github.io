@@ -95,7 +95,7 @@ available <a href="/annotorious/api-docs/osd-plugin">here</a>.</p>
 </tbody>
 </table>
 <h2 id="instance-methods">Instance Methods</h2>
-<h3 id="addannotation">addAnnotation</h3>
+<h3 id="addannotation">.addAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addAnnotation(annotation [, readOnly]);
 </code></pre></div><p>Adds an annotation programmatically. The format is the
 <a href="https://github.com/recogito/annotorious/wiki/Web-Annotation-Model">W3C WebAnnotation model</a>. At the moment,
@@ -121,7 +121,121 @@ only a single <code>FragmentSelector</code> with an <code>xywh=pixel</code> frag
 </tr>
 </tbody>
 </table>
-<h3 id="removeannotation">removeAnnotation</h3>
+<h3 id="applytemplate">.applyTemplate</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.applyTemplate(template);
+</code></pre></div><p>When a new annotation is created, Annotorious will automatically apply the given
+template. The template can be a single annotation body, or an array of bodies.
+If <code>openEditor</code> is set to true, the editor popup will open, allowing the user to
+edit the annotation normally. Otherwise, Annotorious will <strong>instantly</strong> create an
+annotation from the template bodies <strong>only</strong>. The editor will not open.</p>
+<p>Use this method if you want to implement batch- or fast annotation modes, where
+the same annotation should be applied repeatedly, and the user should only take
+care of drawing selections.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>template</code></td>
+<td>Object</td>
+<td>the template body or list of bodies to apply automatically</td>
+</tr>
+<tr>
+<td><code>openEditor</code></td>
+<td>Boolean</td>
+<td>if <code>true</code>, the editor will open after the template is applied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="clearauthinfo">.clearAuthInfo</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAuthInfo();
+</code></pre></div><p>Clears the user auth information. Annotorious will no longer insert creator data
+when a new annotation is created or updated. (See <a href="#setauthinfo">setAuthInfo</a> for
+more information about creator data.)</p>
+<h3 id="destroy">.destroy</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.destroy();
+</code></pre></div><p>Destroys this instance of Annotorious, removing the annotation layer on the image.</p>
+<h3 id="getannotations">.getAnnotations</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.getAnnotations();
+</code></pre></div><p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
+<h3 id="loadannotations">.loadAnnotations</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.loadAnnotations(url);
+</code></pre></div><p>Loads annotations from a JSON file. The method returns a promise, in
+case you want to perform an action after the annotations have loaded.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.loadAnnotations(url).then(<span style="color:#268bd2">function</span>(annotations) {
+  <span style="color:#586e75">// Do something
+</span><span style="color:#586e75"></span>});
+</code></pre></div><table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>String</td>
+<td>the URL to HTTP GET the annotations from</td>
+</tr>
+</tbody>
+</table>
+<h3 id="off">.off</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
+</code></pre></div><p>Unsubscribe from an event. If no callback is provided,
+all event handlers for this event will be unsubscribed.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>String</td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>Function</td>
+<td>the function used when binding to the event</td>
+</tr>
+</tbody>
+</table>
+<h3 id="on">.on</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(event, callback);
+</code></pre></div><p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>String</td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>Function</td>
+<td>the function to call when the event is emitted</td>
+</tr>
+</tbody>
+</table>
+<h3 id="removeannotation">.removeAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.removeAnnotation(arg);
 </code></pre></div><p>Removes an annotation programmatically.</p>
 <table>
@@ -140,66 +254,7 @@ only a single <code>FragmentSelector</code> with an <code>xywh=pixel</code> frag
 </tr>
 </tbody>
 </table>
-<h3 id="setannotations">setAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotations(annotations);
-</code></pre></div><p>Renders the list of annotations to the image, removing any previously
-existing annotations.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>annotations</code></td>
-<td>array of annotations in W3C WebAnnotation format</td>
-</tr>
-</tbody>
-</table>
-<h3 id="loadannotations">loadAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.loadAnnotations(url);
-</code></pre></div><p>Loads annotations from a JSON file. The method returns a promise, in
-case you want to perform an action after the annotations have loaded.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.loadAnnotations(url).then(<span style="color:#268bd2">function</span>(annotations) {
-  <span style="color:#586e75">// Do something
-</span><span style="color:#586e75"></span>});
-</code></pre></div><table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>url</code></td>
-<td>the URL to HTTP GET the annotations from</td>
-</tr>
-</tbody>
-</table>
-<h3 id="getannotations">getAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.getAnnotations();
-</code></pre></div><p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
-<h3 id="setannotationsvisible">setAnnotationsVisible</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotationsVisible(visible);
-</code></pre></div><p>Shows or hides the annotation layer.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>visible</code></td>
-<td>if <code>true</code> show the annotation layer, otherwise hide it</td>
-</tr>
-</tbody>
-</table>
-<h3 id="selectannotation">selectAnnotation</h3>
+<h3 id="selectannotation">.selectAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.selectAnnotations(arg);
 </code></pre></div><p>Selects an annotation programmatically, highlighting its shape, and opening the editor popup.</p>
 <ul>
@@ -212,111 +267,107 @@ the current selection, if any</li>
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>arg</code></td>
+<td>Object, String</td>
 <td>the annotation or the annotation ID</td>
 </tr>
 </tbody>
 </table>
-<h3 id="applytemplate">applyTemplate</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.applyTemplate(template);
-</code></pre></div><p>When a new annotation is created, Annotorious will automatically apply the given
-template. The template can be a single annotation body, or an array of bodies.
-If <code>openEditor</code> is set to true, the editor popup will open, allowing the user to
-edit the annotation normally. Otherwise, Annotorious will <strong>instantly</strong> create an
-annotation from the template bodies <strong>only</strong>. The editor will not open.</p>
-<p>Use this method if you want to implement batch- or fast annotation modes, where
-the same annotation should be applied repeatedly, and the user should only take
-care of drawing selections.</p>
+<h3 id="setannotations">.setAnnotations</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotations(annotations);
+</code></pre></div><p>Renders the list of annotations to the image, removing any previously
+existing annotations.</p>
 <table>
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>template</code></td>
-<td>the template body or list of bodies to apply automatically</td>
-</tr>
-<tr>
-<td><code>openEditor</code></td>
-<td>if <code>true</code>, the editor will open after the template is applied</td>
+<td><code>annotations</code></td>
+<td>Array</td>
+<td>array of annotations in W3C WebAnnotation format</td>
 </tr>
 </tbody>
 </table>
-<h3 id="destroy">destroy</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.destroy();
-</code></pre></div><p>Destroys this instance of Annotorious, removing the annotation layer on the image.</p>
-<h3 id="on">on</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(event, callback);
-</code></pre></div><p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
+<h3 id="setannotationsvisible">.setAnnotationsVisible</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotationsVisible(visible);
+</code></pre></div><p>Shows or hides the annotation layer.</p>
 <table>
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>event</code></td>
-<td>the name of the event</td>
-</tr>
-<tr>
-<td><code>callback</code></td>
-<td>the function to call when the event is emitted</td>
+<td><code>visible</code></td>
+<td>Boolean</td>
+<td>if <code>true</code> show the annotation layer, otherwise hide it</td>
 </tr>
 </tbody>
 </table>
-<h3 id="off">off</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
-</code></pre></div><p>Unsubscribe from an event. If no callback is provided,
-all event handlers for this event will be unsubscribed.</p>
+<h3 id="setauthinfo">.setAuthInfo</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAuthInfo(arg);
+</code></pre></div><p>Specifies user authentication information. Annotorious will use this information when annotations
+are created or updated, and display them in the editor popup.</p>
+<p><code>arg</code> is an object with the following properties:</p>
 <table>
 <thead>
 <tr>
-<th>Argument</th>
+<th>Property</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>event</code></td>
-<td>the name of the event</td>
+<td><code>id</code></td>
+<td>String</td>
+<td><strong>REQUIRED</strong> the user ID, which should be an IRI</td>
 </tr>
 <tr>
-<td><code>callback</code></td>
-<td>the function used when binding to the event</td>
+<td><code>displayName</code></td>
+<td>String</td>
+<td><strong>REQUIRED</strong> the user name, for display in the UI</td>
 </tr>
 </tbody>
 </table>
+<p>The data will go into annotation bodies via the <code>creator</code> field:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{ 
+  type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;Annotation&#34;</span>,
+  
+  <span style="color:#586e75">// ...  
+</span><span style="color:#586e75"></span>
+  body<span style="color:#719e07">:</span>[{
+    type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+    value<span style="color:#719e07">:</span><span style="color:#2aa198">&#34;My comment&#34;</span>,
+    purpose<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;commenting&#34;</span>,
+    created<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;2020-05-18T09:39:47.582Z&#34;</span>,
+    creator<span style="color:#719e07">:</span> {
+      id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;http://recogito.example.com/rainer&#34;</span>,
+      name<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;rainer&#34;</span>
+    }
+  }]
+}
+</code></pre></div><h3 id="setservertime">.setServerTime</h3>
+<p>Set a &ldquo;server time&rdquo; timestamp. When using <a href="#setauthinfo">authInfo</a>, this method helps to synchronize the
+<code>created</code> timestamp that Annotorious inserts into the annotation with your server environment, avoiding
+problems when the clock isn&rsquo;t properly set in the user&rsquo;s browser.</p>
+<p>After setting server time, the Annotorious will adjust the <code>created</code> timestamps by the difference between
+server time the user&rsquo;s local clock.</p>
 <h2 id="events">Events</h2>
-<h3 id="selectannotation-1">selectAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;selectAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
-  <span style="color:#586e75">// 
-</span><span style="color:#586e75"></span>});
-</code></pre></div><p>Fired when the user selects an annotation. Note that this event will <strong>not</strong> fire when
-the selection is made programmatically through the <code>selectAnnotation(arg)</code> API method.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>annotation</code></td>
-<td>the annotation in W3C WebAnnotation format</td>
-</tr>
-</tbody>
-</table>
 <h3 id="createannotation">createAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// 
@@ -326,36 +377,15 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>annotation</code></td>
+<td>Object</td>
 <td>the annotation in W3C WebAnnotation format</td>
-</tr>
-</tbody>
-</table>
-<h3 id="updateannotation">updateAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;updateAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, previous) {
-  <span style="color:#586e75">// 
-</span><span style="color:#586e75"></span>});
-</code></pre></div><p>Fired when an existing annotation was updated.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>annotation</code></td>
-<td>the updated annotation</td>
-</tr>
-<tr>
-<td><code>previous</code></td>
-<td>the annotation state before the update</td>
 </tr>
 </tbody>
 </table>
@@ -368,12 +398,14 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>annotation</code></td>
+<td>Object</td>
 <td>the deleted annotation</td>
 </tr>
 </tbody>
@@ -387,16 +419,19 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>annotation</code></td>
+<td>Object</td>
 <td>the annotation</td>
 </tr>
 <tr>
 <td><code>event</code></td>
+<td>Object</td>
 <td>the original mouse event</td>
 </tr>
 </tbody>
@@ -410,17 +445,68 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 <thead>
 <tr>
 <th>Argument</th>
+<th>Type</th>
 <th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>annotation</code></td>
+<td>Object</td>
 <td>the annotation</td>
 </tr>
 <tr>
 <td><code>event</code></td>
+<td>Object</td>
 <td>the original mouse event</td>
+</tr>
+</tbody>
+</table>
+<h3 id="selectannotation-1">selectAnnotation</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;selectAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+  <span style="color:#586e75">// 
+</span><span style="color:#586e75"></span>});
+</code></pre></div><p>Fired when the user selects an annotation. Note that this event will <strong>not</strong> fire when
+the selection is made programmatically through the <code>selectAnnotation(arg)</code> API method.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>Object</td>
+<td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="updateannotation">updateAnnotation</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;updateAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, previous) {
+  <span style="color:#586e75">// 
+</span><span style="color:#586e75"></span>});
+</code></pre></div><p>Fired when an existing annotation was updated.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>annotation</code></td>
+<td>Object</td>
+<td>the updated annotation</td>
+</tr>
+<tr>
+<td><code>previous</code></td>
+<td>Object</td>
+<td>the annotation state before the update</td>
 </tr>
 </tbody>
 </table>
@@ -435,27 +521,30 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
     <li><a href="#initializing-annotorious">Initializing Annotorious</a></li>
     <li><a href="#instance-methods">Instance Methods</a>
       <ul>
-        <li><a href="#addannotation">addAnnotation</a></li>
-        <li><a href="#removeannotation">removeAnnotation</a></li>
-        <li><a href="#setannotations">setAnnotations</a></li>
-        <li><a href="#loadannotations">loadAnnotations</a></li>
-        <li><a href="#getannotations">getAnnotations</a></li>
-        <li><a href="#setannotationsvisible">setAnnotationsVisible</a></li>
-        <li><a href="#selectannotation">selectAnnotation</a></li>
-        <li><a href="#applytemplate">applyTemplate</a></li>
-        <li><a href="#destroy">destroy</a></li>
-        <li><a href="#on">on</a></li>
-        <li><a href="#off">off</a></li>
+        <li><a href="#addannotation">.addAnnotation</a></li>
+        <li><a href="#applytemplate">.applyTemplate</a></li>
+        <li><a href="#clearauthinfo">.clearAuthInfo</a></li>
+        <li><a href="#destroy">.destroy</a></li>
+        <li><a href="#getannotations">.getAnnotations</a></li>
+        <li><a href="#loadannotations">.loadAnnotations</a></li>
+        <li><a href="#off">.off</a></li>
+        <li><a href="#on">.on</a></li>
+        <li><a href="#removeannotation">.removeAnnotation</a></li>
+        <li><a href="#selectannotation">.selectAnnotation</a></li>
+        <li><a href="#setannotations">.setAnnotations</a></li>
+        <li><a href="#setannotationsvisible">.setAnnotationsVisible</a></li>
+        <li><a href="#setauthinfo">.setAuthInfo</a></li>
+        <li><a href="#setservertime">.setServerTime</a></li>
       </ul>
     </li>
     <li><a href="#events">Events</a>
       <ul>
-        <li><a href="#selectannotation-1">selectAnnotation</a></li>
         <li><a href="#createannotation">createAnnotation</a></li>
-        <li><a href="#updateannotation">updateAnnotation</a></li>
         <li><a href="#deleteannotation">deleteAnnotation</a></li>
         <li><a href="#mouseenterannotation">mouseEnterAnnotation</a></li>
         <li><a href="#mouseleaveannotation">mouseLeaveAnnotation</a></li>
+        <li><a href="#selectannotation-1">selectAnnotation</a></li>
+        <li><a href="#updateannotation">updateAnnotation</a></li>
       </ul>
     </li>
   </ul>
