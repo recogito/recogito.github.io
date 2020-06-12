@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://recogito.github.io/annotorious/getting-started/annotorious/</loc>
-    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://recogito.github.io/guides/using-firebase-for-storage/</loc>
     <lastmod>2020-05-01T13:28:54+02:00</lastmod>
   </url>

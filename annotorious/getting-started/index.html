@@ -4,7 +4,7 @@
     <title>Annotorious | Getting Started</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.871580401b4375ad057e058bc58ac850ef57f5935cee8fa5e4d4af17eac78a8b.css">
+    <link rel="stylesheet" href="/css/style.min.f037d50087636abb260540653705a9153952d8d2d4933bc4f5f6765e44b7eea3.css">
     <meta name="description" content="Examples and instructions for getting started with the Annotorious image annotation library">
 <meta name="twitter:title" content="Getting Started With Annotorious" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
@@ -51,9 +51,12 @@
     <div class="column">
       <div class="main-content">
         <h1 id="getting-started-with-annotorious">Getting Started with Annotorious</h1>
-<p>Add drawing, commenting and labeling functionality to images on your website with
-just a few lines of code. <strong>Click the annotation below</strong> to edit.
-<strong>Click and drag the mouse</strong> to create a new annotation.</p>
+<p>Annotorious lets your users make rectangle selections on images and add comments
+and labels. Try it out on the image below:</p>
+<ul>
+<li><strong>Click the annotation</strong> to edit comment and tags</li>
+<li><strong>Click and drag</strong> with the mouse to create a new annotation</li>
+</ul>
 <div class="inline-demo">
   <img id="hallstatt" src="/images/640px-Hallstatt.jpg">
   <p class="image-caption">
@@ -97,39 +100,51 @@ just a few lines of code. <strong>Click the annotation below</strong> to edit.
     anno.addAnnotation(sampleAnnotation);
   }
 </script>
-<p><strong>Current features of Annotorious include:</strong></p>
-<ul>
-<li>Editable rectangle shapes: draw with click &amp; drag, resize and move after creation</li>
-<li>A <a href="/annotorious/api-docs/">rich JavaScript API</a> for integrating Annotorious with your own application,
-tweaking its behavior, handling user auth info, etc.</li>
-<li>All SVG and CSS-based, allowing you to customize styles on everything</li>
-<li>Component-based architecture that allows you to extend the editor with custom widgets</li>
-</ul>
+<h2 id="importing-via-script-tag">Importing via Script Tag</h2>
+<p>To include Annotorious on your page, download the <a href="https://github.com/recogito/annotorious/releases/latest">latest release</a>
+and add the script at the end of the <code>&lt;body&gt;</code> section.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">body</span>&gt;
+  &lt;<span style="color:#268bd2">div</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;content&#34;</span>&gt;
+    &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;hallstatt&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;640px-Hallstatt.jpg&#34;</span>&gt;
+  &lt;/<span style="color:#268bd2">div</span>&gt;
+  &lt;<span style="color:#268bd2">script</span>&gt;
+    (<span style="color:#268bd2">function</span>() {
+      <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+        image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span> <span style="color:#586e75">// image element or ID
+</span><span style="color:#586e75"></span>      });
+
+      anno.loadAnnotations(<span style="color:#2aa198">&#39;annotations.w3c.json&#39;</span>);
+
+      <span style="color:#586e75">// Add event handlers using .on  
+</span><span style="color:#586e75"></span>      r.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+        <span style="color:#586e75">// Do something
+</span><span style="color:#586e75"></span>      });
+    })()
+  &lt;/<span style="color:#268bd2">script</span>&gt;
+
+  &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+&lt;/<span style="color:#268bd2">body</span>&gt;
+</code></pre></div><h2 id="from-cdn">From CDN</h2>
+<p>Alternatively, you can grab the script from the <a href="https://www.jsdelivr.com/package/npm/@recogito/annotorious">jsDelivr CDN</a>.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.0.3/dist/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+</code></pre></div><h2 id="using-npm">Using NPM</h2>
+<p>If you use npm, <code>npm install @recogito/annotorious</code> and then</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
+
+<span style="color:#268bd2">const</span> anno <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
+  image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>)
+});
+</code></pre></div><h1 id="annotorious-openseadragon-plugin">Annotorious OpenSeadragon Plugin</h1>
+<p>There is a separate version of Annotorious which plugs into the <a href="http://openseadragon.github.io/">OpenSeadragon viewer</a>
+for high-resolution images. Setup is just as easy as for the standard version. <a href="/annotorious/getting-started/osd-plugin">Read more</a></p>
+<h1 id="next-steps">Next Steps</h1>
+<p>Once you have the basics up and running, you will probably want to know more about the data format
+of the annotations, and how you can store them permanently. Read more about the
+<a href="/annotorious/getting-started/web-annotation">W3C Web Annotation Model</a> and <a href="/annotorious/getting-started/storing-annotations">how to integrate Annotorious
+with a backend</a>.</p>
 
 
-        <div class="section-overview">
-          
-            <h2><a href="http://recogito.github.io/annotorious/getting-started/annotorious/">Annotorious</a></h2>
-            <p class="blurb">
-              The Annotorious <strong>standard version</strong> works on normal images embedded in websites or web applications. <a href="http://recogito.github.io/annotorious/getting-started/annotorious/">Read more</a>
-            </p>
-          
-            <h2><a href="http://recogito.github.io/annotorious/getting-started/osd-plugin/">OpenSeadragon Plugin</a></h2>
-            <p class="blurb">
-              The <strong>OpenSeadragon plugin</strong> is an extension to the <a href="http://openseadragon.github.io/">OpenSeadragon</a> viewer for zoomable high-resolution images. <a href="http://recogito.github.io/annotorious/getting-started/osd-plugin/">Read more</a>
-            </p>
-          
-            <h2><a href="http://recogito.github.io/annotorious/getting-started/web-annotation/">Web Annotation Model</a></h2>
-            <p class="blurb">
-              Annotorious uses the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>. Learn the basics of how annotations are encoded as JSON, and what parts of the standard Annotorious currently supports. <a href="http://recogito.github.io/annotorious/getting-started/web-annotation/">Read more</a>
-            </p>
-          
-            <h2><a href="http://recogito.github.io/annotorious/getting-started/storing-annotations/">Storing Annotations</a></h2>
-            <p class="blurb">
-              To store annotations, you need an annotation server. <strong>Annotorious does not come with built-in storage</strong>. Learn how you can use the JavaScript API to set up your own solution that fits your needs. <a href="http://recogito.github.io/annotorious/getting-started/storing-annotations/">Read more</a>
-            </p>
-          
-        </div>
+        
       </div>
 
       <div class="table-of-contents">
@@ -138,10 +153,6 @@ tweaking its behavior, handling user auth info, etc.</li>
             <li><a href="http://recogito.github.io/annotorious/getting-started/">Getting Started</a></li>
             <li>
               <ul>
-                
-                  <li>
-                    <a href="http://recogito.github.io/annotorious/getting-started/annotorious/">Annotorious</a>
-                  </li>
                 
                   <li>
                     <a href="http://recogito.github.io/annotorious/getting-started/osd-plugin/">OpenSeadragon Plugin</a>
