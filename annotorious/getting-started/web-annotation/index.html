@@ -4,7 +4,7 @@
     <title>Annotorious | Web Annotation Model</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.f037d50087636abb260540653705a9153952d8d2d4933bc4f5f6765e44b7eea3.css">
+    <link rel="stylesheet" href="/css/style.min.6ebae7812fcac60f07c5419daa33a6d890d074322c488cf1f2dbed94d376c6e8.css">
     <meta name="description" content="Learn the basics of how Annotorious uses the W3C Web Annotation standard">
 <meta name="twitter:title" content="Annotorious &amp; Web Annotation" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
@@ -51,11 +51,12 @@
     <div class="column">
       <div class="main-content">
         <h1 id="the-w3c-web-annotation-model">The W3C Web Annotation Model</h1>
-<p>Annotorious uses the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>. Only a limited range
-of the specification is supported at the moment. Current limitations are:</p>
+<p>Annotorious supports the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>, an open standard for
+interoperable annotations on the web. However, only a part of the specification is supported at the moment.
+Current limitations are:</p>
 <ul>
-<li>Annotations with a <strong>single rectangle</strong> shape</li>
-<li>The <a href="https://www.w3.org/TR/media-frags/">W3C Media Fragments</a> <code>FragmentSelector</code> is the only currently supported selector type</li>
+<li>Only annotations with a <strong>single rectangle</strong> shape are supported</li>
+<li>The <a href="https://www.w3.org/TR/media-frags/">W3C Media Fragments</a> <code>FragmentSelector</code> is the only supported selector type</li>
 </ul>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
   <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
@@ -74,9 +75,9 @@ of the specification is supported at the moment. Current limitations are:</p>
   }
 }
 </code></pre></div><h2 id="annotation-ids">Annotation IDs</h2>
-<p>Annotations should have a value for <code>id</code>. When creating a new annotation, Annotorious will
-automatically assign a globally unique ID in the form <code>#{uuid}</code>. In principle, however,
-Annotorious accepts any alphanumeric string for the ID.</p>
+<p>When adding an annotation via the API, the annotation should have an <code>id</code>. In principle,
+Annotorious accepts any alphanumeric string. Annotations created by users will automatically
+get a globally unique ID in the form <code>#{uuid}</code>.</p>
 
       </div>
 

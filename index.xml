@@ -47,8 +47,8 @@ Message Dictionaries The user interface labels are part of the recogito-client-c
       <pubDate>Sun, 17 May 2020 14:33:09 +0200</pubDate>
       
       <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
-      <description>The W3C Web Annotation Model Annotorious uses the W3C Web Annotation model. Only a limited range of the specification is supported at the moment. Current limitations are:
- Annotations with a single rectangle shape The W3C Media Fragments FragmentSelector is the only currently supported selector type  { &amp;#34;@context&amp;#34;: &amp;#34;http://www.w3.org/ns/anno.jsonld&amp;#34;, &amp;#34;id&amp;#34;: &amp;#34;#a88b22d0-6106-4872-9435-c78b5e89fede&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;Annotation&amp;#34;, &amp;#34;body&amp;#34;: [{ &amp;#34;type&amp;#34;: &amp;#34;TextualBody&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;It&amp;#39;s Hallstatt in Upper Austria&amp;#34; }], &amp;#34;target&amp;#34;: { &amp;#34;selector&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;FragmentSelector&amp;#34;, &amp;#34;conformsTo&amp;#34;: &amp;#34;http://www.</description>
+      <description>The W3C Web Annotation Model Annotorious supports the W3C Web Annotation model, an open standard for interoperable annotations on the web. However, only a part of the specification is supported at the moment. Current limitations are:
+ Only annotations with a single rectangle shape are supported The W3C Media Fragments FragmentSelector is the only supported selector type  { &amp;#34;@context&amp;#34;: &amp;#34;http://www.w3.org/ns/anno.jsonld&amp;#34;, &amp;#34;id&amp;#34;: &amp;#34;#a88b22d0-6106-4872-9435-c78b5e89fede&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;Annotation&amp;#34;, &amp;#34;body&amp;#34;: [{ &amp;#34;type&amp;#34;: &amp;#34;TextualBody&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;It&amp;#39;s Hallstatt in Upper Austria&amp;#34; }], &amp;#34;target&amp;#34;: { &amp;#34;selector&amp;#34;: { &amp;#34;type&amp;#34;: &amp;#34;FragmentSelector&amp;#34;, &amp;#34;conformsTo&amp;#34;: &amp;#34;http://www.</description>
     </item>
     
     <item>
@@ -58,7 +58,8 @@ Message Dictionaries The user interface labels are part of the recogito-client-c
       
       <guid>http://recogito.github.io/annotorious/getting-started/storing-annotations/</guid>
       <description>Storing Annotations To store annotations, you need an annotation server or database backend. Annotorious - as well as its sister project RecogitoJS - do not include their own storage solution. They provide the user interface functionality for annotation only. To store annotations, you need to connect them to your own backend, using the API.
-When an annotation is created, updated or deleted by the user, Annotorious emits the following events through the API:</description>
+When the user creates, updates or deletes an annotation, Annotorious emits the following events:
+ createAnnotation updateAnnotation deleteAnnotation  Subscribe to these events, and execute the corresponding write operations to your backend.</description>
     </item>
     
     <item>
@@ -88,8 +89,7 @@ Developing  Clone the repository Run npm install to download project dependencie
       
       <guid>http://recogito.github.io/annotorious/about/</guid>
       <description>About Annotorious Annotorious is a modernized reboot of the now outdated original Annotorious.
-License Annotorious is licensed under the terms of the BSD 3-Clause license. That basically means: you can use this code for free, in whatever way you want, for non-commerical and commercial projects. But keep the attribution/license file included - and bear in mind: this code comes as is, don&amp;rsquo;t come complaining to us stuff breaks ;-)
-Need Help?</description>
+License Annotorious is licensed under the terms of the BSD 3-Clause license. That basically means: you can use this code for free, in whatever way you want, for non-commerical and commercial projects. But attribute Annotorious in your project at a suitable location. And bear in mind: this code comes as is, don&amp;rsquo;t come complaining to us stuff breaks ;-)</description>
     </item>
     
     <item>
