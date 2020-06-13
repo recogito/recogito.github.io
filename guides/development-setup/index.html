@@ -52,45 +52,43 @@
       <div class="main-content">
         <h1 id="hackers-guide-to-annotorious-and-recogitojs">Hacker&rsquo;s Guide to Annotorious and RecogitoJS</h1>
 <p>We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute,
-simply fork the relevant repository and hack away.</p>
-<h2 id="repositories">Repositories</h2>
-<p>&hellip;</p>
-<h2 id="developing">Developing</h2>
+simply fork the relevant repository and hack away. Our code is located in the following repositories</p>
+<ul>
+<li><strong><a href="https://github.com/recogito/recogito-client-core">recogito/recogito-client-core</a></strong>. A base module that contains most of
+the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&rsquo;ll need this module if you
+want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</li>
+<li><strong><a href="https://github.com/recogito/recogito-js">recogito/recogito-js</a></strong>. The RecogitoJS application entry point. Doesn&rsquo;t
+implement much on its own, except for the JavaScript API. All actual functionality is pulled from <strong><a href="https://github.com/recogito/recogito-client-core">recogito/recogito-client-core</a></strong>.</li>
+<li><strong><a href="https://github.com/recogito/annotorious">recogito/annotorious</a></strong>. The Annotorious application entry point.
+Also implements SVG rendering and shape drawing.</li>
+<li><strong><a href="https://github.com/recogito/annotorious-openseadragon">recogito/annotorious-openseadragon</a></strong>. The OpenSeadragon plugin.
+Imports most functionality from recogito-client-core and annotorious.</li>
+</ul>
+<h2 id="running-in-development-mode">Running in Development Mode</h2>
+<p>To hack on <strong>RecogitoJS</strong>, <strong>Annotorious</strong>, or the <strong>OpenSeadragon plugin</strong>, you need to run them in development mode.</p>
 <ul>
 <li>Clone the repository</li>
 <li>Run <code>npm install</code> to download project dependencies</li>
 <li>Run <code>npm start</code> to launch the project in dev mode, with hot-reloading enabled</li>
-<li>Go to <a href="http://localhost:3000/">http://localhost:3000/</a></li>
+<li>If your browser doesn&rsquo;t open automatically, go to <a href="http://localhost:3000/">http://localhost:3000/</a></li>
 </ul>
 <h2 id="building-a-distribution-bundle">Building a distribution bundle</h2>
 <ul>
 <li>Run <code>npm run build</code> to build a distribution bundle</li>
 <li>The distribution files will be in the <code>dist</code> folder</li>
 </ul>
-<p>Want to find your way around in the source code? Read our <a href="https://github.com/recogito/annotorious/wiki/Guided-Tour">Guided Tour of the Codebase</a>.</p>
-<p>To contribute to Annotorious, simply fork <a href="https://github.com/recogito/annotorious">our repository</a> and hack away. We welcome pull requests - both for our code, as well as for our documentation!</p>
-<h2 id="developing-1">Developing</h2>
+<h2 id="hacking-recogito-client-core">Hacking recogito-client-core</h2>
+<blockquote>
+<p>When working on <strong>RecogitoJS</strong>, <strong>Annotorious</strong>, or the <strong>OpenSeadragon plugin</strong>, you might sometimes need to modify code in
+<strong>recogito-client-core</strong>. This means you need to change your development setup, so that your project points to a local
+copy of <strong>recogito-client-core</strong>, rather than the official package published on NPM.</p>
+</blockquote>
+<p>To make this work, you have to <code>npm link</code> your local projects.</p>
 <ul>
-<li>Clone the repository</li>
-<li>Run <code>npm install</code> to download project dependencies</li>
-<li>Run <code>npm start</code> to launch the project in dev mode, with hot-reloading enabled</li>
-<li>Go to <a href="http://localhost:3000/">http://localhost:3000/</a></li>
-</ul>
-<h2 id="building-a-distribution-bundle-1">Building a distribution bundle</h2>
-<ul>
-<li>Run <code>npm run build</code> to build a distribution bundle</li>
-<li>The distribution files will be in the <code>dist</code> folder</li>
-</ul>
-<p>Want to find your way around in the source code? Read our <a href="https://github.com/recogito/annotorious/wiki/Guided-Tour">Guided Tour of the Codebase</a>.</p>
-<p>When working on <strong>RecogitoJS</strong> or <strong>Annotorious</strong>, you may sometimes need to modify code in
-<strong>recogito-client-core</strong>. To make this work, you have to <code>npm link</code> your local projects.</p>
-<ul>
-<li>Clone the <a href="https://github.com/recogito/recogito-js">RecogitoJS</a> and/or
-<a href="https://github.com/recogito/annotorious">Annotorious</a> repositories</li>
 <li>Clone the <a href="https://github.com/recogito/recogito-client-core">recogito-client-core repository</a></li>
-<li>Run <code>npm install</code> in all repositories to install dependencies</li>
+<li>Run <code>npm install</code> to install dependencies</li>
 <li>Link your local clone of <strong>recogito-client-core</strong>, so that changes you make to
-recogito-client-core are reflected in RecogitoJS/Annotorious</li>
+recogito-client-core are reflected in your RecogitoJS/Annotorious project</li>
 </ul>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#b58900">cd</span> recogito-client-core
 $ npm install 
