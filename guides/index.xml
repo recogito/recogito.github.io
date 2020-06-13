@@ -18,7 +18,7 @@
       
       <guid>http://recogito.github.io/guides/using-firebase-for-storage/</guid>
       <description>Using Firebase for Storage A quick and easy way to set up your own annotation store without managing your own server is through Firebase, a web application development platform by Google. Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and deleting JSON records. All you need to do is wire up the Firebase storage SDK operations with the corresponding events from Annotorious.
-Using Events for Storage When Annotorious fires the createAnnotation event, store the annotation via the .</description>
+Annotorious Lifecycle Events When Annotorious fires the createAnnotation event, store the annotation via the .</description>
     </item>
     
     <item>
@@ -27,8 +27,8 @@ Using Events for Storage When Annotorious fires the createAnnotation event, stor
       <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
       
       <guid>http://recogito.github.io/guides/contributing-ui-translations/</guid>
-      <description>Contributing UI Translations We want to make our software available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled user interface elements, it&amp;rsquo;s also not a lot of work.
-Message Dictionaries The user interface labels are part of the recogito-client-core package, located here. In this folder you will find messages files, one file for each available translation.</description>
+      <description>Contributing UI Translations We want to make our user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&amp;rsquo;s not a lot of work.
+Message Dictionaries The user interface labels are part of recogito-client-core, a JavaScript package for common code shared between Annotorious and RecogitoJS. In this folder you will find messages files, one file for each available translation.</description>
     </item>
     
     <item>

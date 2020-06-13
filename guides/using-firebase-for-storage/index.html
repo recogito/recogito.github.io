@@ -56,7 +56,7 @@ through <a href="https://firebase.google.com/">Firebase</a>, a web application d
 Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and
 deleting JSON records. All you need to do is wire up the Firebase storage SDK operations with the corresponding events from Annotorious.</p>
 <p><img src="/images/guides/firebase.png" alt="Firebase Screenshot"></p>
-<h2 id="using-events-for-storage">Using Events for Storage</h2>
+<h2 id="annotorious-lifecycle-events">Annotorious Lifecycle Events</h2>
 <p>When Annotorious fires the <code>createAnnotation</code> event, store the annotation via the <code>.add()</code>
 method on the cloud storage SDK. Storage operations return a <code>Promise</code>, so you can execute
 code after completion, and handle connection errors.</p>
