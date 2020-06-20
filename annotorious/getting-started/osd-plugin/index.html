@@ -116,7 +116,6 @@ OpenSeadragon script.</p>
   <span style="color:#b58900">window</span>.onload <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>() {
     <span style="color:#268bd2">var</span> viewer <span style="color:#719e07">=</span> OpenSeadragon({
       id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;openseadragon1&#34;</span>,
-      prefixUrl<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;openseadragon/images/&#34;</span>,
       tileSources<span style="color:#719e07">:</span> {
         type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;image&#34;</span>,
         url<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;1280px-Hallstatt.jpg&#34;</span>
@@ -132,6 +131,22 @@ OpenSeadragon script.</p>
 &lt;/<span style="color:#268bd2">script</span>&gt;
 </code></pre></div><p>The plugin takes a config object as optional second argument. See the <a href="/annotorious/api-docs/osd-plugin/">API Reference</a> for details.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> OpenSeadragon.Annotorious(viewer, config);
+</code></pre></div><h2 id="using-npm">Using NPM</h2>
+<p>If you use npm, <code>npm install @recogito/annotorious-openseadragon</code> and then</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> OpenSeadragon from <span style="color:#2aa198">&#39;openseadragon&#39;</span>;
+<span style="color:#268bd2">import</span> <span style="color:#719e07">*</span> as Annotorious from <span style="color:#2aa198">&#39;@recogito/annotorious-openseadragon&#39;</span>;
+
+<span style="color:#268bd2">const</span> viewer <span style="color:#719e07">=</span> OpenSeadragon({
+  id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;openseadragon&#34;</span>,
+  tileSources<span style="color:#719e07">:</span> {
+    type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;image&#34;</span>,
+    url<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;1280px-Hallstatt.jpg&#34;</span>
+  }
+ });
+
+<span style="color:#268bd2">const</span> config <span style="color:#719e07">=</span> {}; <span style="color:#586e75">// Optional plugin config options
+</span><span style="color:#586e75"></span>
+Annotorious(viewer, config);
 </code></pre></div>
       </div>
 
