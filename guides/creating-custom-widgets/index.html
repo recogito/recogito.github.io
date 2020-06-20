@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Creating Custom Widgets</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.8bef9cc3da8e4f57a4ab16df28265ab93eae1f1f58705f56e3c82f3380af78b0.css">
+    <meta name="description" content="This guide explains how you can create custom widgets for the Annotorious/RecogitoJS editor popup">
+<meta name="twitter:title" content="Creating custom editor widgets" />
+<meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta name="twitter:site" content="@aboutgeo" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This guide explains how you can create custom widgets for the Annotorious/RecogitoJS editor popup">
+<meta property="og:title" content="Creating custom editor widgets" />
+<meta property="og:description" content="This guide explains how you can create custom widgets for the Annotorious/RecogitoJS editor popup">
+<meta property="og:url" content="https://recogito.github.io/guides/creating-custom-widgets" />
+<meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta property="og:type" content="object" />
+
+  </head>
+
+  <body>
+    <div class="navbar">
+  <header>
+    <ul>
+      <li>
+        <a href="/annotorious/">Home</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/getting-started">Getting Started</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/api-docs">API Docs</a>
+      </li>
+      
+      <li class='current'>
+        <a href="/guides">Guides</a>
+      </li>
+      
+      <li class=''>
+        <a href="/annotorious/about">About</a>
+      </li>
+      
+      <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="main-content">
+        <h1 id="creating-custom-editor-widgets">Creating Custom Editor Widgets</h1>
+<blockquote>
+<p>Please note that this guide is still under construction.</p>
+</blockquote>
+<p>The <strong>editor popup</strong> is shared between Annotorious and RecogitoJS. It is possible to extend it with your own widgets. However,
+this currently requires you to create your own project fork. (This is going to change - bear with us.)
+To write your own
+editor extensions, you should familiarize yourself with some basics first:</p>
+<ul>
+<li>The <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation</a> concept of <strong>annotation bodies</strong></li>
+<li>Editor <strong>widgets</strong> and how they relate to annotation bodies</li>
+<li>Also, check the <a href="/guides/development-setup">Hacker&rsquo;s Guide</a></li>
+</ul>
+<p><img src="/images/guides/editor-popup.png" alt="Editor popup"></p>
+<h2 id="annotation-bodies">Annotation Bodies</h2>
+<p>In the terminology of the  <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation</a> spec, an
+annotation consists of multiple <strong>bodies</strong> - data structures that each represent one &ldquo;piece&rdquo; of the
+annotation. For example, if an annotation consists of one comment and multiple tags, then each is
+encoded as one body in the data structure.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
+  <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
+  <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#ce0ed291-766b-4763-8e91-90ce1d04e706&#34;</span>,
+  <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
+  <span style="color:#268bd2">&#34;body&#34;</span>: [{
+    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;This is a comment&#34;</span>,
+    <span style="color:#268bd2">&#34;purpose&#34;</span>: <span style="color:#2aa198">&#34;commenting&#34;</span>
+  }, {
+    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;A Tag&#34;</span>,
+    <span style="color:#268bd2">&#34;purpose&#34;</span>: <span style="color:#2aa198">&#34;tagging&#34;</span>
+  }, {
+    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;Another Tag&#34;</span>,
+    <span style="color:#268bd2">&#34;purpose&#34;</span>: <span style="color:#2aa198">&#34;tagging&#34;</span>
+  }],
+
+  ...
+
+}
+</code></pre></div><p>To specify the body type, the W3C model has a <code>type</code> field, and an extra (optional)
+<code>purpose</code>. For example, tags and comments are both of type <code>TextualBody</code>, but with different
+purposes - <code>commenting</code> and <code>tagging</code>.</p>
+<h2 id="editor-widgets">Editor Widgets</h2>
+<p>The <a href="https://github.com/recogito/recogito-client-core/blob/master/src/editor/Editor.jsx">Editor class</a>
+handles some basic general concerns, like positioning of the popup window and managing the editing state.
+Otherwise though, it is just a shell for <strong>widgets</strong>. <strong>Widgets</strong> implement user interface representations for
+particular types of <strong>bodies</strong>. For example, the
+<a href="https://github.com/recogito/recogito-client-core/blob/master/src/editor/widgets/comment/CommentWidget.jsx">CommentWidget</a>
+handles <code>TextualBody</code> nodes with purpose <code>commenting</code> or <code>replying</code>. The
+<a href="https://github.com/recogito/recogito-client-core/blob/master/src/editor/widgets/tag/TagWidget.jsx">TagWidget</a>
+takes care of <code>TextualBody</code> nodes with purpose <code>tagging</code>. Want to support a new type of body? Make a new widget for it and append it to the Editor!</p>
+<h2 id="the-editor-react-component">The Editor React Component</h2>
+<p>The Editor is a <a href="https://reactjs.org/">React</a> component that is instantiated in the following way. In
+RecogitoJS, instantiation happens in the <a href="https://github.com/recogito/recogito-client-core/blob/master/src/TextAnnotator.jsx">TextAnnotator component</a>.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">&lt;<span style="color:#268bd2">Editor</span>
+  wrapperEl<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.props.wrapperEl}
+  annotation<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.state.selectedAnnotation}
+  bounds<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.state.selectionBounds}
+  onAnnotationCreated<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onCreateOrUpdateAnnotation(<span style="color:#2aa198">&#39;onAnnotationCreated&#39;</span>)}
+  onAnnotationUpdated<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onCreateOrUpdateAnnotation(<span style="color:#2aa198">&#39;onAnnotationUpdated&#39;</span>)}
+  onAnnotationDeleted<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onDeleteAnnotation}
+  onCancel<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onCancelAnnotation}&gt;
+  &lt;<span style="color:#268bd2">CommentWidget</span> /&gt;
+  &lt;<span style="color:#268bd2">TagWidget</span> /&gt;
+&lt;/<span style="color:#268bd2">Editor</span>&gt;
+</code></pre></div><h2 id="anatomy-of-a-widget">Anatomy of a Widget</h2>
+<p>When the Editor opens an annotation, it passes it to the widgets through <code>props.annotation</code>. Furthermore,
+it attaches a number of event callbacks. These allow the widgets to trigger changes to the annotation bodies:</p>
+<ul>
+<li><code>props.onAppendBody</code> for appending a new body to the annotation</li>
+<li><code>props.onUpdateBody</code> to change an existing body</li>
+<li><code>props.onRemoveBody</code> to delete an existing body from the annotation</li>
+</ul>
+
+      </div>
+
+      <div class="table-of-contents subsections">
+        <nav>
+          <ul>
+            <li><a href="http://recogito.github.io/guides/">Guides</a></li>
+            <li>
+              <ul>
+                
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/using-firebase-for-storage/">Using Firebase for Storage</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/contributing-ui-translations/">Contributing UI Translations</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/development-setup/">Hacker&#39;s Guide</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/creating-custom-widgets/" class="active">Creating Custom Widgets</a>
+                    
+                  </li>
+                
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <footer>
+  <div class="inner">
+    <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
+    <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious">Annotorious Gitter Chat</a></p>
+    <p class="github-link">
+      <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
+      <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

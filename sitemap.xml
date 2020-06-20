@@ -18,8 +18,18 @@
   </url>
   
   <url>
+    <loc>http://recogito.github.io/guides/development-setup/</loc>
+    <lastmod>2020-06-04T11:46:22+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://recogito.github.io/annotorious/getting-started/web-annotation/</loc>
     <lastmod>2020-05-17T14:33:09+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/guides/creating-custom-widgets/</loc>
+    <lastmod>2020-06-20T20:56:23+02:00</lastmod>
   </url>
   
   <url>
@@ -28,17 +38,12 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/guides/development-setup/</loc>
-    <lastmod>2020-06-04T11:46:22+02:00</lastmod>
+    <loc>http://recogito.github.io/</loc>
+    <lastmod>2020-06-20T20:56:23+02:00</lastmod>
   </url>
   
   <url>
     <loc>http://recogito.github.io/site/annotorious/</loc>
-    <lastmod>2020-06-12T08:04:26+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://recogito.github.io/</loc>
     <lastmod>2020-06-12T08:04:26+02:00</lastmod>
   </url>
   

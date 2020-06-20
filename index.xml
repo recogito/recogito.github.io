@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jun 2020 08:04:26 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2020 20:56:23 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -42,6 +42,16 @@ Message Dictionaries The user interface labels are part of recogito-client-core,
     </item>
     
     <item>
+      <title>Hacker&#39;s Guide</title>
+      <link>http://recogito.github.io/guides/development-setup/</link>
+      <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/development-setup/</guid>
+      <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
+ recogito/recogito-client-core. A base module that contains most of the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&amp;rsquo;ll need this module if you want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</description>
+    </item>
+    
+    <item>
       <title>Web Annotation Model</title>
       <link>http://recogito.github.io/annotorious/getting-started/web-annotation/</link>
       <pubDate>Sun, 17 May 2020 14:33:09 +0200</pubDate>
@@ -49,6 +59,17 @@ Message Dictionaries The user interface labels are part of recogito-client-core,
       <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
       <description>The W3C Web Annotation Model Annotorious supports the W3C Web Annotation model, an open standard for interoperable annotations on the web. However, only a part of the specification is supported at the moment. Current limitations are:
  Only annotations with a single rectangle shape are supported The W3C Media Fragments FragmentSelector is the only supported selector type Annotation TextualBody types with a purpose of commenting, replying or no purpose are displayed as comments Anntation bodies with a purpose of tagging are displayed as tags Bodies of any other type are ignored (unless you implement your own editor extension)  { &amp;#34;@context&amp;#34;: &amp;#34;http://www.</description>
+    </item>
+    
+    <item>
+      <title>Creating Custom Widgets</title>
+      <link>http://recogito.github.io/guides/creating-custom-widgets/</link>
+      <pubDate>Sat, 20 Jun 2020 20:56:23 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/creating-custom-widgets/</guid>
+      <description>Creating Custom Editor Widgets  Please note that this guide is still under construction.
+ The editor popup is shared between Annotorious and RecogitoJS. It is possible to extend it with your own widgets. However, this currently requires you to create your own project fork. (This is going to change - bear with us.) To write your own editor extensions, you should familiarize yourself with some basics first:
+ The W3C Web Annotation concept of annotation bodies Editor widgets and how they relate to annotation bodies Also, check the Hacker&amp;rsquo;s Guide  Annotation Bodies In the terminology of the W3C Web Annotation spec, an annotation consists of multiple bodies - data structures that each represent one &amp;ldquo;piece&amp;rdquo; of the annotation.</description>
     </item>
     
     <item>
@@ -60,16 +81,6 @@ Message Dictionaries The user interface labels are part of recogito-client-core,
       <description>Storing Annotations To store annotations, you need an annotation server or database backend. Annotorious - as well as its sister project RecogitoJS - do not include their own storage solution. They provide the user interface functionality for annotation only. To store annotations, you need to connect them to your own backend, using the API.
 When the user creates, updates or deletes an annotation, Annotorious emits the following events:
  createAnnotation updateAnnotation deleteAnnotation  Subscribe to these events, and execute the corresponding write operations to your backend.</description>
-    </item>
-    
-    <item>
-      <title>Hacker&#39;s Guide</title>
-      <link>http://recogito.github.io/guides/development-setup/</link>
-      <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
-      
-      <guid>http://recogito.github.io/guides/development-setup/</guid>
-      <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
- recogito/recogito-client-core. A base module that contains most of the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&amp;rsquo;ll need this module if you want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</description>
     </item>
     
     <item>
