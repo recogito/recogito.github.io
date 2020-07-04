@@ -319,11 +319,17 @@ existing annotations.</p>
 </tbody>
 </table>
 <h3 id="setauthinfo">.setAuthInfo</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAuthInfo(arg);
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;my-image&#39;</span> });
+
+anno.setAuthInfo({
+  id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;http://recogito.example.com/rainer&#39;</span>,
+  displayName<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;rainer&#39;</span>
+});
 </code></pre></div><p>Specifies user authentication information. Annotorious will use this information when annotations
 are created or updated, and display it in the editor popup.</p>
 <p><img src="/images/setAuthInfo.png" alt="Editor popup example"></p>
-<p><code>arg</code> is an object with the following properties:</p>
+<p>Set this data right after initializing Annotorious, and in case the user login status in your host
+application changes. The argument to <code>.setAuthInfo</code> is an object with the following properties:</p>
 <table>
 <thead>
 <tr>
@@ -336,7 +342,7 @@ are created or updated, and display it in the editor popup.</p>
 <tr>
 <td><code>id</code></td>
 <td>String</td>
-<td><strong>REQUIRED</strong> the user ID, which should be an IRI</td>
+<td><strong>REQUIRED</strong> the user ID, which should be a URI</td>
 </tr>
 <tr>
 <td><code>displayName</code></td>
@@ -345,7 +351,7 @@ are created or updated, and display it in the editor popup.</p>
 </tr>
 </tbody>
 </table>
-<p>The data will go into annotation bodies via the <code>creator</code> field:</p>
+<p>Annotorious will insert this data into every new annotation body that gets created:</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{ 
   type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;Annotation&#34;</span>,
   
