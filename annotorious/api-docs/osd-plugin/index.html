@@ -222,6 +222,29 @@ existing annotations.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="setdrawingtool">.setDrawingTool</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingTool(toolName);
+</code></pre></div><blockquote>
+<p>This feature is experimental. The API will likely change in the future.</p>
+</blockquote>
+<p>Switches between the different available drawing tools. At the moment, only
+the built-in rubberband rectangle and polygon tools are available.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>toolName</code></td>
+<td>String</td>
+<td>Either <code>rect</code> or <code>polygon</code></td>
+</tr>
+</tbody>
+</table>
 <h3 id="off">.off</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
 </code></pre></div><p>Unsubscribe from an event. If no callback is provided,
@@ -457,6 +480,7 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
         <li><a href="#removeannotation">.removeAnnotation</a></li>
         <li><a href="#selectannotation">.selectAnnotation</a></li>
         <li><a href="#setannotations">.setAnnotations</a></li>
+        <li><a href="#setdrawingtool">.setDrawingTool</a></li>
         <li><a href="#off">.off</a></li>
         <li><a href="#on">.on</a></li>
         <li><a href="#panto">.panTo</a></li>

@@ -374,7 +374,30 @@ application changes. The argument to <code>.setAuthInfo</code> is an object with
     }
   }]
 }
-</code></pre></div><h3 id="setservertime">.setServerTime</h3>
+</code></pre></div><h3 id="setdrawingtool">.setDrawingTool</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingTool(toolName);
+</code></pre></div><blockquote>
+<p>This feature is experimental. The API will likely change in the future.</p>
+</blockquote>
+<p>Switches between the different available drawing tools. At the moment, only
+the built-in rubberband rectangle and polygon tools are available.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>toolName</code></td>
+<td>String</td>
+<td>Either <code>rect</code> or <code>polygon</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="setservertime">.setServerTime</h3>
 <p>Set a &ldquo;server time&rdquo; timestamp. When using <a href="#setauthinfo">authInfo</a>, this method helps to synchronize the
 <code>created</code> timestamp that Annotorious inserts into the annotation with your server environment, avoiding
 problems when the clock isn&rsquo;t properly set in the user&rsquo;s browser.</p>
@@ -547,6 +570,7 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
         <li><a href="#setannotations">.setAnnotations</a></li>
         <li><a href="#setannotationsvisible">.setAnnotationsVisible</a></li>
         <li><a href="#setauthinfo">.setAuthInfo</a></li>
+        <li><a href="#setdrawingtool">.setDrawingTool</a></li>
         <li><a href="#setservertime">.setServerTime</a></li>
       </ul>
     </li>
