@@ -105,6 +105,11 @@ At the moment, only a single <code>FragmentSelector</code> with an <code>xywh=pi
 </tr>
 </tbody>
 </table>
+<h3 id="clearauthinfo">.clearAuthInfo</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAuthInfo();
+</code></pre></div><p>Clears the user auth information. Annotorious will no longer insert creator data
+when a new annotation is created or updated. (See <a href="#setauthinfo">setAuthInfo</a> for
+more information about creator data.)</p>
 <h3 id="destroy">.destroy</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.destroy();
 </code></pre></div><p>Destroys this instance of Annotorious, removing the annotation layer on the image.</p>
@@ -222,7 +227,57 @@ existing annotations.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="setdrawingtool">.setDrawingTool</h3>
+<h3 id="setauthinfo">.setAuthInfo</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;my-image&#39;</span> });
+
+anno.setAuthInfo({
+  id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;http://recogito.example.com/rainer&#39;</span>,
+  displayName<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;rainer&#39;</span>
+});
+</code></pre></div><p>Specifies user authentication information. Annotorious will use this information when annotations
+are created or updated, and display it in the editor popup.</p>
+<p><img src="/images/setAuthInfo.png" alt="Editor popup example"></p>
+<p>Set this data right after initializing Annotorious, and in case the user login status in your host
+application changes. The argument to <code>.setAuthInfo</code> is an object with the following properties:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>String</td>
+<td><strong>REQUIRED</strong> the user ID, which should be a URI</td>
+</tr>
+<tr>
+<td><code>displayName</code></td>
+<td>String</td>
+<td><strong>REQUIRED</strong> the user name, for display in the UI</td>
+</tr>
+</tbody>
+</table>
+<p>Annotorious will insert this data into every new annotation body that gets created:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{ 
+  type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;Annotation&#34;</span>,
+  
+  <span style="color:#586e75">// ...  
+</span><span style="color:#586e75"></span>
+  body<span style="color:#719e07">:</span>[{
+    type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+    value<span style="color:#719e07">:</span><span style="color:#2aa198">&#34;My comment&#34;</span>,
+    purpose<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;commenting&#34;</span>,
+    created<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;2020-05-18T09:39:47.582Z&#34;</span>,
+    creator<span style="color:#719e07">:</span> {
+      id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;http://recogito.example.com/rainer&#34;</span>,
+      name<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;rainer&#34;</span>
+    }
+  }]
+}
+</code></pre></div><h3 id="setdrawingtool">.setDrawingTool</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingTool(toolName);
 </code></pre></div><blockquote>
 <p>This feature is experimental. The API will likely change in the future.</p>
@@ -245,6 +300,12 @@ the built-in rubberband rectangle and polygon tools are available.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="setservertime">.setServerTime</h3>
+<p>Set a &ldquo;server time&rdquo; timestamp. When using <a href="#setauthinfo">authInfo</a>, this method helps to synchronize the
+<code>created</code> timestamp that Annotorious inserts into the annotation with your server environment, avoiding
+problems when the clock isn&rsquo;t properly set in the user&rsquo;s browser.</p>
+<p>After setting server time, the Annotorious will adjust the <code>created</code> timestamps by the difference between
+server time the user&rsquo;s local clock.</p>
 <h3 id="off">.off</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
 </code></pre></div><p>Unsubscribe from an event. If no callback is provided,
@@ -473,6 +534,7 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
     <li><a href="#instance-methods">Instance Methods</a>
       <ul>
         <li><a href="#addannotation">.addAnnotation</a></li>
+        <li><a href="#clearauthinfo">.clearAuthInfo</a></li>
         <li><a href="#destroy">.destroy</a></li>
         <li><a href="#fitbounds">.fitBounds</a></li>
         <li><a href="#getannotations">.getAnnotations</a></li>
@@ -480,7 +542,9 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
         <li><a href="#removeannotation">.removeAnnotation</a></li>
         <li><a href="#selectannotation">.selectAnnotation</a></li>
         <li><a href="#setannotations">.setAnnotations</a></li>
+        <li><a href="#setauthinfo">.setAuthInfo</a></li>
         <li><a href="#setdrawingtool">.setDrawingTool</a></li>
+        <li><a href="#setservertime">.setServerTime</a></li>
         <li><a href="#off">.off</a></li>
         <li><a href="#on">.on</a></li>
         <li><a href="#panto">.panTo</a></li>
