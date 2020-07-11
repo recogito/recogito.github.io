@@ -111,7 +111,7 @@ License Annotorious is licensed under the terms of the BSD 3-Clause license. Tha
       <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon, zoomable image viewer. The API reference for the Annotorious standard version is available here.
  Initializing the Plugin Initialize Annotorious on an OpenSeadragon viewer instance with
 var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, and must be an object with the following properties:
-   Property Type Value Default     readOnly Boolean Set to true to display annotations read-only false    Instance Methods .</description>
+   Property Type Value Default     readOnly Boolean Set to true to display annotations read-only false   tagVocabulary Array A list of strings to use as a pre-defined tag vocabulary in the tagging widget -    Instance Methods .</description>
     </item>
     
     <item>
@@ -123,7 +123,7 @@ var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, an
       <description>API Reference: Annotorious  The standard version of Annotorious works on normal images embedded in websites or web applications. The API reference for the Annotorious OpenSeadragon plugin is available here.
  Initializing Annotorious Initialize an Annotorious instance on an image with
 var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); The config object can have the following properties:
-   Property Type Value Default     image Element, String image element or, alternatively, element ID -   readOnly Boolean Set to true to display all annotations read-only false   headless Boolean Completely disables the editor popup.</description>
+   Property Type Value Default     image Element, String Image element or, alternatively, element ID -   readOnly Boolean Set to true to display all annotations read-only false   headless Boolean Completely disables the editor popup.</description>
     </item>
     
   </channel>
