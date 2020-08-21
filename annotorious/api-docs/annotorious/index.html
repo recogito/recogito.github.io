@@ -305,25 +305,6 @@ existing annotations.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="setannotationsvisible">.setAnnotationsVisible</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotationsVisible(visible);
-</code></pre></div><p>Shows or hides the annotation layer.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>visible</code></td>
-<td>Boolean</td>
-<td>if <code>true</code> show the annotation layer, otherwise hide it</td>
-</tr>
-</tbody>
-</table>
 <h3 id="setauthinfo">.setAuthInfo</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;my-image&#39;</span> });
 
@@ -397,6 +378,25 @@ the built-in rubberband rectangle and polygon tools are available.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="setvisible">.setVisible</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotationsVisible(visible);
+</code></pre></div><p>Shows or hides the annotation layer.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>visible</code></td>
+<td>Boolean</td>
+<td>if <code>true</code> show the annotation layer, otherwise hide it</td>
+</tr>
+</tbody>
+</table>
 <h3 id="setservertime">.setServerTime</h3>
 <p>Set a &ldquo;server time&rdquo; timestamp. When using <a href="#setauthinfo">authInfo</a>, this method helps to synchronize the
 <code>created</code> timestamp that Annotorious inserts into the annotation with your server environment, avoiding
@@ -404,6 +404,28 @@ problems when the clock isn&rsquo;t properly set in the user&rsquo;s browser.</p
 <p>After setting server time, the Annotorious will adjust the <code>created</code> timestamps by the difference between
 server time the user&rsquo;s local clock.</p>
 <h2 id="events">Events</h2>
+<h3 id="changeselectiontarget">changeSelectionTarget</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;changeSelectionTarget&#39;</span>, <span style="color:#268bd2">function</span>(target) {
+  <span style="color:#586e75">// 
+</span><span style="color:#586e75"></span>});
+</code></pre></div><p>Fired when the shape of a newly created selection, or of a selected annotation
+is moved or resized.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code></td>
+<td>Object</td>
+<td>the W3C WebAnnotation target</td>
+</tr>
+</tbody>
+</table>
 <h3 id="createannotation">createAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// 
@@ -422,6 +444,27 @@ server time the user&rsquo;s local clock.</p>
 <td><code>annotation</code></td>
 <td>Object</td>
 <td>the annotation in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
+<h3 id="createselection">createSelection</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
+  <span style="color:#586e75">// 
+</span><span style="color:#586e75"></span>});
+</code></pre></div><p>Fired when a new selection shape is drawn on the image.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selection</code></td>
+<td>Object</td>
+<td>the selection object in W3C WebAnnotation format</td>
 </tr>
 </tbody>
 </table>
@@ -568,15 +611,17 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
         <li><a href="#removeannotation">.removeAnnotation</a></li>
         <li><a href="#selectannotation">.selectAnnotation</a></li>
         <li><a href="#setannotations">.setAnnotations</a></li>
-        <li><a href="#setannotationsvisible">.setAnnotationsVisible</a></li>
         <li><a href="#setauthinfo">.setAuthInfo</a></li>
         <li><a href="#setdrawingtool">.setDrawingTool</a></li>
+        <li><a href="#setvisible">.setVisible</a></li>
         <li><a href="#setservertime">.setServerTime</a></li>
       </ul>
     </li>
     <li><a href="#events">Events</a>
       <ul>
+        <li><a href="#changeselectiontarget">changeSelectionTarget</a></li>
         <li><a href="#createannotation">createAnnotation</a></li>
+        <li><a href="#createselection">createSelection</a></li>
         <li><a href="#deleteannotation">deleteAnnotation</a></li>
         <li><a href="#mouseenterannotation">mouseEnterAnnotation</a></li>
         <li><a href="#mouseleaveannotation">mouseLeaveAnnotation</a></li>

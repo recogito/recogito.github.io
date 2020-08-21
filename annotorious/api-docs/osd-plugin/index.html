@@ -163,6 +163,79 @@ case you want to perform an action after the annotations have loaded.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="off">.off</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
+</code></pre></div><p>Unsubscribe from an event. If no callback is provided,
+all event handlers for this event will be unsubscribed.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>String</td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>Function</td>
+<td>the function used when binding to the event</td>
+</tr>
+</tbody>
+</table>
+<h3 id="on">.on</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(event, callback);
+</code></pre></div><p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>String</td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>Function</td>
+<td>the function to call when the event is emitted</td>
+</tr>
+</tbody>
+</table>
+<h3 id="panto">.panTo</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.panTo(arg [, immediately]);
+</code></pre></div><p>Pans the OpenSeadragon viewport to the specified annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>String, Object</td>
+<td>the annotation or the annotation ID</td>
+</tr>
+<tr>
+<td><code>immediately</code></td>
+<td>Boolean</td>
+<td>if <code>true</code> pans without animation</td>
+</tr>
+</tbody>
+</table>
 <h3 id="removeannotation">.removeAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.removeAnnotation(arg);
 </code></pre></div><p>Removes an annotation programmatically.</p>
@@ -277,7 +350,29 @@ application changes. The argument to <code>.setAuthInfo</code> is an object with
     }
   }]
 }
-</code></pre></div><h3 id="setdrawingtool">.setDrawingTool</h3>
+</code></pre></div><h3 id="setdrawingenabled">.setDrawingEnabled</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingEnabled(enabled);
+</code></pre></div><p>Switches the OpenSeadragon viewer from its normal zoom &amp; pan behavior to
+&ldquo;drawing mode&rdquo;. That means the user no longer needs to hold <strong>SHIFT</strong> in
+order to start drawing. Instead, drawing starts immediately when clicking and
+holding the mouse button.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>Boolean</td>
+<td>if <code>true</code> OpenSeadragon switches from navigation to drawing mode</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setdrawingtool">.setDrawingTool</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingTool(toolName);
 </code></pre></div><blockquote>
 <p>This feature is experimental. The API will likely change in the future.</p>
@@ -306,80 +401,28 @@ the built-in rubberband rectangle and polygon tools are available.</p>
 problems when the clock isn&rsquo;t properly set in the user&rsquo;s browser.</p>
 <p>After setting server time, the Annotorious will adjust the <code>created</code> timestamps by the difference between
 server time the user&rsquo;s local clock.</p>
-<h3 id="off">.off</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
-</code></pre></div><p>Unsubscribe from an event. If no callback is provided,
-all event handlers for this event will be unsubscribed.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>event</code></td>
-<td>String</td>
-<td>the name of the event</td>
-</tr>
-<tr>
-<td><code>callback</code></td>
-<td>Function</td>
-<td>the function used when binding to the event</td>
-</tr>
-</tbody>
-</table>
-<h3 id="on">.on</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(event, callback);
-</code></pre></div><p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>event</code></td>
-<td>String</td>
-<td>the name of the event</td>
-</tr>
-<tr>
-<td><code>callback</code></td>
-<td>Function</td>
-<td>the function to call when the event is emitted</td>
-</tr>
-</tbody>
-</table>
-<h3 id="panto">.panTo</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.panTo(arg [, immediately]);
-</code></pre></div><p>Pans the OpenSeadragon viewport to the specified annotation.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>arg</code></td>
-<td>String, Object</td>
-<td>the annotation or the annotation ID</td>
-</tr>
-<tr>
-<td><code>immediately</code></td>
-<td>Boolean</td>
-<td>if <code>true</code> pans without animation</td>
-</tr>
-</tbody>
-</table>
 <h2 id="events">Events</h2>
+<h3 id="cancelselection">cancelSelection</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;cancelSelection&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
+  <span style="color:#586e75">// 
+</span><span style="color:#586e75"></span>});
+</code></pre></div><p>Fired when the creates a selection and then aborts by clicking cancel.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selection</code></td>
+<td>Object</td>
+<td>the canceled selection in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
 <h3 id="createannotation">createAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// 
@@ -539,19 +582,21 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
         <li><a href="#fitbounds">.fitBounds</a></li>
         <li><a href="#getannotations">.getAnnotations</a></li>
         <li><a href="#loadannotations">.loadAnnotations</a></li>
+        <li><a href="#off">.off</a></li>
+        <li><a href="#on">.on</a></li>
+        <li><a href="#panto">.panTo</a></li>
         <li><a href="#removeannotation">.removeAnnotation</a></li>
         <li><a href="#selectannotation">.selectAnnotation</a></li>
         <li><a href="#setannotations">.setAnnotations</a></li>
         <li><a href="#setauthinfo">.setAuthInfo</a></li>
+        <li><a href="#setdrawingenabled">.setDrawingEnabled</a></li>
         <li><a href="#setdrawingtool">.setDrawingTool</a></li>
         <li><a href="#setservertime">.setServerTime</a></li>
-        <li><a href="#off">.off</a></li>
-        <li><a href="#on">.on</a></li>
-        <li><a href="#panto">.panTo</a></li>
       </ul>
     </li>
     <li><a href="#events">Events</a>
       <ul>
+        <li><a href="#cancelselection">cancelSelection</a></li>
         <li><a href="#createannotation">createAnnotation</a></li>
         <li><a href="#deleteannotation">deleteAnnotation</a></li>
         <li><a href="#mouseenterannotation">mouseEnterAnnotation</a></li>
