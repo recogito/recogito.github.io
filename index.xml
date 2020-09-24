@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jun 2020 20:56:23 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 24 Sep 2020 10:47:22 +0200</lastBuildDate>
     
 	<atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -39,6 +39,17 @@ Message Dictionaries The user interface labels are part of recogito-client-core,
       <guid>http://recogito.github.io/annotorious/getting-started/osd-plugin/</guid>
       <description>Getting Started with the OpenSeadragon Plugin The OpenSeadragon plugin is an extension to the OpenSeadragon viewer for zoomable high-resolution images. Click the annotation to edit. Hold SHIFT while clicking and dragging the mouse to create a new annotation.
  .openseadragon-canvas { outline:none; background-color:#f4f4f4 !important; border-radius:3px; }        var sampleAnnotation = { &#34;@context&#34;: &#34;http://www.w3.org/ns/anno.jsonld&#34;, &#34;id&#34;: &#34;#07475897-d2eb-4dce-aa12-ecb50771c734&#34;, &#34;type&#34;: &#34;Annotation&#34;, &#34;body&#34;: [{ &#34;type&#34;: &#34;TextualBody&#34;, &#34;value&#34;: &#34;Annotation&#34; }], &#34;</description>
+    </item>
+    
+    <item>
+      <title>Customizing Styles</title>
+      <link>http://recogito.github.io/guides/customizing-styles/</link>
+      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/customizing-styles/</guid>
+      <description>Customizing Annotation Styles Need a bit more flexibility with the visual appearance of your annotations than Annotorious provides out of the box? Customizing styles is easy! Depending on what you need, you have two options:
+ Change the styles globally, by overriding or replacing the built-in CSS stylesheet Write your own JavaScript Formatter function to apply styles based on specific rules  Overriding the CSS Stylesheet [&amp;hellip;TODO&amp;hellip;]
+Formatter Functions [&amp;hellip;TODO&amp;hellip;]</description>
     </item>
     
     <item>
@@ -123,7 +134,7 @@ var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, an
       <description>API Reference: Annotorious  The standard version of Annotorious works on normal images embedded in websites or web applications. The API reference for the Annotorious OpenSeadragon plugin is available here.
  Initializing Annotorious Initialize an Annotorious instance on an image with
 var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); The config object can have the following properties:
-   Property Type Value Default     image Element, String Image element or, alternatively, element ID -   readOnly Boolean Set to true to display all annotations read-only false   headless Boolean Completely disables the editor popup.</description>
+   Property Type Value Default     image Element, String Image element or, alternatively, element ID.</description>
     </item>
     
   </channel>

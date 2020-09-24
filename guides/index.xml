@@ -32,6 +32,17 @@ Message Dictionaries The user interface labels are part of recogito-client-core,
     </item>
     
     <item>
+      <title>Customizing Styles</title>
+      <link>http://recogito.github.io/guides/customizing-styles/</link>
+      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/customizing-styles/</guid>
+      <description>Customizing Annotation Styles Need a bit more flexibility with the visual appearance of your annotations than Annotorious provides out of the box? Customizing styles is easy! Depending on what you need, you have two options:
+ Change the styles globally, by overriding or replacing the built-in CSS stylesheet Write your own JavaScript Formatter function to apply styles based on specific rules  Overriding the CSS Stylesheet [&amp;hellip;TODO&amp;hellip;]
+Formatter Functions [&amp;hellip;TODO&amp;hellip;]</description>
+    </item>
+    
+    <item>
       <title>Hacker&#39;s Guide</title>
       <link>http://recogito.github.io/guides/development-setup/</link>
       <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>

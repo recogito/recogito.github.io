@@ -76,26 +76,38 @@ available <a href="/annotorious/api-docs/osd-plugin">here</a>.</p>
 <tbody>
 <tr>
 <td><code>image</code></td>
-<td><code>Element</code>, <code>String</code></td>
-<td>Image element or, alternatively, element ID</td>
+<td>Element, String</td>
+<td>Image element or, alternatively, element ID.</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td>String</td>
+<td>Sets the user interface language. A two-character language code or <code>auto</code> to use the browser setting.</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>readOnly</code></td>
-<td><code>Boolean</code></td>
-<td>Set to <code>true</code> to display all annotations read-only</td>
+<td>Boolean</td>
+<td>Set to <code>true</code> to display all annotations read-only.</td>
 <td><code>false</code></td>
 </tr>
 <tr>
 <td><code>headless</code></td>
-<td><code>Boolean</code></td>
+<td>Boolean</td>
 <td>Completely disables the editor popup. Drawing is still possible, and lifecycle events still fire. Can be used in conjunction with <a href="#applytemplate">applyTemplate</a>. Note that headless mode currently supports only shape creation, not editing.</td>
 <td><code>false</code></td>
 </tr>
 <tr>
-<td><code>tagVocabulary</code></td>
-<td><code>Array</code></td>
-<td>A list of strings to use as a pre-defined tag vocabulary in the tagging widget</td>
+<td><code>formatter</code></td>
+<td>Function</td>
+<td>A <strong>Formatter</strong> function providing custom style rules <a href="">see below</a>.</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>widgets</code></td>
+<td>Array</td>
+<td>A list of widget definitions for the editor. See <a href="">Guide on customizing the editor</a>.</td>
 <td>-</td>
 </tr>
 </tbody>
@@ -589,7 +601,37 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 </tr>
 </tbody>
 </table>
+<h2 id="formatters">Formatters</h2>
+<p>Per default, Annotorious renders annotations as SVG <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g">group</a>
+elements with an <code>a9s-annotation</code> CSS class. A formatter function allows you to dynamically add additional
+attributes to the SVG annotation shape elements.</p>
+<p>A formatter is a JavaScript function takes a single argument - the annotation - and must return either a string or
+an object.</p>
+<ul>
+<li>If a string is returned, it will be appended to the annotation element CSS class list.</li>
+<li>If an object is returned, it should have one or more of the following properties:
+<ul>
+<li><code>className</code> a string to be added to the CSS class list</li>
+<li><code>data-*</code> a data attribute to add to the annotation SVG element</li>
+<li><code>style</code> a list of CSS styles (in the form of a string)</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">// This simple formatter will add an extra &#39;long&#39; CSS class to long comments
+</span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> formatter1 <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(annotation) {
 
+  <span style="color:#586e75">// ... TODO
+</span><span style="color:#586e75"></span>
+}
+
+<span style="color:#586e75">// This formatter will add usernames from the annotation as a data attribute
+</span><span style="color:#586e75">// and apply an inline style (red outline) where multiple users have annotated
+</span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> formatter2 <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(annotation) {
+
+  <span style="color:#586e75">// ... TODO
+</span><span style="color:#586e75"></span>
+}
+</code></pre></div>
       </div>
     </div>
 
@@ -629,6 +671,7 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
         <li><a href="#updateannotation">updateAnnotation</a></li>
       </ul>
     </li>
+    <li><a href="#formatters">Formatters</a></li>
   </ul>
 </nav>
     </div>
