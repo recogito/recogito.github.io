@@ -8,8 +8,13 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/guides/contributing-ui-translations/</loc>
-    <lastmod>2020-06-01T20:04:18+02:00</lastmod>
+    <loc>http://recogito.github.io/guides/editor-customization/</loc>
+    <lastmod>2020-09-24T14:24:22+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/guides/customizing-appearance/</loc>
+    <lastmod>2020-09-24T10:47:22+02:00</lastmod>
   </url>
   
   <url>
@@ -18,13 +23,8 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/guides/customizing-styles/</loc>
-    <lastmod>2020-09-24T10:47:22+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://recogito.github.io/guides/development-setup/</loc>
-    <lastmod>2020-06-04T11:46:22+02:00</lastmod>
+    <loc>http://recogito.github.io/guides/contributing-ui-translations/</loc>
+    <lastmod>2020-06-01T20:04:18+02:00</lastmod>
   </url>
   
   <url>
@@ -33,8 +33,8 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/guides/creating-custom-widgets/</loc>
-    <lastmod>2020-06-20T20:56:23+02:00</lastmod>
+    <loc>http://recogito.github.io/guides/development-setup/</loc>
+    <lastmod>2020-06-04T11:46:22+02:00</lastmod>
   </url>
   
   <url>
@@ -43,8 +43,13 @@
   </url>
   
   <url>
+    <loc>http://recogito.github.io/guides/creating-custom-widgets/</loc>
+    <lastmod>2020-06-20T20:56:23+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://recogito.github.io/</loc>
-    <lastmod>2020-09-24T10:47:22+02:00</lastmod>
+    <lastmod>2020-09-24T14:24:22+02:00</lastmod>
   </url>
   
   <url>

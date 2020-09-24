@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Using Firebase for Storage</title>
+      <title>Using Firebase Storage</title>
       <link>http://recogito.github.io/guides/using-firebase-for-storage/</link>
       <pubDate>Fri, 01 May 2020 13:28:54 +0200</pubDate>
       
@@ -22,24 +22,32 @@ Annotorious Lifecycle Events When Annotorious fires the createAnnotation event, 
     </item>
     
     <item>
-      <title>Contributing UI Translations</title>
+      <title>Customizing the Editor</title>
+      <link>http://recogito.github.io/guides/editor-customization/</link>
+      <pubDate>Thu, 24 Sep 2020 14:24:22 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/editor-customization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Customizing Appearance</title>
+      <link>http://recogito.github.io/guides/customizing-appearance/</link>
+      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/customizing-appearance/</guid>
+      <description>Customizing the Visual Appearance Need a different look and feel for Annotorious to match your application? Customizing the visual appearance is easy! All elements of the annotation layer and the editor window can be styled with CSS.
+Customizing the Annotation Layer Annotations in Annotorious are rendered using SVG. Annotorious applies various CSS classes to the different types of shapes. By writing your own stylesheet for these classes, you can completely alter the visual appearance of every graphical element.</description>
+    </item>
+    
+    <item>
+      <title>Contributing Translations</title>
       <link>http://recogito.github.io/guides/contributing-ui-translations/</link>
       <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
       
       <guid>http://recogito.github.io/guides/contributing-ui-translations/</guid>
       <description>Contributing UI Translations We want to make our user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&amp;rsquo;s not a lot of work.
 Message Dictionaries The user interface labels are part of recogito-client-core, a JavaScript package for common code shared between Annotorious and RecogitoJS. In this folder you will find messages files, one file for each available translation.</description>
-    </item>
-    
-    <item>
-      <title>Customizing Styles</title>
-      <link>http://recogito.github.io/guides/customizing-styles/</link>
-      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
-      
-      <guid>http://recogito.github.io/guides/customizing-styles/</guid>
-      <description>Customizing Annotation Styles Need a bit more flexibility with the visual appearance of your annotations than Annotorious provides out of the box? Customizing styles is easy! Depending on what you need, you have two options:
- Change the styles globally, by overriding or replacing the built-in CSS stylesheet Write your own JavaScript Formatter function to apply styles based on specific rules  Overriding the CSS Stylesheet [&amp;hellip;TODO&amp;hellip;]
-Formatter Functions [&amp;hellip;TODO&amp;hellip;]</description>
     </item>
     
     <item>

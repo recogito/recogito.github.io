@@ -101,13 +101,13 @@ available <a href="/annotorious/api-docs/osd-plugin">here</a>.</p>
 <tr>
 <td><code>formatter</code></td>
 <td>Function</td>
-<td>A <strong>Formatter</strong> function providing custom style rules <a href="">see below</a>.</td>
+<td>A <strong>Formatter</strong> function providing custom style rules <a href="#formatters">see below</a>.</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>widgets</code></td>
 <td>Array</td>
-<td>A list of widget definitions for the editor. See <a href="">Guide on customizing the editor</a>.</td>
+<td>A list of widget definitions for the editor. Per default, the editor will contain the <strong>comment/reply</strong> widget, followed by the _<em>tagging</em> widget. See the <a href="/guides/editor-customization/">Guide on customizing the editor</a> for how to change that.</td>
 <td>-</td>
 </tr>
 </tbody>
@@ -617,20 +617,66 @@ an object.</p>
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">// This simple formatter will add an extra &#39;long&#39; CSS class to long comments
-</span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> formatter1 <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(annotation) {
+<h3 id="string-example">String Example</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/** 
+</span><span style="color:#586e75"> * This simple formatter will add an extra &#39;long&#39; CSS class to 
+</span><span style="color:#586e75"> * long comments
+</span><span style="color:#586e75"> */</span>
+<span style="color:#268bd2">var</span> formatter <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(annotation) {
 
-  <span style="color:#586e75">// ... TODO
-</span><span style="color:#586e75"></span>
+  <span style="color:#268bd2">var</span> longComments <span style="color:#719e07">=</span> annotation.bodies.filter(<span style="color:#268bd2">function</span>(body) {
+    <span style="color:#268bd2">var</span> isComment <span style="color:#719e07">=</span> body.type <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;TextualBody&#39;</span> <span style="color:#719e07">&amp;&amp;</span> 
+      (body.purpose <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;commenting&#39;</span> <span style="color:#719e07">||</span> body.purpose <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;replying&#39;</span>);
+
+    <span style="color:#268bd2">var</span> isLong <span style="color:#719e07">=</span> body.value.length <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">100</span>;
+
+    <span style="color:#719e07">return</span> isComment <span style="color:#719e07">&amp;&amp;</span> isLong;
+  });
+
+  <span style="color:#719e07">if</span> (longComments.length <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">0</span>) {
+    <span style="color:#586e75">// This annotation contains long comments - add CSS class
+</span><span style="color:#586e75"></span>    <span style="color:#719e07">return</span> <span style="color:#2aa198">&#39;long&#39;</span>;
+  }
 }
 
-<span style="color:#586e75">// This formatter will add usernames from the annotation as a data attribute
-</span><span style="color:#586e75">// and apply an inline style (red outline) where multiple users have annotated
-</span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> formatter2 <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(annotation) {
-
-  <span style="color:#586e75">// ... TODO
-</span><span style="color:#586e75"></span>
+<span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementyById(<span style="color:#2aa198">&#39;my-image&#39;</span>),
+  locale<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;auto&#39;</span>,
+  formatter<span style="color:#719e07">:</span> formatter
+});
+</code></pre></div><p>You can then apply a visual style to long comments in your own CSS stylesheet.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#268bd2">a9s-annotation</span>.<span style="color:#268bd2">long</span> {
+  stroke-width:<span style="color:#2aa198">4</span>;
+  stroke:<span style="color:#cb4b16">red</span>;
 }
+</code></pre></div><h3 id="object-example">Object Example</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/**
+</span><span style="color:#586e75"> * This formatter will add usernames from the annotation as a data
+</span><span style="color:#586e75"> * attribute and apply an inline style (red outline) where multiple 
+</span><span style="color:#586e75"> * users have annotated
+</span><span style="color:#586e75"> */</span>
+<span style="color:#268bd2">var</span> formatter <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(annotation) {
+
+  <span style="color:#268bd2">var</span> contributors <span style="color:#719e07">=</span> [];
+
+  annotation.bodies.forEach(<span style="color:#268bd2">function</span>(body) {
+    <span style="color:#719e07">if</span> (body.creator)
+      contributors.push(body.creator.id);
+  });
+
+  <span style="color:#719e07">if</span> (contributors.length <span style="color:#719e07">&gt;</span> <span style="color:#2aa198">1</span>) {
+    <span style="color:#719e07">return</span> {
+      <span style="color:#2aa198">&#39;data-users&#39;</span><span style="color:#719e07">:</span> contributors.join(<span style="color:#2aa198">&#39;, &#39;</span>),
+      <span style="color:#2aa198">&#39;style&#39;</span><span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;stroke-width:2; stroke: red&#39;</span>
+    }
+  }
+}
+
+<span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementyById(<span style="color:#2aa198">&#39;my-image&#39;</span>),
+  locale<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;auto&#39;</span>,
+  formatter<span style="color:#719e07">:</span> formatter
+});
 </code></pre></div>
       </div>
     </div>
@@ -671,7 +717,12 @@ an object.</p>
         <li><a href="#updateannotation">updateAnnotation</a></li>
       </ul>
     </li>
-    <li><a href="#formatters">Formatters</a></li>
+    <li><a href="#formatters">Formatters</a>
+      <ul>
+        <li><a href="#string-example">String Example</a></li>
+        <li><a href="#object-example">Object Example</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
