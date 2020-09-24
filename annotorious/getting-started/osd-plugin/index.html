@@ -64,8 +64,9 @@ and dragging the mouse to create a new annotation.</p>
   </style>
   <div id="openseadragon" style="width: 640px; height: 480px;"></div>
 </div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.1.0/dist/annotorious.min.css"></script>
 <script type="text/javascript" src="/js/openseadragon/openseadragon.2.4.2.min.js"></script>
-<script type="text/javascript" src="/js/openseadragon-annotorious.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.1.0/dist/openseadragon-annotorious.min.js"></script>
 <script>
   var sampleAnnotation = { 
     "@context": "http://www.w3.org/ns/anno.jsonld",
@@ -105,12 +106,20 @@ and dragging the mouse to create a new annotation.</p>
   }
 </script>
 <p>Download the <a href="https://github.com/recogito/annotorious-openseadragon/releases/latest">latest release</a>
-and include it in your web page. Make sure to include the script <strong>after</strong> the
+and include script and stylesheet file in your web page. Make sure to include the script <strong>after</strong> the
 OpenSeadragon script.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;openseadragon/openseadragon.2.4.2.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- CSS stylesheet --&gt;</span>
+&lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;annotorious.min.css&#34;</span>&gt;
+
+<span style="color:#586e75">&lt;!-- JS --&gt;</span>
+&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;openseadragon/openseadragon.2.4.2.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;openseadragon-annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
-</code></pre></div><p>Alternatively, grab the script from CDN.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.0.8/dist/openseadragon-annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+</code></pre></div><p>Alternatively, grab the files from CDN.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- CSS stylesheet --&gt;</span>
+&lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.1.0/dist/annotorious.min.css&#34;</span>&gt;
+
+<span style="color:#586e75">&lt;!-- JS --&gt;</span>
+&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.1.0/dist/openseadragon-annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 </code></pre></div><p>Create the viewer and initialize the Annotorious plugin.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">script</span>&gt;
   <span style="color:#b58900">window</span>.onload <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>() {

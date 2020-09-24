@@ -51,7 +51,7 @@
     <div class="column">
       <div class="main-content">
         <h1 id="getting-started-with-annotorious">Getting Started with Annotorious</h1>
-<p>Annotorious lets your users draw rectangle selections on images, and add comments
+<p>Annotorious lets your users draw <strong>rectangle</strong> and <strong>polygon selections</strong> on images, and add comments
 and labels. Try it out on the image below: <strong>click the annotation</strong> to edit, <strong>click and drag</strong>
 with the mouse to create a new annotation</p>
 <div class="inline-demo">
@@ -61,7 +61,8 @@ with the mouse to create a new annotation</p>
     Austria</a>, by Nick Csakany/Wikimedia Commons. Public Domain.
   </p>
 </div>
-<script type="text/javascript" src="/js/annotorious.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.1.2/dist/annotorious.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.1.2/dist/annotorious.min.js"></script>
 <script>
   var sampleAnnotation = { 
     "@context": "http://www.w3.org/ns/anno.jsonld",
@@ -99,8 +100,12 @@ with the mouse to create a new annotation</p>
 </script>
 <h2 id="include-via-script-tag">Include via Script Tag</h2>
 <p>To include Annotorious on your page, download the <a href="https://github.com/recogito/annotorious/releases/latest">latest release</a>
-and add the script at the end of the <code>&lt;body&gt;</code> section.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">body</span>&gt;
+and add the script and stylesheet files to your page source code.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">head</span>&gt;
+  &lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;annotorious.min.css&#34;</span>&gt;
+&lt;/<span style="color:#268bd2">head</span>&gt;
+
+&lt;<span style="color:#268bd2">body</span>&gt;
   &lt;<span style="color:#268bd2">div</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;content&#34;</span>&gt;
     &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;hallstatt&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;640px-Hallstatt.jpg&#34;</span>&gt;
   &lt;/<span style="color:#268bd2">div</span>&gt;
@@ -122,8 +127,12 @@ and add the script at the end of the <code>&lt;body&gt;</code> section.</p>
   &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 &lt;/<span style="color:#268bd2">body</span>&gt;
 </code></pre></div><h2 id="from-cdn">From CDN</h2>
-<p>Alternatively, you can grab the script from the <a href="https://www.jsdelivr.com/package/npm/@recogito/annotorious">jsDelivr CDN</a>.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.0.7/dist/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+<p>Alternatively, you can grab script and stylesheet from the <a href="https://www.jsdelivr.com/package/npm/@recogito/annotorious">jsDelivr CDN</a>.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- CSS stylesheet --&gt;</span>
+&lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.1.2/dist/annotorious.min.css&#34;</span>&gt;
+
+<span style="color:#586e75">&lt;!-- JS --&gt;</span>
+&lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.1.2/dist/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 </code></pre></div><h2 id="using-npm">Using NPM</h2>
 <p>If you use npm, <code>npm install @recogito/annotorious</code> and then</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
