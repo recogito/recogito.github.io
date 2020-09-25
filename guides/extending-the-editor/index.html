@@ -78,8 +78,10 @@ image above.</p>
 <ul>
 <li>The name of a built-in widget - currently either <code>COMMENT</code> or <code>TAG</code></li>
 <li>A plugin function (see more info on <a href="">creating your own widget plugins below</a>)</li>
-<li>An object with a <code>widget</code> property that has the widget name or plugin function as value, and additional
-arguments that will serve as configuration for the widget</li>
+<li>A <a href="https://reactjs.org/docs/introducing-jsx.html">React JSX Component</a> conforming to the same
+interface conventions like the built-in widgets (details to come soon&hellip;)</li>
+<li>An object with a <code>widget</code> property that has the widget name, plugin function or JSX component as value, and
+additional arguments that will be forwarded to the widget as configuration data</li>
 </ul>
 <h2 id="extending-the-editor-1">Extending the Editor</h2>
 <p>You can extend the editor with your own <strong>widget functions</strong>. A widget function is just an ordinary JavaScript
@@ -91,7 +93,7 @@ the <a href="/annotorious/getting-started/web-annotation/">W3C Web Annotation sp
 particular the concepts of <strong>annotation bodies</strong> and body <strong>purposes</strong>, and
 <a href="/guides/creating-custom-widgets/">how they relates to editor widgets</a>.</p>
 </blockquote>
-<h3 id="widget-code-example">Widget Code Example</h3>
+<h3 id="code-example">Code Example</h3>
 <p><img src="/images/guides/colorselector-widget.png" alt="Editor popup"></p>
 <p>This minimal widget adds a simple color selector to the editor. Clicking the
 selector creates a new annotation body with the purpose <code>highlighting</code>.</p>
