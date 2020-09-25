@@ -22,12 +22,12 @@ Annotorious Lifecycle Events When Annotorious fires the createAnnotation event, 
     </item>
     
     <item>
-      <title>Customizing the Editor</title>
-      <link>http://recogito.github.io/guides/editor-customization/</link>
+      <title>Extending the Editor</title>
+      <link>http://recogito.github.io/guides/extending-the-editor/</link>
       <pubDate>Thu, 24 Sep 2020 14:24:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/guides/editor-customization/</guid>
-      <description>Customizing the Editor Per default, the Annotorious/RecogitoJS editor popup features two widgets:
+      <guid>http://recogito.github.io/guides/extending-the-editor/</guid>
+      <description>Extending the Editor Per default, the Annotorious/RecogitoJS editor popup features two widgets:
  A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown  You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
 var anno = Annotorious.</description>
     </item>
