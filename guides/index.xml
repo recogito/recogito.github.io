@@ -38,8 +38,10 @@ var anno = Annotorious.</description>
       <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
       
       <guid>http://recogito.github.io/guides/customizing-appearance/</guid>
-      <description>Customizing the Visual Appearance Need a different look and feel for Annotorious to match your application? Customizing the visual appearance is easy! All elements of the annotation layer and the editor window can be styled with CSS.
-Customizing the Annotation Layer Annotations in Annotorious are rendered using SVG. Annotorious applies various CSS classes to the different types of shapes. By writing your own stylesheet for these classes, you can completely alter the visual appearance of every graphical element.</description>
+      <description>Customizing Visual Appearance Need a different look and feel? Customizing the visual appearance of Annotorious is easy! All elements of the annotation layer and the editor window can be styled with CSS.
+Customizing the Annotation Layer Annotorious renders annotations using SVG, which means you can completely alter the visual appearance of every graphical element via CSS.
+To make styling even more flexible, Annotorious adds a few extras:
+ For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
     </item>
     
     <item>

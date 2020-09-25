@@ -50,23 +50,54 @@
 
     <div class="column">
       <div class="main-content">
-        <h1 id="customizing-the-visual-appearance">Customizing the Visual Appearance</h1>
-<p>Need a different look and feel for Annotorious to match your application? Customizing
-the visual appearance is easy! All elements of the annotation layer and the editor window
-can be styled with CSS.</p>
+        <h1 id="customizing-visual-appearance">Customizing Visual Appearance</h1>
+<p>Need a different look and feel? Customizing the visual appearance of Annotorious is easy!
+All elements of the annotation layer and the editor window can be styled with CSS.</p>
 <h2 id="customizing-the-annotation-layer">Customizing the Annotation Layer</h2>
-<p>Annotations in Annotorious are rendered using <a href="https://developer.mozilla.org/en-US/docs/Web/SVG">SVG</a>.
-Annotorious applies various CSS classes to the different types of shapes. By writing your own stylesheet
-for these classes, you can completely alter the visual appearance of every graphical element.</p>
-<p>To make styling more flexible, Annotorious adds a few extras:</p>
+<p>Annotorious renders annotations using <a href="https://developer.mozilla.org/en-US/docs/Web/SVG">SVG</a>, which
+means you can completely alter the visual appearance of every graphical element via CSS.</p>
+<p>To make styling even more flexible, Annotorious adds a few extras:</p>
 <ul>
 <li>For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other. The two shapes
 have different CSS classes - <code>a9s-inner</code> and <code>a9s-outer</code>. You can use this to create line styles with an outline.
-(<strong>TODO: example code and image</strong>)</li>
-<li>When the user creates a new selection, Annotorious renders a mask element. You can use this to dim the area outside
-of the selection. (<strong>TODO: example code and image</strong>)</li>
+(The default style renders an outer black line and a slightly thinner white inner line.)</li>
+<li>When the user creates a new selection, Annotorious renders a mask element. In the default theme, the mask is
+hidden. But you can enable it via CSS to add a dimming effect to the area outside the selection.</li>
 </ul>
-<h2 id="customizing-the-editor-popup-style">Customizing the Editor Popup Style</h2>
+<h3 id="custom-style-example">Custom Style Example</h3>
+<p><img src="/images/guides/custom-annotationlayer-style.jpg" alt="A custom annotation layer style"></p>
+<p>This example applies custom CSS rules to enable the dim mask and give different appearance to the
+annotation outlines.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-outer</span><span style="color:#719e07">,</span> 
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-outer</span> {
+  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
+}
+
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-inner</span><span style="color:#719e07">,</span>
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-inner</span>  {
+  stroke-width:<span style="color:#2aa198">4</span>;
+  stroke:<span style="color:#cb4b16">white</span>;
+  stroke-dasharray:<span style="color:#2aa198">5</span>;
+}
+
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span>.<span style="color:#268bd2">editable</span>:<span style="color:#268bd2">hover</span> .<span style="color:#268bd2">a9s-inner</span> {
+  fill:<span style="color:#cb4b16">transparent</span>;
+}
+
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-outer</span> {
+  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
+}
+
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-inner</span> {
+  fill:<span style="color:#cb4b16">white</span>;
+  stroke:<span style="color:#cb4b16">white</span>;
+  <span style="color:#719e07">transform</span>:<span style="color:#b58900">scale</span>(<span style="color:#2aa198">1</span>, <span style="color:#2aa198">1</span>);
+}
+
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection-mask</span> {
+  fill:<span style="color:#b58900">rgba</span>(<span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0.6</span>);
+}
+</code></pre></div><h2 id="customizing-the-editor-popup-style">Customizing the Editor Popup Style</h2>
 <p>[&hellip;TODO&hellip;]</p>
 
       </div>
