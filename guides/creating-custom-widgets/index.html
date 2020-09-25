@@ -54,14 +54,11 @@
 <blockquote>
 <p>Please note that this guide is still under construction.</p>
 </blockquote>
-<p>The <strong>editor popup</strong> is shared between Annotorious and RecogitoJS. It is possible to extend it with your own widgets. However,
-this currently requires you to create your own project fork. (This is going to change - bear with us.)
-To write your own
-editor extensions, you should familiarize yourself with some basics first:</p>
+<p>The <strong>editor popup</strong> is shared between Annotorious and RecogitoJS. It is possible to extend it with your own widgets.
+To write your own editor extensions, you should familiarize yourself with some basics first:</p>
 <ul>
 <li>The <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation</a> concept of <strong>annotation bodies</strong></li>
 <li>Editor <strong>widgets</strong> and how they relate to annotation bodies</li>
-<li>Also, check the <a href="/guides/development-setup">Hacker&rsquo;s Guide</a></li>
 </ul>
 <p><img src="/images/guides/editor-popup.png" alt="Editor popup"></p>
 <h2 id="annotation-bodies">Annotation Bodies</h2>
@@ -97,33 +94,13 @@ purposes - <code>commenting</code> and <code>tagging</code>.</p>
 <p>The <a href="https://github.com/recogito/recogito-client-core/blob/master/src/editor/Editor.jsx">Editor class</a>
 handles some basic general concerns, like positioning of the popup window and managing the editing state.
 Otherwise though, it is just a shell for <strong>widgets</strong>. <strong>Widgets</strong> implement user interface representations for
-particular types of <strong>bodies</strong>. For example, the
+particular types of <strong>bodies</strong>. The built-in
 <a href="https://github.com/recogito/recogito-client-core/blob/master/src/editor/widgets/comment/CommentWidget.jsx">CommentWidget</a>
-handles <code>TextualBody</code> nodes with purpose <code>commenting</code> or <code>replying</code>. The
+handles <code>TextualBody</code> nodes with purpose <code>commenting</code> or <code>replying</code>. The built-in
 <a href="https://github.com/recogito/recogito-client-core/blob/master/src/editor/widgets/tag/TagWidget.jsx">TagWidget</a>
-takes care of <code>TextualBody</code> nodes with purpose <code>tagging</code>. Want to support a new type of body? Make a new widget for it and append it to the Editor!</p>
-<h2 id="the-editor-react-component">The Editor React Component</h2>
-<p>The Editor is a <a href="https://reactjs.org/">React</a> component that is instantiated in the following way. In
-RecogitoJS, instantiation happens in the <a href="https://github.com/recogito/recogito-client-core/blob/master/src/TextAnnotator.jsx">TextAnnotator component</a>.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx">&lt;<span style="color:#268bd2">Editor</span>
-  wrapperEl<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.props.wrapperEl}
-  annotation<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.state.selectedAnnotation}
-  bounds<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.state.selectionBounds}
-  onAnnotationCreated<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onCreateOrUpdateAnnotation(<span style="color:#2aa198">&#39;onAnnotationCreated&#39;</span>)}
-  onAnnotationUpdated<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onCreateOrUpdateAnnotation(<span style="color:#2aa198">&#39;onAnnotationUpdated&#39;</span>)}
-  onAnnotationDeleted<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onDeleteAnnotation}
-  onCancel<span style="color:#719e07">=</span>{<span style="color:#719e07">this</span>.onCancelAnnotation}&gt;
-  &lt;<span style="color:#268bd2">CommentWidget</span> /&gt;
-  &lt;<span style="color:#268bd2">TagWidget</span> /&gt;
-&lt;/<span style="color:#268bd2">Editor</span>&gt;
-</code></pre></div><h2 id="anatomy-of-a-widget">Anatomy of a Widget</h2>
-<p>When the Editor opens an annotation, it passes it to the widgets through <code>props.annotation</code>. Furthermore,
-it attaches a number of event callbacks. These allow the widgets to trigger changes to the annotation bodies:</p>
-<ul>
-<li><code>props.onAppendBody</code> for appending a new body to the annotation</li>
-<li><code>props.onUpdateBody</code> to change an existing body</li>
-<li><code>props.onRemoveBody</code> to delete an existing body from the annotation</li>
-</ul>
+takes care of <code>TextualBody</code> nodes with purpose <code>tagging</code>. Want to support a new type of body? Make a new widget for it!</p>
+<h2 id="anatomy-of-a-widget">Anatomy of a Widget</h2>
+<p>[&hellip; TODO &hellip;]</p>
 
       </div>
 
