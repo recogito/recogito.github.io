@@ -96,7 +96,7 @@ HTML below provides a minimal, but fully working example.</p>
 </span><span style="color:#586e75"></span>      <span style="color:#268bd2">var</span> findById <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(id) {
         <span style="color:#268bd2">var</span> query <span style="color:#719e07">=</span> db.collection(<span style="color:#2aa198">&#39;annotations&#39;</span>).where(<span style="color:#2aa198">&#39;id&#39;</span>, <span style="color:#2aa198">&#39;==&#39;</span>, id);
         <span style="color:#719e07">return</span> query.get().then(<span style="color:#268bd2">function</span>(querySnapshot) {
-          <span style="color:#719e07">return</span> query.docs[<span style="color:#2aa198">0</span>];
+          <span style="color:#719e07">return</span> querySnapshot.docs[<span style="color:#2aa198">0</span>];
         });
       }
 
