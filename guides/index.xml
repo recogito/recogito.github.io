@@ -60,16 +60,5 @@ Message Dictionaries The user interface labels are part of recogito-client-core,
  recogito/recogito-client-core. A base module that contains most of the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&amp;rsquo;ll need this module if you want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</description>
     </item>
     
-    <item>
-      <title>Creating Custom Widgets</title>
-      <link>http://recogito.github.io/guides/creating-custom-widgets/</link>
-      <pubDate>Sat, 20 Jun 2020 20:56:23 +0200</pubDate>
-      
-      <guid>http://recogito.github.io/guides/creating-custom-widgets/</guid>
-      <description>Creating Custom Editor Widgets  Please note that this guide is still under construction.
- The editor popup is shared between Annotorious and RecogitoJS. It is possible to extend it with your own widgets. To write your own editor extensions, you should familiarize yourself with some basics first:
- The W3C Web Annotation concept of annotation bodies Editor widgets and how they relate to annotation bodies  Annotation Bodies In the terminology of the W3C Web Annotation spec, an annotation consists of multiple bodies - data structures that each represent one &amp;ldquo;piece&amp;rdquo; of the annotation.</description>
-    </item>
-    
   </channel>
 </rss>

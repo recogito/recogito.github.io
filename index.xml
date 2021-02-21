@@ -29,18 +29,6 @@ var anno = Annotorious.</description>
     </item>
     
     <item>
-      <title>Customizing Appearance</title>
-      <link>http://recogito.github.io/guides/customizing-appearance/</link>
-      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
-      
-      <guid>http://recogito.github.io/guides/customizing-appearance/</guid>
-      <description>Customizing Visual Appearance Need a different look and feel? Customizing the visual appearance of Annotorious is easy! All elements of the annotation layer and the editor window can be styled with CSS.
-Customizing the Annotation Layer Annotorious renders annotations using SVG, which means you can completely alter the visual appearance of every graphical element via CSS.
-To make styling even more flexible, Annotorious adds a few extras:
- For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
-    </item>
-    
-    <item>
       <title>OpenSeadragon Plugin</title>
       <link>http://recogito.github.io/annotorious/getting-started/osd-plugin/</link>
       <pubDate>Mon, 01 Jun 2020 10:20:00 +0200</pubDate>
@@ -48,16 +36,6 @@ To make styling even more flexible, Annotorious adds a few extras:
       <guid>http://recogito.github.io/annotorious/getting-started/osd-plugin/</guid>
       <description>Getting Started with the OpenSeadragon Plugin The OpenSeadragon plugin is an extension to the OpenSeadragon viewer for zoomable high-resolution images. Click the annotation to edit. Hold SHIFT while clicking and dragging the mouse to create a new annotation.
  .openseadragon-canvas { outline:none; background-color:#f4f4f4 !important; border-radius:3px; }        var sampleAnnotation = { &#34;@context&#34;: &#34;http://www.w3.org/ns/anno.jsonld&#34;, &#34;id&#34;: &#34;#07475897-d2eb-4dce-aa12-ecb50771c734&#34;, &#34;type&#34;: &#34;Annotation&#34;, &#34;body&#34;: [{ &#34;type&#34;: &#34;TextualBody&#34;, &#34;value&#34;: &#34;Annotation&#34; }], &#34;</description>
-    </item>
-    
-    <item>
-      <title>Contributing Translations</title>
-      <link>http://recogito.github.io/guides/contributing-ui-translations/</link>
-      <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
-      
-      <guid>http://recogito.github.io/guides/contributing-ui-translations/</guid>
-      <description>Contributing UI Translations We want to make our user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&amp;rsquo;s not a lot of work.
-Message Dictionaries The user interface labels are part of recogito-client-core, a JavaScript package for common code shared between Annotorious and RecogitoJS. In this folder you will find messages files, one file for each available translation.</description>
     </item>
     
     <item>
@@ -71,13 +49,25 @@ Message Dictionaries The user interface labels are part of recogito-client-core,
     </item>
     
     <item>
-      <title>Hacker&#39;s Guide</title>
-      <link>http://recogito.github.io/guides/development-setup/</link>
-      <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
+      <title>Customizing Appearance</title>
+      <link>http://recogito.github.io/guides/customizing-appearance/</link>
+      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/guides/development-setup/</guid>
-      <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
- recogito/recogito-client-core. A base module that contains most of the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&amp;rsquo;ll need this module if you want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</description>
+      <guid>http://recogito.github.io/guides/customizing-appearance/</guid>
+      <description>Customizing Visual Appearance Need a different look and feel? Customizing the visual appearance of Annotorious is easy! All elements of the annotation layer and the editor window can be styled with CSS.
+Customizing the Annotation Layer Annotorious renders annotations using SVG, which means you can completely alter the visual appearance of every graphical element via CSS.
+To make styling even more flexible, Annotorious adds a few extras:
+ For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
+    </item>
+    
+    <item>
+      <title>Contributing Translations</title>
+      <link>http://recogito.github.io/guides/contributing-ui-translations/</link>
+      <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/contributing-ui-translations/</guid>
+      <description>Contributing UI Translations We want to make our user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&amp;rsquo;s not a lot of work.
+Message Dictionaries The user interface labels are part of recogito-client-core, a JavaScript package for common code shared between Annotorious and RecogitoJS. In this folder you will find messages files, one file for each available translation.</description>
     </item>
     
     <item>
@@ -92,14 +82,13 @@ When the user creates, updates or deletes an annotation, Annotorious emits the f
     </item>
     
     <item>
-      <title>Creating Custom Widgets</title>
-      <link>http://recogito.github.io/guides/creating-custom-widgets/</link>
-      <pubDate>Sat, 20 Jun 2020 20:56:23 +0200</pubDate>
+      <title>Hacker&#39;s Guide</title>
+      <link>http://recogito.github.io/guides/development-setup/</link>
+      <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/guides/creating-custom-widgets/</guid>
-      <description>Creating Custom Editor Widgets  Please note that this guide is still under construction.
- The editor popup is shared between Annotorious and RecogitoJS. It is possible to extend it with your own widgets. To write your own editor extensions, you should familiarize yourself with some basics first:
- The W3C Web Annotation concept of annotation bodies Editor widgets and how they relate to annotation bodies  Annotation Bodies In the terminology of the W3C Web Annotation spec, an annotation consists of multiple bodies - data structures that each represent one &amp;ldquo;piece&amp;rdquo; of the annotation.</description>
+      <guid>http://recogito.github.io/guides/development-setup/</guid>
+      <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
+ recogito/recogito-client-core. A base module that contains most of the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&amp;rsquo;ll need this module if you want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</description>
     </item>
     
     <item>
