@@ -142,6 +142,24 @@ and add the script and stylesheet files to your page source code.</p>
 <span style="color:#268bd2">const</span> anno <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
   image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>)
 });
+</code></pre></div><h1 id="a-note-on-image-css-styles">A Note on Image CSS Styles</h1>
+<p>Because of the way Annotorious works, some CSS style rules applied directly to the &lt;img&gt;
+element can cause compatibility issues. This is especially the case for <code>position</code>, <code>margin</code>
+and <code>padding</code> rules.</p>
+<p>If you need to apply these CSS styles, please do not apply them to the &lt;img&gt; directly, but
+instead <strong>wrap the image in a &lt;div&gt; and apply your styles to the wrapper &lt;div&gt; instead</strong>.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- This does not work --&gt;</span>
+&lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-1.jpg&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position:absolute; top:10px; left:10px;&#34;</span> &gt;
+&lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-2.jpg&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;padding:20px&#34;</span> &gt;
+
+<span style="color:#586e75">&lt;!-- This works --&gt;</span>
+&lt;<span style="color:#268bd2">div</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position:absolute; top:10px; left:10px;&#34;</span>&gt;
+  &lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-1.jpg&#34;</span>&gt;
+&lt;/<span style="color:#268bd2">div</span>&gt;
+
+&lt;<span style="color:#268bd2">div</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;padding:20px;&#34;</span>&gt;
+  &lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-2.jpg&#34;</span>&gt;
+&lt;/<span style="color:#268bd2">div</span>&gt;
 </code></pre></div><h1 id="openseadragon-plugin">OpenSeadragon Plugin</h1>
 <p>There is a separate version of Annotorious which plugs into the <a href="http://openseadragon.github.io/">OpenSeadragon viewer</a>
 for high-resolution images. Setup is just as easy as for the standard version. <a href="/annotorious/getting-started/osd-plugin">Read more</a></p>
