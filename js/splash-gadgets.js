@@ -108,6 +108,7 @@ var observer = new IntersectionObserver(function(entries) {
       var id = entry.target.id;
       if (!annoInstances[id]) {
         var anno = Annotorious.init({ image: id });
+
         annoInstances[id] = anno;
 
         createAnimatedAnnotation(cannedAnnotations[id], anno, 4000);
