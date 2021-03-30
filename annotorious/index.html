@@ -3,8 +3,15 @@
   <head>
     <title>Annotorious | A Javascript Image Annotation Library</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      
-    <link rel="stylesheet" href="/css/splash.min.1e574cefad495b750db9374ce8bfc66f8c7738d78c9a55df4e7fba3c5cbd2423.css">  
+    
+
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.css">
+    
+    
+    
+    <link rel="stylesheet" href="/css/splash.min.c3620fcbbb4da6e18dbb26cb8da2f159a24630c32f0a1ca35d3c12bd54b45e56.css">  
     <link rel="apple-touch-icon" sizes="180x180" href="/images/annotorious-touch-icon.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/images/annotorious-touch-icon-152.png">
     <link rel="apple-touch-icon" sizes="144x144" href="/images/annotorious-touch-icon-144.png">
@@ -39,6 +46,11 @@
     </div>
 
     <div id="navbar" class="jumbo-header-navbar" style="background-color:rgba(34,34,34,0);">
+      <div class="mobile-only">
+        <button class="hamburger-icon" id="open-responsive-menu" onclick="openResponsiveMenu()">
+          <img src="/images/menu-24px.svg">
+        </button>      
+      </div>
       <ul>
         <li><a href="/annotorious/getting-started">Getting Started</a></li>
         <li><a href="/annotorious/api-docs">API Docs</a></li>
@@ -52,7 +64,7 @@
       <div class="download-latest">
         <h2>JavaScript image annotation library</h2>
         <p>
-          Add drawing, commenting and labeling functionality to images on your website <br/>
+          Add drawing, commenting and labeling functionality to images on your website
           with a few lines of JavaScript
         </p>
                
@@ -126,7 +138,8 @@
       </div>
     </footer>
 
-    <script type="text/javascript" src="/js/annotorious.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.js"></script>
     <script type="text/javascript" src="/js/splash-gadgets.js"></script>
   </body>
 </html>

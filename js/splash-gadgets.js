@@ -1,3 +1,13 @@
+/* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+var openResponsiveMenu = function() {
+  var el = document.getElementById('navbar');
+  if (el.className === 'jumbo-header-navbar') {
+    el.className = 'jumbo-header-navbar responsive';
+  } else {
+    el.className = 'jumbo-header-navbar';
+  }
+};
+
 // Annotations on the 'cogs' and 'lego' divider images
 var cannedAnnotations = {
   cogs : { id: '#640e3cde', x: 290, y: 180, w: 250, h: 270, text: 'You can create your own annotations on this image. Just click and drag with your mouse to draw a box.' },
@@ -117,13 +127,13 @@ var onScroll = function() {
   navbar.style.backgroundColor = 'rgba(34,34,34,' + opacity.toFixed(2) + ')';
 };
 
-document.addEventListener('scroll', onScroll);
-
 // 'Random boxes' animation on header background
 window.onload = async function() {
   var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
-  if (vw >= 800) {
+  if (vw > 800) {
+    document.addEventListener('scroll', onScroll);
+
     var MAX_BOXES = 100; // Start recycling annotations after this number
 
     var headerHeight = document.getElementsByClassName('jumbo-header-foreground')[0].offsetHeight;
