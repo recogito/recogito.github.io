@@ -109,7 +109,7 @@ anno.on(&amp;#39;createAnnotation&amp;#39;, function(annotation) { // This part 
       <guid>http://recogito.github.io/annotorious/about/</guid>
       <description>About Annotorious Annotorious is open source software licensed under the BSD 3-Clause license.
 Source Code All source code is available on the recogito GitHub organization. The key repositories are:
- recogito/annotorious for the Annotorious standard version recogito/annotorious-openseadragon for the OpenSeadragon plugin recogito/recogito-client-core for shared base components  Need Help? Get in touch via our Annotorious Gitter chat. If you encounter bugs, or have feature requests, please report them via our GitHub issue trackers:</description>
+ recogito/annotorious Annotorious (standard version) recogito/annotorious-openseadragon Annotorious OpenSeadragon plugin recogito/recogito-client-core shared base components recogito/recogito-client-plugins plugins and extensions  Need Help? Get in touch via the Annotorious Gitter chat. If you encounter bugs, or have feature requests, please report them via the GitHub issue trackers:</description>
     </item>
     
     <item>
@@ -130,10 +130,10 @@ var anno = OpenSeadragon.Annotorious(viewer, config); The config is optional, an
       <pubDate>Sun, 17 May 2020 14:14:36 +0200</pubDate>
       
       <guid>http://recogito.github.io/annotorious/api-docs/annotorious/</guid>
-      <description>API Reference: Annotorious  The standard version of Annotorious works on normal images embedded in websites or web applications. The API reference for the Annotorious OpenSeadragon plugin is available here.
- Initializing Annotorious Initialize an Annotorious instance on an image with
-var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); The config object can have the following properties:
-   Property Type Value Default     image Element, String Image element or, alternatively, element ID.</description>
+      <description>API Reference: Annotorious  The standard version of Annotorious works with normal images embedded in websites or web applications. If you are looking for the Annotorious OpenSeadragon plugin, see here instead.
+ Initialization When included via &amp;lt;script&amp;gt; tag:
+var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); With npm:
+import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; import &amp;#39;@recogito/annotorious/dist/annotorious.min.css&amp;#39;; const config = { image: document.getElementById(&amp;#39;my-image&amp;#39;) } const anno = new Annotorious(config); The config object supports the following properties:</description>
     </item>
     
   </channel>
