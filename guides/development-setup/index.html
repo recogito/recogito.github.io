@@ -4,7 +4,7 @@
     <title>Annotorious | Hacker&#39;s Guide</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.7ce112abd6ff625aa5a1276285e82d2b28001abc5836f270dc93518849a9e77a.css">
+    <link rel="stylesheet" href="/css/style.min.9123f7e014ded6aa0953e623c9cca980eebbf69f3c15a12ffa6c9320d4e24a78.css">
     <meta name="description" content="This guide explains how to contribute to Annotorious &amp; RecogitoJS, where to find what in the codebase, and how to set up a development environment">
 <meta name="twitter:title" content="Annotorious/RecogitoJS Development Setup" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
@@ -21,8 +21,23 @@
   </head>
 
   <body>
-    <div class="navbar">
+    <div id="navbar" class="navbar">
+  <script>
+    var openResponsiveMenu = function() {
+      var el = document.getElementById('navbar');
+      if (el.className === 'navbar') {
+        el.className = 'navbar responsive';
+      } else {
+        el.className = 'navbar';
+      }
+    };
+  </script>
   <header>
+    <div class="mobile-only">
+      <button class="hamburger-icon" id="open-responsive-menu" onclick="openResponsiveMenu()">
+        <img src="/images/menu-24px.svg">
+      </button>      
+    </div>
     <ul>
       <li>
         <a href="/annotorious/">Home</a>
