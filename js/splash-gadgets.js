@@ -116,7 +116,10 @@ var observer = new IntersectionObserver(function(entries) {
       if (!annoInstances[id]) {
         var anno = Annotorious.init({ 
           image: id,
-          allowEmpty: true
+          allowEmpty: true,
+          widgets: [
+            'COMMENT'
+          ]
         });
 
         annoInstances[id] = anno;
@@ -140,30 +143,25 @@ var onScroll = function() {
 
 // 'Random boxes' animation on header background
 window.onload = async function() {
-  // var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  document.addEventListener('scroll', onScroll);
 
-  // if (vw > 800) {
-    document.addEventListener('scroll', onScroll);
+  var MAX_BOXES = 100; // Start recycling annotations after this number
 
-    var MAX_BOXES = 100; // Start recycling annotations after this number
+  var headerHeight = document.getElementsByClassName('jumbo-header-foreground')[0].offsetHeight;
+  var headerWidth = document.getElementsByClassName('jumbo-header-foreground')[0].offsetWidth;
+  var aspectRatio = headerHeight / headerWidth;
 
-    var headerHeight = document.getElementsByClassName('jumbo-header-foreground')[0].offsetHeight;
-    var headerWidth = document.getElementsByClassName('jumbo-header-foreground')[0].offsetWidth;
-    var aspectRatio = headerHeight / headerWidth;
+  var anno = Annotorious.init({ image: 'header-background', readOnly: true });
 
-    var anno = Annotorious.init({ image: 'header-background', readOnly: true });
+  var idx = 0; 
 
-    var idx = 0; 
+  while(true) {
+    var bounds = getRandomBounds(1920, Math.min(960, 1920 * aspectRatio), 40, 200, 20);
+    var data = Object.assign({ id: '#' + idx, text: 'Annotorious!' }, bounds);
 
-    while(true) {
-      var bounds = getRandomBounds(1920, Math.min(960, 1920 * aspectRatio), 40, 200, 20);
-      var data = Object.assign({ id: '#' + idx, text: 'Annotorious!' }, bounds);
-
-      await createAnimatedAnnotation(data, anno);
-      
-      idx += 1;
-      idx = idx % MAX_BOXES;
-    }
-
-  // }
+    await createAnimatedAnnotation(data, anno);
+    
+    idx += 1;
+    idx = idx % MAX_BOXES;
+  }
 }
