@@ -13,8 +13,9 @@
       <pubDate>Mon, 01 Jun 2020 17:48:46 +0200</pubDate>
       
       <guid>http://recogito.github.io/annotorious/about/</guid>
-      <description>About Annotorious Annotorious is a modernized reboot of the now outdated original Annotorious.
-License Annotorious is licensed under the terms of the BSD 3-Clause license. That basically means: you can use this code for free, in whatever way you want, for non-commerical and commercial projects. But attribute Annotorious in your project at a suitable location. And bear in mind: this code comes as is, don&amp;rsquo;t come complaining to us stuff breaks ;-)</description>
+      <description>About Annotorious Annotorious is open source software licensed under the BSD 3-Clause license.
+Source Code All source code is available on the recogito GitHub organization. The key repositories are:
+ recogito/annotorious for the Annotorious standard version recogito/annotorious-openseadragon for the OpenSeadragon plugin recogito/recogito-client-core for shared base components  Need Help? Get in touch via our Annotorious Gitter chat. If you encounter bugs, or have feature requests, please report them via our GitHub issue trackers:</description>
     </item>
     
   </channel>
