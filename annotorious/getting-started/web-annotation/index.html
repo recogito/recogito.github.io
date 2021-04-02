@@ -4,7 +4,7 @@
     <title>Annotorious | Web Annotation Model</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.bd2eb7501537ba5d2e9f6c4072e7f4380c68648b0dda187fe28f61de0b29526a.css">
+    <link rel="stylesheet" href="/css/style.min.d695327f997a24643cfa86709548c2692927755022b3cd96011ee3a97685181f.css">
     <meta name="description" content="Learn the basics of how Annotorious uses the W3C Web Annotation standard">
 <meta name="twitter:title" content="Annotorious &amp; Web Annotation" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
@@ -67,17 +67,22 @@
     <div class="column">
       <div class="main-content">
         <h1 id="the-w3c-web-annotation-model">The W3C Web Annotation Model</h1>
-<p>Annotorious supports the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>, an open standard for
-interoperable annotations on the web. However, only a part of the specification is supported at the moment.
-Current limitations are:</p>
+<p>Annotorious supports a subset of the <a href="https://www.w3.org/TR/annotation-model/">W3C Web Annotation model</a>,
+an open standard for interoperable annotations.</p>
 <ul>
-<li>Only annotations with a <strong>single rectangle</strong> shape are supported</li>
-<li>The <a href="https://www.w3.org/TR/media-frags/">W3C Media Fragments</a> <code>FragmentSelector</code> is the only supported selector type</li>
-<li>Annotation <code>TextualBody</code> types with a <code>purpose</code> of <code>commenting</code>, <code>replying</code> or no <code>purpose</code> are displayed as comments</li>
-<li>Anntation bodies with a <code>purpose</code> of <code>tagging</code> are displayed as tags</li>
-<li>Bodies of any other type are ignored (unless you implement your own editor extension)</li>
+<li>Only a <strong>single target</strong> shape per annotation is supported.</li>
+<li><strong><a href="https://www.w3.org/TR/annotation-model/#fragment-selector">FragmentSelectors</a></strong> of type <a href="https://www.w3.org/TR/media-frags/">Media Fragment</a>
+are supported for rectangle shapes (see example below).</li>
+<li><strong><a href="https://www.w3.org/TR/annotation-model/#svg-selector">SVG Selectors</a></strong> supported for polygon shapes.</li>
+<li>Annotation <code>TextualBody</code> types with a <code>purpose</code> of <code>commenting</code>, <code>replying</code> or no <code>purpose</code> are displayed as <strong>comments</strong>.</li>
+<li>Annotation bodies with a <code>purpose</code> of <code>tagging</code> are displayed as <strong>tags</strong>.</li>
+<li>Bodies of any other type are <strong>ignored</strong>, unless you implement your own editor extension.</li>
 </ul>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
+<h2 id="annotation-ids">Annotation IDs</h2>
+<p><strong>Important:</strong> Annotorious requires an <code>id</code> on every annotation. The ID can be any alphanumeric string.
+Annotations created by users will automatically get a globally unique ID in the form <code>#{uuid}</code>.</p>
+<h2 id="example">Example</h2>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[{ 
   <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
   <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#a88b22d0-6106-4872-9435-c78b5e89fede&#34;</span>,
   <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
@@ -92,12 +97,23 @@ Current limitations are:</p>
       <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;xywh=pixel:270,120,90,170&#34;</span>
     }
   }
-}
-</code></pre></div><h2 id="annotation-ids">Annotation IDs</h2>
-<p>When adding an annotation via the API, the annotation should have an <code>id</code>. In principle,
-Annotorious accepts any alphanumeric string. Annotations created by users will automatically
-get a globally unique ID in the form <code>#{uuid}</code>.</p>
-
+}, { 
+  <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
+  <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#218d01ff-f077-4cc3-992d-1c81c426e51b&#34;</span>,
+  <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
+  <span style="color:#268bd2">&#34;body&#34;</span>: [{
+    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+    <span style="color:#268bd2">&#34;purpose&#34;</span>: <span style="color:#2aa198">&#34;tagging&#34;</span>,
+    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;Church&#34;</span>
+  }],
+  <span style="color:#268bd2">&#34;target&#34;</span>: {
+    <span style="color:#268bd2">&#34;selector&#34;</span>: [{
+      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;SvgSelector&#34;</span>,
+      <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;&lt;svg&gt;&lt;polygon points=&#39;172,160 199,15 223,6 239,132 244,173 285,179 313,208 313,251 218,306 170,290 172,160&#39;&gt;&lt;/polygon&gt;&lt;/svg&gt;&#34;</span>
+    }]
+  }
+}]
+</code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">
