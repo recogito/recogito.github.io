@@ -85,10 +85,13 @@ var createAnimatedAnnotation = function(data, anno, closeAfter) {
 
     var keepOpen = closeAfter || 2000;
 
+    var timeout = null;
+
     var onComplete = function() {
       setTimeout(function() { 
         anno.selectAnnotation(data.id); 
-        setTimeout(function() {
+        
+        timeout = setTimeout(function() {
           if (closeAfter)
             anno.selectAnnotation();
 
@@ -96,6 +99,10 @@ var createAnimatedAnnotation = function(data, anno, closeAfter) {
         }, keepOpen);
       }, 200);
     };
+
+    anno.on('createSelection', function() {
+      clearTimeout(timeout);
+    });
 
     animateBounds(data, onTick, onComplete);
   });
@@ -107,7 +114,10 @@ var observer = new IntersectionObserver(function(entries) {
     if (entry.isIntersecting > 0) {
       var id = entry.target.id;
       if (!annoInstances[id]) {
-        var anno = Annotorious.init({ image: id });
+        var anno = Annotorious.init({ 
+          image: id,
+          allowEmpty: true
+        });
 
         annoInstances[id] = anno;
 
@@ -130,9 +140,9 @@ var onScroll = function() {
 
 // 'Random boxes' animation on header background
 window.onload = async function() {
-  var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  // var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
-  if (vw > 800) {
+  // if (vw > 800) {
     document.addEventListener('scroll', onScroll);
 
     var MAX_BOXES = 100; // Start recycling annotations after this number
@@ -155,5 +165,5 @@ window.onload = async function() {
       idx = idx % MAX_BOXES;
     }
 
-  }
+  // }
 }
