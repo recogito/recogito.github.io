@@ -4,7 +4,7 @@
     <title>Annotorious | Getting Started</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.9123f7e014ded6aa0953e623c9cca980eebbf69f3c15a12ffa6c9320d4e24a78.css">
+    <link rel="stylesheet" href="/css/style.min.c347d63a48f00ff2df014acbbc3acb35dbf2251bdab5ac1d50a00ab125754621.css">
     <meta name="description" content="Examples and instructions for getting started with the Annotorious image annotation library">
 <meta name="twitter:title" content="Getting Started With Annotorious" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
@@ -66,9 +66,10 @@
     <div class="column">
       <div class="main-content">
         <h1 id="getting-started-with-annotorious">Getting Started with Annotorious</h1>
-<p>Annotorious lets your users draw <strong>rectangle</strong> and <strong>polygon selections</strong> on images, and add comments
-and labels. Try it out on the image below: <strong>click the annotation</strong> to edit, <strong>click and drag</strong>
-with the mouse to create a new annotation</p>
+<p>Annotorious lets your users select <strong>rectangle</strong> and <strong>polygon shapes</strong> on images, and add comments
+and tags.</p>
+<p>Try it on the image below: <strong>click</strong> or <strong>tap</strong> the annotation to edit, <strong>click or tap anywhere
+and drag</strong> to create a new annotation.</p>
 <div class="inline-demo">
   <img id="hallstatt" src="/images/640px-Hallstatt.jpg">
   <p class="image-caption">
@@ -76,8 +77,17 @@ with the mouse to create a new annotation</p>
     Austria</a>, by Nick Csakany/Wikimedia Commons. Public Domain.
   </p>
 </div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.1.2/dist/annotorious.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.1.2/dist/annotorious.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.js"></script>
+<style>
+  @media only screen and (max-width: 800px) {
+
+    .r6o-editor {
+      width:260px !important;
+    }
+
+  }
+</style>
 <script>
   var sampleAnnotation = { 
     "@context": "http://www.w3.org/ns/anno.jsonld",
@@ -99,7 +109,7 @@ with the mouse to create a new annotation</p>
       "selector": {
         "type": "FragmentSelector",
         "conformsTo": "http://www.w3.org/TR/media-frags/",
-        "value": "xywh=pixel:270,120,90,170"
+        "value": "xywh=pixel:421,80,151,151"
       }
     }
   };
@@ -107,7 +117,8 @@ with the mouse to create a new annotation</p>
   window.onload = function() {
     var anno = Annotorious.init({
       image: 'hallstatt',
-      locale: 'auto'
+      locale: 'auto',
+      allowEmpty: true
     });
 
     anno.addAnnotation(sampleAnnotation);
@@ -142,7 +153,7 @@ and add the script and stylesheet files to your page source code.</p>
   &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 &lt;/<span style="color:#268bd2">body</span>&gt;
 </code></pre></div><h2 id="from-cdn">From CDN</h2>
-<p>Alternatively, you can grab script and stylesheet from the <a href="https://www.jsdelivr.com/package/npm/@recogito/annotorious">jsDelivr CDN</a>.</p>
+<p>Alternatively, you can grab script and stylesheet directly from the <a href="https://www.jsdelivr.com/package/npm/@recogito/annotorious">jsDelivr CDN</a>.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- CSS stylesheet --&gt;</span>
 &lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.css&#34;</span>&gt;
 
@@ -157,12 +168,12 @@ and add the script and stylesheet files to your page source code.</p>
 <span style="color:#268bd2">const</span> anno <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
   image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>)
 });
-</code></pre></div><h1 id="a-note-on-image-css-styles">A Note on Image CSS Styles</h1>
+</code></pre></div><h1 id="a-note-styled-images">A Note Styled Images</h1>
 <p>Because of the way Annotorious works, some CSS style rules applied directly to the &lt;img&gt;
 element can cause compatibility issues. This is especially the case for <code>position</code>, <code>margin</code>
 and <code>padding</code> rules.</p>
-<p>If you need to apply these CSS styles, please do not apply them to the &lt;img&gt; directly, but
-instead <strong>wrap the image in a &lt;div&gt; and apply your styles to the wrapper &lt;div&gt; instead</strong>.</p>
+<p>If you need to apply these CSS styles, please do not apply them to the <code>&lt;img&gt;</code> directly.
+Instead, <strong>wrap the image in a &lt;div&gt; and apply your styles to the wrapper &lt;div&gt;</strong>.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- This does not work --&gt;</span>
 &lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-1.jpg&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position:absolute; top:10px; left:10px;&#34;</span> &gt;
 &lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-2.jpg&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;padding:20px&#34;</span> &gt;
@@ -179,10 +190,13 @@ instead <strong>wrap the image in a &lt;div&gt; and apply your styles to the wra
 <p>There is a separate version of Annotorious which plugs into the <a href="http://openseadragon.github.io/">OpenSeadragon viewer</a>
 for high-resolution images. Setup is just as easy as for the standard version. <a href="/annotorious/getting-started/osd-plugin">Read more</a></p>
 <h1 id="next-steps">Next Steps</h1>
-<p>Once you have the basics up and running, you will probably want to know more about the data format
-of the annotations, and how you can store them permanently. Read more about the
-<a href="/annotorious/getting-started/web-annotation">W3C Web Annotation Model</a> and <a href="/annotorious/getting-started/storing-annotations">how to integrate Annotorious
-with a backend</a>.</p>
+<p>Once you have the basics up and running, you will probably want to know more about
+Annotorious' JavaScript API, the format of the annotations, how you can store them
+permanently, and how you can customize Annotorious to fit your needs and UI design.</p>
+<p>Read the <a href="/annotorious/api-docs/annotorious/">API docs</a> and check our
+<a href="http://localhost:1313/guides/">Guides section</a> for more info. More
+questions? Feedack? Feature requests? Get in touch via the
+<a href="https://gitter.im/recogito/annotorious">Annotorious chat on Gitter</a>.</p>
 
 
         
@@ -217,7 +231,7 @@ with a backend</a>.</p>
     <footer>
   <div class="inner">
     <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
-    <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious">Annotorious Gitter Chat</a></p>
+    <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious" class="no-break">Annotorious Gitter Chat</a></p>
     <p class="github-link">
       <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
       <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
