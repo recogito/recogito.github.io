@@ -223,8 +223,8 @@ more information about creator data.)</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> { snippet, transform } <span style="color:#719e07">=</span> anno.getSelectedImageSnippet();
 </code></pre></div><p>Returns an object containing:</p>
 <ul>
-<li>A DOM CANVAS element, in the size of the current selection&rsquo;s bounding box, with
-the selected image snippet</li>
+<li>A <strong>Canvas</strong> element, in the size of the current selection&rsquo;s bounding box, with
+the selected image snippet (in the same resolution as the current OpenSeadragon viewport)</li>
 <li>A coordinate transform function that translates X/Y coordinates in the snippet coordinate
 space back to the coordinate space of the full image</li>
 </ul>
@@ -240,7 +240,7 @@ space back to the coordinate space of the full image</li>
 <tr>
 <td><code>snippet</code></td>
 <td>Canvas</td>
-<td>the image under the current selection bounds as a CANVAS element</td>
+<td>the image under the current selection bounds as a <code>Canvas</code> element</td>
 </tr>
 <tr>
 <td><code>transform</code></td>
