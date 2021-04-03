@@ -4,7 +4,7 @@
     <title>Annotorious | API Docs | Annotorious</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
-    <link rel="stylesheet" href="/css/style.min.a4cd1979737db5c3816728938f8bcd137d70c86d84c68c9fb16a7f5bd4fe49be.css">
+    <link rel="stylesheet" href="/css/style.min.57d305ffd967cc4df45de9ab7aea352dae12aa79ce41a82db49e9f1e420dac7c.css">
     <meta name="description" content="API Documentation for the Annotorious image annotation library">
 <meta name="twitter:title" content="Annotorious API Docs" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
@@ -103,13 +103,13 @@ or web applications. If you are looking for the Annotorious OpenSeadragon plugin
 <td><code>allowEmpty</code></td>
 <td>Boolean</td>
 <td>false</td>
-<td>If <code>false</code>, empty annotations are discared when created</td>
+<td>Annotations created without bodies are normally discarded. Set to <code>true</code> to allow empty annotations.</td>
 </tr>
 <tr>
 <td><code>disableEditor</code></td>
 <td>Boolean</td>
 <td>false</td>
-<td>Disables the editor and runs Annotorious in <a href="#">headless mode</a>.</td>
+<td>Disable the editor if you only need drawing functionality, but not the popup.</td>
 </tr>
 <tr>
 <td><code>formatter</code></td>
@@ -133,7 +133,7 @@ or web applications. If you are looking for the Annotorious OpenSeadragon plugin
 <td><code>readOnly</code></td>
 <td>Boolean</td>
 <td>false</td>
-<td>Display all annotations as read-only.</td>
+<td>Display annotations in read-only mode.</td>
 </tr>
 <tr>
 <td><code>widgets</code></td>
@@ -143,6 +143,16 @@ or web applications. If you are looking for the Annotorious OpenSeadragon plugin
 </tr>
 </tbody>
 </table>
+<h2 id="instance-fields">Instance Fields</h2>
+<h3 id="disableeditor">disableEditor</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.disableEditor); <span style="color:#586e75">// true or fals
+</span><span style="color:#586e75"></span>anno.disableEditor <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>anno.disableEditor; <span style="color:#586e75">// toggles state
+</span></code></pre></div><p>Change the operation mode between <strong>normal</strong> (drawing tools &amp; editor popup) and <strong>headless</strong>. In
+headless mode, only drawing tools and lifecycle events are active. The editor will not open.</p>
+<h3 id="readonly">readOnly</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.readOnly); <span style="color:#586e75">// true or fals
+</span><span style="color:#586e75"></span>anno.readOnly <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>anno.readOnly; <span style="color:#586e75">// toggles state
+</span></code></pre></div><p>Change display mode between <strong>normal</strong> (annotations are editabel) and <strong>read-only</strong>.</p>
 <h2 id="instance-methods">Instance Methods</h2>
 <h3 id="addannotation">.addAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addAnnotation(annotation [, readOnly]);
@@ -170,37 +180,15 @@ only a single <code>FragmentSelector</code> with an <code>xywh=pixel</code> frag
 </tr>
 </tbody>
 </table>
-<h3 id="applytemplate">.applyTemplate</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.applyTemplate(template);
-</code></pre></div><p>When a new annotation is created, Annotorious will automatically apply the given
-template. The template can be a single annotation body, or an array of bodies.
-If <code>openEditor</code> is set to true, the editor popup will open, allowing the user to
-edit the annotation normally. Otherwise, Annotorious will <strong>instantly</strong> create an
-annotation from the template bodies <strong>only</strong>. The editor will not open.</p>
-<p>Use this method if you want to implement batch- or fast annotation modes, where
-the same annotation should be applied repeatedly, and the user should only take
-care of drawing selections.</p>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>template</code></td>
-<td>Object</td>
-<td>the template body or list of bodies to apply automatically</td>
-</tr>
-<tr>
-<td><code>openEditor</code></td>
-<td>Boolean</td>
-<td>if <code>true</code>, the editor will open after the template is applied</td>
-</tr>
-</tbody>
-</table>
+<h3 id="adddrawingtool">.addDrawingTool</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addDrawingTool(plugin);
+</code></pre></div><p>Register a drawing tool plugin.</p>
+<h3 id="cancelselected">.cancelSelected</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.cancelSelected();
+</code></pre></div><p>Programmatically cancel the current selection, if any.</p>
+<h3 id="clearannotations">.clearAnnotations</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAnnotations();
+</code></pre></div><p>Delete all annotations from the image.</p>
 <h3 id="clearauthinfo">.clearAuthInfo</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAuthInfo();
 </code></pre></div><p>Clears the user auth information. Annotorious will no longer insert creator data
@@ -210,8 +198,45 @@ more information about creator data.)</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.destroy();
 </code></pre></div><p>Destroys this instance of Annotorious, removing the annotation layer on the image.</p>
 <h3 id="getannotations">.getAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.getAnnotations();
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> annotations <span style="color:#719e07">=</span> anno.getAnnotations();
 </code></pre></div><p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
+<h3 id="getselected">.getSelected</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> selected <span style="color:#719e07">=</span> anno.getSelected();
+</code></pre></div><p>Returns the currently selected annotation.</p>
+<h3 id="getselectedimagesnippet">.getSelectedImageSnippet</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> { snippet, transform } <span style="color:#719e07">=</span> anno.getSelectedImageSnippet();
+</code></pre></div><p>Returns an object containing:</p>
+<ul>
+<li>A DOM CANVAS element, in the size of the current selection&rsquo;s bounding box, with
+the selected image snippet</li>
+<li>A coordinate transform function that translates X/Y coordinates in the snippet coordinate
+space back to the coordinate space of the full image</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>snippet</code></td>
+<td>Canvas</td>
+<td>the image under the current selection bounds as a CANVAS element</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>Function</td>
+<td>coordinate conversion function</td>
+</tr>
+</tbody>
+</table>
+<h3 id="listdrawingtools">.listDrawingTools</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> toolNames <span style="color:#719e07">=</span> anno.listDrawingTools();
+</code></pre></div><p>Returns a list of the available drawing tools, including those from registered drawing
+tool plugins.</p>
 <h3 id="loadannotations">.loadAnnotations</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.loadAnnotations(url);
 </code></pre></div><p>Loads annotations from a JSON URL. The method returns a promise, in
@@ -303,6 +328,10 @@ all event handlers for this event will be unsubscribed.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="saveselected">.saveSelected</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.saveSelected();
+</code></pre></div><p>Saves the current selection. This is essentially a programmatic way to hit the <strong>Ok</strong> button on
+the editor.</p>
 <h3 id="selectannotation">.selectAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.selectAnnotation(arg);
 </code></pre></div><p>Selects an annotation programmatically, highlighting its shape, and opening the editor popup.</p>
@@ -400,11 +429,11 @@ application changes. The argument to <code>.setAuthInfo</code> is an object with
 }
 </code></pre></div><h3 id="setdrawingtool">.setDrawingTool</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingTool(toolName);
-</code></pre></div><blockquote>
-<p>This feature is experimental. The API will likely change in the future.</p>
-</blockquote>
-<p>Switches between the different available drawing tools. At the moment, only
-the built-in rubberband rectangle and polygon tools are available.</p>
+</code></pre></div><p>Switches between the different available drawing tools. Per default, Annotorious
+provides a standard rectangle tool (<code>rect</code>) and a standard polygon drawing tool
+(<code>polygon</code>).</p>
+<p>More tools may be available through plugins. Use <a href="#listdrawingtools">.listDrawingTool</a>
+to get the list of registered tools.</p>
 <table>
 <thead>
 <tr>
@@ -417,7 +446,7 @@ the built-in rubberband rectangle and polygon tools are available.</p>
 <tr>
 <td><code>toolName</code></td>
 <td>String</td>
-<td>Either <code>rect</code> or <code>polygon</code></td>
+<td>E.g. <code>rect</code> or <code>polygon</code></td>
 </tr>
 </tbody>
 </table>
@@ -446,7 +475,42 @@ the built-in rubberband rectangle and polygon tools are available.</p>
 problems when the clock isn&rsquo;t properly set in the user&rsquo;s browser.</p>
 <p>After setting server time, the Annotorious will adjust the <code>created</code> timestamps by the difference between
 server time the user&rsquo;s local clock.</p>
-<h2 id="events">Events</h2>
+<h3 id="updateselected">.updateSelected</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.updateSelected(annotation[, saveImmediately]);
+</code></pre></div><p>Replace the currently selected annotation with the one given as argument to .updateSelected.
+Optionally: save the annotation immediately, triggering a <code>createAnnotation</code> or
+<code>updateAnnotation</code> event.</p>
+<blockquote>
+<p><strong>Important:</strong> this method returns a Promise. The update will <strong>not</strong> be effective
+immediately. Make sure you wait until the Promise completes before saving the annotation.</p>
+</blockquote>
+<p>Use this method for applications that  (with <code>disableEditor</code> set
+to <code>true</code>).</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;my-image&#39;</span>
+  disableEditor<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>
+});
+
+anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">async</span> <span style="color:#268bd2">function</span>(selection) {
+  selection.body <span style="color:#719e07">=</span> [{
+    type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;TextualBody&#39;</span>,
+    purpose<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;tagging&#39;</span>,
+    value<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;MyTag&#39;</span>
+  }];
+
+  <span style="color:#586e75">// Make sure to wait before saving!
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">await</span> anno.updateSelected(selection);
+  anno.saveSelected();
+
+  <span style="color:#586e75">// Or: anno.updateSelected(selection, true);
+</span><span style="color:#586e75"></span>});
+</code></pre></div><h2 id="events">Events</h2>
+<h3 id="cancelselected-1">cancelSelected</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;cancelSelected&#39;</span>, <span style="color:#268bd2">function</span>(target) {
+  <span style="color:#586e75">// 
+</span><span style="color:#586e75"></span>});
+</code></pre></div><p>Fired when the user has canceled a selection, by hitting <strong>Cancel</strong> in the editor, or by
+clicking or tapping outside the selected annotation shape.</p>
 <h3 id="changeselectiontarget">changeSelectionTarget</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;changeSelectionTarget&#39;</span>, <span style="color:#268bd2">function</span>(target) {
   <span style="color:#586e75">// 
@@ -715,27 +779,41 @@ an object.</p>
         <nav id="TableOfContents">
   <ul>
     <li><a href="#initialization">Initialization</a></li>
+    <li><a href="#instance-fields">Instance Fields</a>
+      <ul>
+        <li><a href="#disableeditor">disableEditor</a></li>
+        <li><a href="#readonly">readOnly</a></li>
+      </ul>
+    </li>
     <li><a href="#instance-methods">Instance Methods</a>
       <ul>
         <li><a href="#addannotation">.addAnnotation</a></li>
-        <li><a href="#applytemplate">.applyTemplate</a></li>
+        <li><a href="#adddrawingtool">.addDrawingTool</a></li>
+        <li><a href="#cancelselected">.cancelSelected</a></li>
+        <li><a href="#clearannotations">.clearAnnotations</a></li>
         <li><a href="#clearauthinfo">.clearAuthInfo</a></li>
         <li><a href="#destroy">.destroy</a></li>
         <li><a href="#getannotations">.getAnnotations</a></li>
+        <li><a href="#getselected">.getSelected</a></li>
+        <li><a href="#getselectedimagesnippet">.getSelectedImageSnippet</a></li>
+        <li><a href="#listdrawingtools">.listDrawingTools</a></li>
         <li><a href="#loadannotations">.loadAnnotations</a></li>
         <li><a href="#off">.off</a></li>
         <li><a href="#on">.on</a></li>
         <li><a href="#removeannotation">.removeAnnotation</a></li>
+        <li><a href="#saveselected">.saveSelected</a></li>
         <li><a href="#selectannotation">.selectAnnotation</a></li>
         <li><a href="#setannotations">.setAnnotations</a></li>
         <li><a href="#setauthinfo">.setAuthInfo</a></li>
         <li><a href="#setdrawingtool">.setDrawingTool</a></li>
         <li><a href="#setvisible">.setVisible</a></li>
         <li><a href="#setservertime">.setServerTime</a></li>
+        <li><a href="#updateselected">.updateSelected</a></li>
       </ul>
     </li>
     <li><a href="#events">Events</a>
       <ul>
+        <li><a href="#cancelselected-1">cancelSelected</a></li>
         <li><a href="#changeselectiontarget">changeSelectionTarget</a></li>
         <li><a href="#createannotation">createAnnotation</a></li>
         <li><a href="#createselection">createSelection</a></li>
@@ -761,6 +839,7 @@ an object.</p>
   <div class="inner">
     <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
     <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious" class="no-break">Annotorious Gitter Chat</a></p>
+    <p>Want to help improve our documentation? <a href="https://github.com/recogito/project-website-source">Fork this website</a> and send us a pull request!</p>
     <p class="github-link">
       <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
       <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
