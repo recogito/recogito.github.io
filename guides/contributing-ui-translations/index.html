@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
     <link rel="stylesheet" href="/css/style.min.57d305ffd967cc4df45de9ab7aea352dae12aa79ce41a82db49e9f1e420dac7c.css">
-    <meta name="description" content="We want to make our user interface available in as many languages as possible. If you want to help: contributing a translation is easy. This guide explains how">
+    <meta name="description" content="We want to make the user interface available in as many languages as possible. If you want to help: contributing a translation is easy. This guide explains how">
 <meta name="twitter:title" content="Contributing UI Translations" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta name="twitter:site" content="@aboutgeo" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:description" content="We want to make our user interface available in as many languages as possible. If you want to help: contributing a translation is easy. This guide explains how">
+<meta name="twitter:description" content="We want to make the user interface available in as many languages as possible. If you want to help: contributing a translation is easy. This guide explains how">
 <meta property="og:title" content="Contributing UI Translations" />
-<meta property="og:description" content="We want to make our user interface available in as many languages as possible. If you want to help: contributing a translation is easy. This guide explains how">
+<meta property="og:description" content="We want to make the user interface available in as many languages as possible. If you want to help: contributing a translation is easy. This guide explains how">
 <meta property="og:url" content="https://recogito.github.io/guides/contributing-ui-translations" />
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
@@ -67,9 +67,9 @@
     <div class="column">
       <div class="main-content">
         <h1 id="contributing-ui-translations">Contributing UI Translations</h1>
-<p>We want to make our user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&rsquo;s not a lot of work.</p>
+<p>We want to make the user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&rsquo;s not a lot of work.</p>
 <h2 id="message-dictionaries">Message Dictionaries</h2>
-<p>The user interface labels are part of <code>recogito-client-core</code>, a JavaScript package for common code shared between
+<p>User interface labels are part of <code>recogito-client-core</code>, a JavaScript package for common code shared between
 Annotorious and RecogitoJS. In <a href="https://github.com/recogito/recogito-client-core/tree/master/src/i18n">this folder</a>
 you will find <code>messages</code> files, one file for each available translation.</p>
 <p>Each <code>messages</code> file is a dictionary of the default English labels and their translations. For example,
@@ -107,7 +107,7 @@ the language.</li>
 <tr>
 <td>Arabic</td>
 <td>ar</td>
-<td>Complete</td>
+<td><strong>Partial</strong></td>
 <td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_ar.json">messages_ar.json</a></td>
 </tr>
 <tr>
@@ -115,6 +115,12 @@ the language.</li>
 <td>cs</td>
 <td>Complete</td>
 <td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_cs.json">messages_cs.json</a></td>
+</tr>
+<tr>
+<td>Dutch</td>
+<td>nl</td>
+<td>Complete</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_nl.json">messages_nl.json</a></td>
 </tr>
 <tr>
 <td>Galician</td>
@@ -129,6 +135,12 @@ the language.</li>
 <td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_de.json">messages_de.json</a></td>
 </tr>
 <tr>
+<td>Greek</td>
+<td>el</td>
+<td>Complete</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_el.json">messages_el.json</a></td>
+</tr>
+<tr>
 <td>Hindi</td>
 <td>hi</td>
 <td>Complete</td>
@@ -137,8 +149,14 @@ the language.</li>
 <tr>
 <td>Italian</td>
 <td>it</td>
-<td>Complete</td>
+<td><strong>Partial</strong></td>
 <td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_it.json">messages_it.json</a></td>
+</tr>
+<tr>
+<td>Portugese</td>
+<td>pt</td>
+<td>Complete</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_pt.json">messages_pt.json</a></td>
 </tr>
 <tr>
 <td>Spanish</td>
@@ -149,8 +167,14 @@ the language.</li>
 <tr>
 <td>Swedish</td>
 <td>sv</td>
-<td>Complete</td>
+<td><strong>Partial</strong></td>
 <td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_sv.json">messages_sv.json</a></td>
+</tr>
+<tr>
+<td>Turkish</td>
+<td>tr</td>
+<td>Complete</td>
+<td><a href="https://github.com/recogito/recogito-client-core/blob/master/src/i18n/messages_tr.json">messages_sv.json</a></td>
 </tr>
 <tr>
 <td>Urdu</td>
@@ -174,19 +198,13 @@ the language.</li>
                 
                   <li>
                     
-                      <a href="http://recogito.github.io/guides/using-firebase-for-storage/">Using Firebase Storage</a>
+                      <a href="http://recogito.github.io/guides/customizing-the-editor/">Customizing the Editor</a>
                     
                   </li>
                 
                   <li>
                     
-                      <a href="http://recogito.github.io/guides/extending-the-editor/">Extending the Editor</a>
-                    
-                  </li>
-                
-                  <li>
-                    
-                      <a href="http://recogito.github.io/guides/customizing-appearance/">Customizing Appearance</a>
+                      <a href="http://recogito.github.io/guides/customizing-styles/">Customizing Styles</a>
                     
                   </li>
                 

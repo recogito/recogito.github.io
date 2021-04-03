@@ -3,13 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://recogito.github.io/guides/using-firebase-for-storage/</loc>
-    <lastmod>2020-05-01T13:28:54+02:00</lastmod>
+    <loc>http://recogito.github.io/guides/customizing-the-editor/</loc>
+    <lastmod>2020-09-24T14:24:22+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/guides/extending-the-editor/</loc>
-    <lastmod>2020-09-24T14:24:22+02:00</lastmod>
+    <loc>http://recogito.github.io/guides/customizing-styles/</loc>
+    <lastmod>2020-09-24T10:47:22+02:00</lastmod>
   </url>
   
   <url>
@@ -20,11 +20,6 @@
   <url>
     <loc>http://recogito.github.io/annotorious/getting-started/web-annotation/</loc>
     <lastmod>2020-05-17T14:33:09+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://recogito.github.io/guides/customizing-appearance/</loc>
-    <lastmod>2020-09-24T10:47:22+02:00</lastmod>
   </url>
   
   <url>

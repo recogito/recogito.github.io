@@ -8,24 +8,26 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 24 Sep 2020 14:24:22 +0200</lastBuildDate><atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Using Firebase Storage</title>
-      <link>http://recogito.github.io/guides/using-firebase-for-storage/</link>
-      <pubDate>Fri, 01 May 2020 13:28:54 +0200</pubDate>
+      <title>Customizing the Editor</title>
+      <link>http://recogito.github.io/guides/customizing-the-editor/</link>
+      <pubDate>Thu, 24 Sep 2020 14:24:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/guides/using-firebase-for-storage/</guid>
-      <description>Using Firebase for Storage A quick and easy way to set up your own annotation store without managing your own server is through Firebase, a web application development platform by Google. Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and deleting JSON records. All you need to do is wire up the Firebase storage SDK operations with the corresponding events from Annotorious.
-Annotorious Lifecycle Events When Annotorious fires the createAnnotation event, store the annotation via the .</description>
+      <guid>http://recogito.github.io/guides/customizing-the-editor/</guid>
+      <description>Customizing the Editor Per default, the Annotorious editor popup features two widgets:
+ A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown  You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
+var anno = Annotorious.</description>
     </item>
     
     <item>
-      <title>Extending the Editor</title>
-      <link>http://recogito.github.io/guides/extending-the-editor/</link>
-      <pubDate>Thu, 24 Sep 2020 14:24:22 +0200</pubDate>
+      <title>Customizing Styles</title>
+      <link>http://recogito.github.io/guides/customizing-styles/</link>
+      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/guides/extending-the-editor/</guid>
-      <description>Extending the Editor Per default, the Annotorious/RecogitoJS editor popup features two widgets:
- A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown  You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
-var anno = Annotorious.</description>
+      <guid>http://recogito.github.io/guides/customizing-styles/</guid>
+      <description>Customizing Visual Appearance Need a different look and feel? Customizing the visual appearance of Annotorious is easy. All elements of the annotation layer and the editor popup can be styled with CSS.
+Customizing Shape Styles Annotorious renders annotations using SVG. You can completely alter the visual appearance of every graphical element via CSS.
+To make styling more flexible, Annotorious adds a few extras:
+ For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
     </item>
     
     <item>
@@ -49,25 +51,13 @@ var anno = Annotorious.</description>
     </item>
     
     <item>
-      <title>Customizing Appearance</title>
-      <link>http://recogito.github.io/guides/customizing-appearance/</link>
-      <pubDate>Thu, 24 Sep 2020 10:47:22 +0200</pubDate>
-      
-      <guid>http://recogito.github.io/guides/customizing-appearance/</guid>
-      <description>Customizing Visual Appearance Need a different look and feel? Customizing the visual appearance of Annotorious is easy! All elements of the annotation layer and the editor window can be styled with CSS.
-Customizing the Annotation Layer Annotorious renders annotations using SVG, which means you can completely alter the visual appearance of every graphical element via CSS.
-To make styling even more flexible, Annotorious adds a few extras:
- For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
-    </item>
-    
-    <item>
       <title>Contributing Translations</title>
       <link>http://recogito.github.io/guides/contributing-ui-translations/</link>
       <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
       
       <guid>http://recogito.github.io/guides/contributing-ui-translations/</guid>
-      <description>Contributing UI Translations We want to make our user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&amp;rsquo;s not a lot of work.
-Message Dictionaries The user interface labels are part of recogito-client-core, a JavaScript package for common code shared between Annotorious and RecogitoJS. In this folder you will find messages files, one file for each available translation.</description>
+      <description>Contributing UI Translations We want to make the user interface available in as many languages as possible. If you want to help: providing a translation is easy - and because there are not many labeled elements, it&amp;rsquo;s not a lot of work.
+Message Dictionaries User interface labels are part of recogito-client-core, a JavaScript package for common code shared between Annotorious and RecogitoJS. In this folder you will find messages files, one file for each available translation.</description>
     </item>
     
     <item>

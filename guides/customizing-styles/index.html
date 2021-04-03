@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Customizing Styles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.57d305ffd967cc4df45de9ab7aea352dae12aa79ce41a82db49e9f1e420dac7c.css">
+    <meta name="description" content="This guide explains how you can customize the visual appearance of Annotorious with CSS.">
+<meta name="twitter:title" content="Customizing Annotorious Styles" />
+<meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta name="twitter:site" content="@aboutgeo" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This guide explains how you can customize the visual appearance of Annotorious with CSS.">
+<meta property="og:title" content="Customizing Annotorious Styles" />
+<meta property="og:description" content="This guide explains how you can customize the visual appearance of Annotorious with CSS.">
+<meta property="og:url" content="https://recogito.github.io/guides/customizing-styles" />
+<meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta property="og:type" content="object" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.2.1/dist/annotorious.min.css"></script>
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar">
+  <script>
+    var openResponsiveMenu = function() {
+      var el = document.getElementById('navbar');
+      if (el.className === 'navbar') {
+        el.className = 'navbar responsive';
+      } else {
+        el.className = 'navbar';
+      }
+    };
+  </script>
+  <header>
+    <div class="mobile-only">
+      <button class="hamburger-icon" id="open-responsive-menu" onclick="openResponsiveMenu()">
+        <img src="/images/menu-24px.svg">
+      </button>      
+    </div>
+    <ul>
+      <li>
+        <a href="/annotorious/">Home</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/getting-started">Getting Started</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/api-docs">API Docs</a>
+      </li>
+      
+      <li class='current'>
+        <a href="/guides">Guides</a>
+      </li>
+      
+      <li class=''>
+        <a href="/annotorious/about">About</a>
+      </li>
+      
+      <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="main-content">
+        <h1 id="customizing-visual-appearance">Customizing Visual Appearance</h1>
+<p>Need a different look and feel? Customizing the visual appearance of Annotorious is easy.
+All elements of the annotation layer and the editor popup can be styled with CSS.</p>
+<h2 id="customizing-shape-styles">Customizing Shape Styles</h2>
+<p>Annotorious renders annotations using <a href="https://developer.mozilla.org/en-US/docs/Web/SVG">SVG</a>.
+You can completely alter the visual appearance of every graphical element via CSS.</p>
+<p>To make styling more flexible, Annotorious adds a few extras:</p>
+<ul>
+<li>For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other. The two shapes
+have different CSS classes - <code>a9s-inner</code> and <code>a9s-outer</code>. You can use this to create line styles with an outline.
+(The default style renders an outer black line and a slightly thinner white inner line.)</li>
+<li>When the user creates a new selection, Annotorious renders a mask element. In the default theme, the mask is
+hidden. But you can enable it via CSS to add a dimming effect to the area outside the selection.</li>
+</ul>
+<h3 id="custom-style-example">Custom Style Example</h3>
+<p><img src="/images/guides/custom-annotationlayer-style.jpg" alt="A custom annotation layer style"></p>
+<p>This example applies custom CSS rules to enable the dim mask and give different appearance to the
+annotation outlines.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#586e75">/** Hides the outer shapes - for this style we only need one **/</span>
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-outer</span><span style="color:#719e07">,</span> 
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-outer</span> {
+  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
+}
+
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-outer</span> {
+  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
+}
+
+<span style="color:#586e75">/** New style for the annotation outlines **/</span>
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-inner</span><span style="color:#719e07">,</span>
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-inner</span>  {
+  stroke-width:<span style="color:#2aa198">4</span>;
+  stroke:<span style="color:#cb4b16">white</span>;
+  stroke-dasharray:<span style="color:#2aa198">5</span>;
+}
+
+<span style="color:#586e75">/** Disable the hover effect from the default stylesheet **/</span>
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span>.<span style="color:#268bd2">editable</span>:<span style="color:#268bd2">hover</span> .<span style="color:#268bd2">a9s-inner</span> {
+  fill:<span style="color:#cb4b16">transparent</span>;
+}
+
+<span style="color:#586e75">/** Corner handles **/</span>
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-inner</span> {
+  fill:<span style="color:#cb4b16">white</span>;
+  stroke:<span style="color:#cb4b16">white</span>;
+}
+
+<span style="color:#586e75">/** Enable the dim mask, black with 60% transparency **/</span>
+<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection-mask</span> {
+  fill:<span style="color:#b58900">rgba</span>(<span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0.6</span>);
+}
+</code></pre></div><h2 id="customizing-the-editor-popup-style">Customizing the Editor Popup Style</h2>
+<p>The editor has the following markup structure and CSS classes:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-editor&#34;</span>&gt;
+  &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-arrow&#34;</span>&gt;&lt;/<span style="color:#268bd2">div</span>&gt; <span style="color:#586e75">&lt;!-- renders the up- or downwards arrow --&gt;</span>
+  &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-editor-inner&#34;</span>&gt;
+    <span style="color:#586e75">&lt;!-- a list of editor widgets, each contained in a DIV --&gt;</span>
+    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-widget&#34;</span>&gt;
+      <span style="color:#586e75">&lt;!-- ... --&gt;</span>
+    &lt;/<span style="color:#268bd2">div</span>&gt;
+
+    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-footer&#34;</span>&gt;
+      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn left delete-annotation&#34;</span>&gt;
+        <span style="color:#586e75">&lt;!-- Trashcan icon --&gt;</span>
+      &lt;/<span style="color:#268bd2">button</span>&gt;
+      
+      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn outline&#34;</span>&gt;Cancel&lt;/<span style="color:#268bd2">button</span>&gt;
+      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn &#34;</span>&gt;Ok&lt;/<span style="color:#268bd2">button</span>&gt;
+    &lt;/<span style="color:#268bd2">div</span>&gt;
+  &lt;/<span style="color:#268bd2">div</span>&gt;
+&lt;/<span style="color:#268bd2">div</span>&gt;
+</code></pre></div>
+      </div>
+
+      <div class="table-of-contents subsections">
+        <nav>
+          <ul>
+            <li><a href="http://recogito.github.io/guides/">Guides</a></li>
+            <li>
+              <ul>
+                
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/customizing-the-editor/">Customizing the Editor</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/customizing-styles/" class="active">Customizing Styles</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/contributing-ui-translations/">Contributing Translations</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/development-setup/">Hacker&#39;s Guide</a>
+                    
+                  </li>
+                
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <footer>
+  <div class="inner">
+    <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
+    <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious" class="no-break">Annotorious Gitter Chat</a></p>
+    <p>Want to help improve documentation? <a href="https://github.com/recogito/project-website-source">Fork this website</a> and send us a pull request!</p>
+    <p class="github-link">
+      <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
+      <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
