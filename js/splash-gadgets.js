@@ -156,7 +156,7 @@ window.onload = async function() {
   var idx = 0; 
 
   while(true) {
-    var bounds = getRandomBounds(1920, Math.min(960, 1920 * aspectRatio), 40, 200, 20);
+    var bounds = getRandomBounds(1920, 960, 40, 200, 20);
     var data = Object.assign({ id: '#' + idx, text: 'Annotorious!' }, bounds);
 
     await createAnimatedAnnotation(data, anno);

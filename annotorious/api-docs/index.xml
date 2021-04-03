@@ -13,10 +13,10 @@
       <pubDate>Sun, 17 May 2020 14:15:19 +0200</pubDate>
       
       <guid>http://recogito.github.io/annotorious/api-docs/osd-plugin/</guid>
-      <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon zoomable image viewer. If you are looking for the standard version of Annotorious, see here instead.
- Initialization When icnluded via &amp;lt;script&amp;gt; tag:
+      <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon zoomable image viewer. If you are looking for the standard version of Annotorious, which works with normal images embedded in websites, see here instead.
+ Initialization When included via &amp;lt;script&amp;gt; tag:
 var anno = OpenSeadragon.Annotorious(viewer, config); With npm:
-import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorious from &amp;#39;@recogito/annotorious-openseadragon&amp;#39;; import &amp;#39;@recogito/annotorious-openseadragon/dist/annotorious.min.css&amp;#39;; const viewer = OpenSeadragon({ id: &amp;#34;openseadragon&amp;#34;, tileSources: { type: &amp;#34;image&amp;#34;, url: &amp;#34;1280px-Hallstatt.jpg&amp;#34; } }); const config = {}; // Optional plugin config options  Annotorious(viewer, config); The config object is optional, and supports following properties:</description>
+import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorious from &amp;#39;@recogito/annotorious-openseadragon&amp;#39;; import &amp;#39;@recogito/annotorious-openseadragon/dist/annotorious.min.css&amp;#39;; const viewer = OpenSeadragon({ id: &amp;#34;openseadragon&amp;#34;, tileSources: { type: &amp;#34;image&amp;#34;, url: &amp;#34;1280px-Hallstatt.</description>
     </item>
     
     <item>
