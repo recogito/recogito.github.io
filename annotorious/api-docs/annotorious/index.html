@@ -506,11 +506,27 @@ anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span styl
 </span><span style="color:#586e75"></span>});
 </code></pre></div><h2 id="events">Events</h2>
 <h3 id="cancelselected-1">cancelSelected</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;cancelSelected&#39;</span>, <span style="color:#268bd2">function</span>(target) {
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;cancelSelected&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when the user has canceled a selection, by hitting <strong>Cancel</strong> in the editor, or by
 clicking or tapping outside the selected annotation shape.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>selection</code></td>
+<td>Object</td>
+<td>the canceled selection in W3C WebAnnotation format</td>
+</tr>
+</tbody>
+</table>
 <h3 id="changeselectiontarget">changeSelectionTarget</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;changeSelectionTarget&#39;</span>, <span style="color:#268bd2">function</span>(target) {
   <span style="color:#586e75">// 
