@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Annotorious | Headless Mode</title>
+    <title>Annotorious | Configuring the Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
       
     <link rel="stylesheet" href="/css/style.min.57d305ffd967cc4df45de9ab7aea352dae12aa79ce41a82db49e9f1e420dac7c.css">
-    <meta name="description" content="A Guide to Annotorious Headless Mode.">
-<meta name="twitter:title" content="Using Headless Mode" />
+    <meta name="description" content="This guide explains how to change the configuration of the Annotorious/RecogitoJS editor popup.">
+<meta name="twitter:title" content="Configuring the Annotorious/RecogitoJS editor" />
 <meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta name="twitter:site" content="@aboutgeo" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:description" content="A Guide to Annotorious Headless Mode.">
-<meta property="og:title" content="Using Headless Mode" />
-<meta property="og:description" content="A Guide to Annotorious Headless Mode.">
-<meta property="og:url" content="https://recogito.github.io/guides/using-headless-mode" />
+<meta name="twitter:description" content="This guide explains how to change the configuration of the Annotorious/RecogitoJS editor popup.">
+<meta property="og:title" content="Configuring the Annotorious/RecogitoJS editor" />
+<meta property="og:description" content="This guide explains how to change the configuration of the Annotorious/RecogitoJS editor popup.">
+<meta property="og:url" content="https://recogito.github.io/guides/configuring-the-editor" />
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
 
@@ -66,8 +66,39 @@
 
     <div class="column">
       <div class="main-content">
-        <h1 id="headless-mode-using-annotorious-without-the-editor-popup">Headless Mode: Using Annotorious without the Editor Popup</h1>
-<p>Coming soon&hellip;</p>
+        <h1 id="customizing-the-editor">Customizing the Editor</h1>
+<p>Per default, the Annotorious editor popup features two widgets:</p>
+<ul>
+<li>A <strong>comment widget</strong> for writing comments and replies</li>
+<li>A <strong>tag widget</strong> for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown</li>
+</ul>
+<p><img src="/images/guides/editor-popup-with-vocab.png" alt="Editor popup"></p>
+<p>You can can customize this setup when you initialize Annotorious/RecogitoJS using the
+<code>widgets</code> config option. The configuration below will give you the editor shown in the
+image above.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
+  widgets<span style="color:#719e07">:</span> [
+    <span style="color:#2aa198">&#39;COMMENT&#39;</span>,
+    { widget<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;TAG&#39;</span>, vocabulary<span style="color:#719e07">:</span> [ <span style="color:#2aa198">&#39;Animal&#39;</span>, <span style="color:#2aa198">&#39;Building&#39;</span>, <span style="color:#2aa198">&#39;Waterbody&#39;</span>] }
+  ]
+});
+</code></pre></div><p>Alternatively, the configuration below will give you an editor with just a comment widget, but no tag widget.</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
+  widgets<span style="color:#719e07">:</span> [
+    <span style="color:#2aa198">&#39;COMMENT&#39;</span>
+  ]
+});
+</code></pre></div><p>Each item in the <code>widgets</code> array can be one of the following:</p>
+<ul>
+<li>The name of a <strong>built-in widget</strong> - currently either <code>COMMENT</code> or <code>TAG</code></li>
+<li>An editor <strong>plugin</strong></li>
+<li>An object with a <code>widget</code> property that has the widget name or plugin as value, and
+additional configuration arguments for the widget</li>
+</ul>
+<p>If you want to learn how to write your own extensions for the editor,
+<a href="/guides/editor-widgets/">start with this guide</a>.</p>
 
       </div>
 
@@ -81,7 +112,7 @@
                 
                   <li>
                     
-                      <a href="http://recogito.github.io/guides/configuring-the-editor/">Configuring the Editor</a>
+                      <a href="http://recogito.github.io/guides/configuring-the-editor/" class="active">Configuring the Editor</a>
                     
                   </li>
                 
@@ -93,7 +124,7 @@
                 
                   <li>
                     
-                      <a href="http://recogito.github.io/guides/headless-mode/" class="active">Headless Mode</a>
+                      <a href="http://recogito.github.io/guides/headless-mode/">Headless Mode</a>
                     
                   </li>
                 

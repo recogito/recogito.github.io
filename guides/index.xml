@@ -8,11 +8,11 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 01 May 2020 13:28:19 +0200</lastBuildDate><atom:link href="http://recogito.github.io/guides/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Customizing the Editor</title>
-      <link>http://recogito.github.io/guides/customizing-the-editor/</link>
+      <title>Configuring the Editor</title>
+      <link>http://recogito.github.io/guides/configuring-the-editor/</link>
       <pubDate>Thu, 24 Sep 2020 14:24:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/guides/customizing-the-editor/</guid>
+      <guid>http://recogito.github.io/guides/configuring-the-editor/</guid>
       <description>Customizing the Editor Per default, the Annotorious editor popup features two widgets:
  A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown  You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
 var anno = Annotorious.</description>
