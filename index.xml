@@ -111,7 +111,7 @@ Message Dictionaries User interface labels are part of recogito-client-core, a J
       
       <guid>http://recogito.github.io/guides/hackers-guide/</guid>
       <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
- recogito/recogito-client-core. A base module that contains most of the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&amp;rsquo;ll need this module if you want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</description>
+ recogito/annotorious. Annotorious application entry point, SVG rendering and drawing tool base classes. recogito/annotorious-openseadragon. The OpenSeadragon plugin. Imports most functionality from annotorious and recogito-client-core. recogito/recogito-client-core. A base module that contains shared code for Annotorious and RecogitoJS, most importantly the code for the editor popup.</description>
     </item>
     
     <item>
