@@ -67,13 +67,62 @@
     <div class="column">
       <div class="main-content">
         <h1 id="headless-mode-using-annotorious-without-the-editor-popup">Headless Mode: Using Annotorious without the Editor Popup</h1>
-<p>Want to use Annotorious for the drawing tools, but don&rsquo;t need the editor?
-That&rsquo;s what <strong>headless mode</strong> is there for! Headless mode gives you all the
-standard functionality for drawing  and editing shapes, the full Annotorious
-JavaScript API, and the lifecycle events - but with the freedom to build
-your own custom user interface.</p>
+<p>Need only the drawing tools? But not need the editor? That&rsquo;s what
+<strong>headless mode</strong> is there for!</p>
+<p>With headless mode, you keep all the standard functionality: drawing
+and editing shapes, JavaScript API, lifecycle events. But you can build
+your own user interface, without being forced to the standard
+Annotorious editor popup.</p>
+<p>Demo coming soon&hellip;</p>
+<h2 id="the-headless-api">The Headless API</h2>
+<p>To use Annotorious without the editor popup, the following API options are
+most important:</p>
+<ul>
+<li><code>disableEditor</code>, a config option and instance field to switch headless mode
+on and off</li>
+<li>the <code>createSelection</code> event, which fires when the user has created a new selection</li>
+<li><code>updateSelected</code>, an API method for modifying annotation bodies programmatically</li>
+<li><code>saveSelected</code>, an API method that provides a programmatic way to save an (updated)
+annotation</li>
+</ul>
+<h3 id="disableeditor">disableEditor</h3>
 <p>Coming soon&hellip;</p>
+<h3 id="createselection">createSelection</h3>
+<p>Coming soon&hellip;</p>
+<h3 id="updateselected-and-saveselected">updateSelected and saveSelected</h3>
+<p>updateSelected and saveSelected</p>
+<h2 id="code-example">Code Example</h2>
+<p>This minimal example:</p>
+<ul>
+<li>activates headles mode on init</li>
+<li>attaches a <code>createSelection</code> listener which inserts a (hard-coded) tag into new selections</li>
+<li>saves the annotation</li>
+</ul>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
+  locale<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;auto&#39;</span>,
 
+  <span style="color:#586e75">// Important: this switches Annotorious 
+</span><span style="color:#586e75"></span>  <span style="color:#586e75">// to headless mode!
+</span><span style="color:#586e75"></span>  disableEditor<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>
+});
+
+anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">async</span> <span style="color:#268bd2">function</span>(selection) {
+  <span style="color:#586e75">// When the user creates a selection, insert this tag
+</span><span style="color:#586e75"></span>  selection.body <span style="color:#719e07">=</span> [{
+    type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;TextualBody&#39;</span>,
+    purpose<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;tagging&#39;</span>,
+    value<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;MyTag&#39;</span>
+  }];
+
+  <span style="color:#586e75">// Remember that .updateSelected is an async function!
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">await</span> anno.updateSelected(selection);
+  anno.saveSelected();
+
+  <span style="color:#586e75">// Alternative:
+</span><span style="color:#586e75"></span>  <span style="color:#586e75">// anno.updateSelected(selection, true); // Saves immediately
+</span><span style="color:#586e75"></span>});
+</code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">
@@ -104,7 +153,7 @@ your own custom user interface.</p>
                 
                   <li>
                     
-                      <a href="http://recogito.github.io/guides/using-firebase-for-storage/">Using Firebase for Storage</a>
+                      <a href="http://recogito.github.io/guides/using-firebase-for-storage/">Firebase Storage Plugin</a>
                     
                   </li>
                 
