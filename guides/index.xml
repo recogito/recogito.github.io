@@ -41,6 +41,16 @@ Coming soon&amp;hellip;</description>
     </item>
     
     <item>
+      <title>Using Firebase for Storage</title>
+      <link>http://recogito.github.io/guides/using-firebase-for-storage/</link>
+      <pubDate>Fri, 01 May 2020 13:28:54 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/using-firebase-for-storage/</guid>
+      <description>Using Firebase for Storage A quick and easy way to set up your own annotation store without managing your own server is through Firebase, a web application development platform by Google. Firebase includes a cloud-based document database with a JavaScript SDK for storing, updating and deleting JSON records. All you need to do is wire up the Firebase storage SDK operations with the corresponding events from Annotorious.
+Firebase Storage Explained: Lifecycle Events &amp;amp; CRUD Operations The basic idea behind integrating Firebase is:</description>
+    </item>
+    
+    <item>
       <title>Writing Editor Widgets</title>
       <link>http://recogito.github.io/guides/editor-widgets/</link>
       <pubDate>Thu, 24 Sep 2020 14:24:22 +0200</pubDate>
@@ -62,10 +72,10 @@ Message Dictionaries User interface labels are part of recogito-client-core, a J
     
     <item>
       <title>Hacker&#39;s Guide</title>
-      <link>http://recogito.github.io/guides/development-setup/</link>
+      <link>http://recogito.github.io/guides/hackers-guide/</link>
       <pubDate>Thu, 04 Jun 2020 11:46:22 +0200</pubDate>
       
-      <guid>http://recogito.github.io/guides/development-setup/</guid>
+      <guid>http://recogito.github.io/guides/hackers-guide/</guid>
       <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
  recogito/recogito-client-core. A base module that contains most of the code for RecogitoJS, and all code that is shared between RecogitoJS and Annotorious. You&amp;rsquo;ll need this module if you want to hack anything about RecogitoJS (text selection, relationship drawing) or the common editor popup.</description>
     </item>

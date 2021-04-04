@@ -28,13 +28,18 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/guides/editor-widgets/</loc>
-    <lastmod>2020-09-24T14:24:22+02:00</lastmod>
+    <loc>http://recogito.github.io/annotorious/getting-started/storing-annotations/</loc>
+    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://recogito.github.io/annotorious/getting-started/storing-annotations/</loc>
-    <lastmod>2020-06-01T10:20:00+02:00</lastmod>
+    <loc>http://recogito.github.io/guides/using-firebase-for-storage/</loc>
+    <lastmod>2020-05-01T13:28:54+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://recogito.github.io/guides/editor-widgets/</loc>
+    <lastmod>2020-09-24T14:24:22+02:00</lastmod>
   </url>
   
   <url>
@@ -43,7 +48,7 @@
   </url>
   
   <url>
-    <loc>http://recogito.github.io/guides/development-setup/</loc>
+    <loc>http://recogito.github.io/guides/hackers-guide/</loc>
     <lastmod>2020-06-04T11:46:22+02:00</lastmod>
   </url>
   
