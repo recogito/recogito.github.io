@@ -62,6 +62,17 @@ Firebase Storage Explained: Lifecycle Events &amp;amp; CRUD Operations The basic
     </item>
     
     <item>
+      <title>React Editor Widget</title>
+      <link>http://recogito.github.io/guides/example-react-widget/</link>
+      <pubDate>Sat, 20 Feb 2021 10:28:42 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/example-react-widget/</guid>
+      <description>An Example React Editor Widget In this guide, we re-recreate the example color selector widget as a React component.
+ WORK IN PROGRESS This tutorial does not yet work in the current release version, but will be supported with the next Annotorious release.
+ The widget adds a section to the editor with three buttons (red, green, blue). Clicking a button sets an annotation body with purpose highlighting. JSX code for the plugin is below.</description>
+    </item>
+    
+    <item>
       <title>Contributing Translations</title>
       <link>http://recogito.github.io/guides/contributing-ui-translations/</link>
       <pubDate>Mon, 01 Jun 2020 20:04:18 +0200</pubDate>
