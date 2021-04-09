@@ -71,15 +71,25 @@
     <div class="column">
       <div class="main-content">
         <h1 id="an-example-react-editor-widget">An Example React Editor Widget</h1>
-<p>In this guide, we re-recreate the <a href="/guides/editor-widgets/">example color selector widget</a> as a React component.</p>
 <blockquote>
-<p><strong>WORK IN PROGRESS</strong> This tutorial does <strong>not yet work</strong> in the current release version,
-but will be supported with the next Annotorious release.</p>
+<p><strong>WORK IN PROGRESS!</strong> The code in this tutorial will <strong>not yet work</strong> in the current release
+versions, but will be supported with the next upcoming Annotorious release.</p>
 </blockquote>
+<p>In this guide, we re-recreate the example <a href="/guides/editor-widgets/">color selector widget from the previous tutorial</a>
+as a React component. The widget adds a section to the editor with three buttons: red, green and blue.
+Clicking one of the buttons will set an annotation body with the color value, and body purpose of <code>highlighting</code>.</p>
 <p><img src="/images/guides/colorselector-widget.png" alt="Editor popup"></p>
-<p>The widget adds a section to the editor with three buttons (red, green, blue). Clicking a button sets an annotation
-body with purpose <code>highlighting</code>. JSX code for the plugin is below. A full project (including a webpack build
-configuration) is <a href="https://github.com/recogito/recogito-client-plugins/tree/main/packages/widget-react-helloworld">available on GitHub</a>.</p>
+<p>JSX code for the plugin is below. A full project (including a webpack build configuration)
+is <a href="https://github.com/recogito/recogito-client-plugins/tree/main/packages/widget-react-helloworld">available on GitHub</a>.
+Here&rsquo;s what the code does, step by step:</p>
+<ol>
+<li>To get the annotation&rsquo;s current color value, we grab the first body with <code>purpose: 'highlighting'</code>.</li>
+<li>The <code>setHighlightBody</code> function is called when the user selects a color. It uses <code>props.onUpsertBody</code>:
+this callback either replaces the the annotation&rsquo;s current <code>highlighting</code> body (=update), or adds a
+new <code>highlighting</code> body, in case the annotation doesn&rsquo;t have one already (=insert).</li>
+<li>The remainder of the code renders the user interface elements: 3 identical buttons
+in different colors. Clicking a button triggers <code>setHighlightBody</code>.</li>
+</ol>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#268bd2">import</span> React from <span style="color:#2aa198">&#39;preact/compat&#39;</span>;
 
 <span style="color:#268bd2">const</span> HelloWorldWidget <span style="color:#719e07">=</span> props =&gt; {
@@ -119,63 +129,36 @@ configuration) is <a href="https://github.com/recogito/recogito-client-plugins/t
 }
 
 <span style="color:#268bd2">export</span> <span style="color:#719e07">default</span> HelloWorldWidget;
-</code></pre></div><p>Here&rsquo;s what the code does, explained step by step:</p>
-<ol>
-<li>We grab the first body with <code>purpose: 'highlighting'</code> from the annotation.</li>
-<li>The <code>setHighlightBody</code> function is called whenever the user makes a selection in the widget.
-It uses the <code>props.onUpsertBody</code> function to add or replace the current <code>highlighting</code>
-body with the currently selected value.</li>
-<li>The remainder of the code renders the user interface elements: 3 identical buttons
-in different colors. Clicking a button triggers <code>setHighlightBody</code>.</li>
-</ol>
-<h2 id="using-the-plugin">Using the Plugin</h2>
-<p>Include the plugin in your page, and add it to the <code>widgets</code> list in the initialization
-config object.</p>
+</code></pre></div><h2 id="using-the-plugin">Using the Plugin</h2>
+<p>When you include the plugin with a <code>&lt;script&gt;</code> tag, it will make itself available
+through a global <code>recogito.HelloWorldWidget</code> variable. Add it to the <code>widgets</code> list
+in the config object when you initialize Annotorious.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
 &lt;<span style="color:#268bd2">html</span>&gt;
   &lt;<span style="color:#268bd2">head</span>&gt;
+    <span style="color:#586e75">&lt;!-- Loading Annotorious first --&gt;</span>
     &lt;<span style="color:#268bd2">link</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.css&#34;</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span>&gt;
     &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 
-    <span style="color:#586e75">&lt;!-- Loading the script creates a global &#39;recogito.HelloWorldWidget&#39; var --&gt;</span>
+    <span style="color:#586e75">&lt;!-- Loading plugin script next --&gt;</span>
     &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;recogito-helloworld-widget.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
-    &lt;<span style="color:#268bd2">style</span>&gt;
-      .<span style="color:#268bd2">helloworld-widget</span> {
-        <span style="color:#719e07">padding</span>:<span style="color:#2aa198">5</span><span style="color:#dc322f">px</span>;
-        <span style="color:#719e07">border-bottom</span>:<span style="color:#2aa198">1</span><span style="color:#dc322f">px</span> <span style="color:#cb4b16">solid</span> <span style="color:#2aa198">#e5e5e5</span>;
-      }
-
-      .<span style="color:#268bd2">helloworld-widget</span> <span style="color:#268bd2">button</span> {
-        <span style="color:#719e07">outline</span>:<span style="color:#cb4b16">none</span>;
-        <span style="color:#719e07">border</span>:<span style="color:#cb4b16">none</span>;
-        <span style="color:#719e07">display</span>:<span style="color:#cb4b16">inline</span><span style="color:#719e07">-</span><span style="color:#cb4b16">block</span>;
-        <span style="color:#719e07">width</span>:<span style="color:#2aa198">20</span><span style="color:#dc322f">px</span>;
-        <span style="color:#719e07">height</span>:<span style="color:#2aa198">20</span><span style="color:#dc322f">px</span>;
-        <span style="color:#719e07">border-radius</span>:<span style="color:#2aa198">50</span><span style="color:#dc322f">%</span>;
-        <span style="color:#719e07">cursor</span>:<span style="color:#cb4b16">pointer</span>;
-        <span style="color:#719e07">opacity</span>:<span style="color:#2aa198">0.5</span>;
-        <span style="color:#719e07">margin</span>:<span style="color:#2aa198">4</span><span style="color:#dc322f">px</span>;
-      }
-
-      .<span style="color:#268bd2">helloworld-widget</span> <span style="color:#268bd2">button</span>.<span style="color:#268bd2">selected</span><span style="color:#719e07">,</span>
-      .<span style="color:#268bd2">helloworld-widget</span> <span style="color:#268bd2">button</span>:<span style="color:#268bd2">hover</span> {
-        <span style="color:#719e07">opacity</span>:<span style="color:#2aa198">1</span>;
-      }
-    &lt;/<span style="color:#268bd2">style</span>&gt;
   &lt;/<span style="color:#268bd2">head</span>&gt;
   &lt;<span style="color:#268bd2">body</span>&gt;
     &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;hallstatt&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;640px-Hallstatt.jpg&#34;</span> /&gt;
 
     &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span>&gt;
       (<span style="color:#268bd2">function</span>() {
-        <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+
+        <span style="color:#586e75">// Add the plugin to the widgets on init
+</span><span style="color:#586e75"></span>        <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
           image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
           widgets<span style="color:#719e07">:</span> [ 
-            recogito.HelloWorldWidget, <span style="color:#586e75">// Add the plugin here
-</span><span style="color:#586e75"></span>            <span style="color:#2aa198">&#39;COMMENT&#39;</span>,
+            recogito.HelloWorldWidget,
+            <span style="color:#2aa198">&#39;COMMENT&#39;</span>,
             <span style="color:#2aa198">&#39;TAG&#39;</span>
           ]
         });
+        
       })();
     &lt;/<span style="color:#268bd2">script</span>&gt;
   &lt;/<span style="color:#268bd2">body</span>&gt;
