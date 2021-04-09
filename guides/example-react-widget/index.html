@@ -109,19 +109,14 @@ in different colors. Clicking a button triggers <code>setHighlightBody</code>.</
   <span style="color:#719e07">return</span> (
     &lt;<span style="color:#268bd2">div</span> className<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;helloworld-widget&#34;</span>&gt;
       { [ <span style="color:#2aa198">&#39;red&#39;</span>, <span style="color:#2aa198">&#39;green&#39;</span>, <span style="color:#2aa198">&#39;blue&#39;</span> ].map(color =&gt; 
-
         &lt;<span style="color:#268bd2">button</span> 
           key<span style="color:#719e07">=</span>{color}
-    
           // Set class to &#39;selected&#39; if this button value equals current highlight
           className<span style="color:#719e07">=</span>{currentHighlight<span style="color:#719e07">?</span>.value <span style="color:#719e07">===</span> color <span style="color:#719e07">?</span> <span style="color:#2aa198">&#39;selected&#39;</span> <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>}
-
           // Set color value as CSS background
           style<span style="color:#719e07">=</span>{{ backgroundColor<span style="color:#719e07">:</span> color }}
-
           // On click add (or replace) the current highlight body
           onClick<span style="color:#719e07">=</span>{setHighlightBody(color)} /&gt;
-
     )}
     &lt;/<span style="color:#268bd2">div</span>&gt;
   )
