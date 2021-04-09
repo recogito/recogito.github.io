@@ -93,7 +93,6 @@ in different colors. Clicking a button triggers <code>setHighlightBody</code>.</
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#268bd2">import</span> React from <span style="color:#2aa198">&#39;preact/compat&#39;</span>;
 
 <span style="color:#268bd2">const</span> HelloWorldWidget <span style="color:#719e07">=</span> props =&gt; {
-
   <span style="color:#586e75">// We&#39;ll be using &#39;highlighting&#39; as body purpose for 
 </span><span style="color:#586e75"></span>  <span style="color:#586e75">// this type of widget
 </span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> currentHighlight <span style="color:#719e07">=</span> props.annotation <span style="color:#719e07">?</span> 
@@ -115,7 +114,7 @@ in different colors. Clicking a button triggers <code>setHighlightBody</code>.</
           style<span style="color:#719e07">=</span>{{ backgroundColor<span style="color:#719e07">:</span> color }}
           // On click add (or replace) the current highlight body
           onClick<span style="color:#719e07">=</span>{setHighlightBody(color)} /&gt;
-    )}
+      )}
     &lt;/<span style="color:#268bd2">div</span>&gt;
   )
 
