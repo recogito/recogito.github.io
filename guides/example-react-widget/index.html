@@ -102,27 +102,27 @@ in different colors. Clicking a button triggers <code>setHighlightBody</code>.</
     annotation.bodies.find(b =&gt; b.purpose <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;highlighting&#39;</span>) <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>;
 
   <span style="color:#586e75">// This function handles body updates as the user presses buttons
-</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> setHighlightBody <span style="color:#719e07">=</span> value =&gt; evt =&gt; {
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> setHighlightBody <span style="color:#719e07">=</span> value =&gt; () =&gt; {
     props.onUpsertBody(currentHighlight, { value, purpose<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;highlighting&#39;</span> });
   }
 
-  <span style="color:#586e75">// Just a helper to create the color buttons
-</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> createButton <span style="color:#719e07">=</span> value =&gt;
-    &lt;<span style="color:#268bd2">button</span> 
-      // Set class to &#39;selected&#39; if this button value equals current highlight
-      className<span style="color:#719e07">=</span>{currentHighlight<span style="color:#719e07">?</span>.value <span style="color:#719e07">===</span> value <span style="color:#719e07">?</span> <span style="color:#2aa198">&#39;selected&#39;</span> <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>}
-
-      // Set color value as CSS background
-      style<span style="color:#719e07">=</span>{{ backgroundColor<span style="color:#719e07">:</span> value }}
-
-      // On click add (or replace) the current highlight body
-      onClick<span style="color:#719e07">=</span>{setHighlightBody(value)}&gt;&lt;/<span style="color:#268bd2">button</span>&gt;
-
   <span style="color:#719e07">return</span> (
     &lt;<span style="color:#268bd2">div</span> className<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;helloworld-widget&#34;</span>&gt;
-      { createButton(<span style="color:#2aa198">&#39;red&#39;</span>) }
-      { createButton(<span style="color:#2aa198">&#39;green&#39;</span>) }
-      { createButton(<span style="color:#2aa198">&#39;blue&#39;</span>) }
+      { [ <span style="color:#2aa198">&#39;red&#39;</span>, <span style="color:#2aa198">&#39;green&#39;</span>, <span style="color:#2aa198">&#39;blue&#39;</span> ].map(color =&gt; 
+
+        &lt;<span style="color:#268bd2">button</span> 
+          key<span style="color:#719e07">=</span>{color}
+    
+          // Set class to &#39;selected&#39; if this button value equals current highlight
+          className<span style="color:#719e07">=</span>{currentHighlight<span style="color:#719e07">?</span>.value <span style="color:#719e07">===</span> color <span style="color:#719e07">?</span> <span style="color:#2aa198">&#39;selected&#39;</span> <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>}
+
+          // Set color value as CSS background
+          style<span style="color:#719e07">=</span>{{ backgroundColor<span style="color:#719e07">:</span> color }}
+
+          // On click add (or replace) the current highlight body
+          onClick<span style="color:#719e07">=</span>{setHighlightBody(color)} /&gt;
+
+    )}
     &lt;/<span style="color:#268bd2">div</span>&gt;
   )
 
