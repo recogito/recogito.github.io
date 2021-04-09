@@ -136,11 +136,11 @@ in the config object when you initialize Annotorious.</p>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
 &lt;<span style="color:#268bd2">html</span>&gt;
   &lt;<span style="color:#268bd2">head</span>&gt;
-    <span style="color:#586e75">&lt;!-- Loading Annotorious first --&gt;</span>
+    <span style="color:#586e75">&lt;!-- Load Annotorious first --&gt;</span>
     &lt;<span style="color:#268bd2">link</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.css&#34;</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span>&gt;
     &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 
-    <span style="color:#586e75">&lt;!-- Loading plugin script next --&gt;</span>
+    <span style="color:#586e75">&lt;!-- Load plugin script next --&gt;</span>
     &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;recogito-helloworld-widget.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
   &lt;/<span style="color:#268bd2">head</span>&gt;
   &lt;<span style="color:#268bd2">body</span>&gt;
@@ -149,7 +149,7 @@ in the config object when you initialize Annotorious.</p>
     &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span>&gt;
       (<span style="color:#268bd2">function</span>() {
 
-        <span style="color:#586e75">// Add the plugin to the widgets on init
+        <span style="color:#586e75">// Add plugin to the widgets on init
 </span><span style="color:#586e75"></span>        <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
           image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
           widgets<span style="color:#719e07">:</span> [ 
