@@ -14,7 +14,7 @@
       
       <guid>http://recogito.github.io/annotorious/getting-started/osd-plugin/</guid>
       <description>Getting Started with the OpenSeadragon Plugin The Annotorious OpenSeadragon plugin is an extension to the OpenSeadragon viewer for zoomable high-resolution images. Click or tap the annotation to edit. Hold the SHIFT key while clicking and dragging the mouse to create a new annotation.
- .openseadragon-canvas { outline:none; background-color:#f4f4f4 !important; border-radius:3px; }       var sampleAnnotation = { &#34;@context&#34;: &#34;http://www.w3.org/ns/anno.jsonld&#34;, &#34;id&#34;: &#34;#07475897-d2eb-4dce-aa12-ecb50771c734&#34;, &#34;type&#34;: &#34;Annotation&#34;, &#34;body&#34;: [{ &#34;type&#34;: &#34;</description>
+ #toolbar { margin-bottom:10px; } .openseadragon-canvas { outline:none; background-color:#f4f4f4 !important; border-radius:3px; }         var sampleAnnotation = { &#34;@context&#34;: &#34;http://www.w3.org/ns/anno.jsonld&#34;, &#34;id&#34;: &#34;</description>
     </item>
     
     <item>

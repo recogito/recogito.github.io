@@ -76,17 +76,23 @@ viewer for zoomable high-resolution images. <strong>Click or tap</strong> the an
 clicking and dragging the mouse to create a new annotation.</p>
 <div class="inline-demo">
   <style>
+    #toolbar {
+      margin-bottom:10px;
+    }
+    
     .openseadragon-canvas {
       outline:none; 
       background-color:#f4f4f4 !important;
       border-radius:3px;
     }
   </style>
+  <div id="toolbar"></div>
   <div id="openseadragon" style="width: 640px; height: 400px;"></div>
 </div>
 <script type="text/javascript" src="/js/openseadragon/openseadragon.2.4.2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@latest/dist/annotorious.min.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@latest/dist/openseadragon-annotorious.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious-toolbar@0.0.2/dist/annotorious-toolbar.min.js"></script>
 <script>
   var sampleAnnotation = { 
     "@context": "http://www.w3.org/ns/anno.jsonld",
@@ -121,6 +127,8 @@ clicking and dragging the mouse to create a new annotation.</p>
     var anno = OpenSeadragon.Annotorious(viewer, {
       locale: 'auto'
     });
+
+    Annotorious.Toolbar(anno, document.getElementById('toolbar'));
 
     anno.addAnnotation(sampleAnnotation);
   }
