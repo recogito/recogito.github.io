@@ -75,6 +75,7 @@ and tags.</p>
 <p>Try it on the image below: <strong>click</strong> or <strong>tap</strong> the annotation to edit, <strong>click or tap anywhere
 and drag</strong> to create a new annotation.</p>
 <div class="inline-demo">
+  <div id="toolbar"></div>
   <img id="hallstatt" src="/images/640px-Hallstatt.jpg">
   <p class="image-caption">
     Sample image source: <a href="http://commons.wikimedia.org/wiki/File:Hallstatt_300.jpg">Hallstatt,
@@ -82,7 +83,8 @@ and drag</strong> to create a new annotation.</p>
   </p>
 </div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.3.3/dist/annotorious.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious-toolbar@0.0.2/dist/annotorious-toolbar.min.js"></script>
 <style>
   @media only screen and (max-width: 800px) {
 
@@ -124,6 +126,8 @@ and drag</strong> to create a new annotation.</p>
       locale: 'auto',
       allowEmpty: true
     });
+
+    Annotorious.Toolbar(anno, document.getElementById('toolbar'));
 
     anno.addAnnotation(sampleAnnotation);
   }
