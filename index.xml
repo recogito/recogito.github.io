@@ -130,6 +130,7 @@ Message Dictionaries User interface labels are part of recogito-client-core, a J
       
       <guid>http://recogito.github.io/annotorious/plugins/</guid>
       <description>Plugins Plugins extend the functionality of Annotorious. The following plugins are currently available:
+Annotorious Toolbar A simple toolbar to switch between drawing tools.
 Firebase Storage A storage plugin that uses Google Firebase as a cloud annotation store.
 Tensorflow Tag Suggestions A plugin that uses TensorflowJS to provide AI-powered automatic tag suggestions. Tag image regions manually first. After learning from at least two examples, the plugin provides tag suggestions automatically.
 Tilted Box Drawing Tool A plugin that adds a new drawing tool to Annotorious and Annotorious OpenSeadragon: the Tilted Box.</description>
