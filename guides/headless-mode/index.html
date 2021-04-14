@@ -72,11 +72,161 @@
       <div class="main-content">
         <h1 id="headless-mode-using-annotorious-without-the-editor-popup">Headless Mode: Using Annotorious without the Editor Popup</h1>
 <p>Want to use Annotorious only for the drawing tools? But don&rsquo;t need
-the editor? That&rsquo;s what <strong>headless mode</strong> is for!</p>
-<p>With headless mode, you keep all the standard functionality: drawing
-and editing shapes, JavaScript API, lifecycle events. But you are free to
-build your own user interface, without being forced to the standard
-editor popup.</p>
+the editor? That&rsquo;s what <strong>headless mode</strong> is for!  ith headless mode, you keep
+all the standard functionality: drawing and editing shapes, JavaScript API,
+lifecycle events. But you are free to build your own user interface, without being
+forced to the standardeditor popup.</p>
+<p>The demo uses headless mode to create annotations with either an <strong>Orange</strong>
+or <strong>Green</strong> tag, and a <a href="http://localhost:1313/annotorious/api-docs/annotorious/#formatters">formatter</a>
+to color the shapes. (To delete an annotation, select it and press the <strong>Delete</strong> key.)</p>
+<div class="inline-demo">
+  <style>
+    #toolbar, .a9s-toolbar, .tag-selector, .tag-selector ul, .tag-selector li {
+      display:inline;
+    }
+
+    .toolbar-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .toolbar-wrapper ul {
+      padding:0;
+      margin:0;
+    }
+
+    .toolbar-wrapper .tag-selector button {
+      outline:none;
+      border:none;
+      height:45px;
+      vertical-align:middle;
+      margin-right:8px;
+      padding:0 14px;
+      border-radius:4px;
+      cursor:pointer;
+      background-color:transparent;
+      font-weight:bold;
+      color:#838282;
+    }
+
+    .toolbar-wrapper .tag-selector .green.active button {
+      color:#fff;
+      background-color:#00ab00;
+    }
+
+    .toolbar-wrapper .tag-selector .orange.active button {
+      color:#fff;
+      background-color:orange;
+    }
+
+    .a9s-annotationlayer .a9s-annotation .a9s-outer, 
+    .a9s-annotationlayer .a9s-selection .a9s-outer {
+      stroke-width:6px;
+      stroke:#000;  
+    }
+
+    .a9s-annotationlayer .a9s-annotation .a9s-inner,
+    .a9s-annotationlayer .a9s-selection .a9s-inner {
+      stroke-width:4px;
+      stroke:#fff !important;  
+    }
+
+    .a9s-annotationlayer .a9s-annotation.GREEN .a9s-inner {
+      stroke:#00ab00 !important;
+    }
+
+    .a9s-annotationlayer .a9s-annotation.GREEN.editable.selected .a9s-inner,
+    .a9s-annotationlayer .a9s-annotation.GREEN:hover .a9s-inner  {
+      stroke:#00e000 !important;
+    }
+
+    .a9s-annotationlayer .a9s-annotation.ORANGE .a9s-inner {
+      stroke:rgb(204, 133, 1) !important;
+    }
+
+    .a9s-annotationlayer .a9s-annotation.ORANGE.editable.selected .a9s-inner,
+    .a9s-annotationlayer .a9s-annotation.ORANGE:hover .a9s-inner  {
+      stroke:orange !important;
+    }
+
+    .a9s-annotationlayer circle.a9s-handle-inner {
+      display:none;
+    }
+
+    .a9s-annotationlayer .a9s-annotation.editable .a9s-inner:hover {
+      fill:transparent;
+    }
+  </style>
+  <div class="toolbar-wrapper">
+    <div id="toolbar"></div>
+    <ul class="tag-selector">
+      <li id="btn-orange" class="orange"><button>Orange</button></li>
+      <li id="btn-green" class="green active"><button>Green</button></li>
+    </ul>
+  </div>
+  <img id="hallstatt" src="/images/640px-Hallstatt.jpg">
+  <p class="image-caption">
+    Sample image source: <a href="http://commons.wikimedia.org/wiki/File:Hallstatt_300.jpg">Hallstatt,
+    Austria</a>, by Nick Csakany/Wikimedia Commons. Public Domain.
+  </p>
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious@latest/dist/annotorious.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@recogito/annotorious-toolbar@latest/dist/annotorious-toolbar.min.js"></script>
+<script>
+  window.onload = function() {
+    var btnOrange = document.getElementById('btn-orange'),
+        btnGreen = document.getElementById('btn-green');
+
+    var active = 'GREEN';
+
+    btnOrange.addEventListener('click', function() {
+      active = 'ORANGE';
+      btnOrange.className = 'orange active';
+      btnGreen.className = 'green';
+    });
+
+    var formatter = function(annotation) {
+      var highlightBody = annotation.bodies.find(function(b) {
+        return b.purpose == 'highlighting';
+      });
+
+      if (highlightBody)
+        return highlightBody.value;
+    };
+
+    btnGreen.addEventListener('click', function() {
+      active = 'GREEN';
+      btnOrange.className = 'orange';
+      btnGreen.className = 'green active';
+    });
+
+    var anno = Annotorious.init({
+      image: 'hallstatt',
+      allowEmpty: true,
+      disableEditor: true,
+      formatter: formatter
+    });
+
+    anno.on('createSelection', function(selection) {
+      selection.body = {
+        value: active,
+        purpose: 'highlighting'
+      };
+
+      anno.updateSelected(selection, true);
+    });
+
+    document.body.addEventListener('keyup', function(evt) {
+      if (evt.which === 46) { 
+        var selected = anno.getSelected();
+        anno.removeAnnotation(selected); 
+      }
+    });
+
+    Annotorious.Toolbar(anno, document.getElementById('toolbar'));
+  }
+</script>
 <h2 id="the-headless-api">The Headless API</h2>
 <p>To use Annotorious without the editor popup, the following API options are
 important:</p>
@@ -104,11 +254,11 @@ or not (headless mode). You can disable the editor when you initialize Annotorio
 an existing annotation. In headless mode, you want your code to handle these events.</p>
 <p>You can do this by attaching handler functions for the <code>createSelection</code> and <code>selectAnnotation</code>
 events.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">async</span> <span style="color:#268bd2">function</span>(selection) {
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
   <span style="color:#586e75">// The user has created a new shape...
 </span><span style="color:#586e75"></span>});
 
-anno.on(<span style="color:#2aa198">&#39;selectAnnotation&#39;</span>, <span style="color:#268bd2">async</span> <span style="color:#268bd2">function</span>(annotation) {
+anno.on(<span style="color:#2aa198">&#39;selectAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// The users has selected an existing annotation
 </span><span style="color:#586e75"></span>});
 </code></pre></div><h3 id="updateselected-and-saveselected">updateSelected and saveSelected</h3>
