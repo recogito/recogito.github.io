@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Annotorious in React</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.9811921f875d576a8939eebde579d907519d64681c69b2635fe79a3d0f47af88.css">
+    <meta name="description" content="A how-to that explains how you can use Annotorious in a React application.">
+<meta name="twitter:title" content="Annotorious in React" />
+<meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta name="twitter:site" content="@aboutgeo" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="A how-to that explains how you can use Annotorious in a React application.">
+<meta property="og:title" content="Annotorious in React" />
+<meta property="og:description" content="A how-to that explains how you can use Annotorious in a React application.">
+<meta property="og:url" content="https://recogito.github.io/guides/annotorious-in-react" />
+<meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta property="og:type" content="object" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.2.1/dist/annotorious.min.css"></script>
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar">
+  <script>
+    var openResponsiveMenu = function() {
+      var el = document.getElementById('navbar');
+      if (el.className === 'navbar') {
+        el.className = 'navbar responsive';
+      } else {
+        el.className = 'navbar';
+      }
+    };
+  </script>
+  <header>
+    <div class="mobile-only">
+      <button class="hamburger-icon" id="open-responsive-menu" onclick="openResponsiveMenu()">
+        <img src="/images/menu-24px.svg">
+      </button>      
+    </div>
+    <ul>
+      <li>
+        <a href="/annotorious/">Home</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/getting-started">Getting Started</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/api-docs">API Docs</a>
+      </li>
+      
+      <li class='current'>
+        <a href="/guides">Guides</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/plugins">Plugins</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/about">About</a>
+      </li>
+      
+      <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="main-content">
+        <h1 id="using-annotorious-in-react">Using Annotorious in React</h1>
+<p>At the moment, Annotorious doesn&rsquo;t have native React integration (yet). If you want to use
+Annotorious in your own React project, there are a few things to consider:</p>
+<ul>
+<li><strong>Annotorious modifies the DOM directly:</strong> you need to use <a href="https://reactjs.org/docs/refs-and-the-dom.html">refs</a>
+to access image DOM elements.</li>
+<li><strong>Annotorious has an imperative API:</strong> wrapping it for React requires a few workarounds, including initialization
+in a <code>useEffect</code> hook, and storing the <code>anno</code> object in the component state.</li>
+</ul>
+<p>Below is a minimal React component to get you started:</p>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#268bd2">import</span> { useEffect, useRef, useState } from <span style="color:#2aa198">&#39;react&#39;</span>;
+<span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
+
+<span style="color:#268bd2">import</span> <span style="color:#2aa198">&#39;@recogito/annotorious/dist/annotorious.min.css&#39;</span>;
+
+<span style="color:#268bd2">function</span> App() {
+
+  <span style="color:#586e75">// Ref to the image DOM element
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> imgEl <span style="color:#719e07">=</span> useRef();
+
+  <span style="color:#586e75">// The current Annotorious instance
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> [ anno, setAnno ] <span style="color:#719e07">=</span> useState();
+
+  <span style="color:#586e75">// Current drawing tool name
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> [ tool, setTool ] <span style="color:#719e07">=</span> useState(<span style="color:#2aa198">&#39;rect&#39;</span>);
+
+  <span style="color:#586e75">// Init Annotorious when the component
+</span><span style="color:#586e75"></span>  <span style="color:#586e75">// mounts, and keep the current &#39;anno&#39;
+</span><span style="color:#586e75"></span>  <span style="color:#586e75">// instance in the application state
+</span><span style="color:#586e75"></span>  useEffect(() =&gt; {
+    <span style="color:#268bd2">let</span> annotorious <span style="color:#719e07">=</span> <span style="color:#cb4b16">null</span>;
+
+    <span style="color:#719e07">if</span> (imgEl.current) {
+      <span style="color:#586e75">// Init
+</span><span style="color:#586e75"></span>      annotorious <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
+        image<span style="color:#719e07">:</span> imgEl.current
+      });
+
+      <span style="color:#586e75">// Attach event handlers here
+</span><span style="color:#586e75"></span>      annotorious.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, annotation =&gt; {
+        console.log(<span style="color:#2aa198">&#39;created&#39;</span>, annotation);
+      });
+
+      annotorious.on(<span style="color:#2aa198">&#39;updateAnnotation&#39;</span>, (annotation, previous) =&gt; {
+        console.log(<span style="color:#2aa198">&#39;updated&#39;</span>, annotation, previous);
+      });
+
+      annotorious.on(<span style="color:#2aa198">&#39;deleteAnnotation&#39;</span>, annotation =&gt; {
+        console.log(<span style="color:#2aa198">&#39;deleted&#39;</span>, annotation);
+      });
+    }
+
+    <span style="color:#586e75">// Keep current Annotorious instance in state
+</span><span style="color:#586e75"></span>    setAnno(annotorious);
+
+    <span style="color:#586e75">// Cleanup: destroy current instance
+</span><span style="color:#586e75"></span>    <span style="color:#719e07">return</span> () =&gt; annotorious.destroy();
+  }, []);
+
+  <span style="color:#586e75">// Toggles current tool + button label
+</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> toggleTool <span style="color:#719e07">=</span> () =&gt; {
+    <span style="color:#719e07">if</span> (tool <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;rect&#39;</span>) {
+      setTool(<span style="color:#2aa198">&#39;polygon&#39;</span>);
+      anno.setDrawingTool(<span style="color:#2aa198">&#39;polygon&#39;</span>);
+    } <span style="color:#719e07">else</span> {
+      setTool(<span style="color:#2aa198">&#39;rect&#39;</span>);
+      anno.setDrawingTool(<span style="color:#2aa198">&#39;rect&#39;</span>);
+    }
+  }
+
+  <span style="color:#719e07">return</span> (
+    &lt;<span style="color:#268bd2">div</span>&gt;
+      &lt;<span style="color:#268bd2">div</span>&gt;
+        &lt;<span style="color:#268bd2">button</span>
+          onClick<span style="color:#719e07">=</span>{toggleTool}&gt;
+            { tool <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;rect&#39;</span> <span style="color:#719e07">?</span> <span style="color:#2aa198">&#39;RECTANGLE&#39;</span> <span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;POLYGON&#39;</span> }
+        &lt;/<span style="color:#268bd2">button</span>&gt;
+      &lt;/<span style="color:#268bd2">div</span>&gt;
+
+      &lt;<span style="color:#268bd2">img</span> 
+        ref<span style="color:#719e07">=</span>{imgEl} 
+        src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;640px-Hallstatt.jpg&#34;</span> 
+        alt<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;Hallstatt Town Square&#34;</span> /&gt;
+    &lt;/<span style="color:#268bd2">div</span>&gt;
+  );
+}
+
+<span style="color:#268bd2">export</span> <span style="color:#719e07">default</span> App;
+</code></pre></div>
+      </div>
+
+      <div class="table-of-contents subsections">
+        <nav>
+          <ul>
+            <li><a href="http://recogito.github.io/guides/">Guides</a></li>
+            <li>
+              <ul>
+                
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/configuring-the-editor/">Configuring the Editor</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/customizing-styles/">Customizing Styles</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/headless-mode/">Headless Mode</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/annotorious-in-react/" class="active">Annotorious in React</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/using-firebase-for-storage/">Firebase Storage Plugin</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/editor-widgets/">Writing Editor Widgets</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/example-react-widget/">React Editor Widget</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/contributing-ui-translations/">Contributing Translations</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/hackers-guide/">Hacker&#39;s Guide</a>
+                    
+                  </li>
+                
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <footer>
+  <div class="inner">
+    <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
+    <p>Need help? Contact us via the <a href="https://gitter.im/recogito/annotorious" class="no-break">Annotorious Gitter Chat</a></p>
+    <p>Want to help improve documentation? <a href="https://github.com/recogito/project-website-source">Fork this website</a> and send us a pull request!</p>
+    <p class="social-links">
+      <span class="no-break">
+        <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
+        <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
+        &nbsp;
+      </span>
+
+      <span class="no-break">
+        <a href="https://twitter.com/aboutgeo"><img src="/images/twitter-logo.svg"></a>
+        <a href="https://twitter.com/aboutgeo">twitter.com/aboutgeo</a> 
+      </span>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

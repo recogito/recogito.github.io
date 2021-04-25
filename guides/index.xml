@@ -41,6 +41,16 @@ The demo uses headless mode to create annotations with either an Orange or Green
     </item>
     
     <item>
+      <title>Annotorious in React</title>
+      <link>http://recogito.github.io/guides/annotorious-in-react/</link>
+      <pubDate>Sun, 25 Apr 2021 16:45:12 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/annotorious-in-react/</guid>
+      <description>Using Annotorious in React At the moment, Annotorious doesn&amp;rsquo;t have native React integration (yet). If you want to use Annotorious in your own React project, there are a few things to consider:
+ Annotorious modifies the DOM directly: you need to use refs to access image DOM elements. Annotorious has an imperative API: wrapping it for React requires a few workarounds, including initialization in a useEffect hook, and storing the anno object in the component state.</description>
+    </item>
+    
+    <item>
       <title>Firebase Storage Plugin</title>
       <link>http://recogito.github.io/guides/using-firebase-for-storage/</link>
       <pubDate>Fri, 01 May 2020 13:28:54 +0200</pubDate>

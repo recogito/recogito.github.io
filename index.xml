@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Apr 2021 10:09:57 +0200</lastBuildDate><atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Apr 2021 16:45:12 +0200</lastBuildDate><atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configuring the Editor</title>
       <link>http://recogito.github.io/guides/configuring-the-editor/</link>
@@ -58,6 +58,16 @@ The demo uses headless mode to create annotations with either an Orange or Green
       <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
       <description>The W3C Web Annotation Model Annotorious supports a subset of the W3C Web Annotation model, an open standard for interoperable annotations.
  Only a single target shape per annotation is supported. FragmentSelectors of type Media Fragment are supported for rectangle shapes (see example below). SVG Selectors aer supported for polygon shapes (see example below). Annotation TextualBody types with a purpose of commenting, replying or no purpose are displayed as comments. Annotation bodies with a purpose of tagging are displayed as tags.</description>
+    </item>
+    
+    <item>
+      <title>Annotorious in React</title>
+      <link>http://recogito.github.io/guides/annotorious-in-react/</link>
+      <pubDate>Sun, 25 Apr 2021 16:45:12 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/annotorious-in-react/</guid>
+      <description>Using Annotorious in React At the moment, Annotorious doesn&amp;rsquo;t have native React integration (yet). If you want to use Annotorious in your own React project, there are a few things to consider:
+ Annotorious modifies the DOM directly: you need to use refs to access image DOM elements. Annotorious has an imperative API: wrapping it for React requires a few workarounds, including initialization in a useEffect hook, and storing the anno object in the component state.</description>
     </item>
     
     <item>
