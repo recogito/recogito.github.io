@@ -15,9 +15,9 @@
       <guid>http://recogito.github.io/annotorious/plugins/</guid>
       <description>Plugins Plugins extend the functionality of Annotorious. The following plugins are currently available:
 Annotorious Toolbar A simple toolbar to switch between drawing tools.
+Comments Mention A comment thread widget for the editor popup that lets you @-mention users like on Facebook or Twitter.
 Firebase Storage A storage plugin that uses Google Firebase as a cloud annotation store.
-Shape Labels A plugin that adds labels to annotation shapes, using the first tag as the label value. Provides customization options via CSS.
-Tensorflow Tag Suggestions A plugin that uses TensorflowJS to provide AI-powered automatic tag suggestions.</description>
+Shape Labels A plugin that adds labels to annotation shapes, using the first tag as the label value.</description>
     </item>
     
     <item>
