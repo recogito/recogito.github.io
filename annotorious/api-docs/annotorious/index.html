@@ -701,6 +701,27 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 </tr>
 </tbody>
 </table>
+<h3 id="startselection">startSelection</h3>
+<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;startSelection&#39;</span>, <span style="color:#268bd2">function</span>(point) {
+  console.log(point.x, point.y)
+});
+</code></pre></div><p>Fired when the user starts drawing a new shape.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>point</code></td>
+<td>Object</td>
+<td>the x/y coordinates of the start point (image pixel coordinates)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="updateannotation">updateAnnotation</h3>
 <div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;updateAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, previous) {
   <span style="color:#586e75">// 
@@ -730,14 +751,15 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 <h2 id="formatters">Formatters</h2>
 <p>Per default, Annotorious renders annotations as SVG <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g">group</a>
 elements with an <code>a9s-annotation</code> CSS class. A formatter function allows you to dynamically add additional
-attributes to the SVG annotation shape elements.</p>
-<p>A formatter is a JavaScript function takes a single argument - the annotation - and must return either a string or
-an object.</p>
+attributes and elements to the SVG annotation shape.</p>
+<p>A formatter is a JavaScript function takes a single argument - the annotation - and must return a <strong>string</strong>, a
+<strong>DOM element</strong> or an <strong>object</strong>.</p>
 <ul>
 <li>If a string is returned, it will be appended to the annotation element CSS class list.</li>
 <li>If an object is returned, it should have one or more of the following properties:
 <ul>
 <li><code>className</code> a string to be added to the CSS class list</li>
+<li><code>element</code> a DOM element to be appended to the SVG group</li>
 <li><code>data-*</code> a data attribute to add to the annotation SVG element</li>
 <li><code>style</code> a list of CSS styles (in the form of a string)</li>
 </ul>
@@ -852,6 +874,7 @@ an object.</p>
         <li><a href="#mouseenterannotation">mouseEnterAnnotation</a></li>
         <li><a href="#mouseleaveannotation">mouseLeaveAnnotation</a></li>
         <li><a href="#selectannotation-1">selectAnnotation</a></li>
+        <li><a href="#startselection">startSelection</a></li>
         <li><a href="#updateannotation">updateAnnotation</a></li>
       </ul>
     </li>
