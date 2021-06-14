@@ -36,7 +36,7 @@ To make styling more flexible, Annotorious adds a few extras:
       <pubDate>Sat, 03 Apr 2021 10:28:42 +0200</pubDate>
       
       <guid>http://recogito.github.io/guides/headless-mode/</guid>
-      <description>Headless Mode: Using Annotorious without the Editor Popup Want to use Annotorious only for the drawing tools? But don&amp;rsquo;t need the editor? That&amp;rsquo;s what headless mode is for! ith headless mode, you keep all the standard functionality: drawing and editing shapes, JavaScript API, lifecycle events. But you are free to build your own user interface, without being forced to the standardeditor popup.
+      <description>Headless Mode: Using Annotorious without the Editor Popup Want to use Annotorious only for the drawing tools? But don&amp;rsquo;t need the editor? That&amp;rsquo;s what headless mode is for! In headless mode, you keep all the standard functionality: drawing and editing shapes, JavaScript API, lifecycle events. But you are free to build your own user interface, without being forced to the standardeditor popup.
 The demo uses headless mode to create annotations with either an Orange or Green tag, and a formatter to color the shapes.</description>
     </item>
     
