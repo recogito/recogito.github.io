@@ -140,7 +140,7 @@ closes the shape. When using touch, keep the finger on the screen and hold for a
 <h2 id="include-via-script-tag">Include via Script Tag</h2>
 <p>To include Annotorious on your page, download the <a href="https://github.com/recogito/annotorious/releases/latest">latest release</a>
 and add the script and stylesheet files to your page source code.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">head</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">head</span>&gt;
   &lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;annotorious.min.css&#34;</span>&gt;
 &lt;/<span style="color:#268bd2">head</span>&gt;
 
@@ -167,14 +167,14 @@ and add the script and stylesheet files to your page source code.</p>
 &lt;/<span style="color:#268bd2">body</span>&gt;
 </code></pre></div><h2 id="from-cdn">From CDN</h2>
 <p>Alternatively, you can grab script and stylesheet directly from the <a href="https://www.jsdelivr.com/package/npm/@recogito/annotorious">jsDelivr CDN</a>.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- CSS stylesheet --&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- CSS stylesheet --&gt;</span>
 &lt;<span style="color:#268bd2">link</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.5.1/dist/annotorious.min.css&#34;</span>&gt;
 
 <span style="color:#586e75">&lt;!-- JS --&gt;</span>
 &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/annotorious@2.5.1/dist/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
 </code></pre></div><h2 id="using-npm">Using NPM</h2>
 <p>If you use npm, <code>npm install @recogito/annotorious</code> and then</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
 
 <span style="color:#268bd2">import</span> <span style="color:#2aa198">&#39;@recogito/annotorious/dist/annotorious.min.css&#39;</span>;
 
@@ -187,7 +187,7 @@ element can cause compatibility issues. This is especially the case for <code>po
 and <code>padding</code> rules.</p>
 <p>If you need to apply these CSS styles, please do not apply them to the <code>&lt;img&gt;</code> directly.
 Instead, <strong>wrap the image in a &lt;div&gt; and apply your styles to the wrapper &lt;div&gt;</strong>.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- This does not work --&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#586e75">&lt;!-- This does not work --&gt;</span>
 &lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-1.jpg&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;position:absolute; top:10px; left:10px;&#34;</span> &gt;
 &lt;<span style="color:#268bd2">img</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;my-image-2.jpg&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;padding:20px&#34;</span> &gt;
 

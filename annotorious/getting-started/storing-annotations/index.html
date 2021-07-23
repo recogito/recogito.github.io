@@ -81,7 +81,7 @@ backend, using the <a href="/annotorious/api-docs/">JavaScript API</a>.</p>
 <li><strong>deleteAnnotation</strong></li>
 </ul>
 <p>Subscribe to these events, and execute the corresponding write operations to your backend.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// This part depends entirely on how your backend works
 </span><span style="color:#586e75"></span>  axios.post(<span style="color:#2aa198">&#39;http://www.example.com/annotations/).then((response) =&gt; {
 </span><span style="color:#2aa198">    console.log(&#39;</span>Stored.&#39;);

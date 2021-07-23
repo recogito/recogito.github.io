@@ -88,7 +88,7 @@ particular the concepts of <strong>annotation bodies</strong> and body <strong>p
 annotation consists of multiple <strong>bodies</strong> - data structures that each represent one &ldquo;piece&rdquo; of the
 annotation. For example, if an annotation consists of one comment and multiple tags, then each is
 encoded as one body in the data structure.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
   <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
   <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#ce0ed291-766b-4763-8e91-90ce1d04e706&#34;</span>,
   <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
@@ -126,7 +126,7 @@ takes care of <code>TextualBody</code> nodes with purpose <code>tagging</code>. 
 <p>As an example, let&rsquo;s create a minimal editor widget that adds a color selector. Clicking the
 selector creates a new annotation body with the purpose <code>highlighting</code>.</p>
 <p><img src="/images/guides/colorselector-widget.png" alt="Editor popup"></p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> ColorSelectorWidget <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(args) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> ColorSelectorWidget <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(args) {
 
   <span style="color:#586e75">// 1. Find a current color setting in the annotation, if any
 </span><span style="color:#586e75"></span>  <span style="color:#268bd2">var</span> currentColorBody <span style="color:#719e07">=</span> args.annotation <span style="color:#719e07">?</span> 
@@ -195,7 +195,7 @@ in different colors. Clicking a button triggers <code>addTag</code>.</li>
 <p>Since the <code>highlighting</code> body is now stored in the annotation, we can write a
 <a href="/annotorious/api-docs/annotorious/#formatters">formatter</a> that renders highlighted
 annotations in different colors.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/** A matching formatter that sets the color according to the &#39;highlighting&#39; body value **/</span>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/** A matching formatter that sets the color according to the &#39;highlighting&#39; body value **/</span>
 <span style="color:#268bd2">var</span> ColorFormatter <span style="color:#719e07">=</span> <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#268bd2">var</span> highlightBody <span style="color:#719e07">=</span> annotation.bodies.find(<span style="color:#268bd2">function</span>(b) {
     <span style="color:#719e07">return</span> b.purpose <span style="color:#719e07">==</span> <span style="color:#2aa198">&#39;highlighting&#39;</span>;
@@ -206,7 +206,7 @@ annotations in different colors.</p>
 }
 </code></pre></div><p>Finally, we add the plugin and formatter to Annotorious on initialization, and apply some
 CSS for styling.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
   image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
   widgets<span style="color:#719e07">:</span> [ 
     ColorSelectorWidget,
@@ -215,7 +215,7 @@ CSS for styling.</p>
   ],
   formatter<span style="color:#719e07">:</span> ColorFormatter
 });
-</code></pre></div><div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#586e75">/* 5. CSS styles for the color selector widget */</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#586e75">/* 5. CSS styles for the color selector widget */</span>
 .<span style="color:#268bd2">colorselector-widget</span> {
   <span style="color:#719e07">padding</span>:<span style="color:#2aa198">5</span><span style="color:#dc322f">px</span>;
   <span style="color:#719e07">border-bottom</span>:<span style="color:#2aa198">1</span><span style="color:#dc322f">px</span> <span style="color:#cb4b16">solid</span> <span style="color:#2aa198">#e5e5e5</span>;

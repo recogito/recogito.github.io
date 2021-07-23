@@ -77,14 +77,14 @@ or web applications. If you are looking for the Annotorious OpenSeadragon plugin
 </blockquote>
 <h2 id="initialization">Initialization</h2>
 <p>When included via <code>&lt;script&gt;</code> tag:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> config <span style="color:#719e07">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">var</span> config <span style="color:#719e07">=</span> {
   image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>),
   readOnly<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>
 };
 
 <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init(config);
 </code></pre></div><p>With npm:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#268bd2">import</span> { Annotorious } from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
 <span style="color:#268bd2">import</span> <span style="color:#2aa198">&#39;@recogito/annotorious/dist/annotorious.min.css&#39;</span>;
 
 <span style="color:#268bd2">const</span> config <span style="color:#719e07">=</span> {
@@ -161,17 +161,17 @@ or web applications. If you are looking for the Annotorious OpenSeadragon plugin
 </table>
 <h2 id="instance-fields">Instance Fields</h2>
 <h3 id="disableeditor">disableEditor</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.disableEditor); <span style="color:#586e75">// true or fals
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.disableEditor); <span style="color:#586e75">// true or fals
 </span><span style="color:#586e75"></span>anno.disableEditor <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>anno.disableEditor; <span style="color:#586e75">// toggles state
 </span></code></pre></div><p>Change the operation mode between <strong>normal</strong> (drawing tools &amp; editor popup) and <strong>headless</strong>. In
 headless mode, only drawing tools and lifecycle events are active. The editor will not open.</p>
 <h3 id="readonly">readOnly</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.readOnly); <span style="color:#586e75">// true or fals
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.readOnly); <span style="color:#586e75">// true or fals
 </span><span style="color:#586e75"></span>anno.readOnly <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>anno.readOnly; <span style="color:#586e75">// toggles state
 </span></code></pre></div><p>Change display mode between <strong>normal</strong> (annotations are editable) and <strong>read-only</strong>.</p>
 <h2 id="instance-methods">Instance Methods</h2>
 <h3 id="addannotation">.addAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addAnnotation(annotation [, readOnly]);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addAnnotation(annotation [, readOnly]);
 </code></pre></div><p>Adds an annotation programmatically. The format is the
 <a href="/annotorious/getting-started/web-annotation">W3C WebAnnotation model</a>.</p>
 <table>
@@ -196,30 +196,30 @@ headless mode, only drawing tools and lifecycle events are active. The editor wi
 </tbody>
 </table>
 <h3 id="adddrawingtool">.addDrawingTool</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addDrawingTool(plugin);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.addDrawingTool(plugin);
 </code></pre></div><p>Register a drawing tool plugin.</p>
 <h3 id="cancelselected">.cancelSelected</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.cancelSelected();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.cancelSelected();
 </code></pre></div><p>Programmatically cancel the current selection, if any.</p>
 <h3 id="clearannotations">.clearAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAnnotations();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAnnotations();
 </code></pre></div><p>Delete all annotations from the image.</p>
 <h3 id="clearauthinfo">.clearAuthInfo</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAuthInfo();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAuthInfo();
 </code></pre></div><p>Clears the user auth information. Annotorious will no longer insert creator data
 when a new annotation is created or updated. (See <a href="#setauthinfo">setAuthInfo</a> for
 more information about creator data.)</p>
 <h3 id="destroy">.destroy</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.destroy();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.destroy();
 </code></pre></div><p>Destroys this instance of Annotorious, removing the annotation layer on the image.</p>
 <h3 id="getannotations">.getAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> annotations <span style="color:#719e07">=</span> anno.getAnnotations();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> annotations <span style="color:#719e07">=</span> anno.getAnnotations();
 </code></pre></div><p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
 <h3 id="getselected">.getSelected</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> selected <span style="color:#719e07">=</span> anno.getSelected();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> selected <span style="color:#719e07">=</span> anno.getSelected();
 </code></pre></div><p>Returns the currently selected annotation.</p>
 <h3 id="getselectedimagesnippet">.getSelectedImageSnippet</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> { snippet, transform } <span style="color:#719e07">=</span> anno.getSelectedImageSnippet();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> { snippet, transform } <span style="color:#719e07">=</span> anno.getSelectedImageSnippet();
 </code></pre></div><p>Returns an object containing:</p>
 <ul>
 <li>A DOM CANVAS element, in the size of the current selection&rsquo;s bounding box, with
@@ -249,14 +249,14 @@ space back to the coordinate space of the full image</li>
 </tbody>
 </table>
 <h3 id="listdrawingtools">.listDrawingTools</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> toolNames <span style="color:#719e07">=</span> anno.listDrawingTools();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">const</span> toolNames <span style="color:#719e07">=</span> anno.listDrawingTools();
 </code></pre></div><p>Returns a list of the available drawing tools, including those from registered drawing
 tool plugins.</p>
 <h3 id="loadannotations">.loadAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.loadAnnotations(url);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.loadAnnotations(url);
 </code></pre></div><p>Loads annotations from a JSON URL. The method returns a promise, in
 case you want to perform an action after the annotations have loaded.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.loadAnnotations(url).then(<span style="color:#268bd2">function</span>(annotations) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.loadAnnotations(url).then(<span style="color:#268bd2">function</span>(annotations) {
   <span style="color:#586e75">// Do something
 </span><span style="color:#586e75"></span>});
 </code></pre></div><table>
@@ -276,7 +276,7 @@ case you want to perform an action after the annotations have loaded.</p>
 </tbody>
 </table>
 <h3 id="off">.off</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.off(event [, callback]);
 </code></pre></div><p>Unsubscribe from an event. If no callback is provided,
 all event handlers for this event will be unsubscribed.</p>
 <table>
@@ -301,7 +301,7 @@ all event handlers for this event will be unsubscribed.</p>
 </tbody>
 </table>
 <h3 id="on">.on</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(event, callback);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(event, callback);
 </code></pre></div><p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
 <table>
 <thead>
@@ -325,7 +325,7 @@ all event handlers for this event will be unsubscribed.</p>
 </tbody>
 </table>
 <h3 id="removeannotation">.removeAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.removeAnnotation(arg);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.removeAnnotation(arg);
 </code></pre></div><p>Removes an annotation programmatically.</p>
 <table>
 <thead>
@@ -344,11 +344,11 @@ all event handlers for this event will be unsubscribed.</p>
 </tbody>
 </table>
 <h3 id="saveselected">.saveSelected</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.saveSelected();
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.saveSelected();
 </code></pre></div><p>Saves the current selection. This is essentially a programmatic way to hit the <strong>Ok</strong> button on
 the editor.</p>
 <h3 id="selectannotation">.selectAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.selectAnnotation(arg);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.selectAnnotation(arg);
 </code></pre></div><p>Selects an annotation programmatically, highlighting its shape, and opening the editor popup.</p>
 <ul>
 <li>If no argument is provided (or the annotation or ID is unknown), this method will deselect
@@ -373,7 +373,7 @@ the current selection, if any</li>
 </tbody>
 </table>
 <h3 id="setannotations">.setAnnotations</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotations(annotations);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setAnnotations(annotations);
 </code></pre></div><p>Renders the list of annotations to the image, removing any previously
 existing annotations.</p>
 <table>
@@ -393,7 +393,7 @@ existing annotations.</p>
 </tbody>
 </table>
 <h3 id="setauthinfo">.setAuthInfo</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;my-image&#39;</span> });
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;my-image&#39;</span> });
 
 anno.setAuthInfo({
   id<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;http://recogito.example.com/rainer&#39;</span>,
@@ -426,7 +426,7 @@ application changes. The argument to <code>.setAuthInfo</code> is an object with
 </tbody>
 </table>
 <p>Annotorious will insert this data into every new annotation body that gets created:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{ 
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">{ 
   type<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;Annotation&#34;</span>,
   
   <span style="color:#586e75">// ...  
@@ -443,7 +443,7 @@ application changes. The argument to <code>.setAuthInfo</code> is an object with
   }]
 }
 </code></pre></div><h3 id="setdrawingtool">.setDrawingTool</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingTool(toolName);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setDrawingTool(toolName);
 </code></pre></div><p>Switches between the different available drawing tools. Per default, Annotorious
 provides a standard rectangle tool (<code>rect</code>) and a standard polygon drawing tool
 (<code>polygon</code>).</p>
@@ -466,7 +466,7 @@ to get the list of registered tools.</p>
 </tbody>
 </table>
 <h3 id="setvisible">.setVisible</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setVisible(visible);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.setVisible(visible);
 </code></pre></div><p>Shows or hides the annotation layer.</p>
 <table>
 <thead>
@@ -491,7 +491,7 @@ problems when the clock isn&rsquo;t properly set in the user&rsquo;s browser.</p
 <p>After setting server time, the Annotorious will adjust the <code>created</code> timestamps by the difference between
 server time the user&rsquo;s local clock.</p>
 <h3 id="updateselected">.updateSelected</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.updateSelected(annotation[, saveImmediately]);
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.updateSelected(annotation[, saveImmediately]);
 </code></pre></div><p>Replace the currently selected annotation with the one given as argument to .updateSelected.
 Optionally: save the annotation immediately, triggering a <code>createAnnotation</code> or
 <code>updateAnnotation</code> event.</p>
@@ -501,7 +501,7 @@ immediately. Make sure you wait until the Promise completes before saving the an
 </blockquote>
 <p>Use this method for applications that  (with <code>disableEditor</code> set
 to <code>true</code>).</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
   image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;my-image&#39;</span>
   disableEditor<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>
 });
@@ -521,7 +521,7 @@ anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span styl
 </span><span style="color:#586e75"></span>});
 </code></pre></div><h2 id="events">Events</h2>
 <h3 id="cancelselected-1">cancelSelected</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;cancelSelected&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;cancelSelected&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when the user has canceled a selection, by hitting <strong>Cancel</strong> in the editor, or by
@@ -543,7 +543,7 @@ clicking or tapping outside the selected annotation shape.</p>
 </tbody>
 </table>
 <h3 id="changeselectiontarget">changeSelectionTarget</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;changeSelectionTarget&#39;</span>, <span style="color:#268bd2">function</span>(target) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;changeSelectionTarget&#39;</span>, <span style="color:#268bd2">function</span>(target) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when the shape of a newly created selection, or of a selected annotation
@@ -565,7 +565,7 @@ is moved or resized.</p>
 </tbody>
 </table>
 <h3 id="createannotation">createAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when a new annotation is created from a user selection.</p>
@@ -586,7 +586,7 @@ is moved or resized.</p>
 </tbody>
 </table>
 <h3 id="createselection">createSelection</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when a new selection shape is drawn on the image.</p>
@@ -607,7 +607,7 @@ is moved or resized.</p>
 </tbody>
 </table>
 <h3 id="deleteannotation">deleteAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;deleteAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;deleteAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when an existing annotation was deleted.</p>
@@ -628,7 +628,7 @@ is moved or resized.</p>
 </tbody>
 </table>
 <h3 id="mouseenterannotation">mouseEnterAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;mouseEnterAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, event) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;mouseEnterAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, event) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when the mouse moves into an existing annotation.</p>
@@ -654,7 +654,7 @@ is moved or resized.</p>
 </tbody>
 </table>
 <h3 id="mouseleaveannotation">mouseLeaveAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;mouseLeaveAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, event) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;mouseLeaveAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, event) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when the mouse moves out of an existing annotation.</p>
@@ -680,7 +680,7 @@ is moved or resized.</p>
 </tbody>
 </table>
 <h3 id="selectannotation-1">selectAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;selectAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;selectAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when the user selects an annotation. Note that this event will <strong>not</strong> fire when
@@ -702,7 +702,7 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 </tbody>
 </table>
 <h3 id="startselection">startSelection</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;startSelection&#39;</span>, <span style="color:#268bd2">function</span>(point) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;startSelection&#39;</span>, <span style="color:#268bd2">function</span>(point) {
   console.log(point.x, point.y)
 });
 </code></pre></div><p>Fired when the user starts drawing a new shape.</p>
@@ -723,7 +723,7 @@ the selection is made programmatically through the <code>selectAnnotation(arg)</
 </tbody>
 </table>
 <h3 id="updateannotation">updateAnnotation</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;updateAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, previous) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;updateAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation, previous) {
   <span style="color:#586e75">// 
 </span><span style="color:#586e75"></span>});
 </code></pre></div><p>Fired when an existing annotation was updated.</p>
@@ -766,7 +766,7 @@ attributes and elements to the SVG annotation shape.</p>
 </li>
 </ul>
 <h3 id="string-example">String Example</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/** 
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/** 
 </span><span style="color:#586e75"> * This simple formatter will add an extra &#39;long&#39; CSS class to 
 </span><span style="color:#586e75"> * long comments
 </span><span style="color:#586e75"> */</span>
@@ -793,12 +793,12 @@ attributes and elements to the SVG annotation shape.</p>
   formatter<span style="color:#719e07">:</span> formatter
 });
 </code></pre></div><p>You can then apply a visual style to long comments in your own CSS stylesheet.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#268bd2">a9s-annotation</span>.<span style="color:#268bd2">long</span> {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">.<span style="color:#268bd2">a9s-annotation</span>.<span style="color:#268bd2">long</span> {
   stroke-width:<span style="color:#2aa198">4</span>;
   stroke:<span style="color:#cb4b16">red</span>;
 }
 </code></pre></div><h3 id="object-example">Object Example</h3>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/**
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/**
 </span><span style="color:#586e75"> * This formatter will add usernames from the annotation as a data
 </span><span style="color:#586e75"> * attribute and apply an inline style (red outline) where multiple 
 </span><span style="color:#586e75"> * users have annotated

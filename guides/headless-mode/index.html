@@ -243,19 +243,19 @@ annotation</li>
 <h3 id="disableeditor">disableEditor</h3>
 <p>The <code>disableEditor</code> option defines whether Annotorious will show the editor (normal mode)
 or not (headless mode). You can disable the editor when you initialize Annotorious:</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
   image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
   disableEditor<span style="color:#719e07">:</span> <span style="color:#cb4b16">true</span>
 });
 </code></pre></div><p>Or you can change the value of the <code>disableEditor</code> instance field at any time.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.disableEditor <span style="color:#719e07">=</span> <span style="color:#cb4b16">true</span>; <span style="color:#586e75">// Annotorious is now in headless mode
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.disableEditor <span style="color:#719e07">=</span> <span style="color:#cb4b16">true</span>; <span style="color:#586e75">// Annotorious is now in headless mode
 </span><span style="color:#586e75"></span>anno.disableEditor <span style="color:#719e07">=</span> <span style="color:#cb4b16">false</span>; <span style="color:#586e75">// back to normal mode
 </span></code></pre></div><h3 id="createselection-and-selectannotation">createSelection and selectAnnotation</h3>
 <p>In normal mode, the editor opens when the user creates a new selection, or selects
 an existing annotation. In headless mode, you want your code to handle these events.</p>
 <p>You can do this by attaching handler functions for the <code>createSelection</code> and <code>selectAnnotation</code>
 events.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">function</span>(selection) {
   <span style="color:#586e75">// The user has created a new shape...
 </span><span style="color:#586e75"></span>});
 
@@ -275,7 +275,7 @@ This will persist the change (and Annotorious will fire <code>createAnnotation</
 to complete and returns a <code>Promise</code>. Make sure you wait until <code>updateSelected</code>
 completes before calling <code>saveSelected</code>!</p>
 </blockquote>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">// This does not work
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">// This does not work
 </span><span style="color:#586e75"></span>anno.updateSelected(modified);
 anno.saveSelected();
 
@@ -289,7 +289,7 @@ anno.saveSelected();
 });
 </code></pre></div><p>Because some applications will often apply only a single change, and then save immediately,
 <code>updateSelected</code> also includes a convenience &ldquo;update and save&rdquo; option.</p>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">// This updates and saves immediately, no
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">// This updates and saves immediately, no
 </span><span style="color:#586e75">// more need to call .saveSelected
 </span><span style="color:#586e75"></span>anno.updateSelected(modified, <span style="color:#cb4b16">true</span>);
 </code></pre></div><h2 id="code-example">Code Example</h2>
@@ -303,7 +303,7 @@ your page.)</p>
 <li>attaches a <code>createSelection</code> listener, which inserts a (hard-coded) tag into new selections</li>
 <li>saves the annotation</li>
 </ol>
-<div class="highlight"><pre style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
   image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
   locale<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;auto&#39;</span>,
 
