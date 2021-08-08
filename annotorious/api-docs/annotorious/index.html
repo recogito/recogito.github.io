@@ -165,6 +165,12 @@ or web applications. If you are looking for the Annotorious OpenSeadragon plugin
 </span><span style="color:#586e75"></span>anno.disableEditor <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>anno.disableEditor; <span style="color:#586e75">// toggles state
 </span></code></pre></div><p>Change the operation mode between <strong>normal</strong> (drawing tools &amp; editor popup) and <strong>headless</strong>. In
 headless mode, only drawing tools and lifecycle events are active. The editor will not open.</p>
+<h3 id="disableselect">disableSelect</h3>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.disableSelect); <span style="color:#586e75">// true or false
+</span><span style="color:#586e75"></span>anno.disableSelect <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>anno.disableSelect;
+</code></pre></div><p>Disables selection functionality. Clicking an annotation will no longer open the editor, or fire
+the <code>selectAnnotation</code> event. The <code>clickAnnotation</code> event will still fire!</p>
+<p>Setting <code>disableSelect</code> to <code>true</code> will <strong>not</strong> clear the current selection, if any.</p>
 <h3 id="readonly">readOnly</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">console.log(anno.readOnly); <span style="color:#586e75">// true or fals
 </span><span style="color:#586e75"></span>anno.readOnly <span style="color:#719e07">=</span> <span style="color:#719e07">!</span>anno.readOnly; <span style="color:#586e75">// toggles state
@@ -303,6 +309,30 @@ all event handlers for this event will be unsubscribed.</p>
 <h3 id="on">.on</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(event, callback);
 </code></pre></div><p>Subscribe to an event. (See <a href="#events">Events</a> for the list.)</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>event</code></td>
+<td>String</td>
+<td>the name of the event</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td>Function</td>
+<td>the function to call when the event is emitted</td>
+</tr>
+</tbody>
+</table>
+<h3 id="once">.once</h3>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.once(event, callback);
+</code></pre></div><p>Subscribe to an event only <strong>once</strong>. (See <a href="#events">Events</a> for the list.)</p>
 <table>
 <thead>
 <tr>
@@ -564,6 +594,12 @@ is moved or resized.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="clickannotation">clickAnnotation</h3>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;clickAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+  <span style="color:#586e75">// 
+</span><span style="color:#586e75"></span>});
+</code></pre></div><p>Fired every time the user clicks an annotation (regardless of whether it is already
+selected or not).</p>
 <h3 id="createannotation">createAnnotation</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
   <span style="color:#586e75">// 
@@ -835,6 +871,7 @@ attributes and elements to the SVG annotation shape.</p>
     <li><a href="#instance-fields">Instance Fields</a>
       <ul>
         <li><a href="#disableeditor">disableEditor</a></li>
+        <li><a href="#disableselect">disableSelect</a></li>
         <li><a href="#readonly">readOnly</a></li>
       </ul>
     </li>
@@ -853,6 +890,7 @@ attributes and elements to the SVG annotation shape.</p>
         <li><a href="#loadannotations">.loadAnnotations</a></li>
         <li><a href="#off">.off</a></li>
         <li><a href="#on">.on</a></li>
+        <li><a href="#once">.once</a></li>
         <li><a href="#removeannotation">.removeAnnotation</a></li>
         <li><a href="#saveselected">.saveSelected</a></li>
         <li><a href="#selectannotation">.selectAnnotation</a></li>
@@ -868,6 +906,7 @@ attributes and elements to the SVG annotation shape.</p>
       <ul>
         <li><a href="#cancelselected-1">cancelSelected</a></li>
         <li><a href="#changeselectiontarget">changeSelectionTarget</a></li>
+        <li><a href="#clickannotation">clickAnnotation</a></li>
         <li><a href="#createannotation">createAnnotation</a></li>
         <li><a href="#createselection">createSelection</a></li>
         <li><a href="#deleteannotation">deleteAnnotation</a></li>
