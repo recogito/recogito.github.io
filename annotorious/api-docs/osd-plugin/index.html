@@ -866,6 +866,10 @@ attributes and elements to the SVG annotation shape.</p>
 </ul>
 </li>
 </ul>
+<h4 id="element-caveats">Element Caveats</h4>
+<p>When using DOM elements, keep in mind that you should specify at least the x,y positions and the width and height attributes.<br>
+The x and y positions are calculated from the upper left when using the box tool. If using SVG elements then make sure to use
+the appropriate fill/stroke attributes.</p>
 <h3 id="string-example">String Example</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#586e75">/** 
 </span><span style="color:#586e75"> * This simple formatter will add an extra &#39;long&#39; CSS class to 
@@ -987,6 +991,7 @@ attributes and elements to the SVG annotation shape.</p>
     </li>
     <li><a href="#formatters">Formatters</a>
       <ul>
+        <li></li>
         <li><a href="#string-example">String Example</a></li>
         <li><a href="#object-example">Object Example</a></li>
       </ul>
