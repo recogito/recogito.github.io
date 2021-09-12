@@ -207,6 +207,7 @@ the <code>selectAnnotation</code> event. The <code>clickAnnotation</code> event 
 <h3 id="cancelselected">.cancelSelected</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.cancelSelected();
 </code></pre></div><p>Programmatically cancel the current selection, if any.</p>
+<p><strong>Note:</strong> programmatic cancel <strong>will not</strong> trigger the <a href="#cancelselected-1">cancelSelected event</a>!</p>
 <h3 id="clearannotations">.clearAnnotations</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.clearAnnotations();
 </code></pre></div><p>Delete all annotations from the image.</p>
@@ -356,7 +357,7 @@ all event handlers for this event will be unsubscribed.</p>
 </table>
 <h3 id="removeannotation">.removeAnnotation</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.removeAnnotation(arg);
-</code></pre></div><p>Removes an annotation programmatically.</p>
+</code></pre></div><p>Removes an annotation programmatically. <strong>Note:</strong> programmatic remove <strong>will not</strong> trigger the <a href="#deleteannotation">deleteAnnotation event</a>!</p>
 <table>
 <thead>
 <tr>
@@ -379,7 +380,8 @@ all event handlers for this event will be unsubscribed.</p>
 the editor.</p>
 <h3 id="selectannotation">.selectAnnotation</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">anno.selectAnnotation(arg);
-</code></pre></div><p>Selects an annotation programmatically, highlighting its shape, and opening the editor popup.</p>
+</code></pre></div><p>Selects an annotation programmatically, highlighting its shape, and opening the editor popup.
+<strong>Note:</strong> programmatic select <strong>will not</strong> trigger the <a href="#selectannotation-1">selectAnnotation event</a>!</p>
 <ul>
 <li>If no argument is provided (or the annotation or ID is unknown), this method will deselect
 the current selection, if any</li>
