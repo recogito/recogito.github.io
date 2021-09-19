@@ -94,7 +94,16 @@ image above.</p>
     <span style="color:#2aa198">&#39;COMMENT&#39;</span>
   ]
 });
-</code></pre></div><h2 id="tagging-vocabularies">Tagging Vocabularies</h2>
+</code></pre></div><p>Each item in the <code>widgets</code> array can be one of the following:</p>
+<ul>
+<li>The name of a <strong>built-in widget</strong> - currently either <code>COMMENT</code> or <code>TAG</code></li>
+<li>An editor <strong>plugin</strong></li>
+<li>An object with a <code>widget</code> property that has the widget name or plugin as value, and
+additional configuration arguments for the widget</li>
+</ul>
+<p>If you want to learn how to write your own extensions for the editor,
+<a href="/guides/editor-widgets/">start with this guide</a>.</p>
+<h2 id="tagging-vocabularies">Tagging Vocabularies</h2>
 <p><strong>Note:</strong> the tag widget also supports semantic vocabularies, where each term has a label and a URI.</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
   image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
@@ -107,16 +116,7 @@ image above.</p>
     ] 
   }]
 });
-</code></pre></div><p>Each item in the <code>widgets</code> array can be one of the following:</p>
-<ul>
-<li>The name of a <strong>built-in widget</strong> - currently either <code>COMMENT</code> or <code>TAG</code></li>
-<li>An editor <strong>plugin</strong></li>
-<li>An object with a <code>widget</code> property that has the widget name or plugin as value, and
-additional configuration arguments for the widget</li>
-</ul>
-<p>If you want to learn how to write your own extensions for the editor,
-<a href="/guides/editor-widgets/">start with this guide</a>.</p>
-
+</code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">
