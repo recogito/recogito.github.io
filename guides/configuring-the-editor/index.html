@@ -87,6 +87,20 @@ image above.</p>
     { widget<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;TAG&#39;</span>, vocabulary<span style="color:#719e07">:</span> [ <span style="color:#2aa198">&#39;Animal&#39;</span>, <span style="color:#2aa198">&#39;Building&#39;</span>, <span style="color:#2aa198">&#39;Waterbody&#39;</span>] }
   ]
 });
+</code></pre></div><blockquote>
+<p>The tag widget also supports semantic vocabularies, where each term has a label and a URI.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+  image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
+  widgets<span style="color:#719e07">:</span> [{ 
+    widget<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;TAG&#39;</span>,
+    vocabulary<span style="color:#719e07">:</span> [ 
+      { label<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;Place&#39;</span>, uri<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;http://www.example.com/ontology/place&#39;</span> },
+      { label<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;Person&#39;</span>, uri<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;http://www.example.com/ontology/person&#39;</span> }, 
+      { label<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;Event&#39;</span>, uri<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;http://www.example.com/ontology/event&#39;</span> }
+    ] 
+  }]
+});
 </code></pre></div><p>Alternatively, the configuration below will give you an editor with just a comment widget, but no tag widget.</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
   image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
