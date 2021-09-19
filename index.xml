@@ -57,7 +57,7 @@ The demo uses headless mode to create annotations with either an Orange or Green
       
       <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
       <description>The W3C Web Annotation Model Annotorious supports a subset of the W3C Web Annotation model, an open standard for interoperable annotations.
- Only a single target shape per annotation is supported. FragmentSelectors of type Media Fragment are supported for rectangle shapes (see example below). SVG Selectors aer supported for polygon shapes (see example below). Annotation TextualBody types with a purpose of commenting, replying or no purpose are displayed as comments. Annotation bodies with a purpose of tagging are displayed as tags.</description>
+ Only a single target shape per annotation is supported. FragmentSelectors of type Media Fragment are supported for rectangle shapes (see example below), with both pixel- and percent-encoded coordinates. SVG Selectors aer supported for polygon shapes (see example below). Annotation TextualBody types with a purpose of commenting, replying or no purpose are displayed as comments.</description>
     </item>
     
     <item>
