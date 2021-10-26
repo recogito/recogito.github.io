@@ -129,7 +129,10 @@ closes the shape. When using touch, keep the finger on the screen and hold for a
     var anno = Annotorious.init({
       image: 'hallstatt',
       locale: 'auto',
-      allowEmpty: true
+      allowEmpty: true,
+      widgets: [{
+        widget: 'COMMENT', purposeSelector:true
+      }]
     });
 
     Annotorious.Toolbar(anno, document.getElementById('toolbar'));
