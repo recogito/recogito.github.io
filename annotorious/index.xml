@@ -14,10 +14,8 @@
       
       <guid>http://recogito.github.io/annotorious/plugins/</guid>
       <description>Plugins Plugins extend the functionality of Annotorious. The following plugins are currently available:
-Annotorious Selector Pack Additional selection tools for Annotorious and Annotorious OpenSeadragon: circle, ellipse and freehand drawing.
-Annotorious Toolbar A simple toolbar to switch between drawing tools.
-Comments Mention A comment thread widget for the editor popup that lets you @-mention users like on Facebook or Twitter.
-Firebase Storage A storage plugin that uses Google Firebase as a cloud annotation store.</description>
+Annotorious Better Polygon A better polygon drawing tool for for Annotorious and Annotorious OpenSeadragon. Provides extra features not found in the built-in polygon tool, such as adding and removing points, closing the polygon by re-selecting the first point, and selecting/moving multiple corners.
+Annotorious Selector Pack Additional selection tools for Annotorious and Annotorious OpenSeadragon: circle, ellipse and freehand drawing.</description>
     </item>
     
     <item>
