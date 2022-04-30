@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.2/dist/annotorious.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.3/dist/annotorious.min.css" />
     <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"rainer@no5.at",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
   </head>
 
@@ -88,45 +88,45 @@ Firebase SDK.</li>
 <p>Example: when Annotorious fires the <code>createAnnotation</code> event, store the annotation by
 calling the <code>.add()</code> method on your Firebase connection. Firebase operations return
 a <code>Promise</code>, so you can execute code after completion, and handle connection errors.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
-  db.collection(<span style="color:#2aa198">&#39;annotations&#39;</span>).add(annotation).then(<span style="color:#268bd2">function</span>() {
-    console.log(<span style="color:#2aa198">&#39;Stored annotation&#39;</span>);
-  });
-});
-</code></pre></div><p>You can wire up the rest of the events - <code>update</code>, <code>delete</code> - in the same way.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
+</span></span><span style="display:flex;"><span>  db.collection(<span style="color:#2aa198">&#39;annotations&#39;</span>).add(annotation).then(<span style="color:#268bd2">function</span>() {
+</span></span><span style="display:flex;"><span>    console.log(<span style="color:#2aa198">&#39;Stored annotation&#39;</span>);
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>You can wire up the rest of the events - <code>update</code>, <code>delete</code> - in the same way.</p>
 <h2 id="annotorious-firebase-plugin">Annotorious Firebase Plugin</h2>
 <p>The <a href="https://github.com/recogito/recogito-client-plugins/tree/main/packages/storage-firebase">Firebase Storage Plugin for Annotorious and RecogitoJS</a> provides an example implementation.</p>
 <p>Include the pluign via the <code>&lt;script&gt;</code> tag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#719e07">&lt;</span>script type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/firebase-storage@latest/dist/recogito-firebase-storage.min.js&#34;</span><span style="color:#719e07">&gt;&lt;</span>/script&gt;
-</code></pre></div><p>Or use npm.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ npm install @recogito/firebase-storage
-</code></pre></div><p>Initialize the plugin after Annotorious. It will register the lifecycle event listeners
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#719e07">&lt;</span>script type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;https://cdn.jsdelivr.net/npm/@recogito/firebase-storage@latest/dist/recogito-firebase-storage.min.js&#34;</span><span style="color:#719e07">&gt;&lt;</span>/script&gt;
+</span></span></code></pre></div><p>Or use npm.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ npm install @recogito/firebase-storage
+</span></span></code></pre></div><p>Initialize the plugin after Annotorious. It will register the lifecycle event listeners
 and connect them to the SDK CRUD operations.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#268bd2">var</span> image <span style="color:#719e07">=</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>);
-
-<span style="color:#586e75">// Init Annotorious
-</span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image });
-
-<span style="color:#586e75">// Firebase will auto-generate this config for you when you 
-</span><span style="color:#586e75">// register your account. Just paste your own settings in here.
-</span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> firebaseConfig <span style="color:#719e07">=</span> {
-  apiKey<span style="color:#719e07">:</span>        <span style="color:#2aa198">&#34;-- your firebase api key here --&#34;</span>,
-  authDomain<span style="color:#719e07">:</span>    <span style="color:#2aa198">&#34;-- your authdomain here --&#34;</span>,
-  databaseURL<span style="color:#719e07">:</span>   <span style="color:#2aa198">&#34;-- your database url --&#34;</span>,
-  projectId<span style="color:#719e07">:</span>     <span style="color:#2aa198">&#34;-- your project id --&#34;</span>,
-  storageBucket<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;-- your storage bucket --&#34;</span>,
-  messagingSenderId<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;...&#34;</span>,
-  appId<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;...&#34;</span>
-};
-
-<span style="color:#268bd2">var</span> settings <span style="color:#719e07">=</span> {
-  annotationTarget<span style="color:#719e07">:</span> image.src,  <span style="color:#586e75">// mandatory
-</span><span style="color:#586e75"></span>  collectionName<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;annotations&#39;</span> <span style="color:#586e75">// optional (default = &#39;annotations&#39;)
-</span><span style="color:#586e75"></span>}
-
-<span style="color:#586e75">// Init the storage plugin
-</span><span style="color:#586e75"></span>recogito.FirebaseStorage(anno, firebaseConfig, settings);
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#268bd2">var</span> image <span style="color:#719e07">=</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#39;my-image&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">// Init Annotorious
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({ image });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">// Firebase will auto-generate this config for you when you 
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75">// register your account. Just paste your own settings in here.
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span><span style="color:#268bd2">var</span> firebaseConfig <span style="color:#719e07">=</span> {
+</span></span><span style="display:flex;"><span>  apiKey<span style="color:#719e07">:</span>        <span style="color:#2aa198">&#34;-- your firebase api key here --&#34;</span>,
+</span></span><span style="display:flex;"><span>  authDomain<span style="color:#719e07">:</span>    <span style="color:#2aa198">&#34;-- your authdomain here --&#34;</span>,
+</span></span><span style="display:flex;"><span>  databaseURL<span style="color:#719e07">:</span>   <span style="color:#2aa198">&#34;-- your database url --&#34;</span>,
+</span></span><span style="display:flex;"><span>  projectId<span style="color:#719e07">:</span>     <span style="color:#2aa198">&#34;-- your project id --&#34;</span>,
+</span></span><span style="display:flex;"><span>  storageBucket<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;-- your storage bucket --&#34;</span>,
+</span></span><span style="display:flex;"><span>  messagingSenderId<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;...&#34;</span>,
+</span></span><span style="display:flex;"><span>  appId<span style="color:#719e07">:</span> <span style="color:#2aa198">&#34;...&#34;</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">var</span> settings <span style="color:#719e07">=</span> {
+</span></span><span style="display:flex;"><span>  annotationTarget<span style="color:#719e07">:</span> image.src,  <span style="color:#586e75">// mandatory
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  collectionName<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;annotations&#39;</span> <span style="color:#586e75">// optional (default = &#39;annotations&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">// Init the storage plugin
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>recogito.FirebaseStorage(anno, firebaseConfig, settings);
+</span></span></code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">

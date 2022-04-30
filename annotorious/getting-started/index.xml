@@ -36,7 +36,7 @@
       <description>Storing Annotations Important: Annotorious does not provide a backend for storing annotations online. It provides user interface functionality only. To store annotations, you need to connect them to your own backend, using the JavaScript API.
 When users create, update or delete annotations, Annotorious emits the following events:
  createAnnotation updateAnnotation deleteAnnotation  Subscribe to these events, and execute the corresponding write operations to your backend.
-anno.on(&amp;#39;createAnnotation&amp;#39;, function(annotation) { // This part depends entirely on how your backend works  axios.</description>
+anno.on(&amp;#39;createAnnotation&amp;#39;, function(annotation) {  // This part depends entirely on how your backend works  axios.</description>
     </item>
     
   </channel>

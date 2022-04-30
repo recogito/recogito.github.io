@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.2/dist/annotorious.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.3/dist/annotorious.min.css" />
     <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"rainer@no5.at",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
   </head>
 
@@ -87,69 +87,69 @@ new <code>highlighting</code> body, in case the annotation doesn&rsquo;t have on
 <li>The remainder of the code renders the user interface elements: 3 identical buttons
 in different colors. Clicking a button triggers <code>setHighlightBody</code>.</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#268bd2">import</span> React from <span style="color:#2aa198">&#39;preact/compat&#39;</span>;
-
-<span style="color:#268bd2">const</span> HelloWorldWidget <span style="color:#719e07">=</span> props =&gt; {
-  <span style="color:#586e75">// We&#39;ll be using &#39;highlighting&#39; as body purpose for 
-</span><span style="color:#586e75"></span>  <span style="color:#586e75">// this type of widget
-</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> currentHighlight <span style="color:#719e07">=</span> props.annotation <span style="color:#719e07">?</span> 
-    props.annotation.bodies.find(b =&gt; b.purpose <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;highlighting&#39;</span>) <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>;
-
-  <span style="color:#586e75">// This function handles body updates as the user presses buttons
-</span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> setHighlightBody <span style="color:#719e07">=</span> value =&gt; () =&gt; {
-    props.onUpsertBody(currentHighlight, { value, purpose<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;highlighting&#39;</span> });
-  }
-
-  <span style="color:#719e07">return</span> (
-    &lt;<span style="color:#268bd2">div</span> className<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;helloworld-widget&#34;</span>&gt;
-      { [ <span style="color:#2aa198">&#39;red&#39;</span>, <span style="color:#2aa198">&#39;green&#39;</span>, <span style="color:#2aa198">&#39;blue&#39;</span> ].map(color =&gt; 
-        &lt;<span style="color:#268bd2">button</span> 
-          key<span style="color:#719e07">=</span>{color}
-          className<span style="color:#719e07">=</span>{currentHighlight<span style="color:#719e07">?</span>.value <span style="color:#719e07">===</span> color <span style="color:#719e07">?</span> <span style="color:#2aa198">&#39;selected&#39;</span> <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>}
-          style<span style="color:#719e07">=</span>{{ backgroundColor<span style="color:#719e07">:</span> color }}
-          onClick<span style="color:#719e07">=</span>{setHighlightBody(color)} /&gt;
-      )}
-    &lt;/<span style="color:#268bd2">div</span>&gt;
-  )
-
-}
-
-<span style="color:#268bd2">export</span> <span style="color:#719e07">default</span> HelloWorldWidget;
-</code></pre></div><h2 id="using-the-plugin">Using the Plugin</h2>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-jsx" data-lang="jsx"><span style="display:flex;"><span><span style="color:#268bd2">import</span> React from <span style="color:#2aa198">&#39;preact/compat&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">const</span> HelloWorldWidget <span style="color:#719e07">=</span> props =&gt; {
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">// We&#39;ll be using &#39;highlighting&#39; as body purpose for 
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  <span style="color:#586e75">// this type of widget
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> currentHighlight <span style="color:#719e07">=</span> props.annotation <span style="color:#719e07">?</span> 
+</span></span><span style="display:flex;"><span>    props.annotation.bodies.find(b =&gt; b.purpose <span style="color:#719e07">===</span> <span style="color:#2aa198">&#39;highlighting&#39;</span>) <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#586e75">// This function handles body updates as the user presses buttons
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  <span style="color:#268bd2">const</span> setHighlightBody <span style="color:#719e07">=</span> value =&gt; () =&gt; {
+</span></span><span style="display:flex;"><span>    props.onUpsertBody(currentHighlight, { value, purpose<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;highlighting&#39;</span> });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">return</span> (
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">div</span> className<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;helloworld-widget&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      { [ <span style="color:#2aa198">&#39;red&#39;</span>, <span style="color:#2aa198">&#39;green&#39;</span>, <span style="color:#2aa198">&#39;blue&#39;</span> ].map(color =&gt; 
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#268bd2">button</span> 
+</span></span><span style="display:flex;"><span>          key<span style="color:#719e07">=</span>{color}
+</span></span><span style="display:flex;"><span>          className<span style="color:#719e07">=</span>{currentHighlight<span style="color:#719e07">?</span>.value <span style="color:#719e07">===</span> color <span style="color:#719e07">?</span> <span style="color:#2aa198">&#39;selected&#39;</span> <span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>}
+</span></span><span style="display:flex;"><span>          style<span style="color:#719e07">=</span>{{ backgroundColor<span style="color:#719e07">:</span> color }}
+</span></span><span style="display:flex;"><span>          onClick<span style="color:#719e07">=</span>{setHighlightBody(color)} /&gt;
+</span></span><span style="display:flex;"><span>      )}
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>  )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">export</span> <span style="color:#719e07">default</span> HelloWorldWidget;
+</span></span></code></pre></div><h2 id="using-the-plugin">Using the Plugin</h2>
 <p>When you include the plugin with a <code>&lt;script&gt;</code> tag, it will make itself available
 through a global <code>recogito.HelloWorldWidget</code> variable. Add it to the <code>widgets</code> list
 in the config object when you initialize Annotorious.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
-&lt;<span style="color:#268bd2">html</span>&gt;
-  &lt;<span style="color:#268bd2">head</span>&gt;
-    <span style="color:#586e75">&lt;!-- Load Annotorious first --&gt;</span>
-    &lt;<span style="color:#268bd2">link</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.css&#34;</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span>&gt;
-    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
-
-    <span style="color:#586e75">&lt;!-- Load plugin script next --&gt;</span>
-    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;recogito-helloworld-widget.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
-  &lt;/<span style="color:#268bd2">head</span>&gt;
-  &lt;<span style="color:#268bd2">body</span>&gt;
-    &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;hallstatt&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;640px-Hallstatt.jpg&#34;</span> /&gt;
-
-    &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span>&gt;
-      (<span style="color:#268bd2">function</span>() {
-
-        <span style="color:#586e75">// Add plugin to the widgets on init
-</span><span style="color:#586e75"></span>        <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
-          image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
-          widgets<span style="color:#719e07">:</span> [ 
-            recogito.HelloWorldWidget,
-            <span style="color:#2aa198">&#39;COMMENT&#39;</span>,
-            <span style="color:#2aa198">&#39;TAG&#39;</span>
-          ]
-        });
-        
-      })();
-    &lt;/<span style="color:#268bd2">script</span>&gt;
-  &lt;/<span style="color:#268bd2">body</span>&gt;
-&lt;/<span style="color:#268bd2">html</span>&gt;
-</code></pre></div><p>Full project <a href="https://github.com/recogito/recogito-client-plugins/tree/main/packages/widget-react-helloworld">available on GitHub</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#719e07">&lt;!DOCTYPE html&gt;</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">html</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">head</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75">&lt;!-- Load Annotorious first --&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">link</span> href<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.css&#34;</span> rel<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;stylesheet&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;/annotorious.min.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75">&lt;!-- Load plugin script next --&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">script</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;recogito-helloworld-widget.js&#34;</span>&gt;&lt;/<span style="color:#268bd2">script</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">head</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">body</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;hallstatt&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;640px-Hallstatt.jpg&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">script</span> type<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;text/javascript&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      (<span style="color:#268bd2">function</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#586e75">// Add plugin to the widgets on init
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>        <span style="color:#268bd2">var</span> anno <span style="color:#719e07">=</span> Annotorious.init({
+</span></span><span style="display:flex;"><span>          image<span style="color:#719e07">:</span> <span style="color:#2aa198">&#39;hallstatt&#39;</span>,
+</span></span><span style="display:flex;"><span>          widgets<span style="color:#719e07">:</span> [ 
+</span></span><span style="display:flex;"><span>            recogito.HelloWorldWidget,
+</span></span><span style="display:flex;"><span>            <span style="color:#2aa198">&#39;COMMENT&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#2aa198">&#39;TAG&#39;</span>
+</span></span><span style="display:flex;"><span>          ]
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>      })();
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#268bd2">script</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">body</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">html</span>&gt;
+</span></span></code></pre></div><p>Full project <a href="https://github.com/recogito/recogito-client-plugins/tree/main/packages/widget-react-helloworld">available on GitHub</a>.</p>
 
       </div>
 

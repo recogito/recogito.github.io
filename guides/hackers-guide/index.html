@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.2/dist/annotorious.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.3/dist/annotorious.min.css" />
     <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"rainer@no5.at",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
   </head>
 
@@ -110,21 +110,21 @@ have to <code>npm link</code> your local projects.</p>
 <li>Link your local clone of <strong>recogito-client-core</strong>, so that changes you make to
 recogito-client-core are reflected in your RecogitoJS/Annotorious project</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#b58900">cd</span> recogito-client-core
-$ npm install 
-$ npm link <span style="color:#586e75"># Creates a global symlink</span>
-$ <span style="color:#b58900">cd</span> ..
-
-$ <span style="color:#b58900">cd</span> annotorious
-$ npm install
-$ npm link @recogito/recogito-client-core <span style="color:#586e75"># Links to the global symlink</span>
-
-<span style="color:#586e75"># Annotorious now uses your local clone of recogito-client-core</span>
-<span style="color:#586e75"># instead of the latest published NPM package</span>
-$ npm start
-
-<span style="color:#586e75"># Same procedure for RecogitoJS if needed</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ <span style="color:#b58900">cd</span> recogito-client-core
+</span></span><span style="display:flex;"><span>$ npm install 
+</span></span><span style="display:flex;"><span>$ npm link <span style="color:#586e75"># Creates a global symlink</span>
+</span></span><span style="display:flex;"><span>$ <span style="color:#b58900">cd</span> ..
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ <span style="color:#b58900">cd</span> annotorious
+</span></span><span style="display:flex;"><span>$ npm install
+</span></span><span style="display:flex;"><span>$ npm link @recogito/recogito-client-core <span style="color:#586e75"># Links to the global symlink</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Annotorious now uses your local clone of recogito-client-core</span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># instead of the latest published NPM package</span>
+</span></span><span style="display:flex;"><span>$ npm start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75"># Same procedure for RecogitoJS if needed</span>
+</span></span></code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">

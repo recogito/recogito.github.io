@@ -79,7 +79,7 @@ The demo uses headless mode to create annotations with either an Orange or Green
       <description>Storing Annotations Important: Annotorious does not provide a backend for storing annotations online. It provides user interface functionality only. To store annotations, you need to connect them to your own backend, using the JavaScript API.
 When users create, update or delete annotations, Annotorious emits the following events:
  createAnnotation updateAnnotation deleteAnnotation  Subscribe to these events, and execute the corresponding write operations to your backend.
-anno.on(&amp;#39;createAnnotation&amp;#39;, function(annotation) { // This part depends entirely on how your backend works  axios.</description>
+anno.on(&amp;#39;createAnnotation&amp;#39;, function(annotation) {  // This part depends entirely on how your backend works  axios.</description>
     </item>
     
     <item>
@@ -172,7 +172,7 @@ Source Code All source code is available on the recogito GitHub organization. Th
       <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon zoomable image viewer. If you are looking for the standard version of Annotorious, which works with normal images embedded in websites, see here instead.
  Initialization When included via &amp;lt;script&amp;gt; tag:
 var anno = OpenSeadragon.Annotorious(viewer, config); With npm:
-import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorious from &amp;#39;@recogito/annotorious-openseadragon&amp;#39;; import &amp;#39;@recogito/annotorious-openseadragon/dist/annotorious.min.css&amp;#39;; const viewer = OpenSeadragon({ id: &amp;#34;openseadragon&amp;#34;, tileSources: { type: &amp;#34;image&amp;#34;, url: &amp;#34;1280px-Hallstatt.</description>
+import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorious from &amp;#39;@recogito/annotorious-openseadragon&amp;#39;; import &amp;#39;@recogito/annotorious-openseadragon/dist/annotorious.min.css&amp;#39;;  const viewer = OpenSeadragon({  id: &amp;#34;openseadragon&amp;#34;,  tileSources: {  type: &amp;#34;image&amp;#34;,  url: &amp;#34;1280px-Hallstatt.</description>
     </item>
     
     <item>
@@ -183,8 +183,8 @@ import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorio
       <guid>http://recogito.github.io/annotorious/api-docs/annotorious/</guid>
       <description>API Reference: Annotorious  The standard version of Annotorious works with normal images embedded in websites or web applications. If you are looking for the Annotorious OpenSeadragon plugin, see here instead.
  Initialization When included via &amp;lt;script&amp;gt; tag:
-var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); With npm:
-import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; import &amp;#39;@recogito/annotorious/dist/annotorious.min.css&amp;#39;; const config = { image: document.getElementById(&amp;#39;my-image&amp;#39;) } const anno = new Annotorious(config); The config object supports the following properties:</description>
+var config = {  image: document.getElementById(&amp;#39;my-image&amp;#39;),  readOnly: true };  var anno = Annotorious.init(config); With npm:
+import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; import &amp;#39;@recogito/annotorious/dist/annotorious.min.css&amp;#39;;  const config = {  image: document.</description>
     </item>
     
   </channel>

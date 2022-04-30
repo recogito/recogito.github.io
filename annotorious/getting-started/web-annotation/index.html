@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.2/dist/annotorious.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.3/dist/annotorious.min.css" />
     <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"rainer@no5.at",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
   </head>
 
@@ -87,38 +87,38 @@ are supported for rectangle shapes (see example below), with both pixel- and per
 <p><strong>Important:</strong> Annotorious requires an <code>id</code> on every annotation. The ID can be any alphanumeric string.
 Annotations created by users will automatically get a globally unique ID in the form <code>#{uuid}</code>.</p>
 <h2 id="example">Example</h2>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">[{ 
-  <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
-  <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#a88b22d0-6106-4872-9435-c78b5e89fede&#34;</span>,
-  <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
-  <span style="color:#268bd2">&#34;body&#34;</span>: [{
-    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
-    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;It&#39;s Hallstatt in Upper Austria&#34;</span>
-  }],
-  <span style="color:#268bd2">&#34;target&#34;</span>: {
-    <span style="color:#268bd2">&#34;selector&#34;</span>: {
-      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;FragmentSelector&#34;</span>,
-      <span style="color:#268bd2">&#34;conformsTo&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/TR/media-frags/&#34;</span>,
-      <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;xywh=pixel:270,120,90,170&#34;</span>
-    }
-  }
-}, { 
-  <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
-  <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#218d01ff-f077-4cc3-992d-1c81c426e51b&#34;</span>,
-  <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
-  <span style="color:#268bd2">&#34;body&#34;</span>: [{
-    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
-    <span style="color:#268bd2">&#34;purpose&#34;</span>: <span style="color:#2aa198">&#34;tagging&#34;</span>,
-    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;Church&#34;</span>
-  }],
-  <span style="color:#268bd2">&#34;target&#34;</span>: {
-    <span style="color:#268bd2">&#34;selector&#34;</span>: [{
-      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;SvgSelector&#34;</span>,
-      <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;&lt;svg&gt;&lt;polygon points=&#39;172,160 199,15 223,6 239,132 244,173 285,179 313,208 313,251 218,306 170,290 172,160&#39;&gt;&lt;/polygon&gt;&lt;/svg&gt;&#34;</span>
-    }]
-  }
-}]
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[{ 
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#a88b22d0-6106-4872-9435-c78b5e89fede&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;body&#34;</span>: [{
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;It&#39;s Hallstatt in Upper Austria&#34;</span>
+</span></span><span style="display:flex;"><span>  }],
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;target&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">&#34;selector&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;FragmentSelector&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#268bd2">&#34;conformsTo&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/TR/media-frags/&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;xywh=pixel:270,120,90,170&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}, { 
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;@context&#34;</span>: <span style="color:#2aa198">&#34;http://www.w3.org/ns/anno.jsonld&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;id&#34;</span>: <span style="color:#2aa198">&#34;#218d01ff-f077-4cc3-992d-1c81c426e51b&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;Annotation&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;body&#34;</span>: [{
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;TextualBody&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">&#34;purpose&#34;</span>: <span style="color:#2aa198">&#34;tagging&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;Church&#34;</span>
+</span></span><span style="display:flex;"><span>  }],
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">&#34;target&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#268bd2">&#34;selector&#34;</span>: [{
+</span></span><span style="display:flex;"><span>      <span style="color:#268bd2">&#34;type&#34;</span>: <span style="color:#2aa198">&#34;SvgSelector&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#268bd2">&#34;value&#34;</span>: <span style="color:#2aa198">&#34;&lt;svg&gt;&lt;polygon points=&#39;172,160 199,15 223,6 239,132 244,173 285,179 313,208 313,251 218,306 170,290 172,160&#39;&gt;&lt;/polygon&gt;&lt;/svg&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>    }]
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}]
+</span></span></code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">

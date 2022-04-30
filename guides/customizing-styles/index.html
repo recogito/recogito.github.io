@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
 <meta property="og:type" content="object" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.2/dist/annotorious.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.3/dist/annotorious.min.css" />
     <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"rainer@no5.at",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
   </head>
 
@@ -89,60 +89,60 @@ hidden. But you can enable it via CSS to add a dimming effect to the area outsid
 <p><img src="/images/guides/custom-annotationlayer-style.jpg" alt="A custom annotation layer style"></p>
 <p>This example applies custom CSS rules to enable the dim mask and give different appearance to the
 annotation outlines.</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css"><span style="color:#586e75">/** Hides the outer shapes - for this style we only need one **/</span>
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-outer</span><span style="color:#719e07">,</span> 
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-outer</span> {
-  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
-}
-
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-outer</span> {
-  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
-}
-
-<span style="color:#586e75">/** New style for the annotation outlines **/</span>
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-inner</span><span style="color:#719e07">,</span>
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-inner</span>  {
-  stroke-width:<span style="color:#2aa198">4</span>;
-  stroke:<span style="color:#cb4b16">white</span>;
-  stroke-dasharray:<span style="color:#2aa198">5</span>;
-}
-
-<span style="color:#586e75">/** Disable the hover effect from the default stylesheet **/</span>
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span>.<span style="color:#268bd2">editable</span>:<span style="color:#268bd2">hover</span> .<span style="color:#268bd2">a9s-inner</span> {
-  fill:<span style="color:#cb4b16">transparent</span>;
-}
-
-<span style="color:#586e75">/** Corner handles **/</span>
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-inner</span> {
-  fill:<span style="color:#cb4b16">white</span>;
-  stroke:<span style="color:#cb4b16">white</span>;
-}
-
-<span style="color:#586e75">/** Enable the dim mask, black with 60% transparency **/</span>
-<span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection-mask</span> {
-  fill:<span style="color:#b58900">rgba</span>(<span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0.6</span>);
-}
-</code></pre></div><h2 id="customizing-the-editor-popup-style">Customizing the Editor Popup Style</h2>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span><span style="color:#586e75">/** Hides the outer shapes - for this style we only need one **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-outer</span><span style="color:#719e07">,</span> 
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-outer</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-outer</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#719e07">display</span>:<span style="color:#cb4b16">none</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">/** New style for the annotation outlines **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection</span> .<span style="color:#268bd2">a9s-inner</span><span style="color:#719e07">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span> .<span style="color:#268bd2">a9s-inner</span>  {
+</span></span><span style="display:flex;"><span>  stroke-width:<span style="color:#2aa198">4</span>;
+</span></span><span style="display:flex;"><span>  stroke:<span style="color:#cb4b16">white</span>;
+</span></span><span style="display:flex;"><span>  stroke-dasharray:<span style="color:#2aa198">5</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">/** Disable the hover effect from the default stylesheet **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-annotation</span>.<span style="color:#268bd2">editable</span>:<span style="color:#268bd2">hover</span> .<span style="color:#268bd2">a9s-inner</span> {
+</span></span><span style="display:flex;"><span>  fill:<span style="color:#cb4b16">transparent</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">/** Corner handles **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-handle</span> .<span style="color:#268bd2">a9s-handle-inner</span> {
+</span></span><span style="display:flex;"><span>  fill:<span style="color:#cb4b16">white</span>;
+</span></span><span style="display:flex;"><span>  stroke:<span style="color:#cb4b16">white</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#586e75">/** Enable the dim mask, black with 60% transparency **/</span>
+</span></span><span style="display:flex;"><span><span style="color:#268bd2">svg</span>.<span style="color:#268bd2">a9s-annotationlayer</span> .<span style="color:#268bd2">a9s-selection-mask</span> {
+</span></span><span style="display:flex;"><span>  fill:<span style="color:#b58900">rgba</span>(<span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0</span>, <span style="color:#2aa198">0.6</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="customizing-the-editor-popup-style">Customizing the Editor Popup Style</h2>
 <p>The editor has the following markup structure and CSS classes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-editor&#34;</span>&gt;
-  &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-arrow&#34;</span>&gt;&lt;/<span style="color:#268bd2">div</span>&gt; <span style="color:#586e75">&lt;!-- renders the up- or downwards arrow --&gt;</span>
-  &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-editor-inner&#34;</span>&gt;
-    <span style="color:#586e75">&lt;!-- a list of editor widgets, each contained in a DIV --&gt;</span>
-    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-widget&#34;</span>&gt;
-      <span style="color:#586e75">&lt;!-- ... --&gt;</span>
-    &lt;/<span style="color:#268bd2">div</span>&gt;
-
-    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-footer&#34;</span>&gt;
-      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn left delete-annotation&#34;</span>&gt;
-        <span style="color:#586e75">&lt;!-- Trashcan icon --&gt;</span>
-      &lt;/<span style="color:#268bd2">button</span>&gt;
-      
-      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn outline&#34;</span>&gt;Cancel&lt;/<span style="color:#268bd2">button</span>&gt;
-      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn &#34;</span>&gt;Ok&lt;/<span style="color:#268bd2">button</span>&gt;
-    &lt;/<span style="color:#268bd2">div</span>&gt;
-  &lt;/<span style="color:#268bd2">div</span>&gt;
-&lt;/<span style="color:#268bd2">div</span>&gt;
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-editor&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-arrow&#34;</span>&gt;&lt;/<span style="color:#268bd2">div</span>&gt; <span style="color:#586e75">&lt;!-- renders the up- or downwards arrow --&gt;</span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-editor-inner&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#586e75">&lt;!-- a list of editor widgets, each contained in a DIV --&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-widget&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      <span style="color:#586e75">&lt;!-- ... --&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">div</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-footer&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn left delete-annotation&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        <span style="color:#586e75">&lt;!-- Trashcan icon --&gt;</span>
+</span></span><span style="display:flex;"><span>      &lt;/<span style="color:#268bd2">button</span>&gt;
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn outline&#34;</span>&gt;Cancel&lt;/<span style="color:#268bd2">button</span>&gt;
+</span></span><span style="display:flex;"><span>      &lt;<span style="color:#268bd2">button</span> class<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;r6o-btn &#34;</span>&gt;Ok&lt;/<span style="color:#268bd2">button</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span></code></pre></div>
       </div>
 
       <div class="table-of-contents subsections">
