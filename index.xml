@@ -14,8 +14,8 @@
       
       <guid>http://recogito.github.io/guides/configuring-the-editor/</guid>
       <description>Customizing the Editor Per default, the Annotorious editor popup features two widgets:
- A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown  You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
-var anno = Annotorious.</description>
+A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
+var anno = Annotorious.init({ image: &amp;#39;hallstatt&amp;#39;, widgets: [ &amp;#39;COMMENT&amp;#39;, { widget: &amp;#39;TAG&amp;#39;, vocabulary: [ &amp;#39;Animal&amp;#39;, &amp;#39;Building&amp;#39;, &amp;#39;Waterbody&amp;#39;] } ] }); Alternatively, the configuration below will give you an editor with just a comment widget, but no tag widget.</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@ var anno = Annotorious.</description>
       <description>Customizing Visual Appearance Need a different look and feel? Customizing the visual appearance of Annotorious is easy. All elements of the annotation layer and the editor popup can be styled with CSS.
 Customizing Shape Styles Annotorious renders annotations using SVG. You can completely alter the visual appearance of every graphical element via CSS.
 To make styling more flexible, Annotorious adds a few extras:
- For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
+For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
     </item>
     
     <item>
@@ -37,7 +37,8 @@ To make styling more flexible, Annotorious adds a few extras:
       
       <guid>http://recogito.github.io/annotorious/getting-started/osd-plugin/</guid>
       <description>Getting Started with the OpenSeadragon Plugin The Annotorious OpenSeadragon plugin is an extension to the OpenSeadragon viewer for zoomable high-resolution images. Click or tap the annotation to edit. Hold the SHIFT key while clicking and dragging the mouse to create a new annotation.
- #toolbar { margin-bottom:10px; } .openseadragon-canvas { outline:none; background-color:#f4f4f4 !important; border-radius:3px; } #openseadragon { max-width:640px; height:400px; width:100%; } @media only screen and (max-width: 800px) { .r6o-editor { width:260px !</description>
+Download the latest release and include script and stylesheet file in your web page. Make sure to include the script after the OpenSeadragon script.
+&amp;lt;!-- CSS stylesheet --&amp;gt; &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;annotorious.</description>
     </item>
     
     <item>
@@ -57,7 +58,7 @@ The demo uses headless mode to create annotations with either an Orange or Green
       
       <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
       <description>The W3C Web Annotation Model Annotorious supports a subset of the W3C Web Annotation model, an open standard for interoperable annotations.
- Only a single target shape per annotation is supported. FragmentSelectors of type Media Fragment are supported for rectangle shapes (see example below), with both pixel- and percent-encoded coordinates. SVG Selectors aer supported for polygon shapes (see example below). Annotation TextualBody types with a purpose of commenting, replying or no purpose are displayed as comments.</description>
+Only a single target shape per annotation is supported. FragmentSelectors of type Media Fragment are supported for rectangle shapes (see example below), with both pixel- and percent-encoded coordinates. SVG Selectors aer supported for polygon shapes (see example below). Annotation TextualBody types with a purpose of commenting, replying or no purpose are displayed as comments.</description>
     </item>
     
     <item>
@@ -67,7 +68,7 @@ The demo uses headless mode to create annotations with either an Orange or Green
       
       <guid>http://recogito.github.io/guides/annotorious-in-react/</guid>
       <description>Using Annotorious in React At the moment, Annotorious doesn&amp;rsquo;t have native React integration (yet). If you want to use Annotorious in your own React project, there are a few things to consider:
- Annotorious modifies the DOM directly: you need to use refs to access image DOM elements. Annotorious has an imperative API: wrapping it for React requires a few workarounds, including initialization in a useEffect hook, and storing the anno object in the component state.</description>
+Annotorious modifies the DOM directly: you need to use refs to access image DOM elements. Annotorious has an imperative API: wrapping it for React requires a few workarounds, including initialization in a useEffect hook, and storing the anno object in the component state.</description>
     </item>
     
     <item>
@@ -78,8 +79,8 @@ The demo uses headless mode to create annotations with either an Orange or Green
       <guid>http://recogito.github.io/annotorious/getting-started/storing-annotations/</guid>
       <description>Storing Annotations Important: Annotorious does not provide a backend for storing annotations online. It provides user interface functionality only. To store annotations, you need to connect them to your own backend, using the JavaScript API.
 When users create, update or delete annotations, Annotorious emits the following events:
- createAnnotation updateAnnotation deleteAnnotation  Subscribe to these events, and execute the corresponding write operations to your backend.
-anno.on(&amp;#39;createAnnotation&amp;#39;, function(annotation) {  // This part depends entirely on how your backend works  axios.</description>
+createAnnotation updateAnnotation deleteAnnotation Subscribe to these events, and execute the corresponding write operations to your backend.
+anno.on(&amp;#39;createAnnotation&amp;#39;, function(annotation) { // This part depends entirely on how your backend works axios.</description>
     </item>
     
     <item>
@@ -99,7 +100,7 @@ Firebase Storage Explained: Lifecycle Events &amp;amp; CRUD Operations The basic
       
       <guid>http://recogito.github.io/guides/editor-widgets/</guid>
       <description>Writing Your Own Editor Widgets You can extend the editor with your own widgets. A widget can be:
- an ordinary JavaScript function that takes a set of input arguments and returns a DOM element, which will be inserted into the editor a React component conforming to the same interface conventions as the built-in widgets.   Before you start writing your own widgets, you should first familiarize yourself with the the W3C Web Annotation specification, in particular the concepts of annotation bodies and body purposes.</description>
+an ordinary JavaScript function that takes a set of input arguments and returns a DOM element, which will be inserted into the editor a React component conforming to the same interface conventions as the built-in widgets. Before you start writing your own widgets, you should first familiarize yourself with the the W3C Web Annotation specification, in particular the concepts of annotation bodies and body purposes.</description>
     </item>
     
     <item>
@@ -129,7 +130,7 @@ Message Dictionaries User interface labels are part of recogito-client-core, a J
       
       <guid>http://recogito.github.io/guides/hackers-guide/</guid>
       <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
- recogito/annotorious. Annotorious application entry point, SVG rendering and drawing tool base classes. recogito/annotorious-openseadragon. The OpenSeadragon plugin. Imports most functionality from annotorious and recogito-client-core. recogito/recogito-client-core. A base module that contains shared code for Annotorious and RecogitoJS, most importantly the code for the editor popup.</description>
+recogito/annotorious. Annotorious application entry point, SVG rendering and drawing tool base classes. recogito/annotorious-openseadragon. The OpenSeadragon plugin. Imports most functionality from annotorious and recogito-client-core. recogito/recogito-client-core. A base module that contains shared code for Annotorious and RecogitoJS, most importantly the code for the editor popup.</description>
     </item>
     
     <item>
@@ -160,7 +161,7 @@ Annotorious Selector Pack Additional selection tools for Annotorious and Annotor
       <guid>http://recogito.github.io/annotorious/about/</guid>
       <description>About Annotorious Annotorious is open source software licensed under the BSD 3-Clause license.
 Source Code All source code is available on the recogito GitHub organization. The key repositories are:
- recogito/annotorious Annotorious (standard version) recogito/annotorious-openseadragon Annotorious OpenSeadragon plugin recogito/recogito-client-core shared base components recogito/recogito-client-plugins plugins and extensions  Need Help? Get in touch via the Annotorious Gitter chat. If you encounter bugs, or have feature requests, please report them via the GitHub issue trackers:</description>
+recogito/annotorious Annotorious (standard version) recogito/annotorious-openseadragon Annotorious OpenSeadragon plugin recogito/recogito-client-core shared base components recogito/recogito-client-plugins plugins and extensions Need Help? Get in touch via the Annotorious Gitter chat. If you encounter bugs, or have feature requests, please report them via the GitHub issue trackers:</description>
     </item>
     
     <item>
@@ -169,10 +170,10 @@ Source Code All source code is available on the recogito GitHub organization. Th
       <pubDate>Sun, 17 May 2020 14:15:19 +0200</pubDate>
       
       <guid>http://recogito.github.io/annotorious/api-docs/osd-plugin/</guid>
-      <description>API Reference: OpenSeadragon Plugin  The OpenSeadragon Plugin is an extension to the OpenSeadragon zoomable image viewer. If you are looking for the standard version of Annotorious, which works with normal images embedded in websites, see here instead.
- Initialization When included via &amp;lt;script&amp;gt; tag:
+      <description>API Reference: OpenSeadragon Plugin The OpenSeadragon Plugin is an extension to the OpenSeadragon zoomable image viewer. If you are looking for the standard version of Annotorious, which works with normal images embedded in websites, see here instead.
+Initialization When included via &amp;lt;script&amp;gt; tag:
 var anno = OpenSeadragon.Annotorious(viewer, config); With npm:
-import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorious from &amp;#39;@recogito/annotorious-openseadragon&amp;#39;; import &amp;#39;@recogito/annotorious-openseadragon/dist/annotorious.min.css&amp;#39;;  const viewer = OpenSeadragon({  id: &amp;#34;openseadragon&amp;#34;,  tileSources: {  type: &amp;#34;image&amp;#34;,  url: &amp;#34;1280px-Hallstatt.</description>
+import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorious from &amp;#39;@recogito/annotorious-openseadragon&amp;#39;; import &amp;#39;@recogito/annotorious-openseadragon/dist/annotorious.min.css&amp;#39;; const viewer = OpenSeadragon({ id: &amp;#34;openseadragon&amp;#34;, tileSources: { type: &amp;#34;image&amp;#34;, url: &amp;#34;1280px-Hallstatt.</description>
     </item>
     
     <item>
@@ -181,10 +182,10 @@ import OpenSeadragon from &amp;#39;openseadragon&amp;#39;; import * as Annotorio
       <pubDate>Sun, 17 May 2020 14:14:36 +0200</pubDate>
       
       <guid>http://recogito.github.io/annotorious/api-docs/annotorious/</guid>
-      <description>API Reference: Annotorious  The standard version of Annotorious works with normal images embedded in websites or web applications. If you are looking for the Annotorious OpenSeadragon plugin, see here instead.
- Initialization When included via &amp;lt;script&amp;gt; tag:
-var config = {  image: document.getElementById(&amp;#39;my-image&amp;#39;),  readOnly: true };  var anno = Annotorious.init(config); With npm:
-import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; import &amp;#39;@recogito/annotorious/dist/annotorious.min.css&amp;#39;;  const config = {  image: document.</description>
+      <description>API Reference: Annotorious The standard version of Annotorious works with normal images embedded in websites or web applications. If you are looking for the Annotorious OpenSeadragon plugin, see here instead.
+Initialization When included via &amp;lt;script&amp;gt; tag:
+var config = { image: document.getElementById(&amp;#39;my-image&amp;#39;), readOnly: true }; var anno = Annotorious.init(config); With npm:
+import { Annotorious } from &amp;#39;@recogito/annotorious&amp;#39;; import &amp;#39;@recogito/annotorious/dist/annotorious.min.css&amp;#39;; const config = { image: document.getElementById(&amp;#39;my-image&amp;#39;) } const anno = new Annotorious(config); The config object supports the following properties:</description>
     </item>
     
   </channel>

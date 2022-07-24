@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "splash.css",
-	"sourceRoot": "/home/rainers/Workspaces/recogito/project-website-source",
+	"sourceRoot": "/home/rainer/Workspaces/recogito/project-website-source",
 	"sources": [
 		"assets/scss/splash.scss",
 		"assets/scss/global/_fonts.scss"

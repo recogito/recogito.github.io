@@ -14,8 +14,8 @@
       
       <guid>http://recogito.github.io/guides/configuring-the-editor/</guid>
       <description>Customizing the Editor Per default, the Annotorious editor popup features two widgets:
- A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown  You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
-var anno = Annotorious.</description>
+A comment widget for writing comments and replies A tag widget for adding tags, either freetext or supported by a pre-configured vocabulary and an autosuggest dropdown You can can customize this setup when you initialize Annotorious/RecogitoJS using the widgets config option. The configuration below will give you the editor shown in the image above.
+var anno = Annotorious.init({ image: &amp;#39;hallstatt&amp;#39;, widgets: [ &amp;#39;COMMENT&amp;#39;, { widget: &amp;#39;TAG&amp;#39;, vocabulary: [ &amp;#39;Animal&amp;#39;, &amp;#39;Building&amp;#39;, &amp;#39;Waterbody&amp;#39;] } ] }); Alternatively, the configuration below will give you an editor with just a comment widget, but no tag widget.</description>
     </item>
     
     <item>
@@ -27,7 +27,7 @@ var anno = Annotorious.</description>
       <description>Customizing Visual Appearance Need a different look and feel? Customizing the visual appearance of Annotorious is easy. All elements of the annotation layer and the editor popup can be styled with CSS.
 Customizing Shape Styles Annotorious renders annotations using SVG. You can completely alter the visual appearance of every graphical element via CSS.
 To make styling more flexible, Annotorious adds a few extras:
- For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
+For every annotation shape, Annotorious renders two SVG shapes, exactly on top of each other.</description>
     </item>
     
     <item>
@@ -47,7 +47,7 @@ The demo uses headless mode to create annotations with either an Orange or Green
       
       <guid>http://recogito.github.io/guides/annotorious-in-react/</guid>
       <description>Using Annotorious in React At the moment, Annotorious doesn&amp;rsquo;t have native React integration (yet). If you want to use Annotorious in your own React project, there are a few things to consider:
- Annotorious modifies the DOM directly: you need to use refs to access image DOM elements. Annotorious has an imperative API: wrapping it for React requires a few workarounds, including initialization in a useEffect hook, and storing the anno object in the component state.</description>
+Annotorious modifies the DOM directly: you need to use refs to access image DOM elements. Annotorious has an imperative API: wrapping it for React requires a few workarounds, including initialization in a useEffect hook, and storing the anno object in the component state.</description>
     </item>
     
     <item>
@@ -67,7 +67,7 @@ Firebase Storage Explained: Lifecycle Events &amp;amp; CRUD Operations The basic
       
       <guid>http://recogito.github.io/guides/editor-widgets/</guid>
       <description>Writing Your Own Editor Widgets You can extend the editor with your own widgets. A widget can be:
- an ordinary JavaScript function that takes a set of input arguments and returns a DOM element, which will be inserted into the editor a React component conforming to the same interface conventions as the built-in widgets.   Before you start writing your own widgets, you should first familiarize yourself with the the W3C Web Annotation specification, in particular the concepts of annotation bodies and body purposes.</description>
+an ordinary JavaScript function that takes a set of input arguments and returns a DOM element, which will be inserted into the editor a React component conforming to the same interface conventions as the built-in widgets. Before you start writing your own widgets, you should first familiarize yourself with the the W3C Web Annotation specification, in particular the concepts of annotation bodies and body purposes.</description>
     </item>
     
     <item>
@@ -97,7 +97,7 @@ Message Dictionaries User interface labels are part of recogito-client-core, a J
       
       <guid>http://recogito.github.io/guides/hackers-guide/</guid>
       <description>Hacker&amp;rsquo;s Guide to Annotorious and RecogitoJS We welcome pull requests to Annotorious and RecogitoJS - both to the code, as well as to our documentation! To contribute, simply fork the relevant repository and hack away. Our code is located in the following repositories
- recogito/annotorious. Annotorious application entry point, SVG rendering and drawing tool base classes. recogito/annotorious-openseadragon. The OpenSeadragon plugin. Imports most functionality from annotorious and recogito-client-core. recogito/recogito-client-core. A base module that contains shared code for Annotorious and RecogitoJS, most importantly the code for the editor popup.</description>
+recogito/annotorious. Annotorious application entry point, SVG rendering and drawing tool base classes. recogito/annotorious-openseadragon. The OpenSeadragon plugin. Imports most functionality from annotorious and recogito-client-core. recogito/recogito-client-core. A base module that contains shared code for Annotorious and RecogitoJS, most importantly the code for the editor popup.</description>
     </item>
     
   </channel>
