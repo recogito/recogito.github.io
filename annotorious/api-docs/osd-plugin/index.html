@@ -320,6 +320,25 @@ while enforcing the constraints (minZoom, maxZoom and visibilityRatio).</p>
 <h3 id="getannotations">.getAnnotations</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>anno.getAnnotations();
 </span></span></code></pre></div><p>Returns all annotations according to the current rendered state, in W3C Web Annotation format.</p>
+<h3 id="getannotationsintersecting">.getAnnotationsIntersecting</h3>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>anno.getAnnotationsIntersecting(arg);
+</span></span></code></pre></div><p>Returns the annotations whose bounding boxes intersect with the bounding box of the specified annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arg</code></td>
+<td>String, Object</td>
+<td>the annotation or the annotation ID</td>
+</tr>
+</tbody>
+</table>
 <h3 id="getimagesnippetbyid">.getImageSnippetById</h3>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#268bd2">const</span> { snippet, transform } <span style="color:#719e07">=</span> anno.getImageSnippetById(annotationId);
 </span></span></code></pre></div><p>Returns an object containing:</p>
@@ -1136,6 +1155,7 @@ the appropriate fill/stroke attributes.</p>
         <li><a href="#fitboundswithconstraints">.fitBoundsWithConstraints</a></li>
         <li><a href="#getannotationbyid">.getAnnotationById</a></li>
         <li><a href="#getannotations">.getAnnotations</a></li>
+        <li><a href="#getannotationsintersecting">.getAnnotationsIntersecting</a></li>
         <li><a href="#getimagesnippetbyid">.getImageSnippetById</a></li>
         <li><a href="#getselected">.getSelected</a></li>
         <li><a href="#getselectedimagesnippet">.getSelectedImageSnippet</a></li>
