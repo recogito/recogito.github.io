@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Annotorious | Annotorious in Vue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <link rel="stylesheet" href="/css/style.min.75017861b239a23b53d820680640ff764c73ea81a8fe85f2d9bf0dc63ff88982.css">
+    <meta name="description" content="A code example that shows how to use Annotorious in Vue.js">
+<meta name="twitter:title" content="Annotorious in Vue" />
+<meta name="twitter:image:src" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta name="twitter:site" content="@aboutgeo" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="A code example that shows how to use Annotorious in Vue.js">
+<meta property="og:title" content="Annotorious in Vue" />
+<meta property="og:description" content="A code example that shows how to use Annotorious in Vue.js">
+<meta property="og:url" content="https://recogito.github.io/guides/annotorious-in-vue" />
+<meta property="og:image" content="https://recogito.github.io/images/annotorious-social-large.png" />
+<meta property="og:type" content="object" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@recogito/annotorious-openseadragon@2.7.8/dist/annotorious.min.css" />
+    <script>if(!sessionStorage.getItem("_swa")&&document.referrer.indexOf(location.protocol+"//"+location.host)!== 0){fetch("https://counter.dev/track?"+new URLSearchParams({referrer:document.referrer,screen:screen.width+"x"+screen.height,user:"rainer@no5.at",utcoffset:"1"}))};sessionStorage.setItem("_swa","1");</script>
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar">
+  <script>
+    var openResponsiveMenu = function() {
+      var el = document.getElementById('navbar');
+      if (el.className === 'navbar') {
+        el.className = 'navbar responsive';
+      } else {
+        el.className = 'navbar';
+      }
+    };
+  </script>
+  <header>
+    <div class="mobile-only">
+      <button class="hamburger-icon" id="open-responsive-menu" onclick="openResponsiveMenu()">
+        <img src="/images/menu-24px.svg">
+      </button>      
+    </div>
+    <ul>
+      <li>
+        <a href="/annotorious/">Home</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/getting-started">Getting Started</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/api-docs">API Docs</a>
+      </li>
+      
+      <li class='current'>
+        <a href="/guides">Guides</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/plugins">Plugins</a>
+      </li>
+
+      <li class=''>
+        <a href="/annotorious/about">About</a>
+      </li>
+      
+      <li class="github"><a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a></li>
+    </ul>
+  </header>
+</div>
+
+    <div class="column">
+      <div class="main-content">
+        <h1 id="using-annotorious-in-vuejs">Using Annotorious in Vue.js</h1>
+<p>Below is a minimal example for using Annotorious in Vue.js. Thanks to
+<a href="https://github.com/gbrits">Grant Brits</a> for this contribution!</p>
+<div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#268bd2">template</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#268bd2">img</span> id<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;plan&#34;</span> src<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;img.png&#34;</span> style<span style="color:#719e07">=</span><span style="color:#2aa198">&#34;width: 100%; max-width: 1024px;&#34;</span> /&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#268bd2">div</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">template</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#268bd2">script</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">import</span> { Annotorious} from <span style="color:#2aa198">&#39;@recogito/annotorious&#39;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">import</span> <span style="color:#2aa198">&#39;@recogito/annotorious/dist/annotorious.min.css&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#268bd2">export</span> <span style="color:#719e07">default</span> {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    data() {
+</span></span><span style="display:flex;"><span>      <span style="color:#719e07">return</span> {
+</span></span><span style="display:flex;"><span>        anno<span style="color:#719e07">:</span> <span style="color:#cb4b16">null</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    methods<span style="color:#719e07">:</span> {
+</span></span><span style="display:flex;"><span>      initAnno() {
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno <span style="color:#719e07">=</span> <span style="color:#719e07">new</span> Annotorious({
+</span></span><span style="display:flex;"><span>          image<span style="color:#719e07">:</span> <span style="color:#b58900">document</span>.getElementById(<span style="color:#2aa198">&#34;plan&#34;</span>)
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span> (annotation) {
+</span></span><span style="display:flex;"><span>          console.log(<span style="color:#2aa198">&#39;Created annotation&#39;</span>, annotation);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno.on(<span style="color:#2aa198">&#39;createSelection&#39;</span>, <span style="color:#268bd2">function</span> (selection) {
+</span></span><span style="display:flex;"><span>          console.log(<span style="color:#2aa198">&#39;Created selection&#39;</span>, selection);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno.on(<span style="color:#2aa198">&#39;deleteAnnotation&#39;</span>, <span style="color:#268bd2">function</span> (annotation) {
+</span></span><span style="display:flex;"><span>          console.log(<span style="color:#2aa198">&#39;Delete annotation&#39;</span>, selection);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno.on(<span style="color:#2aa198">&#39;mouseEnterAnnotation&#39;</span>, <span style="color:#268bd2">function</span> (annotation, element) {
+</span></span><span style="display:flex;"><span>          console.log(<span style="color:#2aa198">&#39;Mouse ENTERED annotation&#39;</span>, annotation);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno.on(<span style="color:#2aa198">&#39;selectAnnotation&#39;</span>, <span style="color:#268bd2">function</span> (annotation, element) {
+</span></span><span style="display:flex;"><span>          console.log(<span style="color:#2aa198">&#39;Select annotation&#39;</span>, annotation);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno.on(<span style="color:#2aa198">&#39;cancelSelected&#39;</span>, <span style="color:#268bd2">function</span> (selection) {
+</span></span><span style="display:flex;"><span>          console.log(<span style="color:#2aa198">&#39;UNSELECTED&#39;</span>);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#719e07">this</span>.anno.on(<span style="color:#2aa198">&#39;clickAnnotation&#39;</span>, <span style="color:#268bd2">function</span> (annotation, element) {
+</span></span><span style="display:flex;"><span>          console.log(<span style="color:#2aa198">&#39;Clicked annotation&#39;</span>, annotation);
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mounted() {
+</span></span><span style="display:flex;"><span>      <span style="color:#719e07">this</span>.initAnno();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#268bd2">script</span>&gt;
+</span></span></code></pre></div>
+      </div>
+
+      <div class="table-of-contents subsections">
+        <nav>
+          <ul>
+            <li><a href="http://recogito.github.io/guides/">Guides</a></li>
+            <li>
+              <ul>
+                
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/configuring-the-editor/">Configuring the Editor</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/customizing-styles/">Customizing Styles</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/headless-mode/">Headless Mode</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/annotorious-in-vue/" class="active">Annotorious in Vue</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/annotorious-in-react/">Annotorious in React</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/using-firebase-for-storage/">Firebase Storage Plugin</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/editor-widgets/">Writing Editor Widgets</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/example-react-widget/">React Editor Widget</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/contributing-ui-translations/">Contributing Translations</a>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <a href="http://recogito.github.io/guides/hackers-guide/">Hacker&#39;s Guide</a>
+                    
+                  </li>
+                
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    
+    <footer>
+  <div class="inner">
+    <p>Licensed under the <a href="https://github.com/recogito/annotorious/blob/master/LICENSE">BSD License</a></p>
+    <p>Need help? Get in touch via the <a href="https://gitter.im/recogito/annotorious" class="no-break">Annotorious Gitter Chat</a></p>
+    <p>Want to help improve documentation? <a href="https://github.com/recogito/project-website-source">Fork this website</a> and send a pull request!</p>
+    <p class="social-links">
+      <span class="no-break">
+        <a href="https://github.com/recogito/annotorious"><img src="/images/github-logo.svg"></a>
+        <a href="https://github.com/recogito/annotorious">github.com/recogito</a> 
+        &nbsp;
+      </span>
+
+      <span class="no-break">
+        <a href="https://twitter.com/aboutgeo"><img src="/images/twitter-logo.svg"></a>
+        <a href="https://twitter.com/aboutgeo">twitter.com/aboutgeo</a> 
+        &nbsp;
+      </span>
+
+      <span class="no-break">
+        <a href="https://www.patreon.com/rainersimon"><img src="/images/sponsors-logo.svg"></a>
+        <a href="https://www.patreon.com/rainersimon">Become a sponsor</a> 
+      </span>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

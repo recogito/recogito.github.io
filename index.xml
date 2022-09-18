@@ -6,7 +6,7 @@
     <description>Recent content on recogito.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Apr 2021 16:45:12 +0200</lastBuildDate><atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Sep 2022 08:54:00 +0200</lastBuildDate><atom:link href="http://recogito.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Configuring the Editor</title>
       <link>http://recogito.github.io/guides/configuring-the-editor/</link>
@@ -59,6 +59,16 @@ The demo uses headless mode to create annotations with either an Orange or Green
       <guid>http://recogito.github.io/annotorious/getting-started/web-annotation/</guid>
       <description>The W3C Web Annotation Model Annotorious supports a subset of the W3C Web Annotation model, an open standard for interoperable annotations.
 Only a single target shape per annotation is supported. FragmentSelectors of type Media Fragment are supported for rectangle shapes (see example below), with both pixel- and percent-encoded coordinates. SVG Selectors aer supported for polygon shapes (see example below). Annotation TextualBody types with a purpose of commenting, replying or no purpose are displayed as comments.</description>
+    </item>
+    
+    <item>
+      <title>Annotorious in Vue</title>
+      <link>http://recogito.github.io/guides/annotorious-in-vue/</link>
+      <pubDate>Sun, 18 Sep 2022 08:54:00 +0200</pubDate>
+      
+      <guid>http://recogito.github.io/guides/annotorious-in-vue/</guid>
+      <description>Using Annotorious in Vue.js Below is a minimal example for using Annotorious in Vue.js. Thanks to Grant Brits for this contribution!
+&amp;lt;template&amp;gt; &amp;lt;div&amp;gt; &amp;lt;img id=&amp;#34;plan&amp;#34; src=&amp;#34;img.png&amp;#34; style=&amp;#34;width: 100%; max-width: 1024px;&amp;#34; /&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/template&amp;gt; &amp;lt;script&amp;gt; import { Annotorious} from &amp;#39;@recogito/annotorious&amp;#39;; import &amp;#39;@recogito/annotorious/dist/annotorious.min.css&amp;#39;; export default { data() { return { anno: null } }, methods: { initAnno() { this.anno = new Annotorious({ image: document.getElementById(&amp;#34;plan&amp;#34;) }); this.anno.on(&amp;#39;createAnnotation&amp;#39;, function (annotation) { console.log(&amp;#39;Created annotation&amp;#39;, annotation); }); this.</description>
     </item>
     
     <item>

@@ -17,6 +17,9 @@
     <loc>http://recogito.github.io/annotorious/getting-started/web-annotation/</loc>
     <lastmod>2020-05-17T14:33:09+02:00</lastmod>
   </url><url>
+    <loc>http://recogito.github.io/guides/annotorious-in-vue/</loc>
+    <lastmod>2022-09-18T08:54:00+02:00</lastmod>
+  </url><url>
     <loc>http://recogito.github.io/guides/annotorious-in-react/</loc>
     <lastmod>2021-04-25T16:45:12+02:00</lastmod>
   </url><url>
@@ -39,7 +42,7 @@
     <lastmod>2020-06-04T11:46:22+02:00</lastmod>
   </url><url>
     <loc>http://recogito.github.io/</loc>
-    <lastmod>2021-04-25T16:45:12+02:00</lastmod>
+    <lastmod>2022-09-18T08:54:00+02:00</lastmod>
   </url><url>
     <loc>http://recogito.github.io/annotorious/plugins/</loc>
     <lastmod>2021-04-05T10:09:57+02:00</lastmod>
