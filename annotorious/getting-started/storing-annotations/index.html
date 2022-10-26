@@ -84,8 +84,8 @@ backend, using the <a href="/annotorious/api-docs/">JavaScript API</a>.</p>
 <p>Subscribe to these events, and execute the corresponding write operations to your backend.</p>
 <div class="highlight"><pre tabindex="0" style="color:#93a1a1;background-color:#002b36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>anno.on(<span style="color:#2aa198">&#39;createAnnotation&#39;</span>, <span style="color:#268bd2">function</span>(annotation) {
 </span></span><span style="display:flex;"><span>  <span style="color:#586e75">// This part depends entirely on how your backend works
-</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  axios.post(<span style="color:#2aa198">&#39;http://www.example.com/annotations/).then((response) =&gt; {
-</span></span></span><span style="display:flex;"><span><span style="color:#2aa198">    console.log(&#39;</span>Stored.&#39;);
+</span></span></span><span style="display:flex;"><span><span style="color:#586e75"></span>  axios.post(<span style="color:#2aa198">&#39;http://www.example.com/annotations/&#39;</span>).then((response) =&gt; {
+</span></span><span style="display:flex;"><span>    console.log(<span style="color:#2aa198">&#39;Stored.&#39;</span>);
 </span></span><span style="display:flex;"><span>  });
 </span></span><span style="display:flex;"><span>});
 </span></span></code></pre></div><h2 id="using-cloud-storage-services">Using Cloud Storage Services</h2>
