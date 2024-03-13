@@ -4,7 +4,6 @@ import starlight from '@astrojs/starlight';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://recogito.github.io/',
-	base: '/recogito.github.io/starlight',
 	integrations: [
 		starlight({
 			title: 'Recogito Plus Platform',
