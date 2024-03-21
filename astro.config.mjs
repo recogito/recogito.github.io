@@ -6,12 +6,19 @@ export default defineConfig({
 	site: 'https://recogito.github.io/',
 	integrations: [
 		starlight({
-			title: 'Recogito Plus Platform',
+			title: 'Recogito v4.0.0',
+			defaultLocale: 'root', // optional
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en', // lang is required for root locales
+				},
+			},
 			logo: {
 				src: './src/assets/logo.svg',
 			},			
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/recogito/',
 			},
 			sidebar: [
 				{
