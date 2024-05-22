@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   site: 'https://recogito.github.io/',
   integrations: [starlight({
-    title: 'Recogito v4.0.0',
+    title: 'Recogito Studio',
     defaultLocale: 'root',
     // optional
     locales: {
