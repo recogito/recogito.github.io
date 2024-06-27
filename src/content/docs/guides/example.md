@@ -1,11 +1,10 @@
 ---
-title: Example Guide
-description: A guide in my new Starlight docs site.
+title: Self Hosting
+description: This is where self hosting documentation will live eventually
 ---
 
-Guides lead a user through a specific task they want to accomplish, often with a sequence of steps.
-Writing a good guide requires thinking about what your users are trying to do.
+This will be a step by step guide to self hosting Recogito Studio.  It will include information on how to install and configure the software, as well as how to maintain and update it (eventually).
 
 ## Further reading
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- There is currently a README [here](https://github.com/recogito/recogito-studio/blob/main/README.md).

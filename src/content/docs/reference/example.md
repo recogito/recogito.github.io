@@ -1,11 +1,10 @@
 ---
-title: Example Reference
-description: A reference page in my new Starlight docs site.
+title: Extension Reference
+description: This page will cover how Recogito Studio extensions work.
 ---
 
-Reference pages are ideal for outlining how things work in terse and clear terms.
-Less concerned with telling a story or addressing a specific use case, they should give a comprehensive outline of what you're documenting.
+For now, there is just one extension: a geotagging feature that allows users to link annotations to gazetteer entries.  This feature is currently in development and will be available soon.
 
 ## Further reading
 
-- Read [about reference](https://diataxis.fr/reference/) in the Diátaxis framework
+- More soon!
