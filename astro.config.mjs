@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   site: 'https://recogito.github.io/',
   integrations: [starlight({
-    title: 'Recogito Studio',
+    title: 'Developer Documentation',
     defaultLocale: 'root',
     // optional
     locales: {
@@ -15,7 +15,8 @@ export default defineConfig({
       }
     },
     logo: {
-      src: './src/assets/logo.svg'
+      light: '/src/assets/recogito_logo_horizontal_black.png',
+      dark: '/src/assets/recogito_logo_horizontal_white.png'
     },
     social: {
       github: 'https://github.com/recogito/'
