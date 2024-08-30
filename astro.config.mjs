@@ -3,7 +3,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://recogito.github.io/',
+  site: 'https://recogitostudio.org/',
   integrations: [starlight({
     title: '',
     defaultLocale: 'root',
