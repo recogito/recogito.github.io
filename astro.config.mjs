@@ -18,9 +18,9 @@ export default defineConfig({
       light: '/src/assets/recogito_logo_horizontal_black.png',
       dark: '/src/assets/recogito_logo_horizontal_white.png'
     },
-    social: {
-      github: 'https://github.com/recogito/'
-    },
+    social: [
+      { icon: 'github', label: 'github' , href: 'https://github.com/recogito/' },
+    ],
     sidebar: [{
       label: 'Guides',
       items: [
