@@ -1,0 +1,65 @@
+---
+title: Getting Started
+description: Overview of Recogito Studio self-hosting options and requirements.
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Recogito Studio is a modern, open-source platform for collaborative annotation of TEI text, IIIF images, and PDFs. This documentation covers everything you need to self-host your own instance.
+
+## What is Recogito Studio?
+
+Recogito Studio provides:
+- **Collaborative Annotation**: Multiple users can annotate documents simultaneously
+- **Standards-Based**: Built on TEI, IIIF, and other open standards
+- **Multi-Format Support**: Works with text, images, and PDF documents
+- **Extensible Platform**: Plugin architecture for custom functionality
+
+## Self-Hosting Options
+
+<CardGrid>
+  <Card title="Complete Installation" icon="rocket">
+    Full Docker-based deployment with all services included. Perfect for production environments.
+    
+    [View Self-Hosting Guide →](/guides/self-hosting/)
+  </Card>
+  <Card title="Development Setup" icon="laptop">
+    Simplified setup for development and testing purposes.
+    
+    [Coming Soon]
+  </Card>
+</CardGrid>
+
+## System Requirements
+
+Before you begin, ensure you have:
+
+- **Server**: Ubuntu Linux (v24 recommended)
+- **Memory**: Minimum 4GB RAM
+- **Storage**: 50GB+ available space
+- **Network**: Public IP with domain access
+- **DNS**: Ability to create 5+ DNS records
+
+## Architecture Overview
+
+Recogito Studio consists of several integrated components:
+
+- **Client Application** (Astro.js) - User interface
+- **Server Platform** (Supabase) - Backend services
+- **Database** (PostgreSQL) - Data storage
+- **File Storage** (MinIO) - Document and media files
+- **Management Tools** (Portainer, pgAdmin) - Administration
+
+## Next Steps
+
+1. **Review Requirements**: Ensure your server meets the [system requirements](/guides/self-hosting/#system-requirements)
+2. **Prepare Domains**: Set up DNS records for your installation
+3. **Follow Installation**: Complete the [self-hosting guide](/guides/self-hosting/)
+4. **Configure & Customize**: Adapt the platform to your needs
+
+## Need Help?
+
+- **Documentation**: Complete guides are available in this documentation
+- **Community**: Join the [Recogito Forum](https://community.performantsoftware.com/c/recogito/5)
+- **Source Code**: Visit the [GitHub repository](https://github.com/recogito/recogito-studio)
+- **Commercial Support**: [Contact Performant Software](https://www.performantsoftware.com/pages/recogito/)

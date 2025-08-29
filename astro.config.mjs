@@ -24,11 +24,19 @@ export default defineConfig({
     sidebar: [{
       label: 'Guides',
       items: [
-      // Each item here is one entry in the navigation menu.
-      {
-        label: 'Example Guide',
-        link: '/guides/example/'
-      }]
+        {
+          label: 'Getting Started',
+          link: '/guides/overview/'
+        },
+        {
+          label: 'Self-Hosting Guide',
+          link: '/guides/self-hosting/'
+        },
+        {
+          label: 'Plugin Development',
+          link: '/guides/sdk/'
+        }
+      ]
     }, {
       label: 'Reference',
       autogenerate: {

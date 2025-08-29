@@ -25,4 +25,4 @@ pnpm-debug.log*
 
 
 # Local Netlify folder
-.netlify
+.netlify/state.json

@@ -1,0 +1,400 @@
+---
+title: Recogito Studio Plugin Software Development Kit
+description: A software development kit for developing plugins to Recogito Studio, an open source platform for collaborative annotation of TEI, IIIF and PDF documents.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A software development kit for developing plugins to [Recogito Studio](https://recogitostudio.org/), an open source platform for collaborative annotation of TEI, IIIF and PDF documents.
+
+The **Recogito Studio SDK** is designed to facilitate plugin development for the [Recogito Studio Client](https://github.com/recogito/recogito-client) without the need to set up your own full-stack installation or forking the platform. It provides essential tools and abstractions to help you build useful extensions for the Recogito Studio ecosystem.
+
+## Getting Started
+
+The following steps walk you through the development of a **Hello World** plugin that adds a simple message to the annotation editor.
+
+### Prerequisites
+
+Before starting, make sure you have the following installed:
+
+- NodeJS (version 20 recommended)
+- npm
+
+## Create Your Project
+
+### Step 1: Choose from GitHub Template or Manual Setup
+
+There is a GitHub template that you can use to quickly bootstrap your new project. However if you prefer you can build your project from scratch.
+
+<Tabs>
+<TabItem label="GitHub Template">
+
+#### Step 1.1.1: Create New Project From Template
+
+1. In your browser, go to the [template repository](https://github.com/recogito/plugin-template)
+2. Above the file list, click Use this template.
+3. Select Create a new repository.
+
+![Use this template button](/src/assets/use-this-template-button.png)
+
+4. Use the Owner dropdown menu to select the account you want to own the repository.
+5. Type a name for your repository, and an optional description.
+
+![Create repository owner selection](/src/assets/create-repository-owner.png)
+
+6. Choose a repository visibility.
+
+7. Click `Create repository`.
+
+#### Step 1.1.2: Clone Repository to Your Local Workspace
+
+In a terminal window clone the repository that you just created:
+
+```sh
+git clone https://github.com/[Your Repository].git
+```
+
+Change your directory to the cloned repository and run:
+
+```sh
+npm install
+```
+
+Open your `package.json` file and name your plugin. It should match the name you created above (i.e. @performant/plugin-hello-world).
+
+```diff
+{
+-   "name": "@recogito/plugin-template",
++   "name": "@performant/plugin-hello-world"
+  "version": "0.1.0",
+-   "description": "A template to boot-strap a new Recogito Studio plugin project.",
++   "description": "My new Recogito Studio Plugin"
+  ...
+}
+```
+
+You can now proceed to [Step 2](#step-2-create-the-plugin-entry-point). You will find that some of the proceeding steps have been taken care of by the template.
+
+</TabItem>
+<TabItem label="Manual Setup">
+
+#### Step 1.2.1: Initialize a New Plugin Project
+
+Create a new directory for your plugin and initialize an npm project:
+
+```sh
+mkdir plugin-hello-world
+cd plugin-hello-world
+npm init
+```
+
+Install the following dev dependencies:
+
+```sh
+npm install --save-dev @types/node @types/react @types/react-dom typescript copyfiles
+npm install --save-dev astro react react-dom
+```
+
+Then, install the Recogito Studio SDK as runtime dependencies:
+
+```sh
+npm install @recogito/studio-sdk
+```
+
+#### Step 1.2.2: Configure TypeScript
+
+Create a tsconfig.json file in your project root:
+
+```json
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ESNext"
+  },
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist"]
+}
+```
+
+Make sure the following lines are in your `package.json`:
+
+```jsonc
+{
+  // ...
+  "type": "module",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc && npm run copy-files",
+    "copy-files": "copyfiles -u 1 \"src/extensions/**/*.css\" \"src/extensions/**/*.jpg\" \"src/extensions/**/*.png\" dist"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Step 2: Create the Plugin Entry Point
+
+The entry point is a TypeScript file (`src/index.ts`) that exports an Astro Integration and registers a Plugin. Here's a sample implementation:
+
+```typescript
+import type { AstroIntegration } from "astro";
+import { Plugin, registerPlugin } from "@recogito/studio-sdk";
+
+const HelloWorldPlugin: Plugin = {
+  name: "My Hello World Plugin",
+  module_name: '@performant/plugin-hello-world',
+  description: "An example Hello World plugin.",
+  author: "Performant Software",
+  homepage: "https://www.performantsoftware.com/",
+};
+
+const plugin = (): AstroIntegration => ({
+  name: "plugin-hello-world",
+  hooks: {
+    "astro:config:setup": ({ config, logger }) => {
+      registerPlugin(HelloWorldPlugin, config, logger);
+    },
+  },
+});
+
+export default plugin;
+```
+
+### Step 3: Install the Test Application Template
+
+Run the following command to set up the test application:
+
+```sh
+npx copy-template
+```
+
+Add a development script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "dev": "npm start --prefix .dev/"
+  }
+}
+```
+
+### Step 4: Configure the Test Application
+
+Update `.dev/package.json` to include your plugin:
+
+```json
+{
+  "dependencies": {
+    "@performant/plugin-hello-world": "file:../"
+  }
+}
+```
+
+Modify `.dev/astro.config.mjs`:
+
+```javascript
+import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import node from '@astrojs/node';
+import HelloWorldPlugin from '@performant/plugin-hello-world';
+
+export default defineConfig({
+  integrations: [
+    react(),
+    HelloWorldPlugin()
+  ],
+  // ... other configurations
+});
+```
+
+### Step 5: Create a UI Extension
+
+Create a React component in `src/extensions/HelloWorldMessage.tsx`:
+
+```tsx
+// ./src/extensions/HelloWorldMessage.tsx
+
+export const HelloWorldMessage = () => {
+  return <div>Hello World</div>;
+};
+```
+
+Update the `index.ts` file to register the component as a UI extension:
+
+```typescript
+import type { AstroIntegration } from 'astro';
+import { Plugin, registerPlugin } from '@recogito/studio-sdk';
+
+const HelloWorldPlugin: Plugin = {
+  name: 'My Hello World Plugin',
+  module_name: '@performant/plugin-hello-world',
+  description: 'An example Hello World plugin.',
+  author: 'Performant Software',
+  homepage: 'https://www.performantsoftware.com/',
+
+  extensions: [{
+    name: 'hello-world-message',
+    component_name: 'HelloWorldMessage',
+    extension_point: 'annotation:*:annotation-editor'
+  }]
+};
+
+const plugin = (): AstroIntegration  => ({
+  name: 'plugin-hello-world',
+  hooks: {
+    'astro:config:setup': ({ config, logger }) => {
+      registerPlugin(HelloWorldPlugin, config, logger);
+    }
+  }
+});
+
+export default plugin;
+```
+
+In the `package.json`, add an export for the UI extension:
+
+```jsonc
+{
+  "exports": {
+    ".": "./dist/index.js",
+    "./HelloWorldMessage": "./dist/extensions/HelloWorldMessage.js"
+  }
+}
+```
+
+## Test Your Extension
+
+1. Build the plugin package:
+```bash
+npm run build
+```
+
+2. Add plugin to test application dependencies in `.dev/package.json`:
+```jsonc
+{
+  "dependencies": {
+    "@performant/plugin-hello-world": "file:../"
+  }
+}
+```
+
+3. Configure Astro integration in `.dev/astro.config.mjs`:
+```js
+import HelloWorldPlugin from "@performant/plugin-hello-world";
+
+export default defineConfig({
+  integrations: [
+    react(),
+    HelloWorldPlugin(),
+  ],
+  // other configurations...
+});
+```
+
+4. Run the development process:
+```bash
+npm install
+npm run dev
+```
+
+5. Open browser to `http://localhost:4321/`
+
+## Installing Plugins
+
+Plugins can be installed via:
+- npm registry publication
+- Direct GitHub repository installation
+
+Installation steps:
+1. Install package in Recogito Studio Client folder
+2. Add plugin to `astro.config.mjs`
+
+## Component Styling
+
+The Recogito Studio Client utilizes <a href="https://www.radix-ui.com/">Radix UI</a> primitives for building accessible and consistent interface components. We recommend that plugin developers also adopt Radix when developing extension components.​
+
+To make it easier to build visually consistent extensions that match Recogito Studio's native look and feel, the SDK provides a set of pre-defined CSS classes for common UI primitives. The following primitives and classes are currently available:
+
+- <a href="https://github.com/recogito/recogito-studio-sdk/blob/main/src/styles/accordion/index.css">Accordion</a>. Base styles for the Radix Accordion primitive.
+- <a href="https://github.com/recogito/recogito-studio-sdk/blob/main/src/styles/avatar/index.css">Avatar</a>. The Recogito-themed user avatar.
+- <a href="https://github.com/recogito/recogito-studio-sdk/tree/main/src/styles/button">Button</a>. A range of button variant styles (primary, minimal, unstyled, danger, etc.)
+- <a href="https://github.com/recogito/recogito-studio-sdk/tree/main/src/styles/checkbox">Checkbox</a>. Base styles for the Radix checkbox primitive.
+- <a href="https://github.com/recogito/recogito-studio-sdk/tree/main/src/styles/dialog">Dialog</a>. Default Radix popup dialog styles.
+- <a href="https://github.com/recogito/recogito-studio-sdk/blob/main/src/styles/dropdown/index.css">Dropdown</a>. Base styles for Recogito-themed dropdown menus.
+- <a href="https://github.com/recogito/recogito-studio-sdk/tree/main/src/styles/form">Form</a>. Minimal styles for form input elements.
+- <a href="https://github.com/recogito/recogito-studio-sdk/blob/main/src/styles/popover/index.css">Popover</a>. Base styles for the Radix popover primitive.
+- <a href="https://github.com/recogito/recogito-studio-sdk/blob/main/src/styles/radio/index.css">Radio</a>. Base styles for the Radix Radio primitive.
+- <a href="https://github.com/recogito/recogito-studio-sdk/blob/main/src/styles/select/index.css">Select</a>. Base styles for the Radix Select primitive.
+- <a href="https://github.com/recogito/recogito-studio-sdk/blob/main/src/styles/switch/index.css">Switch</a>. Base styles for the Radix Switch primitive.
+- <a href="https://github.com/recogito/recogito-studio-sdk/tree/main/src/styles/tooltip">Tooltip</a>. Styles for Recogito-themed mouse hover tooltips.
+
+To apply SDK-provided theming, all that's needed is to add the appropriate CSS classes to your components. For example:
+
+```tsx
+// Use Radix Accordion in your extension component
+import * as Accordion from '@radix-ui/react-accordion';
+
+// ...
+
+<Accordion.Root
+  // Apply Recogito-provided `accordion-root` class
+  className="accordion-root"
+  type="multiple">
+  <Accordion.AccordionItem 
+    value="item-1"
+    // Recogito-provided `accordion-item` class
+    className="accordion-item">
+    <Accordion.Header 
+      // Recogito-provided `accordion-header` class
+      className="accordion-header">
+      <Accordion.Trigger
+        // Recogito-provided `accordion-trigger` class
+        className="accordion-trigger">
+        Accordion Item 1 Trigger
+      </Accordion.Trigger>
+    </Accordion.Header>
+
+    <Accordion.AccordionContent 
+      // Recogito-provided `accordion-content` class
+      className="accordion-content">
+      Accordion Item 1 Content
+    </Accordion.AccordionContent>
+  </Accordion.AccordionItem>
+</Accordion.Root>
+```
+
+**Styled example:**
+
+![Styled accordion example](/src/assets/styling-accordion.png)
+
+For details, classes and other components, check the <a href="https://github.com/recogito/recogito-studio-sdk/tree/main/src/styles">stylesheet files</a> directly.
+
+## Available Plugins
+
+Here are the existing plugins available for Recogito Studio:
+
+- **[Geotagging](https://github.com/recogito/plugin-geotagging)** - Recogito Geotagging Plugin.
+
+- **[Named Entity Recognition](https://github.com/recogito/plugin-ner)** - Recogito Studio plugin which can perform Named Entity Recognition on TEI and Plain Text.
+
+- **[Revisions](https://github.com/recogito/plugin-revisions)** - Allows users to make a read-only annotation editable, by cloning it into the active layer.
+
+- **[TEI Inliner](https://github.com/recogito/plugin-tei-inliner)** - A plugin for exporting TEI annotations as inline markup.
+
+- **[Reconciliation Service](https://github.com/recogito/plugin-reconciliation-service)** - Use a Reconciliation Service API endpoint as a tag source in Recogito Studio projects.
+
+- **[Sandcastle Export](https://github.com/recogito/plugin-sandcastle-export)** - A custom annotation export for Duke University's Unreal 3D importer.
