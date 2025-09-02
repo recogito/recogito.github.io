@@ -6,19 +6,72 @@ hero:
   tagline: An Extensible Platform for Collaborative, Standards-Based Annotation of TEI Text, IIIF Images, and PDFs. Modern, Open Source, and Easy to Use.
   image:
     file: ../../assets/stupendous-nature.png
+  actions:
+    - text: Get Started
+      link: /guides/overview/
+      icon: right-arrow
+      variant: primary
+    - text: Get a Demo
+      link: https://www.performantsoftware.com/pages/recogito/
+      icon: external
+      variant: secondary
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+## Key Features
+
+<CardGrid>
+	<Card title="📝 Multi-Format Annotation" icon="">
+		Annotate TEI XML texts, IIIF images, and PDF documents with standards-based W3C Web Annotations.
+	</Card>
+	<Card title="👥 Real-Time Collaboration" icon="">
+		Multiple users can annotate and discuss documents simultaneously with live updates and commenting.
+	</Card>
+	<Card title="🔌 Extensible Plugin System" icon="">
+		Build custom annotation tools, import/export formats, and integrations using the comprehensive SDK.
+	</Card>
+	<Card title="🚀 Self-Hosted & Open Source" icon="">
+		Deploy on your infrastructure with Docker. Full control over your data and customizations.
+	</Card>
+</CardGrid>
+
+## Get Started
 
 <CardGrid stagger>
-	<Card title="Check it Out" icon="approve-check">
-		[Contact us](https://www.performantsoftware.com/pages/recogito/) to schedule a demo.
+	<Card title="Getting Started" icon="rocket">
+		New to Recogito Studio? Start here to learn the basics and explore the platform's capabilities.
+		[Get Started →](/guides/overview/)
 	</Card>
-	<Card title="Read the docs" icon="open-book">
-		[Access Documentation](https://github.com/recogito/recogito-studio) for self-hosting.
+	<Card title="Self-Hosting Guide" icon="setting">
+		Deploy Recogito Studio on your own infrastructure with Docker, Docker Compose, and Nginx.
+		[Self-Host →](/guides/self-hosting/)
 	</Card>
+	<Card title="Plugin Development" icon="laptop">
+		Build custom plugins and extensions using the Recogito Studio SDK and development toolkit.
+		[Develop Plugins →](/guides/sdk/)
+	</Card>
+	<Card title="Technical Reference" icon="information">
+		System requirements, environment variables, and technical configuration references.
+		[View Reference →](/reference/system-requirements/)
+	</Card>
+</CardGrid>
+
+## Community & Support
+
+<CardGrid>
 	<Card title="Get Help" icon="comment-alt">
 		Join a community of users in the [Recogito Forum](https://community.performantsoftware.com/c/recogito/5).
+	</Card>
+	<Card title="Schedule a Demo" icon="approve-check">
+		[Contact us](https://www.performantsoftware.com/pages/recogito/) to schedule a demonstration.
+	</Card>
+	<Card title="Let us host it for you" icon="star">
+		Skip the setup and get a turnkey hosted solution with support, maintenance, and updates included. Individual, departmental and institutional plans available.
+		<p>[Subscribe Now →](https://buy.performant.studio/b/9AQcQydfu2aF2ly6oo)</p>
+	</Card>
+	<Card title="Professional Services" icon="puzzle">
+		Need custom Recogito Studio development, deployment services or integration consulting? Work with the team that built it.
+		<p>[Request a Quote →](https://www.performantsoftware.com/contact/)</p>
 	</Card>
 </CardGrid>
