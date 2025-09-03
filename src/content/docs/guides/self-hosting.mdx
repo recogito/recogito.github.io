@@ -28,6 +28,8 @@ In the example below we will install Recogito Studio on a [Digital Ocean Droplet
   </Card>
 </CardGrid>
 
+![System Diagram](../../../assets/guides/system-diagram.png)
+
 #### Optional Components
 
 - **Trigger.dev** - Background job system (required for plugin-ner)
@@ -59,13 +61,41 @@ For optional plugin-ner:
 
 #### Create a Digital Ocean Droplet
 
-1. Choose Ubuntu (latest version)
-2. Select appropriate region and datacenter
-3. Choose Basic shared CPU, Regular SSD
-4. Minimum: 4GB Memory, 2 CPUs, 80GB SSD
-5. Enable automatic backups (recommended for production)
-6. Choose authentication method
-7. Create the droplet and note the IPv4 address
+##### 1. Start Droplet Creation
+
+Begin by creating a new droplet in your Digital Ocean account.
+
+![Creating a DO Droplet](../../../assets/guides/create-droplet-1.png)
+
+##### 2. Choose Operating System
+
+Choose Ubuntu (latest version) as your operating system and select appropriate region and datacenter.
+
+![Choose OS](../../../assets/guides/create-droplet-2.png)
+
+##### 3. Configure Droplet Specifications
+
+Choose Basic shared CPU, Regular SSD with minimum: 4GB Memory, 2 CPUs, 80GB SSD.
+
+![Droplet Spec](../../../assets/guides/create-droplet-3.png)
+
+##### 4. Select Authentication Method
+
+Choose your preferred authentication method and enable automatic backups (recommended for production).
+
+![Choose Auth Method](../../../assets/guides/create-droplet-4.png)
+
+##### 5. Finalize Droplet Creation
+
+Review your settings and create the droplet.
+
+![Create Droplet](../../../assets/guides/create-droplet-5.png)
+
+##### 6. Droplet Created Successfully
+
+Once created, note the IPv4 address for your new droplet.
+
+![All Created](../../../assets/guides/secure-droplet-1.png)
 
 #### Set Up Non-Root User and Firewall
 
@@ -115,6 +145,8 @@ systemctl status nginx
 
 Test by navigating to `http://your_server_ip` - you should see the Nginx welcome page.
 
+![Nginx welcome](../../../assets/guides/nginx-welcome.png)
+
 ### 3. Install Dependencies
 
 #### Git
@@ -149,6 +181,8 @@ cp ./docker/.env.example ./docker/.env
 nano ./docker/.env
 ```
 
+![Nano Editor](../../../assets/guides/nano-editor-1.png)
+
 ### 5. Critical Environment Variables
 
 Update these required values in your `.env` file:
@@ -165,6 +199,9 @@ openssl rand -base64 36
 ```
 
 Use [Supabase JWT Generator](https://supabase.com/docs/guides/self-hosting/docker#securing-your-services):
+
+![Securing Supabase](../../../assets/guides/supabase-1.png)
+
 - **JWT_SECRET**: Generated secret above
 - **ANON_KEY**: Generate with ANON_KEY payload
 - **SERVICE_ROLE_KEY**: Generate with SERVICE_KEY payload
