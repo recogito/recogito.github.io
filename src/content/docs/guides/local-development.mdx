@@ -1,0 +1,525 @@
+---
+title: Local Development Setup
+description: Complete guide for setting up a local Recogito Studio development environment.
+---
+
+import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
+
+This guide walks you through setting up a complete local development environment for Recogito Studio. Unlike the [self-hosting guide](/guides/self-hosting/) which covers production deployment, this setup is optimized for development and testing.
+
+## Overview
+
+A local development environment consists of three main components:
+
+<CardGrid>
+  <Card title="Recogito Server" icon="puzzle">
+    Supabase-based backend with PostgreSQL database, authentication, and storage. Runs locally via Supabase CLI.
+  </Card>
+  <Card title="Recogito Client" icon="laptop">
+    Astro/React frontend application for the user interface. Runs on localhost:4321.
+  </Card>
+  <Card title="Config Tool" icon="setting">
+    Web-based configuration management tool for policies, roles, and branding. Runs on localhost:5173.
+  </Card>
+</CardGrid>
+
+### Local Services & Ports
+
+- **Supabase API**: `http://localhost:54321`
+- **Supabase Database**: `localhost:54322`
+- **Supabase Studio**: `http://localhost:54323`
+- **Email Testing (Inbucket)**: `http://localhost:54324`
+- **Client Application**: `http://localhost:4321`
+- **Config Tool**: `http://localhost:5173`
+
+## Prerequisites
+
+Before starting, ensure you have the following installed:
+
+### Required Software
+
+- **Docker Desktop** - For running Supabase services
+- **Node.js** (v18 or later) and npm - For running the client and config tool
+- **Git** - For cloning repositories
+- **Supabase CLI** - For local Supabase development
+
+### Install Supabase CLI
+
+**macOS:**
+```bash
+brew install supabase/tap/supabase
+```
+
+**Linux:**
+```bash
+brew install supabase/tap/supabase
+```
+
+**Windows:**
+```powershell
+scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+scoop install supabase
+```
+
+Verify installation:
+```bash
+supabase --version
+```
+
+### Install Docker
+
+Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your platform.
+
+Verify Docker is running:
+```bash
+docker --version
+```
+
+## Setup Process
+
+### Phase 1: Database Setup (recogito-server)
+
+<Steps>
+
+1. **Clone the recogito-server repository**
+
+   ```bash
+   git clone https://github.com/recogito/recogito-server.git
+   cd recogito-server
+   ```
+
+   :::note[Supabase CLI Compatibility]
+   If using Supabase CLI version 2.20.4 or later, you need to make a one-time fix to the migration file:
+
+   Edit `supabase/migrations/20230524173605_remote_commit.sql` and comment out line 13:
+   ```sql
+   -- CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
+   ```
+
+   This is required because newer Supabase CLI versions don't pre-create the pgsodium schema, and Recogito doesn't use this extension.
+   :::
+
+2. **Start Supabase locally**
+
+   ```bash
+   supabase start
+   ```
+
+   This command will:
+   - Download required Docker images
+   - Start all Supabase services
+   - Display access credentials and URLs
+
+   **Note the output**, especially:
+   - `API URL`: http://localhost:54321
+   - `DB URL`: postgresql://postgres:postgres@localhost:54322/postgres
+   - `Studio URL`: http://localhost:54323
+   - `anon key`: Your anonymous API key
+   - `service_role key`: Your service role key
+
+3. **Run database migrations**
+
+   ```bash
+   supabase db reset
+   ```
+
+   This will:
+   - Create all database tables
+   - Set up Row-Level Security policies
+   - Install database functions and triggers
+   - Apply all migrations
+
+4. **Create environment file**
+
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+
+   Update the following values:
+   ```bash
+   SUPABASE_HOST=http://localhost:54321
+   SUPABASE_SERVICE_KEY=<service_role_key from step 2>
+
+   # Test user passwords
+   ORG_ADMIN_PW=admin123
+   PROFESSOR_PW=professor123
+   STUDENT_PW=student123
+   TUTOR_PW=tutor123
+   READER_PW=reader123
+   INVITE_PW=invite123
+
+   # Group IDs from default config
+   ORG_ADMIN_GROUP_ID='350abe76-937b-4a9b-9600-9b1f856db250'
+   PROFESSOR_GROUP_ID='f918b2f8-f587-4ee1-9f2d-35b3aed0b1e6'
+   STUDENT_GROUP_ID='f2e37e37-3b36-4833-b88d-f58e5c018ef5'
+   TUTOR_GROUP_ID='f2e37e37-3b36-4833-b88d-f58e5c018ef5'
+   READER_GROUP_ID='f2e37e37-3b36-4833-b88d-f58e5c018ef5'
+   ```
+
+5. **Create default groups**
+
+   ```bash
+   node create-default-groups.js
+   ```
+
+   This creates the default organization groups (Admin, Professor, Student, etc.)
+
+6. **Create test users**
+
+   ```bash
+   node create-test-users.js
+   ```
+
+   This creates test accounts for development:
+   - `admin@example.com` - Organization Admin
+   - `professor@example.com` - Professor role
+   - `student@example.com` - Student role
+   - `tutor@example.com` - Tutor role
+   - `reader@example.com` - Reader role
+
+7. **Verify Supabase Studio**
+
+   Open http://localhost:54323 in your browser. You should see:
+   - All tables populated in the Database section
+   - Test users in the Authentication section
+   - Policies applied to tables
+
+</Steps>
+
+### Phase 2: Configuration Tool Setup (recogito-config)
+
+<Steps>
+
+1. **Clone the recogito-config repository**
+
+   ```bash
+   cd ..
+   git clone https://github.com/recogito/recogito-config.git
+   cd recogito-config
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Create environment file**
+
+   Create a `.env` file:
+   ```bash
+   VITE_SERVICE_KEY=<service_role_key from Supabase start>
+   ```
+
+4. **Start the config tool**
+
+   ```bash
+   npm run dev
+   ```
+
+   The config tool will be available at http://localhost:5173
+
+5. **Generate configuration file**
+
+   - Open http://localhost:5173 in your browser
+   - The **Policies** tab will auto-load from your local Supabase database
+   - Click **Load Config** and upload `dafault-config.json` (from the repo)
+   - Review and customize:
+     - **Roles**: Define permission sets
+     - **Default Groups**: Org/Project/Layer group templates
+     - **Admin**: Set admin email and groups
+     - **Branding**: Customize platform appearance
+     - **Authentication**: Configure auth methods
+     - **Dynamic Text**: Multi-language content
+   - Click **Save Config** when ready
+   - Enter metadata (project name, author, version)
+   - Download the generated `config.json` file
+
+</Steps>
+
+### Phase 3: Client Application Setup (recogito-client)
+
+<Steps>
+
+1. **Clone the recogito-client repository**
+
+   ```bash
+   cd ..
+   git clone https://github.com/recogito/recogito-client.git
+   cd recogito-client
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Create environment file**
+
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+
+   Update with your local Supabase values:
+   ```bash
+   # Supabase connection
+   PUBLIC_SUPABASE=http://localhost:54321
+   PUBLIC_SUPABASE_API_KEY=<anon_key from Supabase start>
+   SUPABASE_SERVICE_KEY=<service_role_key from Supabase start>
+
+   # IIIF Configuration (use Supabase for local dev)
+   PUBLIC_IIIF_CONFIGURATION="SUPABASE_CANTALOUPE"
+   PUBLIC_IIIF_CANTALOUPE_PATH="/iiif"
+
+   # Room secret for realtime features
+   ROOM_SECRET=local-dev-secret-12345
+
+   # IIIF Server (if using IIIF Cloud, otherwise can leave as example)
+   IIIF_URL=http://localhost:54321/storage/v1/object/public/resources
+   IIIF_KEY=your-local-iiif-key
+   IIIF_PROJECT_ID=local-dev-project
+
+   # Mail (optional for local dev - emails will appear in Inbucket)
+   MAIL_HOST=localhost
+   MAIL_PORT=54325
+   MAIL_USERNAME=
+   MAIL_PASSWORD=
+   MAIL_FROM_ADDRESS=noreply@localhost
+
+   # Optional features
+   PUBLIC_ENABLE_USER_INVITE=TRUE
+   ```
+
+4. **Deploy configuration file**
+
+   Copy the `config.json` file you generated with the config tool:
+   ```bash
+   cp /path/to/downloaded/config.json src/config.json
+   ```
+
+   Or use the default config from the server repo:
+   ```bash
+   cp ../recogito-server/config.json src/config.json
+   ```
+
+5. **Start the development server**
+
+   ```bash
+   npm start
+   ```
+
+   The client will be available at http://localhost:4321
+
+6. **Access the application**
+
+   - Open http://localhost:4321 in your browser
+   - You should see the Recogito Studio login page
+   - Sign in with any test user (e.g., `admin@example.com` / `admin123`)
+
+</Steps>
+
+## Verification & Testing
+
+### Test Authentication
+
+1. Navigate to http://localhost:4321
+2. Sign in with test credentials:
+   - **Email**: `admin@example.com`
+   - **Password**: `admin123` (or whatever you set in .env)
+3. You should be redirected to the dashboard
+
+### Test Project Creation
+
+1. Click **Create Project**
+2. Enter project details
+3. Create the project
+4. Verify it appears in your project list
+
+### Test Document Upload
+
+1. Open a project
+2. Upload a test document (text, image, or PDF)
+3. Verify the document appears in the project
+
+### Test Annotation
+
+1. Open a document
+2. Select text or draw on an image
+3. Create an annotation
+4. Verify it saves and persists
+
+### Access Development Tools
+
+- **Supabase Studio**: http://localhost:54323 - View database, auth, storage
+- **Email Testing**: http://localhost:54324 - View emails sent by the system
+- **Database**: Connect directly at `postgresql://postgres:postgres@localhost:54322/postgres`
+
+## Development Workflow
+
+### Making Database Changes
+
+1. Make changes via Supabase Studio (http://localhost:54323)
+2. Generate a migration:
+   ```bash
+   cd recogito-server
+   supabase db diff -f <migration_name>
+   ```
+3. Reset the database to apply:
+   ```bash
+   supabase db reset
+   ```
+
+### Updating Configuration
+
+1. Make changes in the config tool (http://localhost:5173)
+2. Save and download the new `config.json`
+3. Copy to `recogito-client/src/config.json`
+4. Restart the client dev server
+
+### Running Tests
+
+For server-side database tests:
+```bash
+cd recogito-server/jest
+npm test
+```
+
+## Troubleshooting
+
+### Supabase won't start
+
+**Issue**: Docker containers fail to start
+
+**Solutions**:
+- Ensure Docker Desktop is running
+- Check ports 54321-54326 are not in use
+- Run `supabase stop` then `supabase start` again
+
+### Client can't connect to Supabase
+
+**Issue**: API errors or authentication failures
+
+**Solutions**:
+- Verify `PUBLIC_SUPABASE` and `PUBLIC_SUPABASE_API_KEY` in `.env`
+- Check Supabase is running: `supabase status`
+- Ensure you're using the correct anon key from `supabase start` output
+
+### Database schema is empty
+
+**Issue**: No tables in Supabase Studio
+
+**Solutions**:
+- Run `supabase db reset` from the `recogito-server` directory
+- Check for migration errors in the output
+
+### Email testing not working
+
+**Issue**: Emails not appearing in Inbucket
+
+**Solutions**:
+- Check Inbucket is running: http://localhost:54324
+- Verify `MAIL_HOST=localhost` and `MAIL_PORT=54325` in client `.env`
+
+### Config tool can't load policies
+
+**Issue**: Policies tab is empty
+
+**Solutions**:
+- Verify `VITE_SERVICE_KEY` is set correctly in config tool `.env`
+- Ensure Supabase is running and migrations have been applied
+- Check browser console for errors
+
+## Stopping the Development Environment
+
+### Stop individual services
+
+**Client**:
+```bash
+# Press Ctrl+C in the terminal running npm start
+```
+
+**Config Tool**:
+```bash
+# Press Ctrl+C in the terminal running npm run dev
+```
+
+**Supabase**:
+```bash
+cd recogito-server
+supabase stop
+```
+
+### Restart services
+
+**Supabase**:
+```bash
+cd recogito-server
+supabase start
+```
+
+**Client**:
+```bash
+cd recogito-client
+npm start
+```
+
+## Next Steps
+
+- [Architecture Documentation](/reference/client-architecture/) - Understand the codebase
+- [Self-Hosting Guide](/guides/self-hosting/) - Deploy to production
+- [SDK Guide](/guides/sdk/) - Build plugins
+- [Environment Variables](/reference/environment-variables/) - Full configuration reference
+
+## Common Development Tasks
+
+### Reset the database completely
+
+```bash
+cd recogito-server
+supabase db reset
+node create-default-groups.js
+node create-test-users.js
+```
+
+### Add a new test user manually
+
+Use Supabase Studio (http://localhost:54323):
+1. Go to **Authentication** → **Users**
+2. Click **Add user**
+3. Enter email and password
+4. Assign to appropriate group in the database
+
+### View real-time logs
+
+**Supabase logs**:
+```bash
+cd recogito-server
+supabase logs
+```
+
+**Client logs**:
+Check the terminal running `npm start` or browser console
+
+### Export database for testing
+
+```bash
+cd recogito-server
+supabase db dump -f backup.sql
+```
+
+### Import database from backup
+
+```bash
+cd recogito-server
+supabase db reset
+psql postgresql://postgres:postgres@localhost:54322/postgres < backup.sql
+```
+
+## Additional Resources
+
+- [Supabase Local Development](https://supabase.com/docs/guides/cli/local-development) - Official Supabase CLI docs
+- [Astro Documentation](https://astro.build) - Client framework docs
+- [Recogito GitHub Organization](https://github.com/recogito) - Source code repositories

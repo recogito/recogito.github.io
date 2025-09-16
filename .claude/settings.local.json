@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "Read(//Users/jamie/repos/recogito-server/supabase/migrations/**)"
     ],
     "deny": [],
     "ask": []

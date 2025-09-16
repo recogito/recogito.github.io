@@ -1,0 +1,23 @@
+# Local Development Documentation Process
+
+## Objectives
+- Primary goal: Create accurate documentation for developers
+- The local dev environment setup is a means to validate and improve documentation
+
+## Issue Tracking Approach
+1. **Capture issues and solutions** as we encounter them during setup
+2. **Log in separate file**: Create `local-dev-setup-log.md` for trial-and-error tracking
+3. **Clean documentation**: Update the public-facing guide to be polished, not a troubleshooting log
+4. **Reference existing docs**: When solutions exist in reference pages, update those and link from the guide
+
+## Documentation Structure
+- Issues/solutions log: `~/repos/recogito.github.io/local-dev-setup-log.md` (not published)
+- Public guide: `~/repos/recogito.github.io/src/content/docs/guides/local-development.mdx`
+- Reference docs: `~/repos/recogito.github.io/src/content/docs/reference/*.md`
+
+## Process for Each Step
+1. Attempt the step as documented
+2. If issues arise, document them in the log file
+3. Find/implement solutions
+4. Update appropriate documentation (guide or reference pages)
+5. Add cross-references between documents

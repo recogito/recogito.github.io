@@ -29,6 +29,10 @@ export default defineConfig({
           link: '/guides/overview/'
         },
         {
+          label: 'Local Development Setup',
+          link: '/guides/local-development/'
+        },
+        {
           label: 'Self-Hosting Guide',
           link: '/guides/self-hosting/'
         },
