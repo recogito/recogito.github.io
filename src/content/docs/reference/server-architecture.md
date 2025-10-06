@@ -1,6 +1,8 @@
 ---
-title: Server Architecture
+title: Server
 description: Technical overview of the Recogito server database architecture and backend systems.
+sidebar:
+  order: 2
 ---
 
 **Recogito Server** is the Supabase-based backend that powers the Recogito platform, providing authentication, data storage, and business logic.

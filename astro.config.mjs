@@ -23,24 +23,9 @@ export default defineConfig({
     ],
     sidebar: [{
       label: 'Guides',
-      items: [
-        {
-          label: 'Getting Started',
-          link: '/guides/overview/'
-        },
-        {
-          label: 'Local Development Setup',
-          link: '/guides/local-development/'
-        },
-        {
-          label: 'Self-Hosting Guide',
-          link: '/guides/self-hosting/'
-        },
-        {
-          label: 'Plugin Development',
-          link: '/guides/sdk/'
-        }
-      ]
+      autogenerate: {
+        directory: 'guides'
+      }
     }, {
       label: 'Reference',
       autogenerate: {

@@ -1,6 +1,8 @@
 ---
 title: Environment Variables
 description: Complete reference for configuring Recogito Studio environment variables.
+sidebar:
+  order: 4
 ---
 
 This reference covers all environment variables used in Recogito Studio configuration.

@@ -1,6 +1,8 @@
 ---
 title: System Requirements
 description: Technical requirements and specifications for hosting Recogito Studio.
+sidebar:
+  order: 3
 ---
 
 This page outlines the technical requirements for self-hosting Recogito Studio.

@@ -1,6 +1,8 @@
 ---
-title: Configuration Tool Architecture
+title: Configuration
 description: Technical overview of the Recogito configuration management tool.
+sidebar:
+  order: 5
 ---
 
 **Recogito Config Tool** is a web-based configuration management application for administering and customizing Recogito platform deployments.

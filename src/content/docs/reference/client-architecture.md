@@ -1,6 +1,8 @@
 ---
-title: Client Architecture
+title: Client
 description: Technical overview of the Recogito client application architecture and components.
+sidebar:
+  order: 1
 ---
 
 **Recogito Client** is a collaborative text and image annotation platform built with modern web technologies.

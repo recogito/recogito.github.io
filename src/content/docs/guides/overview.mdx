@@ -1,6 +1,8 @@
 ---
 title: Getting Started
 description: Overview of Recogito Studio self-hosting options and requirements.
+sidebar:
+  order: 1
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -18,15 +20,15 @@ Recogito Studio provides:
 ## Self-Hosting Options
 
 <CardGrid>
+  <Card title="Development Setup" icon="laptop">
+    Simplified setup for development and testing purposes.
+
+    [View Local Development Guide →](/guides/local-development/)
+  </Card>
   <Card title="Complete Installation" icon="rocket">
     Full Docker-based deployment with all services included. Perfect for production environments.
     
     [View Self-Hosting Guide →](/guides/self-hosting/)
-  </Card>
-  <Card title="Development Setup" icon="laptop">
-    Simplified setup for development and testing purposes.
-    
-    [Coming Soon]
   </Card>
 </CardGrid>
 

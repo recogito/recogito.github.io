@@ -171,131 +171,264 @@
 
 ---
 
-### Step 4: Run Supabase Migrations
+### Step 6: Configure Client Environment Variables
 
-**Status**: Not started
+**Status**: ✅ Completed
 
 **Issues**:
--
+- None
 
 **Solutions**:
--
+- Created `.env` file in `recogito-client/` from `.env.example`
+- Configured Supabase connection:
+  - `PUBLIC_SUPABASE=http://127.0.0.1:54321`
+  - `PUBLIC_SUPABASE_API_KEY=<anon_key_from_supabase_start>`
+  - `SUPABASE_SERVICE_KEY=<service_role_key_from_supabase_start>`
+- Configured mail settings for local Mailpit:
+  - `MAIL_HOST=127.0.0.1`
+  - `MAIL_PORT=1025`
+  - `MAIL_FROM_ADDRESS=noreply@recogito.local`
+- Set room secret for realtime collaboration:
+  - `ROOM_SECRET=local-dev-room-secret-change-in-production`
+
+**Test Results**:
+- ✅ Environment variables loaded successfully
+- ✅ Dev server starts without errors
 
 **Documentation Updates Needed**:
--
+- Document required vs optional environment variables
+- Provide example values for local development
+- Note that IIIF, Usersnap, and Google Analytics are optional for basic local dev
 
 ---
 
-### Step 5: Create and Populate Test Users
+### Step 7: Configure Server Environment Variables
 
-**Status**: Not started
+**Status**: ✅ Completed
 
 **Issues**:
--
+- None
 
 **Solutions**:
--
+- Created `.env` file in `recogito-server/` from `.env.example`
+- Configured for testing:
+  - `SUPABASE_HOST=http://localhost:54321`
+  - `SUPABASE_SERVICE_KEY=<service_role_key_from_supabase_start>`
+  - All test user passwords set to `password123`
+
+**Test Results**:
+- ✅ Configuration file created
 
 **Documentation Updates Needed**:
--
+- Note that server .env is mainly for testing
+- Document test user password requirements
 
 ---
 
-### Step 6: Clone recogito-config Repository
+### Step 8: Install Client Dependencies and Start Dev Server
 
-**Status**: Not started
+**Status**: ✅ Completed
 
 **Issues**:
--
+- 7 npm vulnerabilities (1 low, 5 moderate, 1 high) - not blocking for local dev
+- Peer dependency warnings for @uppy/core versions
+- Port 4321 in use, server automatically switched to 4322
 
 **Solutions**:
--
+- Ran `npm install` in recogito-client directory
+- Started dev server with `npm run dev`
+- Server running on http://localhost:4322/
+
+**Test Results**:
+- ✅ Dependencies installed (1265 packages)
+- ✅ Dev server started successfully
+- ✅ Astro v5.12.9 running
+- ✅ Server responding to requests
 
 **Documentation Updates Needed**:
--
+- Document expected port (4321) and note that it may vary
+- Mention that npm vulnerabilities are expected and not blocking
 
 ---
 
-### Step 7: Set Up recogito-config Tool Environment
+### Step 9: Fix Netlify Adapter Issue - Login Form Not Displaying
 
-**Status**: Not started
+**Status**: ✅ Completed
 
 **Issues**:
--
+- Sign-in page loaded but no login form appeared
+- Only branding elements (header/footer) visible
+- Browser console showed 10 JavaScript errors:
+  - Multiple "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of 'text/css'"
+  - "Uncaught ReferenceError: __DEFINES__ is not defined" in env.mjs
+- Login component stuck in "checking" state (couldn't verify auth)
 
-**Solutions**:
--
+**Root Cause**:
+- Netlify adapter (`@astrojs/netlify`) in `astro.config.mjs` was breaking Vite's module resolution in dev mode
+- The adapter was trying to inject Netlify-specific environment handling that conflicted with local dev
+- This caused CSS files to be served with wrong MIME types and environment variables to fail loading
+
+**Investigation**:
+- Default config.json had 3 auth methods - simplified to username/password only
+- Checked Login.tsx component logic - appeared correct
+- Cleared Vite/Astro cache (`rm -rf node_modules/.vite .astro`) - didn't help
+- Checked browser console - found critical module loading errors
+
+**Solution**:
+- Found alternate config file: `astro.config.node.mjs` using Node adapter (`@astrojs/node`)
+- Swapped configs for local development:
+  ```bash
+  mv astro.config.mjs astro.config.netlify.mjs
+  mv astro.config.node.mjs astro.config.mjs
+  ```
+- Restarted dev server - errors cleared, login form appeared
+
+**Test Results**:
+- ✅ Dev server starts cleanly with Node adapter
+- ✅ No browser console errors
+- ✅ Login form renders correctly
+- ✅ Ready for authentication testing
 
 **Documentation Updates Needed**:
--
+- **CRITICAL**: Document that local dev MUST use Node adapter, not Netlify adapter
+- Add step to swap config files before starting dev server
+- Note: Netlify config is for production deployment only
+- Consider: Should repo default to Node adapter with Netlify config as alternate?
 
 ---
 
-### Step 8: Generate Configuration File
+### Step 10: Populate Database with Default Groups and Roles
 
-**Status**: Not started
+**Status**: ✅ Completed
 
 **Issues**:
--
+- Test user creation was failing with "Cannot read properties of undefined (reading 'id')"
+- Script tried to assign users to organization groups that didn't exist in database
+- The `supabase db reset` command only ran migrations and seed.sql
+- seed.sql only populates policies table, NOT roles or groups
+- Database was missing all config-based data (roles, groups, etc.)
 
-**Solutions**:
--
+**Root Cause**:
+- **Missing setup step**: Database needs to be populated with data from config.json BEFORE creating users
+- The `create-default-groups.js` script exists but wasn't documented in setup process
+- Script reads config.json and populates:
+  - Policies (upsert to ensure latest)
+  - Roles (Org Admin, Org Professor, Project Admin, Layer Admin, etc.)
+  - Organization groups
+  - Project groups
+  - Layer groups
+  - An admin user (admin@example.com)
+
+**Solution**:
+- Discovered and ran `create-default-groups.js`:
+  ```bash
+  cd ~/repos/recogito-server
+  export SUPABASE_HOST=http://localhost:54321
+  export SUPABASE_SERVICE_KEY=<service-key>
+  node create-default-groups.js -f config.json
+  ```
+- Script successfully populated all required database structures
+
+**Test Results**:
+- ✅ 108 policies created/updated
+- ✅ 8 roles created (Org Admin, Org Professor, Org Reader, Project Admin, Layer Admin, Project Student, Layer Student, Layer Reader)
+- ✅ 266 role-policy mappings created
+- ✅ 1 organization group created (Org Admins)
+- ✅ 5 default groups created (project/layer admins and students)
+- ✅ Admin user created (admin@example.com)
 
 **Documentation Updates Needed**:
--
+- **CRITICAL**: Add new step "Populate Database from Config" BEFORE creating test users
+- Document the create-default-groups.js script and its purpose
+- Explain the dependency: groups must exist before users can be assigned to them
+- Note that this step is required even though config.json has defaults
 
 ---
 
-### Step 9: Clone recogito-client Repository
+### Step 11: Create Test Users with Correct Passwords
 
-**Status**: Not started
+**Status**: ✅ Completed
 
 **Issues**:
--
+- Initial attempt to create users succeeded but with unknown/old passwords
+- Old SQL file `create_test_users.sql` had bcrypt-hashed passwords with unknown plaintext
+- Users created on Oct 4th during earlier session had different passwords
+- Login attempts with "password123" failed with "Invalid email or password"
 
-**Solutions**:
--
+**Root Cause Analysis**:
+- The `create-test-users.js` script checks if users exist and reuses them
+- Users were already in database from Oct 4th with old/unknown passwords
+- Script doesn't update passwords for existing users
+- The .env file has PROFESSOR_PW, STUDENT_PW etc., but only used for NEW user creation
+
+**Solution Path 1 - Attempted**:
+- Tried running create-test-users.js again - just displayed existing users, didn't update passwords
+
+**Solution Path 2 - Successful**:
+- Used Supabase Admin API to update passwords for existing users:
+  ```javascript
+  supabase.auth.admin.updateUserById(userId, { password: "password123" })
+  ```
+- Updated all 4 test users (professor, student, tutor, reader)
+
+**Test Results**:
+- ✅ All user passwords updated successfully
+- ✅ Login with professor@example.com / password123 works
+- ✅ Redirects to /en/projects after successful login
+
+**Test User Credentials** (all with password123):
+- professor@example.com (ID: 35fb1d77-cb20-41c4-81c0-d344a0c641b8)
+- student@example.com (ID: 4fb7ae8c-51fe-4f4d-9f96-083543d4d75f)
+- tutor@example.com (ID: 643b574b-5673-4839-8f5e-116d551a7103)
+- reader@example.com (ID: dfd9e45c-a435-4e55-9082-10ff52b0f5e2)
+- invited@example.com (ID: f826fe57-b0d6-4f24-91e1-67efdc6c5e6c)
 
 **Documentation Updates Needed**:
--
+- **Option A - Improve Script**: Modify create-test-users.js to update passwords if users exist
+- **Option B - Document Workaround**: Add section on resetting passwords using Supabase Admin API
+- **Option C - Clean Slate**: Document how to delete and recreate users (`supabase db reset` loses all data)
+- Clarify that test user passwords come from .env file variables
+- Provide clear list of test users and their default password
 
 ---
 
-### Step 10: Configure Client Environment Variables
+### Step 12: Verify Complete Local Development Stack
 
-**Status**: Not started
+**Status**: ✅ Completed
 
-**Issues**:
--
+**Summary**:
+Successfully set up and verified complete Recogito local development environment.
 
-**Solutions**:
--
+**Services Running**:
+- ✅ Supabase (PostgreSQL + Auth + Storage): http://127.0.0.1:54321
+- ✅ Supabase Studio (database GUI): http://127.0.0.1:54323
+- ✅ Mailpit (email testing): http://127.0.0.1:54324
+- ✅ Recogito Client (Astro dev server): http://localhost:4322
+
+**Database State**:
+- ✅ 156 migrations applied
+- ✅ 108 policies populated
+- ✅ 8 roles configured
+- ✅ 266 role-policy mappings
+- ✅ Organization and default groups created
+- ✅ 5 test users available
+
+**Functional Tests**:
+- ✅ Client loads without errors
+- ✅ Login form displays correctly
+- ✅ Authentication works (professor@example.com / password123)
+- ✅ Successful login redirects to /en/projects
+- ✅ No browser console errors
+
+**Configuration Files Created**:
+- ✅ recogito-client/.env (Supabase connection, mail, secrets)
+- ✅ recogito-server/.env (test user passwords, group IDs)
+- ✅ Swapped to Node adapter for local dev
 
 **Documentation Updates Needed**:
--
-
----
-
-### Step 11: Deploy Configuration File to Client
-
-**Status**: Not started
-
-**Issues**:
--
-
-**Solutions**:
--
-
-**Documentation Updates Needed**:
--
-
----
-
-### Step 12: Install Client Dependencies and Start Dev Server
-
-**Status**: Not started
-
-**Issues**:
+- Document complete end-to-end setup process
+- Highlight critical steps that were missing from original docs
+- Create troubleshooting section for common issues
 -
 
 **Solutions**:
@@ -360,4 +493,372 @@
 
 ## Notes
 
--
+### Configuration Architecture Clarification
+
+**Date**: 2025-10-06
+
+**Discovery**: The Recogito platform uses TWO types of configuration files that serve different purposes:
+
+#### 1. config.json (Generated by recogito-config tool)
+- **Purpose**: Platform-wide settings for policies, roles, groups, branding, auth methods
+- **Generated by**: recogito-config web tool (React app)
+- **Deployed to**:
+  - Client: `recogito-client/src/config.json`
+  - Server: `recogito-server/config.json`
+- **Contains**:
+  - Access control policies
+  - User role definitions
+  - Default group structures (org/project/layer)
+  - Platform branding (colors, logos, welcome text)
+  - Authentication methods (username/password, SAML, OAuth, Keycloak)
+  - Multi-language content
+  - Admin settings
+- **Default files exist**: Both client and server already have default config.json files
+- **Optional for local dev**: Can use defaults to get started
+
+#### 2. .env files (Environment-specific configuration)
+- **Purpose**: Environment-specific secrets and connection settings
+- **Created manually**: Copy from .env.example and fill in values
+- **Required for local dev**: Must be configured to run the stack
+
+**Client .env** (`recogito-client/.env`):
+- Supabase URL and API keys
+- IIIF server configuration
+- Room secret (for realtime collaboration)
+- Mail settings (transactional emails)
+- Optional: Google Analytics, Usersnap feedback, help redirect
+
+**Server .env** (`recogito-server/.env`):
+- Supabase host URL (http://localhost:54321 for local)
+- Service key
+- Test user passwords (professor, tutor, student, reader)
+- Group IDs for testing
+
+#### Documentation Structure Implications
+
+**Simplified Setup Path**:
+1. Install prerequisites (Node, Docker, Supabase CLI)
+2. Start Supabase local environment
+3. Configure client .env file
+4. Configure server .env file (mainly for testing)
+5. Start client dev server
+6. Verify and test
+
+**Advanced/Optional Configuration**:
+- Using recogito-config tool to customize branding, roles, policies
+- Creating custom config.json files
+- Deploying customized configs to client/server
+
+**Action Items**:
+- Reorganize documentation to make config tool setup optional/advanced
+- Focus core setup on .env file configuration
+- Move Steps 6-8 (config tool) to end as "Advanced: Custom Configuration"
+- Update step numbering accordingly
+
+---
+
+## CRITICAL ISSUES DISCOVERED & RECOMMENDATIONS
+
+### Issue 1: Missing Database Initialization Step
+
+**Problem**:
+- `supabase db reset` only runs migrations and seed.sql
+- seed.sql only populates policies, NOT roles or groups
+- The `create-default-groups.js` script exists but is completely undocumented
+- Users can't be created without groups existing first
+
+**Impact**: BLOCKING - Setup fails at test user creation
+
+**Recommendations**:
+
+**A. Process Improvement (RECOMMENDED)**:
+1. Create a unified setup script that runs all initialization in order:
+   ```bash
+   # recogito-server/scripts/init-local-db.sh
+   supabase db reset
+   node create-default-groups.js -f config.json
+   node create-test-users.js -f config.json
+   ```
+2. Add this to package.json as `npm run init-db`
+3. Document as single command in setup guide
+
+**B. Documentation Only** (if process stays as-is):
+1. Add new section after "Run Migrations"
+2. Document create-default-groups.js script
+3. Explain why it's needed (database needs config data)
+4. Provide exact command with all environment variables
+
+---
+
+### Issue 2: Netlify Adapter Breaks Local Development
+
+**Problem**:
+- Default `astro.config.mjs` uses Netlify adapter
+- Netlify adapter breaks Vite module resolution in dev mode
+- Causes 10+ console errors and complete UI failure
+- Alternate `astro.config.node.mjs` exists but isn't documented or default
+
+**Impact**: BLOCKING - Login form doesn't render, dev environment unusable
+
+**Recommendations**:
+
+**A. Code Change (RECOMMENDED)**:
+1. Make `astro.config.node.mjs` the default `astro.config.mjs`
+2. Rename current one to `astro.config.netlify.mjs`
+3. Document when/how to switch for Netlify deployment
+4. Update deployment docs to use netlify config
+
+**B. Documentation Only** (if repo stays as-is):
+1. Add prominent warning at top of setup guide
+2. Document config swap as FIRST step before npm install
+3. Explain why Netlify adapter doesn't work for local dev
+4. Add troubleshooting section for "login form not appearing"
+
+---
+
+### Issue 3: Test User Password Management
+
+**Problem**:
+- `create-test-users.js` doesn't update passwords for existing users
+- No documented way to reset test user passwords
+- Users from previous sessions have unknown passwords
+- .env password variables only used for NEW users
+
+**Impact**: MODERATE - Authentication testing fails, confusing experience
+
+**Recommendations**:
+
+**A. Code Improvement (RECOMMENDED)**:
+1. Modify `create-test-users.js` to check if user exists
+2. If exists: update password from .env
+3. If new: create with password from .env
+4. Add `--force-reset-passwords` flag option
+
+**B. Documentation** (immediate fix):
+1. Document that `supabase db reset` wipes all data including users
+2. Provide password reset script/command for existing users
+3. List all test users with their default password (password123)
+4. Add troubleshooting: "Invalid email or password" → reset DB
+
+---
+
+### Issue 4: pgsodium Extension Compatibility
+
+**Status**: Already partially addressed but needs refinement
+
+**Problem**:
+- Newer Supabase CLI (>= 2.20.4) doesn't pre-create pgsodium schema
+- Migration fails because it references non-existent schema
+- Extension isn't used by Recogito anyway
+
+**Current Solution**:
+- Commented out line in migration file
+
+**Concerns**:
+- Modifying migration files is anti-pattern
+- Breaks production deployments that have pgsodium
+- Migration history inconsistency
+
+**Recommendations**:
+
+**A. Proper Fix (RECOMMENDED)**:
+1. Create new migration that safely removes pgsodium dependency
+2. Keep original migration intact for history
+3. Or: Add conditional check in original migration (IF schema EXISTS)
+4. Document in migration comments why pgsodium was removed
+
+**B. Keep Current Solution**:
+1. Document WHY we commented it out (CLI incompatibility)
+2. Note that it's safe (extension not used)
+3. Warn about production compatibility
+4. Link to Supabase issue/discussion
+
+---
+
+### Issue 5: Environment Variable Loading
+
+**Problem**:
+- Setup scripts require many environment variables
+- No documented pattern for loading .env in scripts
+- Commands are verbose and error-prone
+
+**Impact**: MINOR - Setup commands are complex, easy to make mistakes
+
+**Recommendations**:
+
+**A. Use dotenv in scripts**:
+```javascript
+// At top of create-default-groups.js and create-test-users.js
+require('dotenv').config();
+```
+
+**B. Provide wrapper scripts**:
+```bash
+# recogito-server/scripts/run-with-env.sh
+set -a
+source .env
+set +a
+exec "$@"
+```
+
+Then: `./scripts/run-with-env.sh node create-default-groups.js -f config.json`
+
+---
+
+## Recommended Setup Order (Corrected)
+
+Based on issues discovered:
+
+1. **Prerequisites**: Install Node, Docker, Homebrew, Supabase CLI
+2. **Clone Repositories**: recogito-server, recogito-client
+3. **Supabase Setup**:
+   - Start Supabase: `supabase start`
+   - Run migrations: `supabase db reset`
+   - **NEW**: Populate database from config: `node create-default-groups.js -f config.json`
+   - **NEW**: Create test users: `node create-test-users.js -f config.json`
+4. **Client Setup**:
+   - **NEW**: Swap to Node adapter: `mv astro.config.{mjs,netlify.mjs} && mv astro.config.node.mjs astro.config.mjs`
+   - Copy .env.example to .env
+   - Configure .env with Supabase keys
+   - Install dependencies: `npm install`
+   - Start dev server: `npm run dev`
+5. **Server Setup** (optional for testing):
+   - Copy .env.example to .env
+   - Configure test user passwords
+6. **Verify**: Test login with professor@example.com / password123
+
+---
+
+## Documentation Priority Recommendations
+
+### CRITICAL (Blocks setup):
+1. Document database initialization with create-default-groups.js
+2. Document Netlify adapter issue and Node adapter requirement
+3. Provide clear test user credentials
+
+### HIGH (Significantly improves experience):
+4. Create unified init-db script
+5. Improve create-test-users.js to handle existing users
+6. Add troubleshooting section with common issues
+
+### MEDIUM (Nice to have):
+7. Clarify config.json vs .env distinction earlier
+8. Document environment variable patterns
+9. Add validation/health check commands
+
+### LOW (Can defer):
+10. Refine pgsodium migration approach
+11. Document advanced configuration workflows
+12. Create video walkthrough
+
+---
+
+## Additional Issues Found After Setup
+
+### Issue 6: WebSocket Connection Warning (Non-blocking)
+
+**Observation**:
+- Browser console shows: "WebSocket connection to 'ws://127.0.0.1:54321/realtime/v1/websocket?apikey=...' failed"
+- Appears after successful login
+
+**Investigation**:
+- Realtime container is running and healthy
+- WebSocket endpoint exists and responds (400 to curl, expected for WS upgrade)
+- Connection is likely being blocked or not properly initialized
+
+**Impact**: MINOR/UNKNOWN
+- Application functions normally despite error
+- Login and navigation work correctly
+- May affect realtime collaboration features if used
+
+**Status**: Requires further investigation
+- Determine if realtime features are actively used
+- Check if this impacts collaborative annotation
+- May need configuration adjustment in .env or Supabase config
+
+**Recommendations**:
+1. Test collaborative annotation features to see if they work
+2. Check Supabase Realtime configuration in supabase/config.toml
+3. Document as known issue if non-critical
+4. Or fix if realtime collaboration is essential feature
+
+**Documentation Updates**:
+- Add to troubleshooting: "WebSocket errors can be ignored if not using realtime features"
+- Or: Add realtime configuration step if it's needed
+
+---
+
+## Managing Secrets Across Environments
+
+### Recommended Multi-Environment Setup
+
+For teams working across multiple environments (dev/staging/prod), use separate `.env` files with 1Password for secret management:
+
+**File Structure**:
+```
+recogito-client/
+  .env.local          # Local Supabase (git-ignored, generated from supabase start)
+  .env.dev            # Remote dev environment (git-ignored, use 1Password)
+  .env.staging        # Remote staging (git-ignored, use 1Password)
+  .env.prod           # Remote production (git-ignored, use 1Password)
+```
+
+**Setup 1Password Items**:
+```bash
+# Store dev environment secrets
+op item create --category=database \
+  --vault=dev \
+  --title="recogito-dev-supabase" \
+  url="https://yourproject.supabase.co" \
+  anon-key="eyJhb..." \
+  service-role-key="eyJhb..."
+
+# Store staging secrets
+op item create --category=database \
+  --vault=staging \
+  --title="recogito-staging-supabase" \
+  url="https://staging.supabase.co" \
+  anon-key="eyJhb..." \
+  service-role-key="eyJhb..."
+```
+
+**Use Secret References in .env Files**:
+```bash
+# .env.dev
+PUBLIC_SUPABASE=op://dev/recogito-dev-supabase/url
+PUBLIC_SUPABASE_API_KEY=op://dev/recogito-dev-supabase/anon-key
+SUPABASE_SERVICE_KEY=op://dev/recogito-dev-supabase/service-role-key
+
+# .env.staging
+PUBLIC_SUPABASE=op://staging/recogito-staging-supabase/url
+PUBLIC_SUPABASE_API_KEY=op://staging/recogito-staging-supabase/anon-key
+SUPABASE_SERVICE_KEY=op://staging/recogito-staging-supabase/service-role-key
+```
+
+**Workflow Commands**:
+```bash
+# Local development (uses actual keys from supabase start)
+npm run dev
+
+# Deploy to dev environment
+op run --env-file=.env.dev -- npm run build
+op run --env-file=.env.dev -- npm run deploy
+
+# Deploy to staging
+op run --env-file=.env.staging -- npm run build
+op run --env-file=.env.staging -- npm run deploy
+
+# Deploy to production
+op run --env-file=.env.prod -- npm run build
+op run --env-file=.env.prod -- npm run deploy
+```
+
+**Benefits**:
+- ✅ Never commit secrets to git
+- ✅ Version-control `.env` files safely with secret references
+- ✅ Easy environment switching with `--env-file` flag
+- ✅ Team secret sharing through 1Password vaults
+- ✅ Audit trail of who accessed which secrets
+- ✅ Automatic secret rotation without code changes
+
+**Note**: Local development keys from `supabase start` change every time, so don't use 1Password for `.env.local` - just keep placeholders and fill them in from the `supabase start` output each time.

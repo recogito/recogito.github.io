@@ -46,6 +46,29 @@ All commands run from project root:
 - File-based routing: `src/content/docs/guides/example.md` → `/guides/example/`
 - Use frontmatter for page metadata (title, description, template)
 
+### Version Information
+When creating or updating documentation pages, **always include version information** to help developers know which software version the documentation covers:
+
+1. **Use Semantic Versioning** - Always use full semantic versioning (MAJOR.MINOR.PATCH) per [semver.org](https://semver.org)
+   - Format: `vX.Y.Z` (e.g., `v1.5.0`, not `v1.5`)
+
+2. **Sidebar Badge** - Add to frontmatter:
+   ```yaml
+   sidebar:
+     badge:
+       text: v1.5.0
+       variant: note
+   ```
+
+3. **Documentation Version Note** - Add at the top of the content:
+   ```mdx
+   :::note[Documentation Version]
+   This guide is written for **Recogito Studio v1.5.0** and later. If you're working with an earlier version, some steps may differ.
+   :::
+   ```
+
+4. **Determine Version** - Check `recogito-client/package.json` for the current version number
+
 ### Navigation Updates
 - Manual sidebar configuration in `astro.config.mjs`
 - Reference section auto-generates from `src/content/docs/reference/` directory
