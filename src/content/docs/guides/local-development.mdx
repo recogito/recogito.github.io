@@ -97,7 +97,7 @@ docker --version
    cd recogito-server
    ```
 
-   :::note[Supabase CLI Compatibility]
+   :::note[Supabase CLI Compatibility - pgsodium Extension]
    If using Supabase CLI version 2.20.4 or later, you need to make a one-time fix to the migration file:
 
    Edit `supabase/migrations/20230524173605_remote_commit.sql` and comment out line 13:
@@ -105,7 +105,14 @@ docker --version
    -- CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
    ```
 
-   This is required because newer Supabase CLI versions don't pre-create the pgsodium schema, and Recogito doesn't use this extension.
+   **Why this is needed:**
+   - Newer Supabase CLI versions don't pre-create the `pgsodium` schema in local development
+   - Supabase is [deprecating the pgsodium extension](https://supabase.com/docs/guides/database/extensions/pgsodium) and does not recommend its use for new projects
+   - Recogito doesn't use pgsodium's encryption features
+   - Your data remains secure: **Supabase projects are encrypted at rest by default** (SOC2 & HIPAA compliant)
+
+   **Production deployments:**
+   If your production instance was created before this change and already has pgsodium installed, it will continue to work. However, the extension is not actively used by Recogito, so this change is safe for all environments.
    :::
 
 2. **Start Supabase locally**
@@ -214,7 +221,26 @@ docker --version
    - `reader@example.com` / `password123`
    - `invited@example.com` / `password123`
 
-8. **Verify Supabase Studio**
+8. **Assign test users to organization groups**
+
+   ```bash
+   export SUPABASE_HOST=http://localhost:54321
+   export SUPABASE_SERVICE_KEY=<service_role_key from step 2>
+   node assign-test-user-groups.js -f config.json
+   ```
+
+   This assigns test users to appropriate groups:
+   - `professor@example.com` → Org Professor (can create projects)
+   - `student@example.com` → Org Readers (read-only)
+   - `tutor@example.com` → Org Readers (read-only)
+   - `reader@example.com` → Org Readers (read-only)
+   - `invited@example.com` → Org Readers (read-only)
+
+   :::tip[Why This Step Matters]
+   Without group assignments, test users cannot access projects or perform any actions in the application. This step is required to enable role-based testing.
+   :::
+
+9. **Verify Supabase Studio**
 
    Open http://localhost:54323 in your browser. You should see:
    - All tables populated in the Database section
@@ -497,6 +523,7 @@ cd recogito-server
 supabase db reset
 node create-default-groups.js -f config.json
 node create-test-users.js -f config.json
+node assign-test-user-groups.js -f config.json
 ```
 
 Or update passwords for existing users via Supabase Studio (http://localhost:54323) → Authentication → Users.
@@ -589,6 +616,7 @@ export SUPABASE_HOST=http://localhost:54321
 export SUPABASE_SERVICE_KEY=<your-service-key>
 node create-default-groups.js -f config.json
 node create-test-users.js -f config.json
+node assign-test-user-groups.js -f config.json
 ```
 
 ### Add a new test user manually
