@@ -3,7 +3,8 @@
     "allow": [
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl:*)",
-      "Read(//Users/jamie/repos/recogito-server/supabase/migrations/**)"
+      "Read(//Users/jamie/repos/recogito-server/supabase/migrations/**)",
+      "mcp__supabase__search_docs"
     ],
     "deny": [],
     "ask": []

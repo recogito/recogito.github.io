@@ -862,3 +862,52 @@ op run --env-file=.env.prod -- npm run deploy
 - ✅ Automatic secret rotation without code changes
 
 **Note**: Local development keys from `supabase start` change every time, so don't use 1Password for `.env.local` - just keep placeholders and fill them in from the `supabase start` output each time.
+
+---
+
+## Known Issues (For Future GitHub Issues)
+
+### Issue #1: Document Upload UI Doesn't Refresh After Upload
+
+**Date Discovered**: 2025-10-06
+
+**Repository**: `recogito-client` (frontend issue)
+
+**Description**: After successfully uploading a document to a project, the UI doesn't refresh to show the newly uploaded document. The upload completes successfully in the backend (file is stored, database record created, project link established), but the frontend doesn't update the document list.
+
+**Symptoms**:
+- Upload progress indicator completes
+- Upload appears successful
+- Document doesn't appear in the project's document list
+- Refreshing the page (Cmd+R / Ctrl+R) shows the uploaded document
+- Navigating away and back to the project also shows the document
+
+**Backend Verification**:
+All backend operations complete successfully:
+- ✅ Document stored in Supabase Storage (`documents` bucket)
+- ✅ Database record created in `documents` table
+- ✅ Project-document relationship created in `project_documents` table
+- ✅ Storage object created in `storage.objects` table
+
+**Root Cause**:
+React query/state cache is not being invalidated after upload completion. The upload handler needs to trigger a re-fetch of the documents list.
+
+**Workaround**:
+1. Refresh the browser page after upload, OR
+2. Navigate away from the project and back
+
+**Suggested Fix**:
+In the document upload handler (likely in `recogito-client/src/apps/*/` or `src/backend/`), add query invalidation after successful upload to trigger a refetch of the project's document list.
+
+**Testing Steps to Reproduce**:
+1. Log in as a test user with project creation permissions (e.g., professor@example.com)
+2. Create a new project or open an existing project
+3. Upload a document (any PDF, image, or text file)
+4. Wait for upload to complete
+5. Observe that the document doesn't appear in the list
+6. Refresh the page - document now appears
+
+**Impact**: Low - workaround is simple (page refresh), but degrades UX
+
+**Priority**: Medium - Should be fixed for better user experience
+
