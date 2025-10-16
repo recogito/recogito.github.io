@@ -2,22 +2,21 @@ name: Claude Code Review
 
 on:
   pull_request:
-    types: [opened, synchronize]
-    # Optional: Only run on specific file changes
-    # paths:
-    #   - "src/**/*.ts"
-    #   - "src/**/*.tsx"
-    #   - "src/**/*.js"
-    #   - "src/**/*.jsx"
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to review'
+        required: true
+        type: number
 
 jobs:
   claude-review:
-    # Optional: Filter by PR author
-    # if: |
-    #   github.event.pull_request.user.login == 'external-contributor' ||
-    #   github.event.pull_request.user.login == 'new-developer' ||
-    #   github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
-    
+    # Only run when 'claude-review' label is added or manually triggered
+    if: |
+      (github.event_name == 'pull_request' && github.event.label.name == 'claude-review') ||
+      github.event_name == 'workflow_dispatch'
+
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,16 +36,18 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
-            
-            Use the repository's CLAUDE.md for guidance on style and conventions. Be constructive and helpful in your feedback.
+            Review this PR. First, read ~/.claude/CLAUDE.md for communication style preferences.
 
-            Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
+            Focus ONLY on significant issues:
+            - Bugs or correctness problems
+            - Security vulnerabilities
+            - Performance issues
+            - Architectural concerns
+
+            Skip minor style/formatting unless critical. Be matter-of-fact and concise.
+            Keep comments brief and actionable. For small changes, a simple "LGTM" or 1-2 sentence summary is sufficient.
+
+            Use `gh pr comment` to post your review.
           
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
