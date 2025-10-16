@@ -7,12 +7,6 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-A software development kit for developing plugins to [Recogito Studio](https://recogitostudio.org/), an open source platform for collaborative annotation of TEI, IIIF and PDF documents.
-
-The **Recogito Studio SDK** is designed to facilitate plugin development for the [Recogito Studio Client](https://github.com/recogito/recogito-client) without the need to set up your own full-stack installation or forking the platform. It provides essential tools and abstractions to help you build useful extensions for the Recogito Studio ecosystem.
-
-## Getting Started
-
 The following steps walk you through the development of a **Hello World** plugin that adds a simple message to the annotation editor.
 
 ### Prerequisites
@@ -184,7 +178,7 @@ Run the following command to set up the test application:
 npx copy-template
 ```
 
-Add a development script to your `package.json`:
+Add a development script to your `package.json`. (Note that this may already be there if you cloned the template repository.)
 
 ```json
 {
@@ -221,6 +215,13 @@ export default defineConfig({
   ],
   // ... other configurations
 });
+```
+
+Update the test application's dependencies:
+
+```sh
+cd .dev
+npm install
 ```
 
 ### Step 5: Create a UI Extension
@@ -285,35 +286,13 @@ In the `package.json`, add an export for the UI extension:
 npm run build
 ```
 
-2. Add plugin to test application dependencies in `.dev/package.json`:
-```jsonc
-{
-  "dependencies": {
-    "@performant/plugin-hello-world": "file:../"
-  }
-}
-```
-
-3. Configure Astro integration in `.dev/astro.config.mjs`:
-```js
-import HelloWorldPlugin from "@performant/plugin-hello-world";
-
-export default defineConfig({
-  integrations: [
-    react(),
-    HelloWorldPlugin(),
-  ],
-  // other configurations...
-});
-```
-
-4. Run the development process:
+2. Run the development process in your project root folder:
 ```bash
 npm install
 npm run dev
 ```
 
-5. Open browser to `http://localhost:4321/`
+3. Open browser to `http://localhost:4321/`
 
 ## Installing Plugins
 
