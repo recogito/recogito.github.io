@@ -74,7 +74,6 @@ Layered annotation system:
 - Multiple layers per document
 - Context-based organization
 - Private/shared annotations
-- Version tracking
 
 ### Backend Integration
 

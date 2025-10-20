@@ -109,6 +109,7 @@ ssh root@your_server_ip
 Update the system:
 ```bash
 apt update
+apt upgrade
 ```
 
 Create a new user with sudo privileges:
@@ -123,6 +124,13 @@ ufw app list
 ufw allow OpenSSH
 ufw enable
 ufw status
+```
+
+Best practice is to not utilize the `root` login except in special circumstances.  Go ahead and exit the instance and SSH in with the new `recogito` user.
+
+```bash
+exit
+ssh recogito@your_server_ip
 ```
 
 ### 2. Install Nginx
@@ -214,31 +222,31 @@ Use [Supabase JWT Generator](https://supabase.com/docs/guides/self-hosting/docke
 - **MINIO_ROOT_USER/PASSWORD**: MinIO dashboard credentials
 - **PGADMIN_ADMIN_EMAIL/PASSWORD**: pgAdmin web access
 
-### 6. Run Installation
-
-Execute the installation script:
-```bash
-sudo bash ./install-self-hosted-docker.sh
-```
-
-Respond "Yes" to database push when prompted.
-
-### 7. Configure Nginx Routes
+### 6. Configure Nginx Routes
 
 Copy and customize Nginx configuration files:
 
 #### Client Configuration
+
+You will need 5 URLs for this setup
+
+- A client URL for accessing the Recogito Studio client
+- A server URL for API calls
+- A MinIO URL for accessing the MinIO dashboard
+- A pgAdmin URL for accessing pgAdmin
+- A Portainer URL for accessing the Portainer UI
+
 ```bash
-sudo cp ./nginx.client.example.com /etc/nginx/sites-available/client.example.com
-sudo nano /etc/nginx/sites-available/client.example.com
+sudo cp ./nginx.client.example.com /etc/nginx/sites-available/<your client url>
+sudo nano /etc/nginx/sites-available/<your client url>
 ```
 
 Replace `client.example.com` with your actual client domain.
 
 #### Server Configuration
 ```bash
-sudo cp ./nginx.server.example.com /etc/nginx/sites-available/server.example.com
-sudo nano /etc/nginx/sites-available/server.example.com
+sudo cp ./nginx.server.example.com /etc/nginx/sites-available/<your server url>
+sudo nano /etc/nginx/sites-available/<your server url>
 ```
 
 Update:
@@ -270,11 +278,11 @@ map $http_upgrade $connection_upgrade {
 #### Enable Sites
 Create symbolic links:
 ```bash
-sudo ln -s /etc/nginx/sites-available/server.example.com /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/client.example.com /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/pgadmin.example.com /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/minio.example.com /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/portainer.example.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/<your server url> /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/<your client url> /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/<your pgAdmin url> /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/<your MinIO url> /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/<your Portainer url> /etc/nginx/sites-enabled/
 ```
 
 Test and restart:
@@ -283,7 +291,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-### 8. SSL Certificates with Let's Encrypt
+### 7. SSL Certificates with Let's Encrypt
 
 Install Certbot:
 ```bash
@@ -294,11 +302,11 @@ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 
 Generate certificates for each domain:
 ```bash
-sudo certbot --nginx -d client.example.com
-sudo certbot --nginx -d server.example.com
-sudo certbot --nginx -d pgadmin.example.com
-sudo certbot --nginx -d minio.example.com
-sudo certbot --nginx -d portainer.example.com
+sudo certbot --nginx -d <your client url>
+sudo certbot --nginx -d <your server url>
+sudo certbot --nginx -d <your pgAdmin url>
+sudo certbot --nginx -d <your MinIO url>
+sudo certbot --nginx -d <your portainer url>
 ```
 
 Verify auto-renewal:
@@ -306,6 +314,15 @@ Verify auto-renewal:
 sudo systemctl status snap.certbot.renew.service
 sudo certbot renew --dry-run
 ```
+
+### 8. Run Installation
+
+Execute the installation script:
+```bash
+sudo bash ./install-self-hosted-docker.sh
+```
+
+Respond "Yes" to database push when prompted.
 
 ## Testing Your Installation
 
