@@ -97,24 +97,6 @@ docker --version
    cd recogito-server
    ```
 
-   :::note[Supabase CLI Compatibility - pgsodium Extension]
-   If using Supabase CLI version 2.20.4 or later, you need to make a one-time fix to the migration file:
-
-   Edit `supabase/migrations/20230524173605_remote_commit.sql` and comment out line 13:
-   ```sql
-   -- CREATE EXTENSION IF NOT EXISTS "pgsodium" WITH SCHEMA "pgsodium";
-   ```
-
-   **Why this is needed:**
-   - Newer Supabase CLI versions don't pre-create the `pgsodium` schema in local development
-   - Supabase is [deprecating the pgsodium extension](https://supabase.com/docs/guides/database/extensions/pgsodium) and does not recommend its use for new projects
-   - Recogito doesn't use pgsodium's encryption features
-   - Your data remains secure: **Supabase projects are encrypted at rest by default** (SOC2 & HIPAA compliant)
-
-   **Production deployments:**
-   If your production instance was created before this change and already has pgsodium installed, it will continue to work. However, the extension is not actively used by Recogito, so this change is safe for all environments.
-   :::
-
 2. **Start Supabase locally**
 
    ```bash
@@ -200,36 +182,26 @@ docker --version
    The `supabase db reset` command only runs migrations - it doesn't populate roles and groups from config.json.
    :::
 
-7. **Create test users**
+7. **Create test users and run tests**
+
+   Recogito Server has a number of `Jest` tests that are in the `jest/tests/projects.test.ts` file. These tests verify some base functionality.  
+
+   To simplify the process going forward, modify the `run_tests.sh` file to be executable:
 
    ```bash
-   export SUPABASE_HOST=http://localhost:54321
-   export SUPABASE_SERVICE_KEY=<service_role_key from step 2>
-   export PROFESSOR_PW=password123
-   export STUDENT_PW=password123
-   export TUTOR_PW=password123
-   export READER_PW=password123
-   export INVITE_PW=password123
-   export PROFESSOR_GROUP_ID='f918b2f8-f587-4ee1-9f2d-35b3aed0b1e6'
-   node create-test-users.js -f config.json
+   chmod +x run_tests.sh
    ```
+
+   Then execute the tests from the root directory of the repository:
+
+   ```bash
+   ./run_tests.sh
+   ```
+
+   The test script will create a number of test users that you can use locally to access the client and test fuctionality.
 
    This creates test accounts for development:
-   - `professor@example.com` / `password123`
-   - `student@example.com` / `password123`
-   - `tutor@example.com` / `password123`
-   - `reader@example.com` / `password123`
-   - `invited@example.com` / `password123`
 
-8. **Assign test users to organization groups**
-
-   ```bash
-   export SUPABASE_HOST=http://localhost:54321
-   export SUPABASE_SERVICE_KEY=<service_role_key from step 2>
-   node assign-test-user-groups.js -f config.json
-   ```
-
-   This assigns test users to appropriate groups:
    - `professor@example.com` → Org Professor (can create projects)
    - `student@example.com` → Org Readers (read-only)
    - `tutor@example.com` → Org Readers (read-only)
