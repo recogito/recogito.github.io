@@ -1,23 +1,17 @@
 ---
 title: Getting Started
-description: Overview of Recogito Studio self-hosting options and requirements.
+description: Overview of Recogito Studio installation options and architecture.
 sidebar:
   order: 1
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-Recogito Studio is a modern, open-source platform for collaborative annotation of TEI text, IIIF images, and PDFs. This documentation covers everything you need to self-host your own instance.
-
-## What is Recogito Studio?
-
-Recogito Studio provides:
-- **Collaborative Annotation**: Multiple users can annotate documents simultaneously
-- **Standards-Based**: Built on TEI, IIIF, and other open standards
-- **Multi-Format Support**: Works with text, images, and PDF documents
-- **Extensible Platform**: Plugin architecture for custom functionality
+Recogito Studio is a modern, open-source platform for collaborative annotation of TEI text, IIIF images, and PDFs. This documentation covers everything you need to run Recogito Studio locally or self-host your own instance.
 
 ## Local Development Setup & Self-Hosting
+
+Choose one of the following guides to set up your own instance:
 
 <CardGrid>
   <Card title="Development Setup" icon="laptop">
@@ -32,36 +26,32 @@ Recogito Studio provides:
   </Card>
 </CardGrid>
 
-## System Requirements
-
-Before you begin, ensure you have:
-
-- **Server**: Ubuntu Linux (v24 recommended)
-- **Memory**: Minimum 4GB RAM
-- **Storage**: 50GB+ available space
-- **Network**: Public IP with domain access
-- **DNS**: Ability to create 5+ DNS records
-
 ## Architecture Overview
 
-Recogito Studio consists of several integrated components:
+Recogito Studio consists primarily of two integrated components:
 
-- **Client Application** (Astro.js) - User interface
-- **Server Platform** (Supabase) - Backend services
-- **Database** (PostgreSQL) - Data storage
-- **File Storage** (MinIO) - Document and media files
-- **Management Tools** (Portainer, pgAdmin) - Administration
+- **[recogito-client](https://github.com/recogito/recogito-client)** (Astro.js + Vite) - Client web application
+- **[recogito-server](https://github.com/recogito/recogito-server)** (Supabase + PostgreSQL) - Database backend and file storage
 
-## Next Steps
+It also offers extended functionality through plugins, and an SDK for developing plugins.
 
-1. **Review Requirements**: Ensure your server meets the [system requirements](/guides/self-hosting/#system-requirements)
-2. **Prepare Domains**: Set up DNS records for your installation
-3. **Follow Installation**: Complete the [self-hosting guide](/guides/self-hosting/)
-4. **Configure & Customize**: Adapt the platform to your needs
+### Plugins
+
+Recogito Studio offers extended functionality through a plugin architecture. The following plugins are currently available:
+
+- **[GeoTagger](https://github.com/recogito/plugin-geotagging)** - Tag annotations with geographical references from a gazetteer.
+- **[Reconciliation Service API](https://github.com/recogito/plugin-reconciliation-service)** - Use a Reconciliation Service API endpoint as a tag source in your projects.
+- **[NER Plugin](https://github.com/recogito/plugin-ner)** - Automatically perform Named Entity Recognition on plain text and TEI documents.
+- **[Revisions Plugin](https://github.com/recogito/plugin-revisions)** - Basic annotation revision functionality.
+- **[TEI Inliner Plugin](https://github.com/recogito/plugin-tei-inliner)** - Export TEI annotations as inline markup.
+- **[Sandcastle3D Export](https://github.com/recogito/plugin-sandcastle-export)** - Custom annotation export for the [Sandcastle](https://www.sandcastle3d.org/) project.
+
+For information on installing plugins, visit the [Plugins Guide →](/guides/plugins/).
+
+**Interested in developing a plugin yourself?** Visit the [Plugin Development Guide →](/guides/sdk/).
 
 ## Need Help?
 
-- **Documentation**: Complete guides are available in this documentation
 - **Community**: Join the [Recogito Forum](https://community.performantsoftware.com/c/recogito/5)
 - **Source Code**: Visit the [GitHub repository](https://github.com/recogito/recogito-studio)
 - **Commercial Support**: [Contact Performant Software](https://www.performantsoftware.com/pages/recogito/)
