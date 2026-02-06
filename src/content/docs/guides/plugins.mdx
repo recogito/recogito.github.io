@@ -1,0 +1,74 @@
+---
+title: Plugin Installation
+description: Install plugins.
+sidebar:
+  order: 4
+---
+
+import AvailablePlugins from '../partials/available-plugins.mdx';
+
+This guide explains how to install the available plugins to a Recogito Studio instance.
+
+## Available Plugins
+
+<AvailablePlugins />
+
+## Local Development Environment
+
+In the root of the `recogito-client` repo (see [Client Application Setup](http://localhost:4321/guides/local-development/#phase-2-client-application-setup-recogito-client)), install whichever plugins you intend to use:
+
+```bash
+npm install @recogito/plugin-geotagging  # GeoTagger
+npm install @recogito/plugin-reconciliation-service. # Reconciliation Service API
+npm install @recogito/plugin-ner  # NER
+npm install @recogito/plugin-revisions  # Revisions
+npm install @recogito/plugin-tei-inliner  # TEI Inliner
+npm install @recogito/plugin-sandcastle-export  # Sandcastle3D Export
+```
+
+Then, in your `astro.config.mjs` file (and/or `astro.config.node.mjs` depending on which adapter you are using), add relevant imports and integrations for those plugins:
+
+```diff
+// astro.config.mjs
+
+import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
+import netlify from '@astrojs/netlify';
+
++ import GeoTaggingPlugin from '@recogito/plugin-geotagging';
++ import ReconcilationPlugin from '@recogito/plugin-reconciliation-service';
++ import NERPlugin from '@recogito/plugin-ner';
++ import RevisionsPlugin from '@recogito/plugin-revisions';
++ import TEIInlinePlugin from '@recogito/plugin-tei-inliner';
++ import Sandcastle3D from '@recogito/plugin-sandcastle-export';
+
+export default defineConfig({
+  integrations: [
+    react(),
++    GeoTaggingPlugin(),
++    ReconcilationPlugin(),
++    NERPlugin(),
++    RevisionsPlugin(),
++    TEIInlinePlugin(),
++    Sandcastle3D(),
+  ],
+  output: 'server',
+  adapter: netlify(),
+  vite: {
+    ssr: {
+      noExternal: ['clsx', '@phosphor-icons/*', '@radix-ui/*']
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'esnext'
+      }
+    }
+  }
+});
+```
+
+
+
+## Self-Hosted Production Environment
+
+## Enabling an Installed Plugin

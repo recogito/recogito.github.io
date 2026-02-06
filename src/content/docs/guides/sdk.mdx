@@ -2,10 +2,11 @@
 title: Plugin Development
 description: A software development kit for developing plugins to Recogito Studio, an open source platform for collaborative annotation of TEI, IIIF and PDF documents.
 sidebar:
-  order: 3
+  order: 5
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AvailablePlugins from '../partials/available-plugins.mdx';
 
 The following steps walk you through the development of a **Hello World** plugin that adds a simple message to the annotation editor.
 
@@ -368,14 +369,4 @@ For details, classes and other components, check the <a href="https://github.com
 
 Here are the existing plugins available for Recogito Studio:
 
-- **[Geotagging](https://github.com/recogito/plugin-geotagging)** - Recogito Geotagging Plugin.
-
-- **[Named Entity Recognition](https://github.com/recogito/plugin-ner)** - Recogito Studio plugin which can perform Named Entity Recognition on TEI and Plain Text.
-
-- **[Revisions](https://github.com/recogito/plugin-revisions)** - Allows users to make a read-only annotation editable, by cloning it into the active layer.
-
-- **[TEI Inliner](https://github.com/recogito/plugin-tei-inliner)** - A plugin for exporting TEI annotations as inline markup.
-
-- **[Reconciliation Service](https://github.com/recogito/plugin-reconciliation-service)** - Use a Reconciliation Service API endpoint as a tag source in Recogito Studio projects.
-
-- **[Sandcastle Export](https://github.com/recogito/plugin-sandcastle-export)** - A custom annotation export for Duke University's Unreal 3D importer.
+<AvailablePlugins />

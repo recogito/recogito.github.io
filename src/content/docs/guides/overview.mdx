@@ -6,6 +6,7 @@ sidebar:
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import AvailablePlugins from '../partials/available-plugins.mdx';
 
 Recogito Studio is a modern, open-source platform for collaborative annotation of TEI text, IIIF images, and PDFs. This documentation covers everything you need to run Recogito Studio locally or self-host your own instance.
 
@@ -39,12 +40,7 @@ It also offers extended functionality through plugins, and an SDK for developing
 
 Recogito Studio offers extended functionality through a plugin architecture. The following plugins are currently available:
 
-- **[GeoTagger](https://github.com/recogito/plugin-geotagging)** - Tag annotations with geographical references from a gazetteer.
-- **[Reconciliation Service API](https://github.com/recogito/plugin-reconciliation-service)** - Use a Reconciliation Service API endpoint as a tag source in your projects.
-- **[NER Plugin](https://github.com/recogito/plugin-ner)** - Automatically perform Named Entity Recognition on plain text and TEI documents.
-- **[Revisions Plugin](https://github.com/recogito/plugin-revisions)** - Basic annotation revision functionality.
-- **[TEI Inliner Plugin](https://github.com/recogito/plugin-tei-inliner)** - Export TEI annotations as inline markup.
-- **[Sandcastle3D Export](https://github.com/recogito/plugin-sandcastle-export)** - Custom annotation export for the [Sandcastle](https://www.sandcastle3d.org/) project.
+<AvailablePlugins />
 
 For information on installing plugins, visit the [Plugins Guide →](/guides/plugins/).
 
