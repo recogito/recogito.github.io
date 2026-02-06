@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Configuration Tool
 description: Technical overview of the Recogito configuration management tool.
 sidebar:
   order: 5

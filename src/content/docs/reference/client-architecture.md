@@ -1,5 +1,5 @@
 ---
-title: Client
+title: Client Architecture
 description: Technical overview of the Recogito client application architecture and components.
 sidebar:
   order: 1

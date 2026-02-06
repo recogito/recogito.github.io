@@ -1,5 +1,5 @@
 ---
-title: Server
+title: Server Architecture
 description: Technical overview of the Recogito server database architecture and backend systems.
 sidebar:
   order: 2

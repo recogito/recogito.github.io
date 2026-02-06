@@ -16,7 +16,7 @@ This guide is written for **Recogito Studio v1.5.0** and later. If you're workin
 
 This guide walks you through setting up a complete local development environment for Recogito Studio. Unlike the [self-hosting guide](/guides/self-hosting/) which covers production deployment, this setup is optimized for development and testing.
 
-## Overview
+## Components
 
 A local development environment consists of three main components:
 
@@ -25,68 +25,35 @@ A local development environment consists of three main components:
     Supabase-based backend with PostgreSQL database, authentication, and storage. Runs locally via Supabase CLI.
   </Card>
   <Card title="Recogito Client" icon="laptop">
-    Astro/React frontend application for the user interface. Runs on localhost:4321.
+    Astro/React frontend application for the user interface. Runs locally via Vite.
   </Card>
   <Card title="Config Tool" icon="setting">
-    Web-based configuration management tool for policies, roles, and branding. Runs on localhost:5173.
+    Optional web-based configuration management tool for policies, roles, and branding. Runs locally via Vite.
   </Card>
 </CardGrid>
 
-### Local Services & Ports
-
-- **Supabase API**: `http://localhost:54321`
-- **Supabase Database**: `localhost:54322`
-- **Supabase Studio**: `http://localhost:54323`
-- **Email Testing (Mailpit)**: `http://localhost:54324`
-- **Client Application**: `http://localhost:4322` (may vary if port is in use)
-- **Config Tool**: `http://localhost:5173` (optional)
-
-## Prerequisites
+## Required Software
 
 Before starting, ensure you have the following installed:
 
-### Required Software
+- **Node.js** (v18 or later) and npm
+- **Git**
+- **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**
+- **[Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started)**
 
-- **Docker Desktop** - For running Supabase services
-- **Node.js** (v18 or later) and npm - For running the client and config tool
-- **Git** - For cloning repositories
-- **Supabase CLI** - For local Supabase development
+### Additional Requirements
 
-### Install Supabase CLI
-
-**macOS:**
-```bash
-brew install supabase/tap/supabase
-```
-
-**Linux:**
-```bash
-brew install supabase/tap/supabase
-```
-
-**Windows:**
-```powershell
-scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
-scoop install supabase
-```
-
-Verify installation:
-```bash
-supabase --version
-```
-
-### Install Docker
-
-Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your platform.
-
-Verify Docker is running:
-```bash
-docker --version
-```
+There may be some additional requirements depending on how you intend to use your local setup.
+- **IIIF service**: When uploading and annotating images, Recogito Studio works primarily with IIIF. It is designed to integrate with [IIIF Cloud](https://github.com/performant-software/iiif-cloud), which can be easily [run in a Docker container](https://github.com/performant-software/iiif-cloud/blob/develop/docker-compose-instructions.md).
+    - Performant Software offers managed IIIF hosting through our IIIF Cloud instances; [contact us](https://www.performantsoftware.com/contact/) for more information.
+    - Recogito Studio also supports *external* IIIF manifests out of the box.
+    - Finally, it is also possible to use a direct file upload to Supabase storage and then use your own IIIF service to transform images locally, but that is not currently well-supported and you may encounter issues.
+- **Mail server**: Recogito Studio will attempt to send transactional emails (invites, password reset, etc) through a configured outgoing mail server. You can use something like [Mailpit](https://mailpit.axllent.org/) or [Ethereal Email](https://ethereal.email/), or set up an actual outbound mail account through a service like [Postmark](https://postmarkapp.com/).
+- [**Trigger.dev**](https://trigger.dev/docs/self-hosting/overview): Required for running background jobs like project import/export and the NER plugin.
 
 ## Setup Process
 
-### Phase 1: Database Setup (recogito-server)
+### Phase 1: Database Setup (`recogito-server`)
 
 <Steps>
 
@@ -99,6 +66,8 @@ docker --version
 
 2. **Start Supabase locally**
 
+   Ensure Docker Desktop is running. Then:
+
    ```bash
    supabase start
    ```
@@ -109,11 +78,11 @@ docker --version
    - Display access credentials and URLs
 
    **Note the output**, especially:
-   - `API URL`: http://localhost:54321
-   - `DB URL`: postgresql://postgres:postgres@localhost:54322/postgres
-   - `Studio URL`: http://localhost:54323
-   - `anon key`: Your anonymous API key
-   - `service_role key`: Your service role key
+   - `API URL`: Local Supabase API access
+   - `Database URL`: Postgres database
+   - `Studio URL`: Supabase Studio, which allows local DB/auth/storage management through a GUI
+   - `Publishable key` or `anon key`: Your anonymous API key
+   - `Secret key` or `service_role key`: Your service role key
 
 3. **Run database migrations**
 
@@ -128,15 +97,54 @@ docker --version
    - Apply all migrations
    - Populate the policies table
 
-4. **Install server dependencies**
+4. **(Optional) Generate a custom configuration with the config tool**
+
+   :::tip[Optional step]
+   If you want to customize roles, groups, authentication, branding, or dynamic text, Recogito Studio offers a configuration tool that can be run separately to generate a `config.json`.
+
+   If the default configuration is sufficient (it is for most development environments), **you can skip this step**.
+   :::
+
+   To use the config tool, clone the repository from GitHub and install and run with NPM:
+
+   ```bash
+   cd ..
+   git clone https://github.com/recogito/recogito-config.git
+   cd recogito-config
+   npm install
+   ```
+
+   Copy the environment variables example file and populate with your own Supabase values:
+
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+   ```bash
+   VITE_SUPABASE_API_URL=<API URL from supabase start>
+   VITE_SUPABASE_SERVICE_KEY=<secret key from supabase start>
+   ```
+
+   Then start the config tool:
+
+
+   ```bash
+   npm start
+   ```
+
+   This will serve the config tool from [`localhost:5174`](http://localhost:5174/).
+
+   For more details on the available options, see the [Configuration Tool Reference →](/reference/config-tool/).
+
+5. **Install dependencies and configure environment**
+
+   From the root of the `recogito-server` repo, run:
 
    ```bash
    npm install
    ```
 
-   This installs the packages needed for setup scripts.
-
-5. **Create environment file**
+   This installs the packages needed for setup scripts. Then, prepare environment variables:
 
    ```bash
    cp .env.example .env
@@ -145,35 +153,35 @@ docker --version
 
    Update the following values:
    ```bash
-   SUPABASE_HOST=http://localhost:54321
-   SUPABASE_SERVICE_KEY=<service_role_key from step 2>
+   SUPABASE_HOST=API URL from step 2
+   SUPABASE_SERVICE_KEY=secret key from step 2
 
-   # Test user passwords (all using same password for simplicity)
-   ORG_ADMIN_PW=password123
-   PROFESSOR_PW=password123
-   STUDENT_PW=password123
-   TUTOR_PW=password123
-   READER_PW=password123
-   INVITE_PW=password123
-
-   # Group IDs from default config
-   ORG_ADMIN_GROUP_ID='350abe76-937b-4a9b-9600-9b1f856db250'
-   PROFESSOR_GROUP_ID='f918b2f8-f587-4ee1-9f2d-35b3aed0b1e6'
-   STUDENT_GROUP_ID='f2e37e37-3b36-4833-b88d-f58e5c018ef5'
-   TUTOR_GROUP_ID='f2e37e37-3b36-4833-b88d-f58e5c018ef5'
-   READER_GROUP_ID='f2e37e37-3b36-4833-b88d-f58e5c018ef5'
+   # Test user passwords (all can use the same password for simplicity)
+   ORG_ADMIN_PW=password
+   PROFESSOR_PW=password
+   STUDENT_PW=password
+   TUTOR_PW=password
+   READER_PW=password
+   INVITE_PW=password
    ```
+
+   You can leave the group IDs alone if you skipped step 4, or based your configuration on the `default-config.json`. If you created custom groups, these values must be populated by UUIDs of Organization Groups.
 
 6. **Populate database with roles and groups**
 
+   Run the following commands to populate the databse with default groups, roles, users, etc.
+
    ```bash
-   export SUPABASE_HOST=http://localhost:54321
-   export SUPABASE_SERVICE_KEY=<service_role_key from step 2>
    node create-default-groups.js -f config.json
+   node create-test-users.js -f config.json
    ```
 
+   :::note[Custom configuration]
+   If you created a custom configuration in step 4, use that JSON file instead of `config.json`.
+   :::
+
    :::tip[Important Step]
-   This step is **required** before creating test users. It populates the database with:
+   This step is **required** before creating users. It populates the database with:
    - Roles (Org Admin, Org Professor, Project Admin, Layer Admin, etc.)
    - Organization groups
    - Project and layer default groups
@@ -181,165 +189,102 @@ docker --version
 
    The `supabase db reset` command only runs migrations - it doesn't populate roles and groups from config.json.
    :::
-
-7. **Create test users and run tests**
-
-   Recogito Server has a number of `Jest` tests that are in the `jest/tests/projects.test.ts` file. These tests verify some base functionality.  
-
-   To simplify the process going forward, modify the `run_tests.sh` file to be executable:
-
-   ```bash
-   chmod +x run_tests.sh
-   ```
-
-   Then execute the tests from the root directory of the repository:
-
-   ```bash
-   ./run_tests.sh
-   ```
-
-   The test script will create a number of test users that you can use locally to access the client and test fuctionality.
-
-   This creates test accounts for development:
-
-   - `professor@example.com` → Org Professor (can create projects)
-   - `student@example.com` → Org Readers (read-only)
-   - `tutor@example.com` → Org Readers (read-only)
-   - `reader@example.com` → Org Readers (read-only)
-   - `invited@example.com` → Org Readers (read-only)
-
-   :::tip[Why This Step Matters]
-   Without group assignments, test users cannot access projects or perform any actions in the application. This step is required to enable role-based testing.
-   :::
-
-9. **Verify Supabase Studio**
-
-   Open http://localhost:54323 in your browser. You should see:
-   - All tables populated in the Database section
-   - Test users in the Authentication section
-   - Policies applied to tables
-
 </Steps>
 
-### Phase 2: Configuration Tool Setup (recogito-config)
+
+### Phase 2: Client Application Setup (`recogito-client`)
 
 <Steps>
 
-1. **Clone the recogito-config repository**
+1. **Install the application**
 
-   ```bash
-   cd ..
-   git clone https://github.com/recogito/recogito-config.git
-   cd recogito-config
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   ```
-
-3. **Create environment file**
-
-   Create a `.env` file:
-   ```bash
-   VITE_SERVICE_KEY=<service_role_key from Supabase start>
-   ```
-
-4. **Start the config tool**
-
-   ```bash
-   npm run dev
-   ```
-
-   The config tool will be available at http://localhost:5173
-
-5. **Generate configuration file**
-
-   - Open http://localhost:5173 in your browser
-   - The **Policies** tab will auto-load from your local Supabase database
-   - Click **Load Config** and upload `dafault-config.json` (from the repo)
-   - Review and customize:
-     - **Roles**: Define permission sets
-     - **Default Groups**: Org/Project/Layer group templates
-     - **Admin**: Set admin email and groups
-     - **Branding**: Customize platform appearance
-     - **Authentication**: Configure auth methods
-     - **Dynamic Text**: Multi-language content
-   - Click **Save Config** when ready
-   - Enter metadata (project name, author, version)
-   - Download the generated `config.json` file
-
-</Steps>
-
-### Phase 3: Client Application Setup (recogito-client)
-
-<Steps>
-
-1. **Clone the recogito-client repository**
-
+   Clone the recogito-client repository:
    ```bash
    cd ..
    git clone https://github.com/recogito/recogito-client.git
    cd recogito-client
    ```
 
-2. **Switch to Node adapter for local development**
-
-   ```bash
-   mv astro.config.mjs astro.config.netlify.mjs
-   mv astro.config.node.mjs astro.config.mjs
-   ```
-
-   :::caution[Critical Step]
-   The default Astro configuration uses the Netlify adapter, which **breaks local development** with Vite module resolution errors. You must swap to the Node adapter before installing dependencies.
-
-   - `astro.config.node.mjs` → Use for local development
-   - `astro.config.netlify.mjs` → Use for Netlify deployment only
-
-   If you see console errors like "Failed to load module script" or "__DEFINES__ is not defined", you're using the wrong adapter.
-   :::
-
-3. **Install dependencies**
+   And install with NPM:
 
    ```bash
    npm install
    ```
 
-4. **Create environment file**
+2. **Create environment file**
 
    ```bash
    cp .env.example .env
    nano .env
    ```
 
-   Update with your local Supabase values:
+   Update with your local values:
    ```bash
-   # Supabase connection
-   PUBLIC_SUPABASE=http://127.0.0.1:54321
-   PUBLIC_SUPABASE_API_KEY=<anon_key from step 2>
-   SUPABASE_SERVICE_KEY=<service_role_key from step 2>
+      ###############################################################################
+      # Public variables
+      # (Variables beginning with PUBLIC_ are exposed to both server and client)
+      ###############################################################################
 
-   # IIIF Configuration (optional - can use defaults for basic setup)
-   PUBLIC_IIIF_CONFIGURATION="IIIF_CLOUD"
+      # Supabase connection
+      PUBLIC_SUPABASE="https://your-project.supabase.co"
+      PUBLIC_SUPABASE_API_KEY="your-anonymous-key"
 
-   # Room secret for realtime features
-   ROOM_SECRET=local-dev-room-secret-change-in-production
+      # IIIF (image server) configuration
+      PUBLIC_IIIF_CONFIGURATION="IIIF_CLOUD"  # or "SUPABASE_CANTALOUPE"
+      # PUBLIC_IIIF_CANTALOUPE_PATH="/iiif"  # uncomment if using SUPABASE_CANTALOUPE
 
-   # IIIF Server (can leave as examples for basic local dev)
-   IIIF_URL=http://www.example.com/iiif/public/resources
-   IIIF_KEY=your-iiif-server-api-key
-   IIIF_PROJECT_ID=iiif-project-uuid-for-this-app
+      # Optional – Enable email/password invites from the UI
+      # When TRUE, Org Admins can invite email/password users from the User Management UI
+      PUBLIC_ENABLE_USER_INVITE=TRUE
 
-   # Mail - Using local Mailpit (available at http://127.0.0.1:54324)
-   MAIL_HOST=127.0.0.1
-   MAIL_PORT=1025
-   MAIL_USERNAME=
-   MAIL_PASSWORD=
-   MAIL_FROM_ADDRESS=noreply@recogito.local
+      # Optional - Usersnap feedback form
+      # PUBLIC_USERSNAP_GLOBAL_API_KEY="usersnap-global-api-key"
+      # PUBLIC_USERSNAP_PROJECT_API_KEY="usersnap-project-api-key"
 
-   # Optional features
-   PUBLIC_ENABLE_USER_INVITE=TRUE
+      # Optional – External help/FAQ page
+      # PUBLIC_HELP_REDIRECT="https://help.example.com"
+
+      ###############################################################################
+      # Server-only secrets
+      # (Never exposed to browser)
+      ###############################################################################
+
+      # Secret 'salt' to compute the realtime room identifiers
+      ROOM_SECRET="your-room-secret"
+
+      # Secret service key for server-side Supabase clients
+      SUPABASE_SERVICE_KEY="your-supabase-service-key"
+
+      # Optional: Server-only Supabase URL.
+      # Use this if your Astro server runs in an environment where it must reach
+      # Supabase using a different URL (e.g. internal/private network, Docker, VPC).
+      # If not set, PUBLIC_SUPABASE is used for both server and client.
+      # SUPABASE_SERVERCLIENT_URL="http://supabase:8000"
+
+      ###############################################################################
+      # Trigger.dev (Background jobs, import/export, NER plugin)
+      ###############################################################################
+      TRIGGER_SECRET_KEY=<your secret key>
+      TRIGGER_SERVER_URL=http://localhost:3040/
+      # TASK_PAYLOAD_OFFLOAD_THRESHOLD=5242880
+
+      ###############################################################################
+      # IIIF Cloud (image server) configuration
+      ###############################################################################
+      IIIF_URL="http://www.example.com/iiif/public/resources"
+      IIIF_KEY=<your iiif cloud api key>
+      IIIF_PROJECT_ID=<iiif cloud project uuid for this app>
+
+      ###############################################################################
+      # Email - Used for transactional emails: invites, notifications, etc.
+      ###############################################################################
+      MAIL_HOST=<your email host>
+      MAIL_PORT=<your email port>
+      MAIL_USERNAME=<your email username>
+      MAIL_PASSWORD=<your email password>
+      MAIL_FROM_ADDRESS=<the from address for emails>
+      # Base64-encoded 256-bit key (e.g. generated with: openssl rand -base64 32)
+      INVITE_CRYPTO_KEY=<base64 encoded 256-bit cryptographic key>
    ```
 
 5. **Deploy configuration file** (optional)
@@ -359,216 +304,37 @@ docker --version
 6. **Start the development server**
 
    ```bash
-   npm run dev
+   npm start
    ```
 
-   The client will be available at http://localhost:4322 (or 4321 if that port is free).
-
-   :::note
-   The dev server may use port 4322 if 4321 is already in use. Check the terminal output for the actual port.
-   :::
+   The client will be available at http://localhost:4321 (or another port if that port is in use).
 
 7. **Access the application**
 
-   - Open the URL shown in the terminal (typically http://localhost:4322)
+   - Open the URL shown in the terminal (typically http://localhost:4321)
    - You should see the Recogito Studio login page
    - Sign in with a test user:
-     - Email: `professor@example.com`
-     - Password: `password123`
+     - Email: `admin@example.com`
+     - Password: `password` (or whatever you set in Phase 1 step 5 for `ORG_ADMIN_PW`)
 
 </Steps>
 
-## Verification & Testing
+#### Building
 
-### Test Authentication
+If you would like to build and run the application as a standalone service, using Node, run:
 
-1. Navigate to http://localhost:4322 (or the port shown in your terminal)
-2. Sign in with test credentials:
-   - **Email**: `professor@example.com`
-   - **Password**: `password123`
-3. You should be redirected to `/en/projects`
-
-### Test Project Creation
-
-1. Click **Create Project**
-2. Enter project details
-3. Create the project
-4. Verify it appears in your project list
-
-### Test Document Upload
-
-1. Open a project
-2. Upload a test document (text, image, or PDF)
-3. Verify the document appears in the project
-
-### Test Annotation
-
-1. Open a document
-2. Select text or draw on an image
-3. Create an annotation
-4. Verify it saves and persists
-
-### Access Development Tools
-
-- **Supabase Studio**: http://localhost:54323 - View database, auth, storage
-- **Email Testing**: http://localhost:54324 - View emails sent by the system
-- **Database**: Connect directly at `postgresql://postgres:postgres@localhost:54322/postgres`
-
-## Development Workflow
-
-### Making Database Changes
-
-1. Make changes via Supabase Studio (http://localhost:54323)
-2. Generate a migration:
-   ```bash
-   cd recogito-server
-   supabase db diff -f <migration_name>
-   ```
-3. Reset the database to apply:
-   ```bash
-   supabase db reset
-   ```
-
-### Updating Configuration
-
-1. Make changes in the config tool (http://localhost:5173)
-2. Save and download the new `config.json`
-3. Copy to `recogito-client/src/config.json`
-4. Restart the client dev server
-
-### Running Tests
-
-For server-side database tests:
 ```bash
-cd recogito-server/jest
-npm test
+npm run build-node
 ```
 
-## Troubleshooting
-
-### Login form not appearing
-
-**Issue**: Sign-in page loads but shows only branding/header/footer, no login form. Browser console shows errors like "Failed to load module script" or "__DEFINES__ is not defined"
-
-**Cause**: Using Netlify adapter instead of Node adapter
-
-**Solution**:
-1. Stop the dev server (Ctrl+C)
-2. Swap the Astro configs:
-   ```bash
-   cd recogito-client
-   mv astro.config.mjs astro.config.netlify.mjs
-   mv astro.config.node.mjs astro.config.mjs
-   ```
-3. Clear caches:
-   ```bash
-   rm -rf node_modules/.vite .astro
-   ```
-4. Restart: `npm run dev`
-
-### Test user creation fails
-
-**Issue**: Error "Cannot read properties of undefined (reading 'id')" when running `create-test-users.js`
-
-**Cause**: Database doesn't have roles and groups yet
-
-**Solution**:
-Run `create-default-groups.js` BEFORE `create-test-users.js`:
+Then you may start the service using:
 ```bash
-cd recogito-server
-export SUPABASE_HOST=http://localhost:54321
-export SUPABASE_SERVICE_KEY=<your-service-key>
-node create-default-groups.js -f config.json
-node create-test-users.js -f config.json
+node ./dist/server/entry.mjs
 ```
 
-### Invalid email or password
+This will use the Node adapter for Astro (`astro.config.node.mjs`). Building with `npm run build`
+instead will use the Netlify adapter (via `astro.config.mjs`), meaning the build output may only be usable on Netlify.
 
-**Issue**: Login fails with correct test user email
-
-**Cause**: Test users exist from previous session with different passwords
-
-**Solution**:
-Reset the database completely:
-```bash
-cd recogito-server
-supabase db reset
-node create-default-groups.js -f config.json
-node create-test-users.js -f config.json
-node assign-test-user-groups.js -f config.json
-```
-
-Or update passwords for existing users via Supabase Studio (http://localhost:54323) → Authentication → Users.
-
-### Supabase won't start
-
-**Issue**: Docker containers fail to start
-
-**Solutions**:
-- Ensure Docker Desktop is running
-- Check ports 54321-54326 are not in use
-- Run `supabase stop` then `supabase start` again
-
-### Client can't connect to Supabase
-
-**Issue**: API errors or authentication failures
-
-**Solutions**:
-- Verify `PUBLIC_SUPABASE=http://127.0.0.1:54321` and `PUBLIC_SUPABASE_API_KEY` in `.env`
-- Check Supabase is running: `supabase status`
-- Ensure you're using the correct anon key from `supabase start` output
-
-### Database schema is empty
-
-**Issue**: No tables in Supabase Studio
-
-**Solutions**:
-- Run `supabase db reset` from the `recogito-server` directory
-- Check for migration errors in the output
-- Verify you're in the correct directory when running the command
-
-### WebSocket connection warnings
-
-**Issue**: Browser console shows WebSocket connection to 'ws://127.0.0.1:54321/realtime/v1/websocket' failed
-
-**Impact**: Non-blocking - application works normally
-
-**Solution**:
-This warning can be ignored for basic local development. It relates to realtime collaboration features and doesn't affect core functionality like login, project creation, or annotation.
-
-## Stopping the Development Environment
-
-### Stop individual services
-
-**Client**:
-```bash
-# Press Ctrl+C in the terminal running npm run dev
-```
-
-**Config Tool** (if running):
-```bash
-# Press Ctrl+C in the terminal running npm run dev
-```
-
-**Supabase**:
-```bash
-cd recogito-server
-supabase stop
-```
-
-### Restart services
-
-**Supabase**:
-```bash
-cd recogito-server
-supabase start
-```
-
-**Client**:
-```bash
-cd recogito-client
-npm run dev
-```
 
 ## Next Steps
 
@@ -577,9 +343,9 @@ npm run dev
 - [SDK Guide](/guides/sdk/) - Build plugins
 - [Environment Variables](/reference/environment-variables/) - Full configuration reference
 
-## Common Development Tasks
+## FAQs
 
-### Reset the database completely
+### How do I reset the database completely?
 
 ```bash
 cd recogito-server
@@ -588,42 +354,30 @@ export SUPABASE_HOST=http://localhost:54321
 export SUPABASE_SERVICE_KEY=<your-service-key>
 node create-default-groups.js -f config.json
 node create-test-users.js -f config.json
-node assign-test-user-groups.js -f config.json
 ```
 
-### Add a new test user manually
+### How do I add a new user?
 
-Use Supabase Studio (http://localhost:54323):
+Use Supabase Studio (typically http://localhost:54323):
 1. Go to **Authentication** → **Users**
 2. Click **Add user**
 3. Enter email and password
-4. Assign to appropriate group in the database
+4. Choose to auto-accept rather than sending an email
 
-### View real-time logs
+Then, log in as an Org Admin, and navigate to the profile menu (top right) → Users. From there you can assign the new user to a group.
 
-**Supabase logs**:
-```bash
-cd recogito-server
-supabase logs
-```
+### How do I make changes to the database schema?
 
-**Client logs**:
-Check the terminal running `npm start` or browser console
-
-### Export database for testing
-
-```bash
-cd recogito-server
-supabase db dump -f backup.sql
-```
-
-### Import database from backup
-
-```bash
-cd recogito-server
-supabase db reset
-psql postgresql://postgres:postgres@localhost:54322/postgres < backup.sql
-```
+1. Make changes in the SQL editor via Supabase Studio (typically http://localhost:54323)
+2. Generate a migration:
+   ```bash
+   cd recogito-server
+   supabase db diff -f <migration_name>
+   ```
+3. Migrate the database to apply:
+   ```bash
+   supabase migration up
+   ```
 
 ## Additional Resources
 
