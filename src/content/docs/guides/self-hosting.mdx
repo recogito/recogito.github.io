@@ -338,6 +338,129 @@ Navigate to your server URL (`https://server.example.com`) for Supabase studio a
 - **Username**: `supabase`
 - **Password**: Value from `DASHBOARD_PASSWORD` in your `.env` file
 
+
+## Upgrading
+
+**Note:** Run these commands from your base project directory (the folder containing your `recogito-studio` repository) so the relative paths match up.
+
+**Note:** Check the [latest release](https://github.com/recogito/recogito-studio/releases) for any version-specific upgrade notes that may be missing from this guide, such as new required environment variables.
+
+### 1. Update repositories
+
+To upgrade a self-hosted instance, pull the latest revision of the self-hosting `recogito-studio` repo to the server running the docker container.
+
+```sh
+# fresh clone
+git clone --single-branch --branch main --depth 1 https://github.com/recogito/recogito-studio
+
+# or, if you already have it checked out
+cd recogito-studio
+git checkout main
+git pull
+```
+
+In addition, pull the most recent, stable versions of the `recogito-client` and `recogito-server` repositories from GitHub.
+
+```sh
+cd ..
+
+# fresh clones
+git clone --single-branch --branch main --depth 1 https://github.com/recogito/recogito-client
+git clone --single-branch --branch main --depth 1 https://github.com/recogito/recogito-server
+
+# or, if you already have them checked out
+cd recogito-client
+git checkout main
+git pull
+
+cd ../recogito-server
+git checkout main
+git pull
+
+cd ..
+```
+
+### 2. Update client `config.json`
+
+Replace the default client configuration file with your live environment's custom `config.json`.
+
+If you have made any manual configuration changes (such as branding), ensure those are propagated here.
+
+```sh
+rm -f ./recogito-client/src/config.json
+cp ./recogito-studio/docker/config/config.json ./recogito-client/src/config.json
+cd ./recogito-client
+```
+
+
+### 3. Update `.env`
+
+Ensure all environment variables from `./docker/.env.example` are in `./docker/.env`, as new required variables may have been added since your install.
+
+Copy your live `.env` file into the client code directory and export the variables to the shell. This is critical because the build process needs to read these variables (like `SITE_URL`) to securely configure the frontend.
+
+```sh
+rm -f .env
+cp ../recogito-studio/docker/.env .env
+set -a && source .env && set +a
+```
+
+
+### 4. Build the Docker image
+
+Instruct Docker to build a new image named `recogito-studio-client:latest` from scratch. The `--no-cache` flag ensures no outdated code or configurations accidentally carry over into the new build.
+```sh
+docker build --no-cache -t recogito-studio-client:latest .
+cd ..
+```
+
+### 5. Update server `config.json`
+
+Because the backend runs on a pre-built Supabase Postgres image, upgrading the server primarily means updating the database schema to match the latest application requirements.
+
+The first step is to ensure the server `config.json` has all of the latest Roles and Policies, which should be up to date from the latest version of the `recogito-studio` repo.
+
+```sh
+rm -f ./recogito-server/config.json
+cp ./recogito-studio/docker/config/config.json ./recogito-server/config.json
+cd ./recogito-server
+```
+
+### 6. Update the server schema
+
+Download the necessary Node.js packages required to run the migration scripts locally.
+```sh
+npm install
+```
+
+Then, use the Supabase CLI tool to push any new SQL schema changes directly into your running PostgreSQL database. 
+```sh
+PGSSLMODE=disable npx supabase db push --db-url postgresql://postgres:$POSTGRES_PASSWORD@localhost:$POSTGRES_PORT/postgres --include-all
+```
+
+Finally, run the `create-default-groups.js` script. This reads your `config.json` and automatically updates the PostgreSQL database roles and access policies to match the latest configuration.
+```sh
+node ./create-default-groups.js -f ./config.json
+cd ..
+```
+
+### 7. Server restart and cleanup
+
+With the new frontend image built and the database fully up to date, the final step is to swap out the old live application for the new one.
+
+Instruct Docker Compose to specifically target the `client` container. It will gracefully shut down the old container and immediately spin up a new one using the fresh `recogito-studio-client:latest` image.
+```sh
+cd ./recogito-studio/docker
+docker compose -f ./docker-compose.yml -f ./docker-compose.client.yml up -d --force-recreate client
+cd ../..
+```
+
+Feel free to delete the `recogito-client` and `recogito-server` repositories, as they are no longer needed.
+```sh
+rm -rf ./recogito-client/
+rm -rf ./recogito-server/
+```
+
 ## Additional Resources
 
 - [Recogito Studio SDK](/guides/sdk/) - For adding plugins
