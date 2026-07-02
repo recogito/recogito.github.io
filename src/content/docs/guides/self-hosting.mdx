@@ -5,6 +5,8 @@ sidebar:
   order: 3
 ---
 
+import { Badge } from '@astrojs/starlight/components';
+
 Recogito Studio is ready for self-hosting and these instructions detail the steps necessary for deployment on Ubuntu Linux, v24 (although many earlier versions will also work as well). The deployment strategy utilizes [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), and [Nginx](https://nginx.org).
 
 Because everything runs in Docker behind Nginx, you can host Recogito Studio on any server that meets the requirements below, including a cloud VM (DigitalOcean, AWS EC2, Hetzner, Linode, etc.) or your own hardware. The steps assume a Debian-based distribution; the examples were written against Ubuntu 24.
@@ -172,28 +174,29 @@ Some values are **passwords you choose** (you'll log in with them); the rest are
 
 Passwords you choose:
 
-- **DASHBOARD_PASSWORD** — Supabase Studio login (must include at least one letter)
-- **ORG_ADMIN_PW** — password for the initial admin user (`admin@example.com`)
+- `DASHBOARD_PASSWORD` <Badge text="required" variant="caution" size="small" /> — Supabase Studio login (must include at least one letter)
+- `DASHBOARD_USERNAME` <Badge text="optional" variant="note" size="small" /> — username for the Supabase Studio login. Defaults to `supabase`.
+- `ORG_ADMIN_PW` <Badge text="required" variant="caution" size="small" /> — password for the initial admin user (`admin@example.com`)
 
-Random secrets — run the command and paste the output:
+Random secrets (run the command and paste the output):
 
-- **POSTGRES_PASSWORD** — `openssl rand -hex 24` (hex avoids characters that break Postgres connection strings)
-- **VAULT_ENC_KEY** — `openssl rand -hex 16` (32 characters)
-- **INVITE_CRYPTO_KEY** — `openssl rand -base64 32`
+- `POSTGRES_PASSWORD` <Badge text="required" variant="caution" size="small" /> — `openssl rand -hex 24` (hex avoids characters that break Postgres connection strings)
+- `VAULT_ENC_KEY` <Badge text="required" variant="caution" size="small" /> — `openssl rand -hex 16` (32 characters)
+- `INVITE_CRYPTO_KEY` <Badge text="required" variant="caution" size="small" /> — `openssl rand -base64 32`
 
 Identifier:
 
-- **POOLER_TENANT_ID** — any unique string, e.g. `recogito`
+- `POOLER_TENANT_ID` <Badge text="required" variant="caution" size="small" /> — any unique string, e.g. `recogito`
 
 #### JWT Secret and API Keys
 
-Recogito uses Supabase's legacy JWT-based keys. First, generate a **JWT_SECRET** and set it in your `.env`:
+Recogito uses Supabase's legacy JWT-based keys. First, generate a `JWT_SECRET` and set it in your `.env`:
 
 ```bash
 openssl rand -base64 36
 ```
 
-**ANON_KEY** and **SERVICE_ROLE_KEY** are JWTs signed with that secret. From your `recogito-studio` directory, with `JWT_SECRET` already set in `docker/.env`:
+`ANON_KEY` and `SERVICE_ROLE_KEY` are JWTs signed with that secret. From your `recogito-studio` directory, with `JWT_SECRET` already set in `docker/.env`:
 
 ```bash
 JWT_SECRET="$(grep '^JWT_SECRET=' docker/.env | cut -d= -f2-)" node -e '
@@ -211,20 +214,38 @@ console.log("SERVICE_ROLE_KEY=" + sign("service_role"));
 '
 ```
 
-Copy the two printed values into **ANON_KEY** and **SERVICE_ROLE_KEY** in your `.env`.
+Copy the two printed values into `ANON_KEY` and `SERVICE_ROLE_KEY` in your `.env`.
 
 #### URLs and Access
 
-- **SITE_URL**: Your client domain (`https://client.example.com`)
-- **API_EXTERNAL_URL**: Your server domain (`https://server.example.com`)
-- **ROOM_SECRET**: Generate with `openssl rand -base64 24`
-- **MINIO_ROOT_USER/PASSWORD**: Choose these; they're your login for the MinIO console. The password must be at least 8 characters.
-- **PGADMIN_ADMIN_EMAIL/PASSWORD**: Choose these; they're your login for pgAdmin. The email must be a valid address format, or the container won't start.
-- **MAIL_FROM_ADDRESS**: Address used as the sender for system emails
+- `SITE_URL` <Badge text="required" variant="caution" size="small" /> — your client domain (`https://client.example.com`)
+- `API_EXTERNAL_URL` <Badge text="required" variant="caution" size="small" /> — your server domain (`https://server.example.com`)
+- `ROOM_SECRET` <Badge text="required" variant="caution" size="small" /> — generate with `openssl rand -base64 24`
+- `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD` <Badge text="required" variant="caution" size="small" /> — your login for the MinIO console. The password must be at least 8 characters.
+- `PGADMIN_ADMIN_EMAIL` / `PGADMIN_ADMIN_PASSWORD` <Badge text="required" variant="caution" size="small" /> — your login for pgAdmin. The email must be a valid address format, or the container won't start.
+- `MAIL_FROM_ADDRESS` <Badge text="required" variant="caution" size="small" /> — sender address for system emails
 
 #### Background Jobs (Trigger.dev)
 
-Project import/export requires Trigger.dev. Set `TRIGGER_PROJECT_ID` and `TRIGGER_SECRET_KEY` here (plus `TRIGGER_SERVER_URL` if you self-host)—see [Set Up Trigger.dev](#set-up-triggerdev) for how to obtain them.
+Project import/export requires Trigger.dev; see [Set Up Trigger.dev](#set-up-triggerdev) for how to obtain these.
+
+- `TRIGGER_PROJECT_ID` <Badge text="required" variant="caution" size="small" /> — project ref from the Trigger.dev dashboard
+- `TRIGGER_SECRET_KEY` <Badge text="required" variant="caution" size="small" /> — secret key from the Trigger.dev dashboard
+- `TRIGGER_SERVER_URL` <Badge text="optional" variant="note" size="small" /> — your instance URL; only when self-hosting Trigger.dev
+
+#### Email (SMTP)
+
+The stack does **not** include a mail server. The `.env.example` defaults (`SMTP_HOST=supabase-mail`) point at a placeholder that doesn't exist, so **user invites and password resets will not be delivered until you configure a real SMTP provider** (e.g. Amazon SES, SendGrid, Mailgun, or your own mail server).
+
+Set these to your provider's credentials:
+
+- `SMTP_HOST` / `SMTP_PORT` <Badge text="required" variant="caution" size="small" /> — your provider's server and port
+- `SMTP_USER` / `SMTP_PASS` <Badge text="required" variant="caution" size="small" /> — your provider's credentials
+- `SMTP_SENDER_NAME` <Badge text="required" variant="caution" size="small" /> — display name on outgoing mail
+- `SMTP_ADMIN_EMAIL` / `MAIL_FROM_ADDRESS` <Badge text="required" variant="caution" size="small" /> — the "from" address (use one your provider is authorized to send from)
+- `ENABLE_EMAIL_AUTOCONFIRM` <Badge text="optional" variant="note" size="small" /> — set to `true` to activate new signups immediately without a confirmation email. Defaults to `false`, which emails each new user a confirmation link they must click (requires working SMTP).
+- `DISABLE_SIGNUP` <Badge text="optional" variant="note" size="small" /> — set to `true` for a closed instance where only invited users can create accounts.
+- `PUBLIC_ENABLE_USER_INVITE` <Badge text="optional" variant="note" size="small" /> — controls whether org admins can invite users from the User Management UI. Defaults to `TRUE`; set to `FALSE` to hide the invite feature.
 
 ### 6. Configure Nginx Routes
 
@@ -365,6 +386,18 @@ Navigate to your server URL (`https://server.example.com`) for Supabase studio a
 
 - **Username**: `supabase`
 - **Password**: Value from `DASHBOARD_PASSWORD` in your `.env` file
+
+## Customization
+
+Branding (platform name, colors, logos, favicon) and sign-in methods are controlled by `config.json`. In the self-hosting repo this lives at `docker/config/config.json`, and the install script bakes it into the client image at build time.
+
+To customize, edit `docker/config/config.json` **before** running the install script (Step 8). If you change it after installation, rebuild the client image (the [upgrade](#upgrading) flow does this). `config.json` also enables SSO methods (`saml`, `keycloak`) alongside the default username/password login.
+
+See the [Config Tool reference](/reference/config-tool/) for the full schema (policies, roles, groups, branding, authentication).
+
+## Backups
+
+The stack stores your data in Postgres and MinIO. For production, set up regular database backups. The self-hosting repo documents a full `pg_dump`/restore procedure (including the storage-schema RLS policies that Supabase's dump omits) in [backup-and-restore.md](https://github.com/recogito/recogito-studio/blob/main/backup-and-restore.md).
 
 ## Upgrading
 
