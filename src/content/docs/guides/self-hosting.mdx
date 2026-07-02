@@ -247,6 +247,10 @@ Set these to your provider's credentials:
 - `DISABLE_SIGNUP` <Badge text="optional" variant="note" size="small" /> — set to `true` for a closed instance where only invited users can create accounts.
 - `PUBLIC_ENABLE_USER_INVITE` <Badge text="optional" variant="note" size="small" /> — controls whether org admins can invite users from the User Management UI. Defaults to `TRUE`; set to `FALSE` to hide the invite feature.
 
+#### Plugins
+
+- `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of npm package names. See the [Plugins guide](/guides/plugins/#self-hosted-production-environment) for the available packages.
+
 ### 6. Configure Nginx Routes
 
 Each hostname you expose ([see above](#domains-and-dns)) needs its own Nginx site configuration. The repo provides a template for each one—copy and customize them as follows.

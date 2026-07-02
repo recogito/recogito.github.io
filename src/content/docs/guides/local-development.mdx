@@ -223,6 +223,10 @@ There may be some additional requirements depending on how you intend to use you
       # App base URL. Required by the Node adapter (used for Astro's allowedDomains).
       SITE_URL="http://localhost:4321"
 
+      # Optional – plugins to register, as a comma- or space-separated list of npm
+      # package names (they must also be installed; see the note below the block).
+      # INSTALLED_PLUGINS="@recogito/plugin-geotagging"
+
       ###############################################################################
       # Public variables
       # (Variables beginning with PUBLIC_ are exposed to both server and client)
@@ -293,6 +297,14 @@ There may be some additional requirements depending on how you intend to use you
       MAIL_FROM_ADDRESS=<the from address for emails>
       # Base64-encoded 256-bit key (e.g. generated with: openssl rand -base64 32)
       INVITE_CRYPTO_KEY=<base64 encoded 256-bit cryptographic key>
+   ```
+
+   To use [plugins](/guides/plugins/), install the packages and list them in `INSTALLED_PLUGINS`:
+
+   ```bash
+   npm install @recogito/plugin-geotagging @recogito/plugin-revisions
+   # then in .env:
+   # INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
    ```
 
 3. **Deploy configuration file** (optional)
