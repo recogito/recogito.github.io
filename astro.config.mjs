@@ -5,7 +5,7 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
   site: 'https://recogitostudio.org/',
   integrations: [starlight({
-    title: '',
+    title: 'Docs',
     defaultLocale: 'root',
     // optional
     locales: {
@@ -16,21 +16,18 @@ export default defineConfig({
     },
     logo: {
       light: '/src/assets/recogito_logo_horizontal_black.png',
-      dark: '/src/assets/recogito_logo_horizontal_white.png'
+      dark: '/src/assets/recogito_logo_horizontal_white.png',
+      replacesTitle: true
     },
     social: [
       { icon: 'github', label: 'github' , href: 'https://github.com/recogito/' },
     ],
     sidebar: [{
       label: 'Guides',
-      autogenerate: {
-        directory: 'guides'
-      }
+      items: [{ autogenerate: { directory: 'guides' } }]
     }, {
       label: 'Reference',
-      autogenerate: {
-        directory: 'reference'
-      }
+      items: [{ autogenerate: { directory: 'reference' } }]
     }]
   })],
 });

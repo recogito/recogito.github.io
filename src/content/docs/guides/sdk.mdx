@@ -14,7 +14,7 @@ The following steps walk you through the development of a **Hello World** plugin
 
 Before starting, make sure you have the following installed:
 
-- NodeJS (version 20 recommended)
+- NodeJS (version 22+ recommended)
 - npm
 
 ## Create Your Project
@@ -295,15 +295,26 @@ npm run dev
 
 3. Open browser to `http://localhost:4321/`
 
-## Installing Plugins
+## Extension Points
 
-Plugins can be installed via:
-- npm registry publication
-- Direct GitHub repository installation
+An extension's `extension_point` decides where its component mounts. The available points are:
 
-Installation steps:
-1. Install package in Recogito Studio Client folder
-2. Add plugin to `astro.config.mjs`
+- `admin` — the instance admin settings area
+- `project:document-actions` — the document card actions menu
+- `annotation:<view>:annotation-editor` — inside the annotation editor
+- `annotation:<view>:annotator` — alongside the annotator instance
+- `annotation:<view>:toolbar` — the annotation view toolbar
+- `annotation:<view>:taglist` — the annotation tag list
+
+`<view>` is `image`, `text`, or `*` (any view), and each segment accepts `*` as a wildcard — so `annotation:*:annotation-editor` targets the editor in every annotation view.
+
+Components receive typed props from the SDK based on their extension point. All extend `ExtensionComponentProps` (which provides the `plugin`, `extension`, and any per-project `settings`), with richer interfaces for specific points — for example, `AnnotationEditorExtensionProps` adds the current `annotation` and an `onUpdateAnnotation` callback, and `DocumentCardActionsExtensionProps` adds the `document`, `context`, and a `closeDialog` callback.
+
+## Installing Your Plugin
+
+Once your plugin is publishable (to the npm registry, or installable from a Git URL), it's added to a Recogito Studio instance by listing its package name in the `INSTALLED_PLUGINS` environment variable and rebuilding the client. A Project Admin then enables it per project from **Project Settings → Plugins**.
+
+See the [Plugins guide](/guides/plugins/) for the full install-and-enable flow.
 
 ## Component Styling
 

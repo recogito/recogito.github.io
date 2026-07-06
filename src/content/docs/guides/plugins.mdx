@@ -13,64 +13,64 @@ This guide explains how to install the available plugins to a Recogito Studio in
 
 <AvailablePlugins />
 
+## How Plugins Work
+
+Recogito Studio plugins are npm packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/). Using a plugin takes two distinct steps:
+
+1. **Install** (build time) — declare the plugin in the `INSTALLED_PLUGINS` environment variable and build the client. This installs the package, compiles it into your instance, and makes it _available_ to every project. It's done once per instance by whoever builds and deploys the client.
+2. **Enable** (runtime, per project) — a Project Admin turns an available plugin on for a specific project from **Project Settings → Plugins**. The same plugin can be enabled for some projects and left off for others.
+
+The sections below cover installing plugins in [local development](#local-development-environment) and in a [self-hosted production](#self-hosted-production-environment) build, then [enabling them](#enabling-an-installed-plugin) per project. To build your own plugin, see the [SDK Guide](/guides/sdk/).
+
 ## Local Development Environment
 
-In the root of the `recogito-client` repo (see [Client Application Setup](http://localhost:4321/guides/local-development/#phase-2-client-application-setup-recogito-client)), install whichever plugins you intend to use:
+Plugins are declared through the `INSTALLED_PLUGINS` environment variable — a comma- or space-separated list of npm package names. The client registers them automatically, so you don't edit the Astro config.
 
-```bash
-npm install @recogito/plugin-geotagging  # GeoTagger
-npm install @recogito/plugin-reconciliation-service. # Reconciliation Service API
-npm install @recogito/plugin-ner  # NER
-npm install @recogito/plugin-revisions  # Revisions
-npm install @recogito/plugin-tei-inliner  # TEI Inliner
-npm install @recogito/plugin-sandcastle-export  # Sandcastle3D Export
-```
+In the root of the `recogito-client` repo (see [Client Application Setup](/guides/local-development/#phase-2-client-application-setup-recogito-client)):
 
-Then, in your `astro.config.mjs` file (and/or `astro.config.node.mjs` depending on which adapter you are using), add relevant imports and integrations for those plugins:
+1. Install the plugin packages you want:
 
-```diff
-// astro.config.mjs
+   ```bash
+   npm install @recogito/plugin-geotagging @recogito/plugin-revisions
+   ```
 
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import netlify from '@astrojs/netlify';
+2. List the same packages in `INSTALLED_PLUGINS` in your `.env`, then restart the dev server:
 
-+ import GeoTaggingPlugin from '@recogito/plugin-geotagging';
-+ import ReconcilationPlugin from '@recogito/plugin-reconciliation-service';
-+ import NERPlugin from '@recogito/plugin-ner';
-+ import RevisionsPlugin from '@recogito/plugin-revisions';
-+ import TEIInlinePlugin from '@recogito/plugin-tei-inliner';
-+ import Sandcastle3D from '@recogito/plugin-sandcastle-export';
+   ```bash
+   INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
+   ```
 
-export default defineConfig({
-  integrations: [
-    react(),
-+    GeoTaggingPlugin(),
-+    ReconcilationPlugin(),
-+    NERPlugin(),
-+    RevisionsPlugin(),
-+    TEIInlinePlugin(),
-+    Sandcastle3D(),
-  ],
-  output: 'server',
-  adapter: netlify(),
-  vite: {
-    ssr: {
-      noExternal: ['clsx', '@phosphor-icons/*', '@radix-ui/*']
-    },
-    optimizeDeps: {
-      esbuildOptions: {
-        target: 'esnext'
-      }
-    }
-  }
-});
-```
+The available plugin packages are:
+
+| Plugin | Package |
+| --- | --- |
+| GeoTagger | `@recogito/plugin-geotagging` |
+| Reconciliation Service API | `@recogito/plugin-reconciliation-service` |
+| Named Entity Recognition | `@recogito/plugin-ner` |
+| Revisions | `@recogito/plugin-revisions` |
+| TEI Inliner | `@recogito/plugin-tei-inliner` |
+| Sandcastle3D Export | `@recogito/plugin-sandcastle-export` |
 
 ## Self-Hosted Production Environment
 
-TODO: Documentation needed
+Self-hosting uses the same `INSTALLED_PLUGINS` variable, set in your `docker/.env` (see [Critical Environment Variables](/guides/self-hosting/#5-critical-environment-variables)). List the [plugin packages](#local-development-environment) you want:
+
+```bash
+INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-ner"
+```
+
+The install and [upgrade](/guides/self-hosting/#upgrading) scripts read this list, install the packages, and compile them into the client image. 
+
+Some plugins depend on additional services — the [NER plugin](https://github.com/recogito/plugin-ner), for example, requires Trigger.dev and Stanford CoreNLP. See [Additional Services](/guides/self-hosting/#additional-services) in the self-hosting guide.
 
 ## Enabling an Installed Plugin
 
-TODO: Documentation needed
+Installing a plugin makes it _available_ but does not turn it on. Plugins are enabled per project from the client UI:
+
+1. Open a project as a **Project Admin**.
+2. Go to **Project Settings → Plugins** and click **Browse Available Plugins**.
+3. The gallery lists every plugin compiled into your instance. Select one to install it for this project.
+4. If the plugin exposes settings, configure them from the same screen.
+5. To disable a plugin for the project, remove it here.
+
+Enablement is stored per project, so a plugin can be active in one project and inactive in another. If a plugin you installed doesn't appear in the gallery, it wasn't installed correctly. Recheck that its package is listed in `INSTALLED_PLUGINS` and rebuild the client.

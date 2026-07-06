@@ -4,14 +4,14 @@ description: Complete guide for setting up a local Recogito Studio development e
 sidebar:
   order: 2
   badge:
-    text: v1.5.0
+    text: v1.9.11
     variant: note
 ---
 
 import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
 
 :::note[Documentation Version]
-This guide is written for **Recogito Studio v1.5.0** and later. If you're working with an earlier version, some steps may differ.
+This guide is written for **Recogito Studio v1.9.11** and later. If you're working with an earlier version, some steps may differ.
 :::
 
 This guide walks you through setting up a complete local development environment for Recogito Studio. Unlike the [self-hosting guide](/guides/self-hosting/) which covers production deployment, this setup is optimized for development and testing.
@@ -36,7 +36,7 @@ A local development environment consists of three main components:
 
 Before starting, ensure you have the following installed:
 
-- **Node.js** (v18 or later) and npm
+- **Node.js** (v22 or later) and npm
 - **Git**
 - **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**
 - **[Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started)**
@@ -49,7 +49,7 @@ There may be some additional requirements depending on how you intend to use you
     - Recogito Studio also supports *external* IIIF manifests out of the box.
     - Finally, it is also possible to use a direct file upload to Supabase storage and then use your own IIIF service to transform images locally, but that is not currently well-supported and you may encounter issues.
 - **Mail server**: Recogito Studio will attempt to send transactional emails (invites, password reset, etc) through a configured outgoing mail server. You can use something like [Mailpit](https://mailpit.axllent.org/) or [Ethereal Email](https://ethereal.email/), or set up an actual outbound mail account through a service like [Postmark](https://postmarkapp.com/).
-- [**Trigger.dev**](https://trigger.dev/docs/self-hosting/overview): Required for running background jobs like project import/export and the NER plugin.
+- [**Trigger.dev**](https://trigger.dev/docs/self-hosting/overview): Required for background jobs like project import/export and the NER plugin. After setting `TRIGGER_PROJECT_ID` and `TRIGGER_SECRET_KEY` (Phase 2), run `npx trigger.dev@latest dev` in the client repo to process tasks locally; see the [client README](https://github.com/recogito/recogito-client?tab=readme-ov-file#triggerdev) for details.
 
 ## Setup Process
 
@@ -220,6 +220,13 @@ There may be some additional requirements depending on how you intend to use you
 
    Update with your local values:
    ```bash
+      # App base URL. Required by the Node adapter (used for Astro's allowedDomains).
+      SITE_URL="http://localhost:4321"
+
+      # Optional – plugins to register, as a comma- or space-separated list of npm
+      # package names (they must also be installed; see the note below the block).
+      # INSTALLED_PLUGINS="@recogito/plugin-geotagging"
+
       ###############################################################################
       # Public variables
       # (Variables beginning with PUBLIC_ are exposed to both server and client)
@@ -244,6 +251,9 @@ There may be some additional requirements depending on how you intend to use you
       # Optional – External help/FAQ page
       # PUBLIC_HELP_REDIRECT="https://help.example.com"
 
+      # Optional – Require users to accept a EULA before uploading documents
+      # PUBLIC_EULA_URL="https://example.com/eula"
+
       ###############################################################################
       # Server-only secrets
       # (Never exposed to browser)
@@ -264,7 +274,9 @@ There may be some additional requirements depending on how you intend to use you
       ###############################################################################
       # Trigger.dev (Background jobs, import/export, NER plugin)
       ###############################################################################
+      TRIGGER_PROJECT_ID=<your trigger project id>
       TRIGGER_SECRET_KEY=<your secret key>
+      # TRIGGER_SERVER_URL is only needed for a self-hosted Trigger.dev instance
       TRIGGER_SERVER_URL=http://localhost:3040/
       # TASK_PAYLOAD_OFFLOAD_THRESHOLD=5242880
 
@@ -287,7 +299,15 @@ There may be some additional requirements depending on how you intend to use you
       INVITE_CRYPTO_KEY=<base64 encoded 256-bit cryptographic key>
    ```
 
-5. **Deploy configuration file** (optional)
+   To use [plugins](/guides/plugins/), install the packages and list them in `INSTALLED_PLUGINS`:
+
+   ```bash
+   npm install @recogito/plugin-geotagging @recogito/plugin-revisions
+   # then in .env:
+   # INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
+   ```
+
+3. **Deploy configuration file** (optional)
 
    The client repository includes a default `src/config.json` that works for basic setup. You can use it as-is, or:
 
@@ -301,7 +321,7 @@ There may be some additional requirements depending on how you intend to use you
    cp ../recogito-server/config.json src/config.json
    ```
 
-6. **Start the development server**
+4. **Start the development server**
 
    ```bash
    npm start
@@ -309,7 +329,7 @@ There may be some additional requirements depending on how you intend to use you
 
    The client will be available at http://localhost:4321 (or another port if that port is in use).
 
-7. **Access the application**
+5. **Access the application**
 
    - Open the URL shown in the terminal (typically http://localhost:4321)
    - You should see the Recogito Studio login page
@@ -335,13 +355,17 @@ node ./dist/server/entry.mjs
 This will use the Node adapter for Astro (`astro.config.node.mjs`). Building with `npm run build`
 instead will use the Netlify adapter (via `astro.config.mjs`), meaning the build output may only be usable on Netlify.
 
+:::note[Node adapter requires `SITE_URL`]
+As of v1.9.6, the Node adapter reads `SITE_URL` to configure Astro's [`allowedDomains`](https://docs.astro.build/en/reference/configuration-reference/#securityalloweddomains). Set `SITE_URL` to your deployment URL (or `http://localhost:4321` in development), or requests may be rejected.
+:::
+
 
 ## Next Steps
 
 - [Architecture Documentation](/reference/client-architecture/) - Understand the codebase
 - [Self-Hosting Guide](/guides/self-hosting/) - Deploy to production
 - [SDK Guide](/guides/sdk/) - Build plugins
-- [Environment Variables](/reference/environment-variables/) - Full configuration reference
+- [Configuration Tool Reference](/reference/config-tool/) - Roles, groups, branding, and authentication
 
 ## FAQs
 
