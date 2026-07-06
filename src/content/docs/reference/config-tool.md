@@ -5,7 +5,7 @@ sidebar:
   order: 3
 ---
 
-**[recogito-config](https://github.com/recogito/recogito-config)** is a web-based tool for authoring a Recogito Studio instance's `config.json` — the file that defines its roles, groups, access policies, branding, and sign-in methods. You can edit `config.json` by hand, but the tool provides a UI and validates the result.
+**[recogito-config](https://github.com/recogito/recogito-config)** is a web-based tool for authoring a Recogito Studio instance's `config.json`, the file that defines its roles, groups, access policies, branding, and sign-in methods. You can edit `config.json` by hand, but the tool provides a UI and validates the result.
 
 `config.json` is consumed in two places: the **server** applies its roles, groups, and policies to the database (via `create-default-groups.js`), and the **client** reads its branding and authentication settings at build time.
 

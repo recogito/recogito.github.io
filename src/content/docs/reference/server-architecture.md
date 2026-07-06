@@ -21,6 +21,8 @@ The core entities and how they relate:
 
 Common conventions across tables: UUID primary keys, soft deletes (archive flags), created/updated audit columns, and cascade deletes from parent records.
 
+Annotations follow the [W3C Web Annotation](https://www.w3.org/TR/annotation-model/) model, and IIIF images are served by the Cantaloupe image server over the [IIIF](https://iiif.io/) APIs. See [Client Architecture → Standards & interoperability](/reference/client-architecture/#standards--interoperability) for how these models are produced and consumed.
+
 ## Access control
 
 - **Roles** (Org Admin, Project Admin, Layer Admin, and others) and their permissions are defined in [`config.json`](https://github.com/recogito/recogito-server/blob/main/config.json) and applied to the database by `create-default-groups.js`. See the [Config Tool](/reference/config-tool/) for how that file is authored.

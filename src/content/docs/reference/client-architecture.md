@@ -12,7 +12,16 @@ sidebar:
 - [**Astro**](https://astro.build/) — server-rendered app framework, with React for interactive UI
 - [**Supabase**](https://supabase.com/) — authentication, database, storage, and realtime
 - [**Radix UI**](https://www.radix-ui.com/) — accessible component primitives
-- **Annotation libraries** — [`@recogito/text-annotator`](https://github.com/recogito/text-annotator) (text/TEI), [`@recogito/pdf-annotator`](https://github.com/recogito/pdf-annotator) (PDF), and [Annotorious](https://annotorious.dev/) with OpenSeadragon (IIIF images)
+- **Annotation libraries** — [`@recogito/text-annotator`](https://github.com/recogito/text-annotator) (text), [`@recogito/pdf-annotator`](https://github.com/recogito/pdf-annotator) (PDF), and [Annotorious](https://annotorious.dev/) with OpenSeadragon (images)
+
+### Standards & interoperability
+
+Recogito Studio is built on open standards, so documents and annotations stay portable, rather than locked into the platform:
+
+- **Annotations** are structured following the [W3C Web Annotation Data Model](https://www.w3.org/TR/annotation-model/) (targets with fragment, SVG, text-position, text-quote, and XPath/range selectors) and can be exported as JSON-serialized W3C Web Annotations.
+- **Images** are [IIIF](https://iiif.io/) resources (Image and Presentation APIs): projects can import IIIF manifests and export a derivative manifest with annotations embedded.
+- **TEI-XML** text is supported for import, annotation, and export. (See also the [TEI Inliner plugin](https://github.com/recogito/plugin-tei-inliner) for inline markup.)
+- **Sign-in** supports SAML and OpenID Connect.
 
 ## File structure
 

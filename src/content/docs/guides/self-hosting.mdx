@@ -348,12 +348,12 @@ Respond "Yes" to database push when prompted.
 
 ## Set Up Trigger.dev
 
-Recogito Studio runs **project import and export** as background jobs on [Trigger.dev](https://trigger.dev/), so a Trigger.dev project is required for those features (annotation and the rest of the app work without it). You can use **managed Trigger.dev Cloud** or **self-host** your own instance—either works. Complete this before running the install script so the client starts with the correct values, or restart the `client` container afterward.
+Recogito Studio runs **project import and export** as background jobs on [Trigger.dev](https://trigger.dev/), so a Trigger.dev project is required for those features (annotation and the rest of the app work without it). You can use **managed Trigger.dev Cloud** or **self-host** your own instance. Complete this before running the install script so the client starts with the correct values, or restart the `client` container afterward.
 
 1. **Get a Trigger.dev instance.**
 
-   - _Managed:_ sign up for [Trigger.dev Cloud](https://trigger.dev/)—nothing to run yourself.
-   - _Self-hosted:_ follow the [Trigger.dev Docker guide](https://trigger.dev/docs/self-hosting/docker) (see the [self-hosting overview](https://trigger.dev/docs/self-hosting/overview) for architecture). Run it on the same or a separate server; to reach it over the web, proxy it with Nginx + TLS at a hostname such as `trigger.example.com`. Pin the instance to a version compatible with the client's `@trigger.dev/sdk` (currently 4.4.x).
+   - _Managed:_ sign up for [Trigger.dev Cloud](https://trigger.dev/).
+   - _Self-hosted:_ follow the [Trigger.dev Docker guide](https://trigger.dev/docs/self-hosting/docker) (see the [self-hosting overview](https://trigger.dev/docs/self-hosting/overview) for architecture). Run it on the same or a separate server; to reach it over the web, proxy it with Nginx + TLS at a hostname such as `trigger.example.com`. Pin the instance to a version compatible with the client's `@trigger.dev/sdk` (see [`package.json`](https://github.com/recogito/recogito-client/blob/main/package.json)).
 
 2. **Create a project** in the Trigger.dev dashboard and generate a secret key, then set the matching variables in `docker/.env`:
 
