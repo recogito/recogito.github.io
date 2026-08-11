@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 import AvailablePlugins from '../../../components/available-plugins.mdx';
 
 The following steps walk you through the development of a **Hello World** plugin that adds a simple message to the annotation editor.
@@ -294,6 +294,47 @@ npm run dev
 ```
 
 3. Open browser to `http://localhost:4321/`
+
+## Testing Against the Client Application
+
+The `.dev/` harness mounts your extension in isolation, which is ideal for iterating on the component itself. But it renders the extension in a bare container—it does **not** reproduce the surrounding Recogito Studio UI. Behavior that depends on that context (e.g. layout inside the annotation editor, styles inherited from the client) will only show up in the real client. For those cases, test your unpublished, local plugin against a full [`recogito-client`](/guides/local-development/#phase-2-client-application-setup-recogito-client) checkout:
+
+<Steps>
+
+1. **Build the plugin.** The client imports the compiled `dist/`, not your source, so build first (and rebuild after every change):
+
+   ```sh
+   npm run build
+   ```
+
+   :::tip[Watch mode and CSS]
+   `tsc --watch` recompiles TypeScript on save, but it does **not** re-run `copy-files`, so changes to `.css` (or other copied assets) won't be picked up. After editing styles, re-run the full `npm run build`.
+   :::
+
+2. **Add the checkout as a local `file:` dependency** so the client resolves it by package name. In the client's `package.json`, point the dependency at your plugin directory, then `npm install`:
+
+   ```jsonc
+   "dependencies": {
+     // ...
+     "@performant/plugin-hello-world": "file:../plugin-hello-world"
+   }
+   ```
+
+   :::note
+   This symlinks the plugin directory, so edits are picked up live. Don't commit this dependency line to the client repo.
+   :::
+
+3. **Register it.** List the package name in `INSTALLED_PLUGINS` in the client's `.env`, then restart the dev server:
+
+   ```sh
+   INSTALLED_PLUGINS="@performant/plugin-hello-world"
+   ```
+
+4. **Run the client** and [enable the plugin](/guides/plugins/#enabling-an-installed-plugin) per project from **Project Settings → Plugins**.
+
+</Steps>
+
+When you're done, revert the temporary changes: remove the `file:` dependency from the client's `package.json` (run `npm install` again), and drop the package from `INSTALLED_PLUGINS`.
 
 ## Extension Points
 

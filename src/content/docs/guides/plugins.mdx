@@ -17,7 +17,7 @@ This guide explains how to install the available plugins to a Recogito Studio in
 
 Recogito Studio plugins are npm packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/). Using a plugin takes two distinct steps:
 
-1. **Install** (build time) — declare the plugin in the `INSTALLED_PLUGINS` environment variable and build the client. This installs the package, compiles it into your instance, and makes it _available_ to every project. It's done once per instance by whoever builds and deploys the client.
+1. **Install** (build time) — add the plugin's npm package to the client _and_ list it in the `INSTALLED_PLUGINS` environment variable, then build the client. `INSTALLED_PLUGINS` only tells the client which already-installed packages to register — it does not fetch anything, so the package must be installed separately (see the steps below). Building compiles the plugin into your instance and makes it _available_ to every project. It's done once per instance by whoever builds and deploys the client.
 2. **Enable** (runtime, per project) — a Project Admin turns an available plugin on for a specific project from **Project Settings → Plugins**. The same plugin can be enabled for some projects and left off for others.
 
 The sections below cover installing plugins in [local development](#local-development-environment) and in a [self-hosted production](#self-hosted-production-environment) build, then [enabling them](#enabling-an-installed-plugin) per project. To build your own plugin, see the [SDK Guide](/guides/sdk/).
