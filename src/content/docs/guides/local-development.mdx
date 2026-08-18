@@ -172,8 +172,8 @@ There may be some additional requirements depending on how you intend to use you
    Run the following commands to populate the databse with default groups, roles, users, etc.
 
    ```bash
-   node create-default-groups.js -f config.json
-   node create-test-users.js -f config.json
+   node --env-file=.env create-default-groups.js -f config.json
+   node --env-file=.env create-test-users.js -f config.json
    ```
 
    :::note[Custom configuration]
