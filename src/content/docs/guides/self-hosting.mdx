@@ -172,6 +172,8 @@ Update these required values in your `.env` file:
 
 Some values are **passwords you choose** (you'll log in with them); the rest are **random secrets** you generate with a command and never type by hand.
 
+All passwords in this file should avoid [characters that break Bash scripts](https://mywiki.wooledge.org/BashGuide/SpecialCharacters). If you're using a password generator, make sure to disable special characters.
+
 Passwords you choose:
 
 - `DASHBOARD_PASSWORD` <Badge text="required" variant="caution" size="small" /> — Supabase Studio login (must include at least one letter)
@@ -250,6 +252,15 @@ Set these to your provider's credentials:
 #### Plugins
 
 - `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of npm package names. See the [Plugins guide](/guides/plugins/#self-hosted-production-environment) for the available packages.
+
+#### Duplicated variables
+
+Some variables values need to be duplicated in other parts of the `.env` file.
+
+- `PUBLIC_SUPABASE` <Badge text="required" variant="caution" size="small" /> - copy the value from `API_EXTERNAL_URL`
+- `PUBLIC_SUPABASE_API_KEY` <Badge text="required" variant="caution" size="small" /> - copy the value from `ANON_KEY`
+- `PUBLIC_IIIF_CANTALOUPE_PATH` <Badge text="required" variant="caution" size="small" /> - copy `API_EXTERNAL_URL` and append `/iiif/2`
+- `SUPABASE_SERVICE_KEY` <Badge text="required" variant="caution" size="small" /> - copy the value from `SERVICE_ROLE_KEY`
 
 ### 6. Configure Nginx Routes
 
