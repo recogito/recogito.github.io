@@ -249,6 +249,13 @@ Set these to your provider's credentials:
 - `DISABLE_SIGNUP` <Badge text="optional" variant="note" size="small" /> — set to `true` for a closed instance where only invited users can create accounts.
 - `PUBLIC_ENABLE_USER_INVITE` <Badge text="optional" variant="note" size="small" /> — controls whether org admins can invite users from the User Management UI. Defaults to `TRUE`; set to `FALSE` to hide the invite feature.
 
+#### Single Sign-On (SAML)
+
+Only needed to let users sign in through a SAML identity provider; see [Set Up SAML Single Sign-On](#set-up-saml-single-sign-on).
+
+- `SAML_ENABLED` <Badge text="optional" variant="note" size="small" /> — set to `true` to turn on SAML in the auth service. Defaults to `false`.
+- `SAML_PRIVATE_KEY` <Badge text="optional" variant="note" size="small" /> — the key the auth service signs SAML requests with; required when `SAML_ENABLED=true`
+
 #### Plugins
 
 - `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of npm package names. See the [Plugins guide](/guides/plugins/#self-hosted-production-environment) for the available packages.
@@ -384,6 +391,62 @@ Recogito Studio runs **project import and export** as background jobs on [Trigge
 
    Self-hosted deploys also require Docker registry access—see the [Trigger.dev deployment docs](https://trigger.dev/docs/self-hosting/docker) for the `docker login` step.
 
+## Set Up SAML Single Sign-On
+
+Recogito Studio can sign users in through a SAML 2.0 identity provider (IdP) such as Shibboleth, Okta, Microsoft Entra ID, or Google Workspace. This is optional and off by default. You can set it up before or after installation.
+
+1. **Enable SAML in the auth service.** Generate the private key that will be used by the auth service to sign SAML requests. It must be a base64-encoded DER PKCS#1 RSA key:
+
+   ```sh
+   openssl genrsa 2048 | openssl rsa -outform DER -traditional | base64 | tr -d '\n'
+   ```
+
+   Then set these in `docker/.env`:
+
+   ```sh
+   SAML_ENABLED=true
+   SAML_PRIVATE_KEY=<output of the command above>
+   ```
+
+2. **Register Recogito Studio with your IdP.** Give your IdP administrator these service provider URLs, replacing `server.example.com` with your `API_EXTERNAL_URL`:
+
+   | Setting                              | Value                                          |
+   |--------------------------------------|------------------------------------------------|
+   | Metadata URL / Entity ID             | `https://server.example.com/sso/saml/metadata` |
+   | Assertion Consumer Service (ACS) URL | `https://server.example.com/sso/saml/acs`      |
+
+   The IdP must release the user's email address as an attribute. Note the attribute name it uses, for example `mail`, `email`, or `urn:oid:0.9.2342.19200300.100.1.3`.
+
+3. **Add the IdP to Recogito Studio.** With the containers running, run `add-saml-provider.sh` from the root of the `recogito-studio` repo. Pass the IdP's metadata URL, the email domain(s) that should sign in with it, and the name of the email attribute:
+
+   ```sh
+   ./add-saml-provider.sh https://idp.university.edu/metadata university.edu mail
+   ```
+
+   Separate multiple domains with commas (`university.edu,alumni.university.edu`).
+
+4. **Add a SAML sign-in button.** Add a `saml` method to `authentication.methods` in your `docker/config/config.local.json`. If you don't have one yet, create it with `cp docker/config/config.json docker/config/config.local.json` (see [Customization](#customization)). `domain` must be one of the domains you registered in step 3, and `name` is the button label:
+
+   ```json
+   "authentication": {
+     "methods": [
+       {
+         "name": "User Name and Password",
+         "type": "username_password"
+       },
+       {
+         "name": "Sign in with University SSO",
+         "type": "saml",
+         "domain": "university.edu"
+       }
+     ]
+   }
+   ```
+
+   Each `saml` entry takes one domain, so add one entry for each IdP that should get a button. Remove the `username_password` method if all users should sign in through SSO.
+
+5. **Rebuild the client.** The client reads its config at build time. If you haven't installed yet, the install script (Step 8) picks it up. Otherwise run `./upgrade.sh` (see [Upgrading](#upgrading)).
+
 ## Testing Your Installation
 
 ### Test Client Access
@@ -404,9 +467,15 @@ Navigate to your server URL (`https://server.example.com`) for Supabase studio a
 
 ## Customization
 
-Branding (platform name, colors, logos, favicon) and sign-in methods are controlled by `config.json`. In the self-hosting repo this lives at `docker/config/config.json`, and the install script bakes it into the client image at build time.
+Branding (platform name, colors, logos, favicon) and sign-in methods are controlled by `config.json`. The self-hosting repo ships a default at `docker/config/config.json`, and the install script bakes it into the client image at build time.
 
-To customize, edit `docker/config/config.json` **before** running the install script (Step 8). If you change it after installation, rebuild the client image (the [upgrade](#upgrading) flow does this). `config.json` also enables SSO methods (`saml`, `keycloak`) alongside the default username/password login.
+To customize, don't edit `docker/config/config.json` directly: it's tracked by Git, so your changes would conflict with updates when you `git pull`. Instead, copy it to `docker/config/config.local.json`, which Git ignores, and edit the copy:
+
+```sh
+cp docker/config/config.json docker/config/config.local.json
+```
+
+When `config.local.json` exists, the install and upgrade scripts use it in place of `config.json`. Create it **before** running the install script (Step 8). If you change it after installation, rebuild the client image (the [upgrade](#upgrading) flow does this). The config also enables SSO methods (`saml`, `keycloak`) alongside the default username/password login; see [Set Up SAML Single Sign-On](#set-up-saml-single-sign-on).
 
 See the [Config Tool reference](/reference/config-tool/) for the full schema (policies, roles, groups, branding, authentication).
 
@@ -431,6 +500,9 @@ git pull
 # Add any newly required variables from .env.example to your .env
 diff ./docker/.env.example ./docker/.env
 
+# If you use config.local.json, check for upstream changes to merge into it
+diff ./docker/config/config.json ./docker/config/config.local.json
+
 # Run the upgrade
 chmod +x upgrade.sh
 ./upgrade.sh
@@ -450,6 +522,7 @@ git clone --single-branch --branch main --depth 1 https://github.com/recogito/re
 git clone --single-branch --branch main --depth 1 https://github.com/recogito/recogito-server
 
 # 2. Build the client with your config and env vars
+#    (use config.local.json in place of config.json in steps 2 and 3 if you have one)
 cp ./recogito-studio/docker/config/config.json ./recogito-client/src/config.json
 cp ./recogito-studio/docker/.env ./recogito-client/.env
 cd ./recogito-client
@@ -472,6 +545,6 @@ cd ../..
 rm -rf ./recogito-client/ ./recogito-server/
 ```
 
-If you've made manual configuration changes (such as branding) to your live `config.json`, propagate them before copying it over in steps 2 and 3.
+If you've made manual configuration changes (such as branding) without a `config.local.json`, propagate them before copying the config over in steps 2 and 3.
 
 </details>
