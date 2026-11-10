@@ -249,6 +249,13 @@ Set these to your provider's credentials:
 - `DISABLE_SIGNUP` <Badge text="optional" variant="note" size="small" /> — set to `true` for a closed instance where only invited users can create accounts.
 - `PUBLIC_ENABLE_USER_INVITE` <Badge text="optional" variant="note" size="small" /> — controls whether org admins can invite users from the User Management UI. Defaults to `TRUE`; set to `FALSE` to hide the invite feature.
 
+#### SAML Single Sign-On
+
+Recogito offers the ability to connect users via SAML: [Set Up SAML Single Sign-On](#set-up-saml-single-sign-on).
+
+- `SAML_ENABLED` <Badge text="optional" variant="note" size="small" /> — set to `true` to enable SAML sign-in
+- `SAML_PRIVATE_KEY` <Badge text="optional" variant="note" size="small" /> — the private key Recogito Studio will use to sign SAML requests. Required when `SAML_ENABLED` is `true`.
+
 #### Plugins
 
 - `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of npm package names. See the [Plugins guide](/guides/plugins/#self-hosted-production-environment) for the available packages.
@@ -383,6 +390,145 @@ Recogito Studio runs **project import and export** as background jobs on [Trigge
    ```
 
    Self-hosted deploys also require Docker registry access—see the [Trigger.dev deployment docs](https://trigger.dev/docs/self-hosting/docker) for the `docker login` step.
+
+## Set Up SAML Single Sign-On
+
+Recogito Studio can sign users in through a SAML 2.0 identity provider (IdP), such as your institution's Shibboleth, Microsoft Entra ID, Okta, or Keycloak. The first time someone signs in this way, Recogito Studio creates their account and adds them to the default organization group.
+
+:::caution
+Recogito does not support switching an existing instance to SAML, or vice versa. If you attempt to do this, user accounts with the same email addresses as existing accounts will be duplicated.
+:::
+
+Sign-in must start from the Recogito Studio login page.
+
+You'll need:
+
+- Someone who can register a new application (a "service provider") with your IdP
+- The email domain or domains your users sign in with, such as `university.edu`
+- The names of the SAML attributes your IdP sends for email, first name, and last name.
+- `jq` on the server, to run the setup script (`sudo apt install jq`)
+
+### 1. Generate a signing key and enable SAML
+
+Generate a key:
+
+```bash
+openssl genrsa 2048 | openssl rsa -outform DER -traditional | base64 | tr -d '\n'
+```
+
+On macOS, remove `-traditional` from the command.
+
+Add the output to `docker/.env` and turn SAML on:
+
+```bash
+SAML_ENABLED=true
+SAML_PRIVATE_KEY=MIIEow...   # the output from the command above
+```
+
+Keep a copy of this key with your other secrets. If you replace it, give your IdP the updated metadata from Step 3.
+
+### 2. Add the sign-in button
+
+The login page shows a button for each method in the `authentication` section of your config. Create `docker/config/config.local.json` if you haven't already (see [Customization](#customization)), then add a `saml` method:
+
+```json
+"authentication": {
+  "methods": [
+    {
+      "name": "Sign in with Username and Password",
+      "type": "username_password"
+    },
+    {
+      "name": "Sign in with University SSO",
+      "type": "saml",
+      "domain": "university.edu"
+    }
+  ]
+}
+```
+
+`domain` must be one of the domains you registered in Step 4.
+
+**Note: If you keep the `username_password` method available, SAML users and username/password users will be duplicated if they use the same email. `username_password` is also required in order to log in with the default admin account whose password you set with `ORG_ADMIN_PW`.**
+
+### 3. Install, then give your IdP the service provider details
+
+Run the install script ([Step 8](#8-run-installation)).
+
+Service provider metadata is available at:
+
+```
+https://server.example.com/auth/v1/sso/saml/metadata
+```
+
+Open it in a browser to check that it loads. Give this URL to your IdP administrator. If your IdP wants the ACS URL, it is available at:
+
+```
+https://server.example.com/auth/v1/sso/saml/acs
+```
+
+Your IdP must:
+
+- Send a **persistent** NameID
+- Release the user's email address, first name, and last name as attributes
+
+Make a note of your IdP's metadata URL.
+
+### 4. Register your IdP
+
+From the root of the `recogito-studio` repository, run `manage-saml-provider.sh`. It reads the server address and `SERVICE_ROLE_KEY` from `docker/.env`. With a metadata URL:
+
+```bash
+./manage-saml-provider.sh add \
+  --metadata-url https://idp.university.edu/metadata \
+  --domains university.edu \
+  --email-attr mail \
+  --first-name-attr givenName \
+  --last-name-attr sn
+```
+
+Replace `mail`, `givenName`, and `sn` with the attribute names your IdP sends. Common alternatives are long URNs such as `urn:oid:0.9.2342.19200300.100.1.3`. If you leave out `--email-attr`, the script uses `email`.
+
+The metadata URL must use HTTPS. Otherwise, save the metadata to a file and use `--metadata-file` instead:
+
+```bash
+./manage-saml-provider.sh add \
+  --metadata-file ./idp-metadata.xml \
+  --domains university.edu,alumni.university.edu \
+  --first-name-attr givenName \
+  --last-name-attr sn
+```
+
+You can also put these values in `docker/.env` and run `./manage-saml-provider.sh add` with no options. Options on the command line take priority.
+
+```bash
+SAML_METADATA_URL=https://idp.university.edu/metadata   # or SAML_METADATA_FILE
+SAML_DOMAINS=university.edu
+SAML_EMAIL_ATTR=mail
+SAML_FIRST_NAME_ATTR=givenName
+SAML_LAST_NAME_ATTR=sn
+```
+
+To manage providers later:
+
+```bash
+./manage-saml-provider.sh list                                     # shows each provider's id
+./manage-saml-provider.sh update <provider id> --last-name-attr surname
+./manage-saml-provider.sh update <provider id> --domains university.edu,new.edu
+./manage-saml-provider.sh delete <provider id>
+```
+
+`update` only changes the values you pass. `--domains` will override the entire domain list. Run `./manage-saml-provider.sh` with no arguments for all options.
+
+### 5. Troubleshooting
+
+- **The SSO button does nothing.** The `domain` in your config doesn't match a registered provider. Check it against `./manage-saml-provider.sh list`, then run `./upgrade.sh` if you change the config. The browser console shows "No SSO provider assigned for this domain".
+- **"Signups not allowed for this instance."** `DISABLE_SIGNUP` is `true`, which also blocks first-time SAML users. Set it to `false`.
+- **"SAML Assertion did not contain a persistent Subject Identifier..."** The IdP isn't sending a persistent NameID. Ask your IdP administrator to change the NameID format.
+- **"SAML Assertion does not contain an email address."** Check `--email-attr` against the attribute name your IdP sends.
+- **Users have no name.** `--first-name-attr` or `--last-name-attr` doesn't match what your IdP sends. Fix it with `update`. Existing users get their name the next time they sign in.
+- **"metadata_url is not a HTTPS URL."** Use `--metadata-file` instead.
+- **Anything else.** Check the auth service's log with `docker logs supabase-auth`.
 
 ## Testing Your Installation
 
