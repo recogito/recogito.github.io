@@ -396,7 +396,7 @@ Recogito Studio runs **project import and export** as background jobs on [Trigge
 Recogito Studio can sign users in through a SAML 2.0 identity provider (IdP), such as your institution's Shibboleth, Microsoft Entra ID, Okta, or Keycloak. The first time someone signs in this way, Recogito Studio creates their account and adds them to the default organization group.
 
 :::caution
-Recogito does not support switching an existing instance to SAML, or vice versa. If you attempt to do this, user accounts will be duplicated.
+Recogito does not support switching an existing instance to SAML, or vice versa. If you attempt to do this, user accounts with the same email addresses as existing accounts will be duplicated.
 :::
 
 Sign-in must start from the Recogito Studio login page.
@@ -447,7 +447,9 @@ The login page shows a button for each method in the `authentication` section of
 }
 ```
 
-`domain` must be one of the domains you registered in Step 4. Make sure to remove the `username_password` method, as signing in with both methods with the same email address will create duplicate accounts.
+`domain` must be one of the domains you registered in Step 4.
+
+**Note: If you keep the `username_password` method available, SAML users and username/password users will be duplicated if they use the same email. `username_password` is also required in order to log in with the default admin account whose password you set with `ORG_ADMIN_PW`.**
 
 ### 3. Install, then give your IdP the service provider details
 
@@ -521,7 +523,7 @@ To manage providers later:
 ### 5. Troubleshooting
 
 - **The SSO button does nothing.** The `domain` in your config doesn't match a registered provider. Check it against `./manage-saml-provider.sh list`, then run `./upgrade.sh` if you change the config. The browser console shows "No SSO provider assigned for this domain".
-- **"Signups not allowed for this instance."** `DISABLE_SIGNUP` is `true`, which also blocks first-time SAML users. Set it to `false`. To stop people creating username and password accounts, remove that method from your config.
+- **"Signups not allowed for this instance."** `DISABLE_SIGNUP` is `true`, which also blocks first-time SAML users. Set it to `false`.
 - **"SAML Assertion did not contain a persistent Subject Identifier..."** The IdP isn't sending a persistent NameID. Ask your IdP administrator to change the NameID format.
 - **"SAML Assertion does not contain an email address."** Check `--email-attr` against the attribute name your IdP sends.
 - **Users have no name.** `--first-name-attr` or `--last-name-attr` doesn't match what your IdP sends. Fix it with `update`. Existing users get their name the next time they sign in.
