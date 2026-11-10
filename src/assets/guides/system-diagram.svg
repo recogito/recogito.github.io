@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="761" height="781" viewBox="0 0 761 781">
+  <!--
+    Recogito Studio self-hosted system diagram.
+    Rendered directly in the self-hosting guide; edit this file to update it.
+
+    Layout: three columns of groups (x = 40, 280, 520), each group 200 wide.
+    Each <g class="group"> is positioned with a transform; inside it, service
+    boxes are 120x40 at x=40, starting at y=40 and stepping by 60. The group
+    outline height is 40 + 60 * (number of services).
+  -->
+  <style>
+    text { font-family: Helvetica, Arial, sans-serif; font-size: 12px; fill: #000; text-anchor: middle; }
+    .instance { fill: #fff; stroke: #000; }
+    .group > rect:first-child { fill: none; stroke: #000; stroke-dasharray: 3 3; }
+    .service rect { fill: #fff; stroke: #000; }
+  </style>
+
+  <rect width="761" height="781" fill="#fff"/>
+  <rect class="instance" x="0.5" y="0.5" width="760" height="780" rx="110"/>
+  <text x="380" y="18">Instance</text>
+
+
+  <g class="group" transform="translate(40 40)">
+    <rect width="200" height="700" rx="20"/>
+    <text x="100" y="18">RS Supabase</text>
+    <g class="service"><rect x="40" y="40" width="120" height="40"/><text x="100" y="64">Envoy</text></g>
+    <g class="service"><rect x="40" y="100" width="120" height="40"/><text x="100" y="124">Auth</text></g>
+    <g class="service"><rect x="40" y="160" width="120" height="40"/><text x="100" y="184">Realtime</text></g>
+    <g class="service"><rect x="40" y="220" width="120" height="40"/><text x="100" y="244">Rest</text></g>
+    <g class="service"><rect x="40" y="280" width="120" height="40"/><text x="100" y="304">Storage</text></g>
+    <g class="service"><rect x="40" y="340" width="120" height="40"/><text x="100" y="364">Edge</text></g>
+    <g class="service"><rect x="40" y="400" width="120" height="40"/><text x="100" y="424">Meta</text></g>
+    <g class="service"><rect x="40" y="460" width="120" height="40"/><text x="100" y="484">Studio</text></g>
+    <g class="service"><rect x="40" y="520" width="120" height="40"/><text x="100" y="544">RustFS</text></g>
+    <g class="service"><rect x="40" y="580" width="120" height="40"/><text x="100" y="604">Imgproxy</text></g>
+    <g class="service"><rect x="40" y="640" width="120" height="40"/><text x="100" y="664">Cantaloupe</text></g>
+  </g>
+
+  <g class="group" transform="translate(280 40)">
+    <rect width="200" height="100" rx="20"/>
+    <text x="100" y="18">RS Client</text>
+    <g class="service"><rect x="40" y="40" width="120" height="40"/><text x="100" y="64">RS Client</text></g>
+  </g>
+
+  <g class="group" transform="translate(280 180)">
+    <rect width="200" height="160" rx="20"/>
+    <text x="100" y="18">Postgres</text>
+    <g class="service"><rect x="40" y="40" width="120" height="40"/><text x="100" y="64">Postgres</text></g>
+    <g class="service"><rect x="40" y="100" width="120" height="40"/><text x="100" y="124">pgAdmin</text></g>
+  </g>
+
+  <g class="group" transform="translate(280 380)">
+    <rect width="200" height="100" rx="20"/>
+    <text x="100" y="18">Portainer</text>
+    <g class="service"><rect x="40" y="40" width="120" height="40"/><text x="100" y="64">Portainer</text></g>
+  </g>
+
+  <g class="group" transform="translate(280 520)">
+    <rect width="200" height="100" rx="20"/>
+    <text x="100" y="12">Stanford CoreNLP</text>
+    <text x="100" y="26">(optional)</text>
+    <g class="service"><rect x="40" y="40" width="120" height="40"/><text x="100" y="64">CoreNLP</text></g>
+  </g>
+
+  <g class="group" transform="translate(520 40)">
+    <rect width="200" height="640" rx="20"/>
+    <text x="100" y="18">Trigger.dev</text>
+    <text x="100" y="30">(optional)</text>
+    <g class="service"><rect x="40" y="40" width="120" height="40"/><text x="100" y="64">Webapp</text></g>
+    <g class="service"><rect x="40" y="100" width="120" height="40"/><text x="100" y="124">Postgres</text></g>
+    <g class="service"><rect x="40" y="160" width="120" height="40"/><text x="100" y="184">Redis</text></g>
+    <g class="service"><rect x="40" y="220" width="120" height="40"/><text x="100" y="244">Electric</text></g>
+    <g class="service"><rect x="40" y="280" width="120" height="40"/><text x="100" y="304">ClickHouse</text></g>
+    <g class="service"><rect x="40" y="340" width="120" height="40"/><text x="100" y="364">Registry</text></g>
+    <g class="service"><rect x="40" y="400" width="120" height="40"/><text x="100" y="424">MinIO</text></g>
+    <g class="service"><rect x="40" y="460" width="120" height="40"/><text x="100" y="484">S2</text></g>
+    <g class="service"><rect x="40" y="520" width="120" height="40"/><text x="100" y="544">Supervisor</text></g>
+    <g class="service"><rect x="40" y="580" width="120" height="40"/><text x="100" y="604">Docker Proxy</text></g>
+  </g>
+</svg>
