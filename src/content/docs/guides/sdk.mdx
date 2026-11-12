@@ -330,7 +330,7 @@ The `.dev/` harness mounts your extension in isolation, which is ideal for itera
    INSTALLED_PLUGINS="@performant/plugin-hello-world"
    ```
 
-4. **Run the client** and [enable the plugin](/guides/plugins/#enabling-an-installed-plugin) per project from **Project Settings → Plugins**.
+4. **Run the client** and [enable the plugin](/guides/plugins/#enabling-an-installed-plugin) for a project.
 
 </Steps>
 
@@ -353,9 +353,17 @@ Components receive typed props from the SDK based on their extension point. All 
 
 ## Installing Your Plugin
 
-Once your plugin is publishable (to the npm registry, or installable from a Git URL), it's added to a Recogito Studio instance by listing its package name in the `INSTALLED_PLUGINS` environment variable and rebuilding the client. A Project Admin then enables it per project from **Project Settings → Plugins**.
+To make your plugin installable, publish it to the npm registry or push it to a public GitHub repository. Plugins installed from GitHub are built on install, so add a `prepare` script to your `package.json`:
 
-See the [Plugins guide](/guides/plugins/) for the full install-and-enable flow.
+```jsonc
+{
+  "scripts": {
+    "prepare": "npm run build"
+  }
+}
+```
+
+From there it is installed and enabled like any other plugin; see the [Plugins guide](/guides/plugins/).
 
 ## Component Styling
 

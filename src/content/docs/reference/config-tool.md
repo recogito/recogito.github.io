@@ -7,7 +7,7 @@ sidebar:
 
 **[recogito-config](https://github.com/recogito/recogito-config)** is a web-based tool for authoring a Recogito Studio instance's `config.json`, the file that defines its roles, groups, access policies, branding, and sign-in methods. You can edit `config.json` by hand, but the tool provides a UI and validates the result.
 
-`config.json` is consumed in two places: the **server** applies its roles, groups, and policies to the database (via `create-default-groups.js`), and the **client** reads its branding and authentication settings at build time.
+`config.json` is consumed in two places: the **server** applies its roles, groups, and policies to the database (via `create-default-groups.js`), and the **client** reads its branding and authentication settings at build time. In a self-hosted deployment, your edited copy lives at `docker/config/config.local.json`, and the install and upgrade scripts deploy it to both.
 
 ## Configuration structure
 
@@ -79,5 +79,5 @@ If a permission can't be expressed as a table/operation toggle (for example, row
 
 ## See also
 
-- [Self-Hosting Guide](/guides/self-hosting/#customization) — applying a custom `config.json` to a deployment
+- [Self-Hosting Guide](/guides/self-hosting/#customization) — applying a custom config (`config.local.json`) to a self-hosted deployment
 - [Server Architecture](/reference/server-architecture/) — how roles and policies are enforced

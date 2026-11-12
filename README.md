@@ -23,8 +23,8 @@ This application is deployed to GitHub Pages at https://recogitostudio.org/.
 ├── src/
 │   ├── assets/
 │   ├── content/
-│   │   ├── docs/
-│   │   └── config.ts
+│   │   └── docs/
+│   ├── content.config.ts
 │   └── env.d.ts
 ├── astro.config.mjs
 ├── package.json

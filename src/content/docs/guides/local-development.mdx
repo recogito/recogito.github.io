@@ -4,7 +4,7 @@ description: Complete guide for setting up a local Recogito Studio development e
 sidebar:
   order: 2
   badge:
-    text: v1.12.0
+    text: v1.12
     variant: note
 ---
 
@@ -169,7 +169,7 @@ There may be some additional requirements depending on how you intend to use you
 
 6. **Populate database with roles and groups**
 
-   Run the following commands to populate the databse with default groups, roles, users, etc.
+   Run the following commands to populate the database with default groups, roles, users, etc.
 
    ```bash
    node --env-file=.env create-default-groups.js -f config.json
@@ -236,7 +236,8 @@ There may be some additional requirements depending on how you intend to use you
       PUBLIC_SUPABASE_API_KEY="your-anonymous-key"
 
       # IIIF (image server) configuration
-      PUBLIC_IIIF_CONFIGURATION="IIIF_CLOUD"  # or "SUPABASE_CANTALOUPE"
+      # "IIIF_CLOUD" selects FairImage (formerly IIIF Cloud); the alternative is "SUPABASE_CANTALOUPE"
+      PUBLIC_IIIF_CONFIGURATION="IIIF_CLOUD"
       # PUBLIC_IIIF_CANTALOUPE_PATH="/iiif"  # uncomment if using SUPABASE_CANTALOUPE
 
       # Optional – Enable email/password invites from the UI
@@ -252,6 +253,10 @@ There may be some additional requirements depending on how you intend to use you
 
       # Optional – Require users to accept a EULA before uploading documents
       # PUBLIC_EULA_URL="https://example.com/eula"
+
+      # Optional – Show a banner on every page warning that this is a test
+      # environment and any data is temporary
+      # PUBLIC_TEST_BANNER=true
 
       ###############################################################################
       # Server-only secrets
@@ -277,7 +282,9 @@ There may be some additional requirements depending on how you intend to use you
       TRIGGER_SECRET_KEY=<your secret key>
       # TRIGGER_SERVER_URL is only needed for a self-hosted Trigger.dev instance
       TRIGGER_SERVER_URL=http://localhost:3040/
+      # NER plugin only (it uses its own, separate Trigger.dev project)
       # TASK_PAYLOAD_OFFLOAD_THRESHOLD=5242880
+      # TRIGGER_NER_SECRET_KEY=<secret key of the NER plugin's trigger project>
 
       ###############################################################################
       # FairImage (image server) configuration
@@ -345,8 +352,7 @@ Then you may start the service using:
 node ./dist/server/entry.mjs
 ```
 
-This will use the Node adapter for Astro (`astro.config.node.mjs`). Building with `npm run build`
-instead will use the Netlify adapter (via `astro.config.mjs`), meaning the build output may only be usable on Netlify.
+This uses the Node adapter for Astro. Plain `npm run build` uses the Netlify adapter instead, so its output may only be usable on Netlify; see [Client Architecture](/reference/client-architecture/#deployment) for the two build targets.
 
 :::note[Node adapter requires `SITE_URL`]
 As of v1.9.6, the Node adapter reads `SITE_URL` to configure Astro's [`allowedDomains`](https://docs.astro.build/en/reference/configuration-reference/#securityalloweddomains). Set `SITE_URL` to your deployment URL (or `http://localhost:4321` in development), or requests may be rejected.

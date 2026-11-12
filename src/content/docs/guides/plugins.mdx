@@ -1,41 +1,60 @@
 ---
 title: Plugin Installation
-description: Install plugins.
+description: Install and enable plugins on a Recogito Studio instance.
 sidebar:
   order: 4
 ---
 
 import AvailablePlugins from '../../../components/available-plugins.mdx';
 
-This guide explains how to install the available plugins to a Recogito Studio instance.
+This guide explains how to install plugins into a Recogito Studio instance and [enable them](#enabling-an-installed-plugin) per project. To build your own plugin, see the [SDK Guide](/guides/sdk/).
 
 ## Available Plugins
 
 <AvailablePlugins />
 
-## How Plugins Work
+## Installing Plugins
 
-Recogito Studio plugins are packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/).
+Recogito Studio plugins are packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/). They are compiled into the client when it is built, which makes them available to every project on the instance.
 
-The sections below cover installing plugins and [enabling them](#enabling-an-installed-plugin) per project. To build your own plugin, see the [SDK Guide](/guides/sdk/).
+The client loads the plugins listed in the `INSTALLED_PLUGINS` environment variable, a comma- or space-separated list:
 
-## Installing plugins
+```bash
+INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
+```
 
-### Development environments
+Each entry can be:
 
-1. `npm install` the plugin's npm package or GitHub repository to add it to the client's `package.json`.
-2. List the same package name in the `INSTALLED_PLUGINS` environment variable in the client's `.env`.
+- an npm package name, optionally with a version: `@recogito/plugin-ner@1.2.0`
+- a public GitHub repository: `owner/repo`, `github:owner/repo#ref`, or `https://github.com/owner/repo`
+- a GitHub repository with an explicit package name: `my-plugin@github:owner/repo`
+
+Plugins installed from a GitHub repository are built on install, so the repository needs a `prepare` script that builds the plugin (for example `"prepare": "npm run build"`).
+
+### Development Environments
+
+In the root of your `recogito-client` checkout:
+
+1. Install the plugin:
+
+   ```bash
+   npm install @recogito/plugin-geotagging
+   ```
+
+2. Add the same entry to `INSTALLED_PLUGINS` in the client's `.env`.
 3. Restart the dev server, or rebuild the client if you're running a build.
 
-The package must be **both** installed **and** listed under the `INSTALLED_PLUGINS` environment variable. This compiles the plugin into your instance and makes it available to every project.
+The package must be **both** installed **and** listed in `INSTALLED_PLUGINS`.
 
-### Self-hosted environments
+### Self-Hosted Environments
 
-List the package name in the `INSTALLED_PLUGINS` environment variable. The package name can be an NPM package or a GitHub repository, and can optionally include a version tag (`mypackage@2.0`).
+Add the entry to `INSTALLED_PLUGINS` in your `docker/.env`. The install script (`install-self-hosted-docker.sh`) and the [upgrade script](/guides/self-hosting/#upgrading) (`upgrade.sh`) install the packages into the client for you.
 
-The `install` and [upgrade](/guides/self-hosting/#upgrading) scripts will install the package into the client application for you.
+To add or remove a plugin on an instance that is already running, edit `INSTALLED_PLUGINS` and run `./upgrade.sh` to rebuild the client.
 
-Some plugins depend on additional services — the [NER plugin](https://github.com/recogito/plugin-ner), for example, requires Trigger.dev and Stanford CoreNLP. See [Additional Services](/guides/self-hosting/#additional-services) in the self-hosting guide.
+### Plugins With Extra Requirements
+
+The [NER plugin](https://github.com/recogito/plugin-ner) additionally requires Stanford CoreNLP and another Trigger.dev project separate from the one used for import/export. See [Additional Services](/guides/self-hosting/#additional-services) in the self-hosting guide and the plugin's README.
 
 ## Enabling an Installed Plugin
 
