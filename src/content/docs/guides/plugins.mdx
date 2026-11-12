@@ -15,10 +15,7 @@ This guide explains how to install the available plugins to a Recogito Studio in
 
 ## How Plugins Work
 
-Recogito Studio plugins are packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/). Using a plugin takes two distinct steps:
-
-1. **Install** — 
-2. **Enable** — **Project Settings → Plugins** allows project admins to enable a plugin for their project. Plugins are off by default and are enabled on a per-project basis.
+Recogito Studio plugins are packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/).
 
 The sections below cover installing plugins and [enabling them](#enabling-an-installed-plugin) per project. To build your own plugin, see the [SDK Guide](/guides/sdk/).
 
@@ -44,7 +41,7 @@ Some plugins depend on additional services — the [NER plugin](https://github.c
 
 Plugins are enabled on a per-project basis, and are disabled by default.
 
-Plugins can be enabled per project from the client UI:
+To enable a plugin for a project:
 
 1. Open a project as a **Project Admin**.
 2. Go to **Project Settings → Plugins** and click **Browse Available Plugins**.
@@ -52,4 +49,4 @@ Plugins can be enabled per project from the client UI:
 4. If the plugin exposes settings, configure them from the same screen.
 5. To disable a plugin for the project, remove it here.
 
-Enablement is stored per project, so a plugin can be active in one project and inactive in another. If a plugin you installed doesn't appear in the gallery, it wasn't installed correctly. Recheck that its package is listed in `INSTALLED_PLUGINS` and rebuild the client.
+If a plugin you installed doesn't appear in the gallery, it was installed incorrectly. Recheck that its package is listed in `INSTALLED_PLUGINS` and rebuild the client.

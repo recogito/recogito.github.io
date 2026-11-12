@@ -72,7 +72,7 @@
     <g class="service"><rect x="40" y="220" width="120" height="40"/><text x="100" y="244">Electric</text></g>
     <g class="service"><rect x="40" y="280" width="120" height="40"/><text x="100" y="304">ClickHouse</text></g>
     <g class="service"><rect x="40" y="340" width="120" height="40"/><text x="100" y="364">Registry</text></g>
-    <g class="service"><rect x="40" y="400" width="120" height="40"/><text x="100" y="424">MinIO</text></g>
+    <g class="service"><rect x="40" y="400" width="120" height="40"/><text x="100" y="424">RustFS</text></g>
     <g class="service"><rect x="40" y="460" width="120" height="40"/><text x="100" y="484">S2</text></g>
     <g class="service"><rect x="40" y="520" width="120" height="40"/><text x="100" y="544">Supervisor</text></g>
     <g class="service"><rect x="40" y="580" width="120" height="40"/><text x="100" y="604">Docker Proxy</text></g>

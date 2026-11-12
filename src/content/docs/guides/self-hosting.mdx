@@ -269,7 +269,7 @@ Recogito offers the ability to connect users via SAML: [Set Up SAML Single Sign-
 
 #### Plugins
 
-- `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of NPM package names or GitHub repositories. See the [Plugins guide](/guides/plugins/#self-hosted-production-environment) for the available packages.
+- `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of NPM package names or GitHub repositories. See the [Plugins guide](/guides/plugins/#self-hosted-environments) for the available packages.
 
 #### Duplicated variables
 
@@ -372,8 +372,6 @@ Execute the installation script:
 ```bash
 sudo bash ./install-self-hosted-docker.sh
 ```
-
-Respond "Yes" to database push when prompted.
 
 ## Set Up Trigger.dev
 
@@ -561,13 +559,7 @@ Navigate to your server URL (`https://server.example.com`) for Supabase studio a
 
 ## Customization
 
-Branding options are available in the config file. If you haven't created your custom `config.local.json` based on the default config, do it now:
-
-```sh
-cp ./docker/config/config.json ./docker/config/config.local.json
-```
-
-When `config.local.json` exists, `install-self-hosted-docker.sh` and `upgrade.sh` use it in place of `config.json`. Any changes require a rebuild to take effect.
+Branding options are available in the config file, `docker/config/config.local.json`. Any changes require a rebuild to take effect.
 
 See the [Config Tool reference](/reference/config-tool/) for the full schema (policies, roles, groups, branding, authentication).
 
@@ -581,6 +573,8 @@ The stack stores your data in Postgres and RustFS. For production, set up regula
 Check the [latest release](https://github.com/recogito/recogito-studio/releases) for any version-specific upgrade notes, such as newly required environment variables.
 :::
 
+If you're coming from a pre-1.12 version, copy your `docker/config/config.json` to `docker/config/config.local.json`. Once that's finished, you're free to `git reset` the original `docker/config/config.json` to make future `git pull`s simpler.
+
 The `recogito-studio` repo includes an `upgrade.sh` script that performs the full upgrade for you: it pulls the latest client and server code, applies your config, rebuilds the client image, pushes database schema changes, and restarts the container.
 
 From the root of your `recogito-studio` repo:
@@ -592,7 +586,7 @@ git pull
 # Add any newly required variables from .env.example to your .env
 diff ./docker/.env.example ./docker/.env
 
-# If you use config.local.json, merge in any upstream changes to config.json
+# Merge in any upstream changes to config.json
 diff ./docker/config/config.json ./docker/config/config.local.json
 
 # Run the upgrade
@@ -601,41 +595,3 @@ chmod +x upgrade.sh
 ```
 
 Building the new image and applying migrations usually takes a few minutes.
-
-<details>
-<summary>Manual upgrade (if you'd rather run each step yourself)</summary>
-
-Run all commands from the base directory that contains your `recogito-studio` repo.
-
-```sh
-# 1. Pull the latest self-hosting, client, and server repos
-cd recogito-studio && git pull && cd ..
-git clone --single-branch --branch main --depth 1 https://github.com/recogito/recogito-client
-git clone --single-branch --branch main --depth 1 https://github.com/recogito/recogito-server
-
-# 2. Build the client with your config and env vars
-cp ./recogito-studio/docker/config/config.local.json ./recogito-client/src/config.json
-cp ./recogito-studio/docker/.env ./recogito-client/.env
-cd ./recogito-client
-set -a && source .env && set +a
-docker build --no-cache -t recogito-studio-client:latest .
-cd ..
-
-# 3. Apply schema changes and sync roles/policies to the database
-cp ./recogito-studio/docker/config/config.json ./recogito-server/config.json
-cd ./recogito-server
-npm install
-PGSSLMODE=disable npx supabase db push --db-url postgresql://postgres:$POSTGRES_PASSWORD@localhost:$POSTGRES_PORT/postgres --include-all --yes
-node ./create-default-groups.js -f ./config.json
-cd ..
-
-# 4. Restart the client container with the new image, then clean up
-cd ./recogito-studio/docker
-docker compose -f ./docker-compose.yml -f ./docker-compose.client.yml up -d --force-recreate client
-cd ../..
-rm -rf ./recogito-client/ ./recogito-server/
-```
-
-If you use a custom `config.local.json`, copy it in place of `config.json` in steps 2 and 3.
-
-</details>

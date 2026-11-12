@@ -223,8 +223,7 @@ There may be some additional requirements depending on how you intend to use you
       # App base URL. Required by the Node adapter (used for Astro's allowedDomains).
       SITE_URL="http://localhost:4321"
 
-      # Optional – plugins to register, as a comma- or space-separated list of npm
-      # package names (they must also be installed; see the note below the block).
+      # See plugin guide for more information about installing plugins
       # INSTALLED_PLUGINS="@recogito/plugin-geotagging"
 
       ###############################################################################
@@ -281,11 +280,11 @@ There may be some additional requirements depending on how you intend to use you
       # TASK_PAYLOAD_OFFLOAD_THRESHOLD=5242880
 
       ###############################################################################
-      # IIIF Cloud (image server) configuration
+      # FairImage (image server) configuration
       ###############################################################################
       IIIF_URL="http://www.example.com/iiif/public/resources"
-      IIIF_KEY=<your iiif cloud api key>
-      IIIF_PROJECT_ID=<iiif cloud project uuid for this app>
+      IIIF_KEY=<your fairimage api key>
+      IIIF_PROJECT_ID=<fairimage project uuid for this app>
 
       ###############################################################################
       # Email - Used for transactional emails: invites, notifications, etc.
@@ -299,13 +298,7 @@ There may be some additional requirements depending on how you intend to use you
       INVITE_CRYPTO_KEY=<base64 encoded 256-bit cryptographic key>
    ```
 
-   To use [plugins](/guides/plugins/), install the packages and list them in `INSTALLED_PLUGINS`:
-
-   ```bash
-   npm install @recogito/plugin-geotagging @recogito/plugin-revisions
-   # then in .env:
-   # INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
-   ```
+   To use plugins, follow the [plugin guide](/guides/plugins/).
 
 3. **Deploy configuration file** (optional)
 
@@ -371,9 +364,7 @@ As of v1.9.6, the Node adapter reads `SITE_URL` to configure Astro's [`allowedDo
 
 ### How do I reset the database completely?
 
-The `reset.sh` script will reset the database and repopulate default users/groups.
-
-Make sure that your `SUPABASE_HOST` and `SUPABASE_SERVICE_KEY` are set before running.
+Run `./reset.sh` from `recogito-server` to reset the database and repopulate default users/groups. Make sure that your `SUPABASE_HOST` and `SUPABASE_SERVICE_KEY` are set in `.env` before running.
 
 ### How do I add a new user?
 
