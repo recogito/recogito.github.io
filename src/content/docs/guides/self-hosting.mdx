@@ -42,6 +42,7 @@ The subdomain names are conventions, not requirements. You choose the base domai
 ## System Requirements
 
 - **Operating System**: Ubuntu 26.04 LTS recommended; other Debian-based distributions should work
+- **CPU**: Minimum 2 CPUs
 - **Memory**: Minimum 4GB
 - **Storage**: 80GB+ recommended
 - **Network**: Public IP address with DNS access
@@ -269,7 +270,7 @@ Recogito offers the ability to connect users via SAML: [Set Up SAML Single Sign-
 
 #### Plugins
 
-- `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of NPM package names or GitHub repositories. See the [Plugins guide](/guides/plugins/#self-hosted-environments) for the available packages.
+- `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of NPM package names or GitHub repositories. See the [Plugins guide](/guides/plugins/#available-plugins) for the available packages.
 
 #### Duplicated variables
 
@@ -438,7 +439,7 @@ Keep a copy of this key with your other secrets. If you replace it, give your Id
 
 ### 2. Add the sign-in button
 
-The login page shows a button for each method in the `authentication` section of your config. Create `docker/config/config.local.json` if you haven't already (see [Customization](#customization)), then add a `saml` method:
+The login page shows a button for each method in the `authentication` section of your config. Create `docker/config/config.local.json` if you haven't already (see [Step 4](#4-clone-and-configure-recogito-studio)), then add a `saml` method:
 
 ```json
 "authentication": {

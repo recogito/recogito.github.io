@@ -23,11 +23,11 @@ The sections below cover installing plugins and [enabling them](#enabling-an-ins
 
 ### Development environments
 
-1. `npm install`` the plugin's npm package or GitHub repository to add it to the client's `package.json`.
-2. List the same package name in the `INSTALLED_PLUGINS` environment variable
-3. Build the client.
+1. `npm install` the plugin's npm package or GitHub repository to add it to the client's `package.json`.
+2. List the same package name in the `INSTALLED_PLUGINS` environment variable in the client's `.env`.
+3. Restart the dev server, or rebuild the client if you're running a build.
 
-The package must be **both** installed **and** listed under the `INSTALLED_PLUGINS` environment variable. Building compiles the plugin into your instance and makes it available to every project.
+The package must be **both** installed **and** listed under the `INSTALLED_PLUGINS` environment variable. This compiles the plugin into your instance and makes it available to every project.
 
 ### Self-hosted environments
 
@@ -49,4 +49,4 @@ To enable a plugin for a project:
 4. If the plugin exposes settings, configure them from the same screen.
 5. To disable a plugin for the project, remove it here.
 
-If a plugin you installed doesn't appear in the gallery, it was installed incorrectly. Recheck that its package is listed in `INSTALLED_PLUGINS` and rebuild the client.
+If a plugin you installed doesn't appear in the gallery, it was installed incorrectly. Recheck that its package is listed in `INSTALLED_PLUGINS` (and, in a development environment, installed with `npm install`), then rebuild the client or restart the dev server.
