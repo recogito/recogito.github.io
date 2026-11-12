@@ -573,9 +573,9 @@ The stack stores your data in Postgres and RustFS. For production, set up regula
 Check the [latest release](https://github.com/recogito/recogito-studio/releases) for any version-specific upgrade notes, such as newly required environment variables.
 :::
 
-If you're coming from a pre-1.12 version, copy your `docker/config/config.json` to `docker/config/config.local.json`. Once that's finished, you're free to `git reset` the original `docker/config/config.json` to make future `git pull`s simpler.
+If you're coming from a pre-1.12 version, copy your `docker/config/config.json` to `docker/config/config.local.json`. Once that's finished, you're free to `git restore` the original `docker/config/config.json` to make future `git pull`s simpler.
 
-The `recogito-studio` repo includes an `upgrade.sh` script that performs the full upgrade for you: it pulls the latest client and server code, applies your config, rebuilds the client image, pushes database schema changes, and restarts the container.
+The `recogito-studio` repo includes an `upgrade.sh` script that performs the full upgrade for you: it pulls the latest client and server code, applies your config, rebuilds the client image, pushes database schema changes, and restarts the container. It also applies any relevant one-time Docker upgrades, such as major Postgres versions or migrations from one image to another.
 
 From the root of your `recogito-studio` repo:
 
