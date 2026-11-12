@@ -38,7 +38,9 @@ Recogito Studio is built on open standards, so documents and annotations stay po
 The client can be built in two ways, each with its own Astro adapter:
 
 - **Netlify** (`npm run build`, `astro.config.mjs`) — used by the hosted service.
-- **Node standalone** (`npm run build-node`, `astro.config.node.mjs`) — used for [self-hosting](/guides/self-hosting/); runs with `node ./dist/server/entry.mjs`.
+- **Node standalone** (`npm run build-node`, `astro.config.node.mjs`) — used for [self-hosting](/guides/self-hosting/).
+
+See [Local Development → Building](/guides/local-development/#building) for how to build and run the Node version.
 
 ## See also
 

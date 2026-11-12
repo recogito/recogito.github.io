@@ -1,71 +1,66 @@
 ---
 title: Plugin Installation
-description: Install plugins.
+description: Install and enable plugins on a Recogito Studio instance.
 sidebar:
   order: 4
 ---
 
 import AvailablePlugins from '../../../components/available-plugins.mdx';
 
-This guide explains how to install the available plugins to a Recogito Studio instance.
+This guide explains how to install plugins into a Recogito Studio instance and [enable them](#enabling-an-installed-plugin) per project. To build your own plugin, see the [SDK Guide](/guides/sdk/).
 
 ## Available Plugins
 
 <AvailablePlugins />
 
-## How Plugins Work
+## Installing Plugins
 
-Recogito Studio plugins are npm packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/). Using a plugin takes two distinct steps:
+Recogito Studio plugins are packages that act as [Astro integrations](https://docs.astro.build/en/guides/integrations-guide/). They are compiled into the client when it is built, which makes them available to every project on the instance.
 
-1. **Install** (build time) — add the plugin's npm package to the client _and_ list it in the `INSTALLED_PLUGINS` environment variable, then build the client. `INSTALLED_PLUGINS` only tells the client which already-installed packages to register — it does not fetch anything, so the package must be installed separately (see the steps below). Building compiles the plugin into your instance and makes it _available_ to every project. It's done once per instance by whoever builds and deploys the client.
-2. **Enable** (runtime, per project) — a Project Admin turns an available plugin on for a specific project from **Project Settings → Plugins**. The same plugin can be enabled for some projects and left off for others.
-
-The sections below cover installing plugins in [local development](#local-development-environment) and in a [self-hosted production](#self-hosted-production-environment) build, then [enabling them](#enabling-an-installed-plugin) per project. To build your own plugin, see the [SDK Guide](/guides/sdk/).
-
-## Local Development Environment
-
-Plugins are declared through the `INSTALLED_PLUGINS` environment variable — a comma- or space-separated list of npm package names. The client registers them automatically, so you don't edit the Astro config.
-
-In the root of the `recogito-client` repo (see [Client Application Setup](/guides/local-development/#phase-2-client-application-setup-recogito-client)):
-
-1. Install the plugin packages you want:
-
-   ```bash
-   npm install @recogito/plugin-geotagging @recogito/plugin-revisions
-   ```
-
-2. List the same packages in `INSTALLED_PLUGINS` in your `.env`, then restart the dev server:
-
-   ```bash
-   INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
-   ```
-
-The available plugin packages are:
-
-| Plugin | Package |
-| --- | --- |
-| GeoTagger | `@recogito/plugin-geotagging` |
-| Reconciliation Service API | `@recogito/plugin-reconciliation-service` |
-| Named Entity Recognition | `@recogito/plugin-ner` |
-| Revisions | `@recogito/plugin-revisions` |
-| TEI Inliner | `@recogito/plugin-tei-inliner` |
-| Sandcastle3D Export | `@recogito/plugin-sandcastle-export` |
-
-## Self-Hosted Production Environment
-
-Self-hosting uses the same `INSTALLED_PLUGINS` variable, set in your `docker/.env` (see [Critical Environment Variables](/guides/self-hosting/#5-critical-environment-variables)). List the [plugin packages](#local-development-environment) you want:
+The client loads the plugins listed in the `INSTALLED_PLUGINS` environment variable, a comma- or space-separated list:
 
 ```bash
-INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-ner"
+INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
 ```
 
-The install and [upgrade](/guides/self-hosting/#upgrading) scripts read this list, install the packages, and compile them into the client image. 
+Each entry can be:
 
-Some plugins depend on additional services — the [NER plugin](https://github.com/recogito/plugin-ner), for example, requires Trigger.dev and Stanford CoreNLP. See [Additional Services](/guides/self-hosting/#additional-services) in the self-hosting guide.
+- an npm package name, optionally with a version: `@recogito/plugin-ner@1.2.0`
+- a public GitHub repository: `owner/repo`, `github:owner/repo#ref`, or `https://github.com/owner/repo`
+- a GitHub repository with an explicit package name: `my-plugin@github:owner/repo`
+
+Plugins installed from a GitHub repository are built on install, so the repository needs a `prepare` script that builds the plugin (for example `"prepare": "npm run build"`).
+
+### Development Environments
+
+In the root of your `recogito-client` checkout:
+
+1. Install the plugin:
+
+   ```bash
+   npm install @recogito/plugin-geotagging
+   ```
+
+2. Add the same entry to `INSTALLED_PLUGINS` in the client's `.env`.
+3. Restart the dev server, or rebuild the client if you're running a build.
+
+The package must be **both** installed **and** listed in `INSTALLED_PLUGINS`.
+
+### Self-Hosted Environments
+
+Add the entry to `INSTALLED_PLUGINS` in your `docker/.env`. The install script (`install-self-hosted-docker.sh`) and the [upgrade script](/guides/self-hosting/#upgrading) (`upgrade.sh`) install the packages into the client for you.
+
+To add or remove a plugin on an instance that is already running, edit `INSTALLED_PLUGINS` and run `./upgrade.sh` to rebuild the client.
+
+### Plugins With Extra Requirements
+
+The [NER plugin](https://github.com/recogito/plugin-ner) additionally requires Stanford CoreNLP and another Trigger.dev project separate from the one used for import/export. See [Additional Services](/guides/self-hosting/#additional-services) in the self-hosting guide and the plugin's README.
 
 ## Enabling an Installed Plugin
 
-Installing a plugin makes it _available_ but does not turn it on. Plugins are enabled per project from the client UI:
+Plugins are enabled on a per-project basis, and are disabled by default.
+
+To enable a plugin for a project:
 
 1. Open a project as a **Project Admin**.
 2. Go to **Project Settings → Plugins** and click **Browse Available Plugins**.
@@ -73,4 +68,4 @@ Installing a plugin makes it _available_ but does not turn it on. Plugins are en
 4. If the plugin exposes settings, configure them from the same screen.
 5. To disable a plugin for the project, remove it here.
 
-Enablement is stored per project, so a plugin can be active in one project and inactive in another. If a plugin you installed doesn't appear in the gallery, it wasn't installed correctly. Recheck that its package is listed in `INSTALLED_PLUGINS` and rebuild the client.
+If a plugin you installed doesn't appear in the gallery, it was installed incorrectly. Recheck that its package is listed in `INSTALLED_PLUGINS` (and, in a development environment, installed with `npm install`), then rebuild the client or restart the dev server.

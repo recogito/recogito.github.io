@@ -4,14 +4,14 @@ description: Complete guide for setting up a local Recogito Studio development e
 sidebar:
   order: 2
   badge:
-    text: v1.10.0
+    text: v1.12
     variant: note
 ---
 
 import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
 
 :::note[Documentation Version]
-This guide is written for **Recogito Studio v1.10.0** and later. If you're working with an earlier version, some steps may differ.
+This guide is written for **Recogito Studio v1.12** and later. If you're working with an earlier version, some steps may differ.
 :::
 
 This guide walks you through setting up a complete local development environment for Recogito Studio. Unlike the [self-hosting guide](/guides/self-hosting/) which covers production deployment, this setup is optimized for development and testing.
@@ -36,16 +36,16 @@ A local development environment consists of three main components:
 
 Before starting, ensure you have the following installed:
 
-- **Node.js** (v22 or later) and npm
+- **Node.js** (v26 or later) and npm
 - **Git**
-- **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**
+- **A Docker service such as [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Colima](https://colima.run/)**
 - **[Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started)**
 
 ### Additional Requirements
 
 There may be some additional requirements depending on how you intend to use your local setup.
-- **IIIF service**: When uploading and annotating images, Recogito Studio works primarily with IIIF. It is designed to integrate with [IIIF Cloud](https://github.com/performant-software/iiif-cloud), which can be easily [run in a Docker container](https://github.com/performant-software/iiif-cloud/blob/develop/docker-compose-instructions.md).
-    - Performant Software offers managed IIIF hosting through our IIIF Cloud instances; [contact us](https://www.performantsoftware.com/contact/) for more information.
+- **IIIF service**: When uploading and annotating images, Recogito Studio works primarily with IIIF. It is designed to integrate with [FairImage](https://github.com/performant-software/iiif-cloud), which can be easily [run in a Docker container](https://github.com/performant-software/iiif-cloud/blob/develop/docker-compose-instructions.md).
+    - Performant Software offers managed IIIF hosting through our FairImage instances; [contact us](https://www.performantsoftware.com/contact/) for more information.
     - Recogito Studio also supports *external* IIIF manifests out of the box.
     - Finally, it is also possible to use a direct file upload to Supabase storage and then use your own IIIF service to transform images locally, but that is not currently well-supported and you may encounter issues.
 - **Mail server**: Recogito Studio will attempt to send transactional emails (invites, password reset, etc) through a configured outgoing mail server. You can use something like [Mailpit](https://mailpit.axllent.org/) or [Ethereal Email](https://ethereal.email/), or set up an actual outbound mail account through a service like [Postmark](https://postmarkapp.com/).
@@ -66,7 +66,7 @@ There may be some additional requirements depending on how you intend to use you
 
 2. **Start Supabase locally**
 
-   Ensure Docker Desktop is running. Then:
+   Ensure your Docker service is running. Then:
 
    ```bash
    supabase start
@@ -169,7 +169,7 @@ There may be some additional requirements depending on how you intend to use you
 
 6. **Populate database with roles and groups**
 
-   Run the following commands to populate the databse with default groups, roles, users, etc.
+   Run the following commands to populate the database with default groups, roles, users, etc.
 
    ```bash
    node --env-file=.env create-default-groups.js -f config.json
@@ -218,94 +218,23 @@ There may be some additional requirements depending on how you intend to use you
    nano .env
    ```
 
-   Update with your local values:
-   ```bash
-      # App base URL. Required by the Node adapter (used for Astro's allowedDomains).
-      SITE_URL="http://localhost:4321"
+   The file you just copied documents every available variable in its comments ([view `.env.example` on GitHub](https://github.com/recogito/recogito-client/blob/develop/.env.example)). Most can stay as they are. For a local setup, update these:
 
-      # Optional – plugins to register, as a comma- or space-separated list of npm
-      # package names (they must also be installed; see the note below the block).
-      # INSTALLED_PLUGINS="@recogito/plugin-geotagging"
+   | Variable | Value |
+   | --- | --- |
+   | `PUBLIC_SUPABASE` | `API URL` from `supabase start` |
+   | `PUBLIC_SUPABASE_API_KEY` | Publishable (anon) key from `supabase start` |
+   | `SUPABASE_SERVICE_KEY` | Secret (service role) key from `supabase start` |
+   | `ROOM_SECRET` | Any random string |
+   | `INVITE_CRYPTO_KEY` | Output of `openssl rand -base64 32` |
+   | `SITE_URL` | `http://localhost:4321` (the default); only read by [Node builds](#building) |
 
-      ###############################################################################
-      # Public variables
-      # (Variables beginning with PUBLIC_ are exposed to both server and client)
-      ###############################################################################
+   Then set the variables for whichever [additional services](#additional-requirements) you are using:
 
-      # Supabase connection
-      PUBLIC_SUPABASE="https://your-project.supabase.co"
-      PUBLIC_SUPABASE_API_KEY="your-anonymous-key"
-
-      # IIIF (image server) configuration
-      PUBLIC_IIIF_CONFIGURATION="IIIF_CLOUD"  # or "SUPABASE_CANTALOUPE"
-      # PUBLIC_IIIF_CANTALOUPE_PATH="/iiif"  # uncomment if using SUPABASE_CANTALOUPE
-
-      # Optional – Enable email/password invites from the UI
-      # When TRUE, Org Admins can invite email/password users from the User Management UI
-      PUBLIC_ENABLE_USER_INVITE=TRUE
-
-      # Optional - Usersnap feedback form
-      # PUBLIC_USERSNAP_GLOBAL_API_KEY="usersnap-global-api-key"
-      # PUBLIC_USERSNAP_PROJECT_API_KEY="usersnap-project-api-key"
-
-      # Optional – External help/FAQ page
-      # PUBLIC_HELP_REDIRECT="https://help.example.com"
-
-      # Optional – Require users to accept a EULA before uploading documents
-      # PUBLIC_EULA_URL="https://example.com/eula"
-
-      ###############################################################################
-      # Server-only secrets
-      # (Never exposed to browser)
-      ###############################################################################
-
-      # Secret 'salt' to compute the realtime room identifiers
-      ROOM_SECRET="your-room-secret"
-
-      # Secret service key for server-side Supabase clients
-      SUPABASE_SERVICE_KEY="your-supabase-service-key"
-
-      # Optional: Server-only Supabase URL.
-      # Use this if your Astro server runs in an environment where it must reach
-      # Supabase using a different URL (e.g. internal/private network, Docker, VPC).
-      # If not set, PUBLIC_SUPABASE is used for both server and client.
-      # SUPABASE_SERVERCLIENT_URL="http://supabase:8000"
-
-      ###############################################################################
-      # Trigger.dev (Background jobs, import/export, NER plugin)
-      ###############################################################################
-      TRIGGER_PROJECT_ID=<your trigger project id>
-      TRIGGER_SECRET_KEY=<your secret key>
-      # TRIGGER_SERVER_URL is only needed for a self-hosted Trigger.dev instance
-      TRIGGER_SERVER_URL=http://localhost:3040/
-      # TASK_PAYLOAD_OFFLOAD_THRESHOLD=5242880
-
-      ###############################################################################
-      # IIIF Cloud (image server) configuration
-      ###############################################################################
-      IIIF_URL="http://www.example.com/iiif/public/resources"
-      IIIF_KEY=<your iiif cloud api key>
-      IIIF_PROJECT_ID=<iiif cloud project uuid for this app>
-
-      ###############################################################################
-      # Email - Used for transactional emails: invites, notifications, etc.
-      ###############################################################################
-      MAIL_HOST=<your email host>
-      MAIL_PORT=<your email port>
-      MAIL_USERNAME=<your email username>
-      MAIL_PASSWORD=<your email password>
-      MAIL_FROM_ADDRESS=<the from address for emails>
-      # Base64-encoded 256-bit key (e.g. generated with: openssl rand -base64 32)
-      INVITE_CRYPTO_KEY=<base64 encoded 256-bit cryptographic key>
-   ```
-
-   To use [plugins](/guides/plugins/), install the packages and list them in `INSTALLED_PLUGINS`:
-
-   ```bash
-   npm install @recogito/plugin-geotagging @recogito/plugin-revisions
-   # then in .env:
-   # INSTALLED_PLUGINS="@recogito/plugin-geotagging,@recogito/plugin-revisions"
-   ```
+   - **Mail server**: `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, and `MAIL_FROM_ADDRESS`.
+   - **IIIF service**: `PUBLIC_IIIF_CONFIGURATION` (`IIIF_CLOUD` for FairImage), plus `IIIF_URL`, `IIIF_KEY`, and `IIIF_PROJECT_ID` from your FairImage project.
+   - **Trigger.dev**: `TRIGGER_PROJECT_ID` and `TRIGGER_SECRET_KEY`. `TRIGGER_SERVER_URL` is only needed for a self-hosted Trigger.dev instance; remove it to use Trigger.dev Cloud.
+   - **Plugins**: `INSTALLED_PLUGINS`; follow the [plugin guide](/guides/plugins/).
 
 3. **Deploy configuration file** (optional)
 
@@ -352,8 +281,7 @@ Then you may start the service using:
 node ./dist/server/entry.mjs
 ```
 
-This will use the Node adapter for Astro (`astro.config.node.mjs`). Building with `npm run build`
-instead will use the Netlify adapter (via `astro.config.mjs`), meaning the build output may only be usable on Netlify.
+This uses the Node adapter for Astro. Plain `npm run build` uses the Netlify adapter instead, so its output may only be usable on Netlify; see [Client Architecture](/reference/client-architecture/#deployment) for the two build targets.
 
 :::note[Node adapter requires `SITE_URL`]
 As of v1.9.6, the Node adapter reads `SITE_URL` to configure Astro's [`allowedDomains`](https://docs.astro.build/en/reference/configuration-reference/#securityalloweddomains). Set `SITE_URL` to your deployment URL (or `http://localhost:4321` in development), or requests may be rejected.
@@ -371,14 +299,7 @@ As of v1.9.6, the Node adapter reads `SITE_URL` to configure Astro's [`allowedDo
 
 ### How do I reset the database completely?
 
-```bash
-cd recogito-server
-supabase db reset
-export SUPABASE_HOST=http://localhost:54321
-export SUPABASE_SERVICE_KEY=<your-service-key>
-node create-default-groups.js -f config.json
-node create-test-users.js -f config.json
-```
+Run `./reset.sh` from `recogito-server` to reset the database and repopulate default users/groups. Make sure that your `SUPABASE_HOST` and `SUPABASE_SERVICE_KEY` are set in `.env` before running.
 
 ### How do I add a new user?
 
