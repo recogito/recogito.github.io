@@ -218,94 +218,23 @@ There may be some additional requirements depending on how you intend to use you
    nano .env
    ```
 
-   Update with your local values:
-   ```bash
-      # App base URL. Required by the Node adapter (used for Astro's allowedDomains).
-      SITE_URL="http://localhost:4321"
+   The file you just copied documents every available variable in its comments ([view `.env.example` on GitHub](https://github.com/recogito/recogito-client/blob/develop/.env.example)). Most can stay as they are. For a local setup, update these:
 
-      # See plugin guide for more information about installing plugins
-      # INSTALLED_PLUGINS="@recogito/plugin-geotagging"
+   | Variable | Value |
+   | --- | --- |
+   | `PUBLIC_SUPABASE` | `API URL` from `supabase start` |
+   | `PUBLIC_SUPABASE_API_KEY` | Publishable (anon) key from `supabase start` |
+   | `SUPABASE_SERVICE_KEY` | Secret (service role) key from `supabase start` |
+   | `ROOM_SECRET` | Any random string |
+   | `INVITE_CRYPTO_KEY` | Output of `openssl rand -base64 32` |
+   | `SITE_URL` | `http://localhost:4321` (the default); only read by [Node builds](#building) |
 
-      ###############################################################################
-      # Public variables
-      # (Variables beginning with PUBLIC_ are exposed to both server and client)
-      ###############################################################################
+   Then set the variables for whichever [additional services](#additional-requirements) you are using:
 
-      # Supabase connection
-      PUBLIC_SUPABASE="https://your-project.supabase.co"
-      PUBLIC_SUPABASE_API_KEY="your-anonymous-key"
-
-      # IIIF (image server) configuration
-      # "IIIF_CLOUD" selects FairImage (formerly IIIF Cloud); the alternative is "SUPABASE_CANTALOUPE"
-      PUBLIC_IIIF_CONFIGURATION="IIIF_CLOUD"
-      # PUBLIC_IIIF_CANTALOUPE_PATH="/iiif"  # uncomment if using SUPABASE_CANTALOUPE
-
-      # Optional – Enable email/password invites from the UI
-      # When TRUE, Org Admins can invite email/password users from the User Management UI
-      PUBLIC_ENABLE_USER_INVITE=TRUE
-
-      # Optional - Usersnap feedback form
-      # PUBLIC_USERSNAP_GLOBAL_API_KEY="usersnap-global-api-key"
-      # PUBLIC_USERSNAP_PROJECT_API_KEY="usersnap-project-api-key"
-
-      # Optional – External help/FAQ page
-      # PUBLIC_HELP_REDIRECT="https://help.example.com"
-
-      # Optional – Require users to accept a EULA before uploading documents
-      # PUBLIC_EULA_URL="https://example.com/eula"
-
-      # Optional – Show a banner on every page warning that this is a test
-      # environment and any data is temporary
-      # PUBLIC_TEST_BANNER=true
-
-      ###############################################################################
-      # Server-only secrets
-      # (Never exposed to browser)
-      ###############################################################################
-
-      # Secret 'salt' to compute the realtime room identifiers
-      ROOM_SECRET="your-room-secret"
-
-      # Secret service key for server-side Supabase clients
-      SUPABASE_SERVICE_KEY="your-supabase-service-key"
-
-      # Optional: Server-only Supabase URL.
-      # Use this if your Astro server runs in an environment where it must reach
-      # Supabase using a different URL (e.g. internal/private network, Docker, VPC).
-      # If not set, PUBLIC_SUPABASE is used for both server and client.
-      # SUPABASE_SERVERCLIENT_URL="http://supabase:8000"
-
-      ###############################################################################
-      # Trigger.dev (Background jobs, import/export, NER plugin)
-      ###############################################################################
-      TRIGGER_PROJECT_ID=<your trigger project id>
-      TRIGGER_SECRET_KEY=<your secret key>
-      # TRIGGER_SERVER_URL is only needed for a self-hosted Trigger.dev instance
-      TRIGGER_SERVER_URL=http://localhost:3040/
-      # NER plugin only (it uses its own, separate Trigger.dev project)
-      # TASK_PAYLOAD_OFFLOAD_THRESHOLD=5242880
-      # TRIGGER_NER_SECRET_KEY=<secret key of the NER plugin's trigger project>
-
-      ###############################################################################
-      # FairImage (image server) configuration
-      ###############################################################################
-      IIIF_URL="http://www.example.com/iiif/public/resources"
-      IIIF_KEY=<your fairimage api key>
-      IIIF_PROJECT_ID=<fairimage project uuid for this app>
-
-      ###############################################################################
-      # Email - Used for transactional emails: invites, notifications, etc.
-      ###############################################################################
-      MAIL_HOST=<your email host>
-      MAIL_PORT=<your email port>
-      MAIL_USERNAME=<your email username>
-      MAIL_PASSWORD=<your email password>
-      MAIL_FROM_ADDRESS=<the from address for emails>
-      # Base64-encoded 256-bit key (e.g. generated with: openssl rand -base64 32)
-      INVITE_CRYPTO_KEY=<base64 encoded 256-bit cryptographic key>
-   ```
-
-   To use plugins, follow the [plugin guide](/guides/plugins/).
+   - **Mail server**: `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD`, and `MAIL_FROM_ADDRESS`.
+   - **IIIF service**: `PUBLIC_IIIF_CONFIGURATION` (`IIIF_CLOUD` for FairImage), plus `IIIF_URL`, `IIIF_KEY`, and `IIIF_PROJECT_ID` from your FairImage project.
+   - **Trigger.dev**: `TRIGGER_PROJECT_ID` and `TRIGGER_SECRET_KEY`. `TRIGGER_SERVER_URL` is only needed for a self-hosted Trigger.dev instance; remove it to use Trigger.dev Cloud.
+   - **Plugins**: `INSTALLED_PLUGINS`; follow the [plugin guide](/guides/plugins/).
 
 3. **Deploy configuration file** (optional)
 
