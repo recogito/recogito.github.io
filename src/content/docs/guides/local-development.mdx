@@ -4,14 +4,14 @@ description: Complete guide for setting up a local Recogito Studio development e
 sidebar:
   order: 2
   badge:
-    text: v1.10.0
+    text: v1.12.0
     variant: note
 ---
 
 import { Card, CardGrid, Steps } from '@astrojs/starlight/components';
 
 :::note[Documentation Version]
-This guide is written for **Recogito Studio v1.10.0** and later. If you're working with an earlier version, some steps may differ.
+This guide is written for **Recogito Studio v1.12** and later. If you're working with an earlier version, some steps may differ.
 :::
 
 This guide walks you through setting up a complete local development environment for Recogito Studio. Unlike the [self-hosting guide](/guides/self-hosting/) which covers production deployment, this setup is optimized for development and testing.
@@ -36,16 +36,16 @@ A local development environment consists of three main components:
 
 Before starting, ensure you have the following installed:
 
-- **Node.js** (v22 or later) and npm
+- **Node.js** (v26 or later) and npm
 - **Git**
-- **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**
+- **A Docker service such as [Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Colima](https://colima.run/)**
 - **[Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started)**
 
 ### Additional Requirements
 
 There may be some additional requirements depending on how you intend to use your local setup.
-- **IIIF service**: When uploading and annotating images, Recogito Studio works primarily with IIIF. It is designed to integrate with [IIIF Cloud](https://github.com/performant-software/iiif-cloud), which can be easily [run in a Docker container](https://github.com/performant-software/iiif-cloud/blob/develop/docker-compose-instructions.md).
-    - Performant Software offers managed IIIF hosting through our IIIF Cloud instances; [contact us](https://www.performantsoftware.com/contact/) for more information.
+- **IIIF service**: When uploading and annotating images, Recogito Studio works primarily with IIIF. It is designed to integrate with [FairImage](https://github.com/performant-software/iiif-cloud), which can be easily [run in a Docker container](https://github.com/performant-software/iiif-cloud/blob/develop/docker-compose-instructions.md).
+    - Performant Software offers managed IIIF hosting through our FairImage instances; [contact us](https://www.performantsoftware.com/contact/) for more information.
     - Recogito Studio also supports *external* IIIF manifests out of the box.
     - Finally, it is also possible to use a direct file upload to Supabase storage and then use your own IIIF service to transform images locally, but that is not currently well-supported and you may encounter issues.
 - **Mail server**: Recogito Studio will attempt to send transactional emails (invites, password reset, etc) through a configured outgoing mail server. You can use something like [Mailpit](https://mailpit.axllent.org/) or [Ethereal Email](https://ethereal.email/), or set up an actual outbound mail account through a service like [Postmark](https://postmarkapp.com/).
@@ -66,7 +66,7 @@ There may be some additional requirements depending on how you intend to use you
 
 2. **Start Supabase locally**
 
-   Ensure Docker Desktop is running. Then:
+   Ensure your Docker service is running. Then:
 
    ```bash
    supabase start
@@ -371,14 +371,9 @@ As of v1.9.6, the Node adapter reads `SITE_URL` to configure Astro's [`allowedDo
 
 ### How do I reset the database completely?
 
-```bash
-cd recogito-server
-supabase db reset
-export SUPABASE_HOST=http://localhost:54321
-export SUPABASE_SERVICE_KEY=<your-service-key>
-node create-default-groups.js -f config.json
-node create-test-users.js -f config.json
-```
+The `reset.sh` script will reset the database and repopulate default users/groups.
+
+Make sure that your `SUPABASE_HOST` and `SUPABASE_SERVICE_KEY` are set before running.
 
 ### How do I add a new user?
 

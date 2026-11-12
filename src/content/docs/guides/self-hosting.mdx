@@ -7,13 +7,13 @@ sidebar:
 
 import { Badge } from '@astrojs/starlight/components';
 
-Recogito Studio is ready for self-hosting and these instructions detail the steps necessary for deployment on Ubuntu Linux, v24 (although many earlier versions will also work as well). The deployment strategy utilizes [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), and [Nginx](https://nginx.org).
+Recogito Studio is ready for self-hosting and these instructions detail the steps necessary for deployment on Ubuntu 26.04 LTS (although many earlier versions will likely work as well). The deployment strategy utilizes [Docker](https://www.docker.com/), [Docker Compose](https://docs.docker.com/compose/), and [Nginx](https://nginx.org).
 
-Because everything runs in Docker behind Nginx, you can host Recogito Studio on any server that meets the requirements below, including a cloud VM (DigitalOcean, AWS EC2, Hetzner, Linode, etc.) or your own hardware. The steps assume a Debian-based distribution; the examples were written against Ubuntu 24.
+Because everything runs in Docker behind Nginx, you can host Recogito Studio on any server that meets the requirements below, including a cloud VM (DigitalOcean, AWS EC2, Hetzner, Linode, etc.) or your own hardware. The steps assume a Debian-based distribution; the examples were written against Ubuntu 26.04 LTS.
 
 ## System Architecture
 
-Self-hosted Recogito Studio runs as a set of Docker containers: the Astro client, a Supabase/Postgres backend (with MinIO object storage and a Cantaloupe IIIF server), and Portainer for container management. See the [architecture overview](/guides/overview/#architecture-overview) for the high-level model, or the [reference docs](/reference/server-architecture/) for detail.
+Self-hosted Recogito Studio runs as a set of Docker containers: the Astro client, a Supabase/Postgres backend (with RustFS object storage and a Cantaloupe IIIF server), and Portainer for container management. See the [architecture overview](/guides/overview/#architecture-overview) for the high-level model, or the [reference docs](/reference/server-architecture/) for detail.
 
 ![System Diagram](../../../assets/guides/system-diagram.svg)
 
@@ -33,7 +33,7 @@ The other three are operator-only management UIs. Give them hostnames if you wan
 
 - `portainer.example.com` — Container management
 - `pgadmin.example.com` — Database administration
-- `minio.example.com` — Object storage console
+- `rustfs.example.com` — Object storage console
 
 If you [self-host Trigger.dev](#set-up-triggerdev) and expose it over the web, add one more, such as `trigger.example.com`.
 
@@ -41,10 +41,11 @@ The subdomain names are conventions, not requirements. You choose the base domai
 
 ## System Requirements
 
-- **Operating System**: Ubuntu Linux v24 recommended; other Debian-based distributions should work
+- **Operating System**: Ubuntu 26.04 LTS recommended; other Debian-based distributions should work
 - **Memory**: Minimum 4GB
 - **Storage**: 80GB+ recommended
 - **Network**: Public IP address with DNS access
+- **SSH**: enabled
 
 ## Installation Steps
 
@@ -52,7 +53,7 @@ The subdomain names are conventions, not requirements. You choose the base domai
 
 #### Provision a Server
 
-Provision an Ubuntu 24 server that meets the [system requirements](#system-requirements) above—at least 4GB RAM, 2 CPUs, and 80GB storage—with SSH access and a public IP. Note its public IP address, and enable automatic backups for production use.
+Provision a server that meets the [system requirements](#system-requirements). Note its public IP address, and enable automatic backups for production use.
 
 > New to cloud servers? DigitalOcean's [droplet creation guide](https://docs.digitalocean.com/products/droplets/how-to/create/) is a good starting point, but any provider or on-premises machine works.
 
@@ -142,10 +143,12 @@ curl -fsSL https://get.docker.com | sudo sh
 
 #### NPM
 
-Install Node Package Manager:
+Recogito recommends Node.js 26 LTS. The version in your distribution's repository is likely older. We recommend following the instructions on [the NodeSource distribution page](https://nodesource.com/products/distributions) to install Node 26.
+
+Double check you're running Node 26:
 
 ```bash
-sudo apt install npm
+node --version
 ```
 
 ### 4. Clone and Configure Recogito Studio
@@ -163,6 +166,14 @@ Copy and edit environment variables:
 cp ./docker/.env.example ./docker/.env
 nano ./docker/.env
 ```
+
+Copy the default config:
+
+```bash
+cp ./docker/config/config.json ./docker/config/config.local.json
+```
+
+You may wish to update `config.local.json` with your branding, such as site name, colors, etc.
 
 ### 5. Critical Environment Variables
 
@@ -223,7 +234,7 @@ Copy the two printed values into `ANON_KEY` and `SERVICE_ROLE_KEY` in your `.env
 - `SITE_URL` <Badge text="required" variant="caution" size="small" /> — your client domain (`https://client.example.com`)
 - `API_EXTERNAL_URL` <Badge text="required" variant="caution" size="small" /> — your server domain (`https://server.example.com`)
 - `ROOM_SECRET` <Badge text="required" variant="caution" size="small" /> — generate with `openssl rand -base64 24`
-- `MINIO_ROOT_USER` / `MINIO_ROOT_PASSWORD` <Badge text="required" variant="caution" size="small" /> — your login for the MinIO console. The password must be at least 8 characters.
+- `S3_ACCESS_KEY` / `S3_SECRET_KEY` <Badge text="required" variant="caution" size="small" /> — your login for the RustFS object storage console. The secret key must be at least 8 characters.
 - `PGADMIN_ADMIN_EMAIL` / `PGADMIN_ADMIN_PASSWORD` <Badge text="required" variant="caution" size="small" /> — your login for pgAdmin. The email must be a valid address format, or the container won't start.
 - `MAIL_FROM_ADDRESS` <Badge text="required" variant="caution" size="small" /> — sender address for system emails
 
@@ -258,7 +269,7 @@ Recogito offers the ability to connect users via SAML: [Set Up SAML Single Sign-
 
 #### Plugins
 
-- `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of npm package names. See the [Plugins guide](/guides/plugins/#self-hosted-production-environment) for the available packages.
+- `INSTALLED_PLUGINS` <Badge text="optional" variant="note" size="small" /> — plugins to install and compile into the client, as a comma- or space-separated list of NPM package names or GitHub repositories. See the [Plugins guide](/guides/plugins/#self-hosted-production-environment) for the available packages.
 
 #### Duplicated variables
 
@@ -271,7 +282,7 @@ Some values need to be duplicated in other parts of the `.env` file.
 
 ### 6. Configure Nginx Routes
 
-Each hostname you expose ([see above](#domains-and-dns)) needs its own Nginx site configuration. The repo provides a template for each one—copy and customize them as follows.
+Each hostname you expose ([see above](#domains-and-dns)) needs its own `nginx` site configuration. The repo provides a template for each one. You can customize these to fit your needs or roll your own `nginx` setup.
 
 #### Client Configuration
 
@@ -299,7 +310,7 @@ Update:
 Repeat for remaining services:
 
 ```bash
-sudo cp ./nginx.minio.example.com /etc/nginx/sites-available/<your MinIO url>
+sudo cp ./nginx.rustfs.example.com /etc/nginx/sites-available/<your RustFS url>
 sudo cp ./nginx.pgadmin.example.com /etc/nginx/sites-available/<your pgAdmin url>
 sudo cp ./nginx.portainer.example.com /etc/nginx/sites-available/<your Portainer url>
 ```
@@ -329,7 +340,7 @@ Create symbolic links:
 sudo ln -s /etc/nginx/sites-available/<your server url> /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/<your client url> /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/<your pgAdmin url> /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/<your MinIO url> /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/<your RustFS url> /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/<your Portainer url> /etc/nginx/sites-enabled/
 ```
 
@@ -348,7 +359,7 @@ Install Certbot by following the [official Certbot instructions](https://certbot
 sudo certbot --nginx -d <your client url>
 sudo certbot --nginx -d <your server url>
 sudo certbot --nginx -d <your pgAdmin url>
-sudo certbot --nginx -d <your MinIO url>
+sudo certbot --nginx -d <your RustFS url>
 sudo certbot --nginx -d <your portainer url>
 ```
 
@@ -550,9 +561,7 @@ Navigate to your server URL (`https://server.example.com`) for Supabase studio a
 
 ## Customization
 
-Branding (platform name, colors, logos, favicon) and sign-in methods are controlled by `config.json`. In the self-hosting repo this lives at `docker/config/config.json`, and the install script bakes it into the client image at build time.
-
-To customize your config, copy the default to `docker/config/config.local.json` and edit the copy **before** running the install script (Step 8):
+Branding options are available in the config file. If you haven't created your custom `config.local.json` based on the default config, do it now:
 
 ```sh
 cp ./docker/config/config.json ./docker/config/config.local.json
@@ -564,7 +573,7 @@ See the [Config Tool reference](/reference/config-tool/) for the full schema (po
 
 ## Backups
 
-The stack stores your data in Postgres and MinIO. For production, set up regular database backups. The self-hosting repo documents a full `pg_dump`/restore procedure (including the storage-schema RLS policies that Supabase's dump omits) in [backup-and-restore.md](https://github.com/recogito/recogito-studio/blob/main/backup-and-restore.md).
+The stack stores your data in Postgres and RustFS. For production, set up regular database backups. The self-hosting repo documents a full `pg_dump`/restore procedure in [backup-and-restore.md](https://github.com/recogito/recogito-studio/blob/main/backup-and-restore.md).
 
 ## Upgrading
 
@@ -605,7 +614,7 @@ git clone --single-branch --branch main --depth 1 https://github.com/recogito/re
 git clone --single-branch --branch main --depth 1 https://github.com/recogito/recogito-server
 
 # 2. Build the client with your config and env vars
-cp ./recogito-studio/docker/config/config.json ./recogito-client/src/config.json
+cp ./recogito-studio/docker/config/config.local.json ./recogito-client/src/config.json
 cp ./recogito-studio/docker/.env ./recogito-client/.env
 cd ./recogito-client
 set -a && source .env && set +a
@@ -616,7 +625,7 @@ cd ..
 cp ./recogito-studio/docker/config/config.json ./recogito-server/config.json
 cd ./recogito-server
 npm install
-PGSSLMODE=disable npx supabase db push --db-url postgresql://postgres:$POSTGRES_PASSWORD@localhost:$POSTGRES_PORT/postgres --include-all
+PGSSLMODE=disable npx supabase db push --db-url postgresql://postgres:$POSTGRES_PASSWORD@localhost:$POSTGRES_PORT/postgres --include-all --yes
 node ./create-default-groups.js -f ./config.json
 cd ..
 
